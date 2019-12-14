@@ -3,7 +3,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <fmt:setLocale value="${local}" scope="session" />
 <fmt:setBundle basename="local" />
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,6 +13,7 @@
 <c:import url="/jsp/header.jsp"/>
 <c:import url="/jsp/user_navigation.jsp"/>
 <body class="m-3">
+<div class="w3-center">
 <form name="Show review" method="POST" action="controller">
 
     <input type="hidden" name="command" value="show_trainers_reviews" />
@@ -28,7 +28,7 @@
 
         <c:forEach items="${trainers}" var="trainer">
             <tr>
-                <td>${trainer.name}</td>
+                <td>${trainer.trainerName}</td>
                 <td>${trainer.workExperience}</td>
                 <td>${trainer.trainingType}</td>
                 <td><button class="w3-btn w3-hover-border-blue w3-round-large" name = "trainer_id" value=${trainer.id} ><fmt:message key="label.display_reviews"/> </button></td>
@@ -84,10 +84,10 @@
         </c:if>
     </ul>
 </nav>
-
+</div>
 <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
-
+<c:import url="/jsp/footer.jsp"/>
 </body>
 </html>

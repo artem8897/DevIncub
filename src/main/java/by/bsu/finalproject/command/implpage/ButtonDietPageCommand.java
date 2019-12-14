@@ -1,9 +1,9 @@
 package by.bsu.finalproject.command.implpage;
 
 import by.bsu.finalproject.command.ActionCommand;
+import by.bsu.finalproject.command.MessageName;
 import by.bsu.finalproject.command.PathName;
 import by.bsu.finalproject.command.ParamName;
-import by.bsu.finalproject.entity.Diet;
 import by.bsu.finalproject.entity.User;
 import by.bsu.finalproject.entity.UserType;
 import by.bsu.finalproject.manager.ConfigurationManager;
@@ -42,7 +42,7 @@ public class ButtonDietPageCommand implements ActionCommand {
                     break;
                     default: throw new EnumConstantNotPresentException(UserType.class,"wrong role");
                 }
-                request.setAttribute("info", MessageManager.getProperty("message.no_diet_for_user"));
+                request.setAttribute(ParamName.INFO, MessageManager.getProperty(MessageName.NO_DIET_EXIST));
 
                 return page;
             }

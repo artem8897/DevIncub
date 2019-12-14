@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 public class ActionFactory {
 
     public static ActionCommand defineCommand(HttpServletRequest request) {
-        //todo точно ли
+
         ActionCommand current =  null;
         String action = request.getParameter(ParamName.PARAM_NAME_COMMAND);
         if (action == null || action.isEmpty()) {

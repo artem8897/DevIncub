@@ -5,7 +5,6 @@ import by.bsu.finalproject.dao.ReviewDao;
 import by.bsu.finalproject.dao.Query;
 import by.bsu.finalproject.dao.TablesColumnName;
 import by.bsu.finalproject.entity.Review;
-import by.bsu.finalproject.entity.UserType;
 import by.bsu.finalproject.exception.ConnectionPoolException;
 import by.bsu.finalproject.exception.DaoException;
 import org.apache.logging.log4j.LogManager;
@@ -15,13 +14,19 @@ import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Data access object for Review.
+ * @author A. Kuzmik
+ */
+
+
 public class ReviewDaoImpl implements ReviewDao {
 
     private static final Logger logger = LogManager.getLogger(ReviewDaoImpl.class);
 
     public boolean create(int userId, int trainerId, Review entity) throws DaoException {
 
-        int reviewId = 0;
+        int reviewId ;
         int createdRow ;
 
         try (Connection connection = ConnectionPool.INSTANCE.getConnection()) {
@@ -38,9 +43,13 @@ public class ReviewDaoImpl implements ReviewDao {
 
                     try(ResultSet resultSet = statement.getGeneratedKeys()){
 
-                        if(resultSet.next()){
+                        if(resultSet.first()){
                             reviewId = resultSet.getInt(1);
                             logger.info("Created review");
+                        }else {
+                            connection.rollback();
+                            logger.error("wrong field");
+                            return false;
                         }
                     }
                 }
@@ -65,6 +74,10 @@ public class ReviewDaoImpl implements ReviewDao {
                 logger.error(e);
                 connection.rollback();
                 return false;
+            }finally {
+                if(connection != null){
+                    connection.setAutoCommit(true);
+                }//todo
             }
         } catch (SQLException | ConnectionPoolException e) {
             throw new DaoException(e);

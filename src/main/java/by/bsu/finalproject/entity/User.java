@@ -74,31 +74,7 @@ public class User implements Entity {
         this.userSex = userSex;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof User)) return false;
 
-        User user = (User) o;
-
-        if (getId() != user.getId()) return false;
-        if (getEmail() != null ? !getEmail().equals(user.getEmail()) : user.getEmail() != null) return false;
-        if (getPassword() != null ? !getPassword().equals(user.getPassword()) : user.getPassword() != null)
-            return false;
-        if (getUsername() != null ? !getUsername().equals(user.getUsername()) : user.getUsername() != null)
-            return false;
-        return getUserType() == user.getUserType();
-    }
-
-    @Override
-    public int hashCode() {
-        int result = getEmail() != null ? getEmail().hashCode() : 0;
-        result = 31 * result + (getPassword() != null ? getPassword().hashCode() : 0);
-        result = 31 * result + getId();
-        result = 31 * result + (getUsername() != null ? getUsername().hashCode() : 0);
-        result = 31 * result + (getUserType() != null ? getUserType().hashCode() : 0);
-        return result;
-    }
     @Override
     public String toString() {
         return "User : " + " id= " + id +
@@ -108,5 +84,34 @@ public class User implements Entity {
                 ", userType=" + userType +
                 ", userSex='" + userSex + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+
+        if (id != user.id) return false;
+        if (email != null ? !email.equals(user.email) : user.email != null) return false;
+        if (password != null ? !password.equals(user.password) : user.password != null) return false;
+        if (username != null ? !username.equals(user.username) : user.username != null) return false;
+        if (userType != user.userType) return false;
+        if (userSex != null ? !userSex.equals(user.userSex) : user.userSex != null) return false;
+        return status != null ? status.equals(user.status) : user.status == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = email != null ? email.hashCode() : 0;
+        result = 31 * result + (password != null ? password.hashCode() : 0);
+        result = 31 * result + id;
+        result = 31 * result + (username != null ? username.hashCode() : 0);
+        result = 31 * result + (userType != null ? userType.hashCode() : 0);
+        result = 31 * result + (userSex != null ? userSex.hashCode() : 0);
+        result = 31 * result + (status != null ? status.hashCode() : 0);
+        return result;
     }
 }

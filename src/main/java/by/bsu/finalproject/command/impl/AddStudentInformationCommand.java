@@ -1,6 +1,7 @@
 package by.bsu.finalproject.command.impl;
 
 import by.bsu.finalproject.command.ActionCommand;
+import by.bsu.finalproject.command.MessageName;
 import by.bsu.finalproject.command.PathName;
 import by.bsu.finalproject.command.ParamName;
 import by.bsu.finalproject.entity.User;
@@ -15,9 +16,7 @@ import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AddInformationCommand implements ActionCommand {
-
-    private static final String MESSAGE_WRONG_REGISTRATION = "message.wrongregistration";
+public class AddStudentInformationCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
@@ -43,12 +42,12 @@ public class AddInformationCommand implements ActionCommand {
         }
         if(wasCreated){
             request.setAttribute(ParamName.REDIRECT, redirect);
+            session.setAttribute(ParamName.PARAM_NAME_USER_TYPE, user.getUserType().toString());
         }else{
             request.setAttribute(ParamName.MOV_ATTRIBUTE, ParamName.ADD);
-            request.setAttribute("this email or username is already exist",
-                    MessageManager.getProperty(MESSAGE_WRONG_REGISTRATION));
+            request.setAttribute(ParamName.INFO,
+                    MessageManager.getProperty(MessageName.SUCCESS_UPDATE));
             request.setAttribute(ParamName.STUDENTS, map);
-            request.setAttribute(ParamName.PARAM_NAME_USER_TYPE, user.getUserType().toString());
         }
         return page;
     }

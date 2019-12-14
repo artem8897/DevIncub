@@ -11,8 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 public class ButtonEmptyInformationPageCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
-        String page = ConfigurationManager.getProperty(PathName.PATH_PAGE_INFORMATION);
         request.setAttribute(ParamName.MOV_ATTRIBUTE, ParamName.ADD);
-        return page;
+        return ConfigurationManager.getProperty(PathName.PATH_PAGE_INFORMATION);
     }
 }

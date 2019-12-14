@@ -12,14 +12,12 @@ public class PathName {
     public static final String PATH_PAGE_INFORMATION = "path.page.userinformation";
     public static final String PATH_USER_PAGE = "path.page.user";
     public static final String PATH_ADMIN_PAGE = "path.page.admin";
-    public static final String PATH_GUEST_PAGE = "path.page.guest";
     public static final String PATH_PAGE_ERROR = "path.page.error";
     public static final String PATH_PAGE_TRAINER = "path.page.trainer";
     public static final String PATH_INDEX_PAGE = "path.page.index";
     public static final String PATH_PAGE_USER_REVIEW = "path.page.user_review";
     public static final String PATH_DIET_PAGE = "path.page.diet";
     public static final String PATH_TRAINING_PAGE = "path.page.training";
-    public static final String PATH_PAGE_ALL_PERSONAL_INFORMATION = "path.page.all_user_information";
     public static final String ADMIN_EDITION_PAGE = "path.page.admin_edition_page";
     public static final String ADMIN_EDITION_TRAINER = "path.page.admin_edition_trainer";
     public static final String PATH_PAGE_TRAINER_INFORMATION = "path.page.trainer_information";
@@ -34,4 +32,6 @@ public class PathName {
     public static final String PATH_PAGE_ADMIN_CHOOSE_PERSON = "path.page.admin_choose_student_for_edit";
     public static final String PATH_PAGE_ADMIN_EDITION_USER = "path.page.admin_edition_user";
     public static final String PATH_PAGE_PASSWORD = "path.page.password";
+    public static final String PATH_PAGE_DISCOUNT = "path.page.discount_page";
+    public static final String ADMIN_CHOOSE_STUDENT_STATUS_PAGE = "path.page.admin_change_student_status";
 }

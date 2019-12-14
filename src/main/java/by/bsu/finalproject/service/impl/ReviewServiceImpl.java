@@ -4,6 +4,7 @@ import by.bsu.finalproject.dao.DaoFactory;
 import by.bsu.finalproject.dao.impl.ReviewDaoImpl;
 import by.bsu.finalproject.entity.Review;
 import by.bsu.finalproject.entity.UserType;
+import by.bsu.finalproject.security.XssSecurity;
 import by.bsu.finalproject.service.ReviewService;
 import by.bsu.finalproject.exception.DaoException;
 import by.bsu.finalproject.exception.LogicException;
@@ -20,6 +21,7 @@ public class ReviewServiceImpl implements ReviewService {
     public boolean createReview(int userId, String userReview, int rate, int trainerId, Map map) throws LogicException {
 
         Review review = new Review();
+        userReview = XssSecurity.protectFromXssAttack(userReview);
         review.setRate(rate);
         review.setReview(userReview);
 
@@ -54,7 +56,7 @@ public class ReviewServiceImpl implements ReviewService {
     }
     private boolean validateReview(Review review, Map<String, String> map){
 
-        boolean isValidReview = ReviewValidator.INSTANCE.isValidReview(review.getReview());
+        boolean isValidReview = review.getReview() != null && ReviewValidator.INSTANCE.isValidReview(review.getReview());
 
         if(isValidReview){
             map.put(ServiceName.REVIEW, review.getReview());

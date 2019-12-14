@@ -9,6 +9,11 @@ public enum CommandType {
             this.command = new LoginCommand();
         }
     },
+    DELETE_TRAINING{
+        {
+            this.command = new DeleteTrainingCommand();
+        }
+    },
     LOGOUT {
         {
             this.command = new LogoutCommand();
@@ -19,9 +24,14 @@ public enum CommandType {
             this.command = new RegistrationCommand();
         }
     },
+    DISCOUNT{
+        {
+            this.command = new DiscountPageCommand();
+        }
+    },
     GO_TO_PASSWORD{
         {
-           this.command = new ChangePasswordPage();
+           this.command = new ChangePasswordPageCommand();
         }
     },
     GOTOREGISTRATION {
@@ -44,15 +54,9 @@ public enum CommandType {
             this.command = new AdminMainAccCommand();
         }
     },
-//    SHOWALLUSERSCOMMAND{
-//        {
-//            this.command = new ShowAllUsersCommand();
-//        }
-//
-//    },
     ADDINFORMATIONCOMMAND{
         {
-            this.command = new AddInformationCommand();
+            this.command = new AddStudentInformationCommand();
         }
     },
     UPDATE_USER_INFORMATION_PAGE {
@@ -71,9 +75,19 @@ public enum CommandType {
             this.command = new AddPersonalTrainingCommand();
         }
     },
+    ADD_DISCOUNT{
+        {
+            this.command = new AddDiscountCommand();
+        }
+    },
     EMPTY_REVIEW{
         {
             this.command = new ButtonReviewPageCommand();
+        }
+    },
+    UPDATE_PAY_STATUS{
+        {
+            this.command = new UpdateStudentStatus();
         }
     },
     CREATEUSERREVIEW{
@@ -89,6 +103,11 @@ public enum CommandType {
     EMPTY_TRAINING_PAGE{
         {
             this.command = new ButtonEmptyTrainingPageCommand();
+        }
+    },
+    ADMIN_STATUS{
+        {
+            this.command = new AdminChooseUserStatusCommand();
         }
     },
     BUTTON_DIET_PAGE{
@@ -213,7 +232,7 @@ public enum CommandType {
     },
     ADMIN_CHOOSE_PERSON{
         {
-            this.command = new AdminChooseStudent();
+            this.command = new AdminChooseStudentCommand();
         }
     },
     ADMIN_EDIT_USER{

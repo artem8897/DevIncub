@@ -35,7 +35,6 @@ public class InformationServiceImpl implements InformationService {
 
         Map<Integer, PersonInformation> personInformationMap ;
 
-        PersonalInformationDaoImpl personalInformationDao = new PersonalInformationDaoImpl();
         try {
             personInformationMap = personalInformationDao.findAllByTrainerInLimit(currentPage,recordPage,trainerId);
         } catch (DaoException e) {
@@ -49,6 +48,13 @@ public class InformationServiceImpl implements InformationService {
 
         try {
             return personalInformationDao.findNumberOfRows();
+        } catch (DaoException e) {
+            throw new LogicException(e);
+        }
+    }
+    public boolean updatePaymentStatus(int userId, int paymentStatus) throws LogicException {
+        try {
+            return personalInformationDao.updatePayStatus(userId, paymentStatus);
         } catch (DaoException e) {
             throw new LogicException(e);
         }
@@ -118,10 +124,11 @@ public class InformationServiceImpl implements InformationService {
         if(!condition.isBlank()){
             try {
                 switch (condition){
-                    case "diet" : personalInformationMap = personalInformationDao.findAllStudentsHavingNoDietByTrainerId(currentPage, recordPage, trainerId);
+                    case ServiceName.DIET : personalInformationMap = personalInformationDao.findAllStudentsHavingNoDietByTrainerId(currentPage, recordPage, trainerId);
                     break;
-                    case "training" : personalInformationMap = personalInformationDao.findAllStudentsHavingPaidTrainingsByTrainerId(currentPage, recordPage, trainerId);
+                    case ServiceName.TRAINING : personalInformationMap = personalInformationDao.findAllStudentsHavingPaidTrainingsByTrainerId(currentPage, recordPage, trainerId);
                     break;
+                    default: personalInformationMap = personalInformationDao.findAllByTrainerInLimit(currentPage, recordPage, trainerId);
                 }
             } catch (DaoException e) {
             throw new LogicException(e);
@@ -193,7 +200,7 @@ public class InformationServiceImpl implements InformationService {
             map.put(ServiceName.WEIGHT,ServiceName.WRONG_FIELD);
         }
 
-        boolean isValidSex = PersonalInformationValidator.INSTANCE.isValidSex(personInformation.getSex());
+        boolean isValidSex = personInformation.getSex() != null && PersonalInformationValidator.INSTANCE.isValidSex(personInformation.getSex());
 
         if(isValidSex){
             map.put(ServiceName.SEX,personInformation.getSex());
@@ -201,7 +208,7 @@ public class InformationServiceImpl implements InformationService {
             map.put(ServiceName.SEX,ServiceName.WRONG_FIELD);
         }
 
-        boolean isValidSecondName = PersonalInformationValidator.INSTANCE.isValidName(personInformation.getSecondName());
+        boolean isValidSecondName = personInformation.getSecondName() != null && PersonalInformationValidator.INSTANCE.isValidName(personInformation.getSecondName());
 
         if(isValidSecondName){
             map.put(ServiceName.SECOND_NAME,personInformation.getSecondName());
@@ -209,7 +216,7 @@ public class InformationServiceImpl implements InformationService {
             map.put(ServiceName.SECOND_NAME,ServiceName.WRONG_FIELD);
         }
 
-        boolean isValidName = PersonalInformationValidator.INSTANCE.isValidName(personInformation.getName());
+        boolean isValidName = personInformation.getName() != null && PersonalInformationValidator.INSTANCE.isValidName(personInformation.getName());
 
         if(isValidName){
             map.put(ServiceName.NAME,personInformation.getName());

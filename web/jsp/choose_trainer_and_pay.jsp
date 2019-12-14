@@ -6,7 +6,8 @@
 <fmt:setBundle basename="local" />
 <html>
 <head>
-    <c:import url="/jsp/header.jsp"/>
+<body>
+<c:import url="/jsp/header.jsp"/>
 
     <form name="Choose_trainer_and_pay" method="POST" action="controller"/>
     <input type="hidden" name="command" value=GO_TO_PAY />
@@ -16,11 +17,11 @@
 
     </br><fmt:message key="label.training_amount"/><br/>
 
-    <select name="amount of trainings">
-        <option value="8"/>8
-        <option value="16"/>16
-        <option value="32"/>32
-        <option value="64"/>64
+    <select name="training_amount">
+        <option value="8"><c:out value="8"/></option>
+        <option value="16"><c:out value="16"/></option>
+        <option value="32"><c:out value="32"/></option>
+        <option value="64"><c:out value="64"/></option>
     </select>
     <br/>
     ${wrongregistration}
@@ -29,7 +30,7 @@
     <button class="w3-btn w3-hover-light-blue w3-round-large"  name="command" value=value="GO_TO_PAY" ><fmt:message key="label.calculate_price"/></button>
     </form><hr/></head>
         </div>
-<body>
+<c:import url="/jsp/footer.jsp"/>
 
 </body>
 </html>

@@ -1,6 +1,7 @@
 package by.bsu.finalproject.command.impl;
 
 import by.bsu.finalproject.command.ActionCommand;
+import by.bsu.finalproject.command.MessageName;
 import by.bsu.finalproject.command.PathName;
 import by.bsu.finalproject.command.ParamName;
 import by.bsu.finalproject.entity.User;
@@ -16,8 +17,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class UpdateDietCommand implements ActionCommand {
-
-    private static final String MESSAGE_WRONG_REGISTRATION = "message.wrongregistration";
 
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
@@ -44,10 +43,11 @@ public class UpdateDietCommand implements ActionCommand {
         if(wasCreated){
             request.setAttribute(ParamName.REDIRECT, redirect);
         }else{
+            request.setAttribute(ParamName.MOV_ATTRIBUTE, ParamName.UPDATE);
             request.setAttribute(ParamName.PARAM_NAME_USER_TYPE, user.getUserType().toString());
-            request.setAttribute("this email or username is already exist",
-                    MessageManager.getProperty(MESSAGE_WRONG_REGISTRATION));
+            request.setAttribute(ParamName.INFO, MessageManager.getProperty(MessageName.MESSAGE_WRONG_FIELDS));
             request.setAttribute(ParamName.DIET,map);
+            request.setAttribute(ParamName.USER_ID, userId);
         }
         return page;
     }

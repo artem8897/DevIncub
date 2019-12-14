@@ -8,7 +8,7 @@
     <c:import url="/jsp/header.jsp"/>
 <body>
 <div class="w3-panel w3-green w3-opacity w3-center">
-<table>
+<table style="mso-table-anchor-horizontal: column">
     <c:forEach var="item" items="${review}">
         <tr>
             <ul>
@@ -20,8 +20,5 @@
 </table>
 </div>
 </form>
-</body>
-</head>
-<body>
 </body>
 </html>

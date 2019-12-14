@@ -3,7 +3,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <fmt:setLocale value="${local}" scope="session" />
 <fmt:setBundle basename="local" />
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,6 +14,7 @@
 <body class="m-3">
 
 <form name="Edit User Form" method="POST" action="controller">
+    <input type="hidden" name="redirect" value="controller?command=GO_TO_ADMIN">
 
 <div class="row col-md-6">
 
@@ -33,25 +33,24 @@
                 <td><select name="user_type">
 
                     <option value="${user.value.userType}" selected/>${user.value.userType}
-                    <option value="user" />user
-                    <option value="admin" />admin
-                    <option value="trainer" />trainer
+                    <option value="user" /><c:out value="user"/>
+                    <option value="admin" /><c:out value="admin"/>
+                    <option value="trainer" /><c:out value="trainer"/>
 
                 </select></td>
                 <td> <select name="status">
 
                     <option value="${user.value.status}" selected/>${user.value.status}
-                    <option value="active" />active
-                    <option value="blocked" />blocked
-                    <option value="deleted" />deleted
+                    <option value="active" /><c:out value="active"/>
+                    <option value="blocked" /><c:out value="blocked"/>
+                    <option value="deleted" /><c:out value="deleted"/>
 
                 </select></td>
                 <input type="hidden" name="command" value="CHANGE_USER_STATUS"/>
 
-                <td><button button class="w3-btn w3-hover-light-blue w3-round-large" name="user_id" value=${user.key} >create trainer </button><td>
+                <td><button button class="w3-btn w3-hover-light-blue w3-round-large" name="user_id" value=${user.key} ><fmt:message key="label.change_user_status"/></button><td>
             </td>
                 </form>
-<%--                <td><button class="w3-btn w3-hover-border-blue w3-round-large" onclick="location.href='controller?command=CHANGE_USER_STATUS&user_id=${user.key}'" ><fmt:message key="display_reviews"/> </button></td>--%>
             </tr>
         </c:forEach>
     </table>
@@ -91,6 +90,7 @@
 <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
+<c:import url="/jsp/footer.jsp"/>
 
 </body>
 </html>

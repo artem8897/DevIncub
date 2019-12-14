@@ -8,6 +8,7 @@ import by.bsu.finalproject.service.TrainingService;
 import by.bsu.finalproject.exception.DaoException;
 import by.bsu.finalproject.exception.LogicException;
 import by.bsu.finalproject.validator.TrainingValidator;
+import by.bsu.finalproject.validator.UserValidator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -40,6 +41,13 @@ public class TrainingServiceImpl implements TrainingService {
             return false;
         }
     }
+    public boolean deleteTraining(int trainingId) throws LogicException {
+        try {
+            return trainingDao.deleteTraining(trainingId);
+        } catch (DaoException e) {
+            throw new LogicException(e);
+        }
+    }
 
     public Map<Integer, Training> findLimitTrainerMap(int currentPage, int recordPage, int userId ) throws LogicException {
 
@@ -53,7 +61,6 @@ public class TrainingServiceImpl implements TrainingService {
         return trainingMap;
     }
     public Integer findNumberOfRows (int userId) throws LogicException {
-        //todo
         try {
              return trainingDao.findNumberOfRows(userId);
         } catch (DaoException e) {
@@ -113,7 +120,7 @@ public class TrainingServiceImpl implements TrainingService {
 
     private boolean validateTraining(Training training, Map<String, String> map){
 
-        boolean isValidDate = TrainingValidator.INSTANCE.isValidDate(training.getDate());
+        boolean isValidDate = training.getDate() != null && TrainingValidator.INSTANCE.isValidDate(training.getDate());
 
         if(isValidDate){
             map.put(ServiceName.DATE,training.getDate());
@@ -121,7 +128,7 @@ public class TrainingServiceImpl implements TrainingService {
             map.put(ServiceName.DATE,ServiceName.WRONG_FIELD);
 
         }
-        boolean isValidTrainingType = TrainingValidator.INSTANCE.isValidTrainingType(training.getTrainingType());
+        boolean isValidTrainingType = training.getTrainingType() != null && TrainingValidator.INSTANCE.isValidTrainingType(training.getTrainingType());
 
         if(isValidTrainingType){
             map.put(ServiceName.TRAINING_TYPE,training.getTrainingType());
@@ -129,7 +136,7 @@ public class TrainingServiceImpl implements TrainingService {
             map.put(ServiceName.TRAINING_TYPE,ServiceName.WRONG_FIELD);
         }
 
-        boolean isValidPersonality = TrainingValidator.INSTANCE.isValidPersonality(training.getPersonality());
+        boolean isValidPersonality = training.getPersonality() != null && TrainingValidator.INSTANCE.isValidPersonality(training.getPersonality());
 
         if(isValidPersonality){
             map.put(ServiceName.PERSONALITY,training.getPersonality());

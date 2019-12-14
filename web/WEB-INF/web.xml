@@ -16,6 +16,10 @@
         <error-code>500</error-code>
         <location>/jsp/error/error.jsp</location>
     </error-page>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/jsp/error/error.jsp</location>
+    </error-page>
     <listener>
         <listener-class>by.bsu.finalproject.listener.SessionListener</listener-class>
     </listener>

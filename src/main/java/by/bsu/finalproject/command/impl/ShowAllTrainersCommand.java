@@ -18,8 +18,8 @@ public class ShowAllTrainersCommand implements ActionCommand {
         TrainerServiceImpl trainerService = new TrainerServiceImpl();
         List<Trainer> trainerList ;
         int noOfRecords;
-        int currentPage = Integer.valueOf(request.getParameter(ParamName.CURRENT_PAGE));
-        int recordsPerPage = Integer.valueOf(request.getParameter(ParamName.RECORDS_PER_PAGE));
+        int currentPage = Integer.parseInt(request.getParameter(ParamName.CURRENT_PAGE));
+        int recordsPerPage = Integer.parseInt(request.getParameter(ParamName.RECORDS_PER_PAGE));
         try {
             trainerList = trainerService.findLimitTrainerMap(currentPage,recordsPerPage);
             noOfRecords = trainerService.findNumberOfRows();

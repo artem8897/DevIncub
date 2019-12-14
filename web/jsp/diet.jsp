@@ -6,6 +6,8 @@
 <html>
 <body>
 <c:import url="/jsp/header.jsp"/>
+<c:import url="/jsp/user_navigation.jsp"/>
+<div style="text-align: center">
 <form name="Trainer" method="POST" action="controller"/>
 <c:set var="diet" value="${diet}"/>
 <select name="diet_type" onselect="${diet['diet_type']}">
@@ -41,6 +43,7 @@
     </c:when>
 </c:choose>
 <br/>
+</div>
 
 <c:set var = "user_type" value = "${user_type}"/>
 
@@ -57,6 +60,7 @@
     </c:when>
 </c:choose></form><hr/>
 
-</form><hr/>
+<c:import url="/jsp/footer.jsp"/>
+
 </body>
 </html>

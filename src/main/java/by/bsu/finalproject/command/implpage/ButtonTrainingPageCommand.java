@@ -1,11 +1,12 @@
 package by.bsu.finalproject.command.implpage;
 
 import by.bsu.finalproject.command.ActionCommand;
+import by.bsu.finalproject.command.MessageName;
 import by.bsu.finalproject.command.PathName;
 import by.bsu.finalproject.command.ParamName;
-import by.bsu.finalproject.entity.Training;
 import by.bsu.finalproject.entity.User;
 import by.bsu.finalproject.manager.ConfigurationManager;
+import by.bsu.finalproject.manager.MessageManager;
 import by.bsu.finalproject.service.impl.TrainingServiceImpl;
 import by.bsu.finalproject.exception.CommandException;
 import by.bsu.finalproject.exception.LogicException;
@@ -28,15 +29,16 @@ public class ButtonTrainingPageCommand implements ActionCommand {
             training = trainingService.findTrainingById(trainingId);
             if(training == null){
                 page = ConfigurationManager.getProperty(PathName.PATH_PAGE_TRAINER);
-                return page;
+                request.setAttribute(ParamName.INFO, MessageManager.getProperty(MessageName.NO_TRAINING_EXIST));
+            }else {
+                request.setAttribute(ParamName.MOV_ATTRIBUTE, ParamName.UPDATE);
+                request.setAttribute(ParamName.TRAINING, training);
+                request.setAttribute(ParamName.PARAM_NAME_USER_TYPE, user.getUserType().toString());
+                page = ConfigurationManager.getProperty(PathName.PATH_TRAINING_PAGE);
             }
-            request.setAttribute(ParamName.MOV_ATTRIBUTE, ParamName.UPDATE);
-            request.setAttribute(ParamName.TRAINING, training);
-            request.setAttribute(ParamName.PARAM_NAME_USER_TYPE, user.getUserType().toString());
         } catch (LogicException e) {
             throw new CommandException(e);
         }
-        page = ConfigurationManager.getProperty(PathName.PATH_TRAINING_PAGE);
         return page;
     }
 }

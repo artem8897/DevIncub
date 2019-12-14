@@ -5,17 +5,17 @@ public class Trainer implements Entity {
     private int id;
     private int workExperience;
     private String trainingType;
-    private String Name;
+    private String trainerName;
 
     public Trainer() {
     }
 
-    public String getName() {
-        return Name;
+    public String getTrainerName() {
+        return trainerName;
     }
 
-    public void setName(String name) {
-        Name = name;
+    public void setTrainerName(String trainerName) {
+        this.trainerName = trainerName;
     }
 
     public String getTrainingType() {
@@ -49,5 +49,28 @@ public class Trainer implements Entity {
                 "id ='" + id + '\'' +
                 ", workExperience=" + workExperience +
                 ", trainingType='" + trainingType + '\'' ;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Trainer trainer = (Trainer) o;
+
+        if (id != trainer.id) return false;
+        if (workExperience != trainer.workExperience) return false;
+        if (trainingType != null ? !trainingType.equals(trainer.trainingType) : trainer.trainingType != null)
+            return false;
+        return trainerName != null ? trainerName.equals(trainer.trainerName) : trainer.trainerName == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + workExperience;
+        result = 31 * result + (trainingType != null ? trainingType.hashCode() : 0);
+        result = 31 * result + (trainerName != null ? trainerName.hashCode() : 0);
+        return result;
     }
 }

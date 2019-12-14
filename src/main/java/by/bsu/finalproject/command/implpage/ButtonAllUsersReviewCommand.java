@@ -20,7 +20,6 @@ public class ButtonAllUsersReviewCommand implements ActionCommand {
   @Override
 
     public String execute(HttpServletRequest request) throws CommandException {
-        String page;
         try {
             HttpSession session = request.getSession(true);
             User user = ((User) (session.getAttribute(ParamName.USER_SESSION)));
@@ -40,7 +39,6 @@ public class ButtonAllUsersReviewCommand implements ActionCommand {
         } catch (LogicException e) {
             throw new CommandException(e);
         }
-        page = ConfigurationManager.getProperty(PathName.PATH_PAGE_ALL_USERS_REVIEW);
-        return page;
-    }
+         return ConfigurationManager.getProperty(PathName.PATH_PAGE_ALL_USERS_REVIEW);
+  }
 }

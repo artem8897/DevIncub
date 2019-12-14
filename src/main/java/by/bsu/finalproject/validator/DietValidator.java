@@ -11,7 +11,7 @@ public enum DietValidator {
 
     public boolean isValidParameter(int parameter){
 
-        return parameter > 0 && parameter < 3000 ? true : false;
+        return parameter > 0 && parameter < 3000 ;
 
     }
     public boolean isValidDietType(String name){

@@ -7,15 +7,18 @@ public enum DaoFactory {
     INSTANCE;
 
     private DietDaoImpl dietDao = new DietDaoImpl();
+    private PaymentDaoImpl paymentDao = new PaymentDaoImpl();
     private PersonalInformationDaoImpl personalInformationDao = new PersonalInformationDaoImpl();
     private ReviewDaoImpl reviewDao = new ReviewDaoImpl();
     private UserDaoImpl userDao = new UserDaoImpl();
     private TrainingDaoImpl trainingDao = new TrainingDaoImpl();
     private TrainerDaoImpl trainerDao = new TrainerDaoImpl();
 
+
     public DietDaoImpl getDietDao(){
         return dietDao;
     }
+    public PaymentDaoImpl getPaymentDao(){return paymentDao;}
     public PersonalInformationDaoImpl getPersonalInformationDao(){
         return personalInformationDao;
     }

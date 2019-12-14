@@ -1,6 +1,7 @@
 package by.bsu.finalproject.command.impl;
 
 import by.bsu.finalproject.command.ActionCommand;
+import by.bsu.finalproject.command.MessageName;
 import by.bsu.finalproject.command.PathName;
 import by.bsu.finalproject.command.ParamName;
 import by.bsu.finalproject.service.impl.TrainingServiceImpl;
@@ -15,14 +16,12 @@ import java.util.Map;
 
 public class AddPersonalTrainingCommand implements ActionCommand {
 
- private static final String MESSAGE_WRONG_REGISTRATION = "message.wrongregistration";
-
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
 
-        String page;
-
+        String page = ConfigurationManager.getProperty(PathName.PATH_PAGE_TRAINER);
         String periodicity = request.getParameter(ParamName.PARAM_NAME_DATE);
+        String redirect = request.getParameter(ParamName.REDIRECT);
         String trainingType = request.getParameter(ParamName.PARAM_NAME_TRAINING_TYPE);
         String personality = request.getParameter(ParamName.PARAM_NAME_PERSONALITY);
         int userId = Integer.parseInt(request.getParameter(ParamName.PARAM_NAME_USER_ID));
@@ -37,12 +36,12 @@ public class AddPersonalTrainingCommand implements ActionCommand {
             throw new CommandException(e);
         }
         if(wasCreated){
-            page = ConfigurationManager.getProperty(PathName.PATH_PAGE_TRAINER);
+            request.setAttribute(ParamName.REDIRECT, redirect);
         }else{
+            request.setAttribute(ParamName.MOV_ATTRIBUTE, ParamName.ADD);
             request.setAttribute(ParamName.TRAINING, map);
-            request.setAttribute("this email or username is already exist",
-                    MessageManager.getProperty(MESSAGE_WRONG_REGISTRATION));
-            page = ConfigurationManager.getProperty(PathName.PATH_PAGE_TRAINER);
+            request.setAttribute(ParamName.INFO,
+                    MessageManager.getProperty(MessageName.MESSAGE_WRONG_FIELDS));
         }
         return page;
     }

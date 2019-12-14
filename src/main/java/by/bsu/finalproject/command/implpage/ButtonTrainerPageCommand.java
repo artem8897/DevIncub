@@ -31,11 +31,10 @@ public class ButtonTrainerPageCommand implements ActionCommand {
             request.setAttribute(ParamName.MOV_ATTRIBUTE, ParamName.UPDATE);
             request.setAttribute(ParamName.USER_ID,userId);
             request.setAttribute(ParamName.TRAINER_ATTRIBUTE,trainer);
-            request.setAttribute(ParamName.PARAM_NAME_USER_TYPE, user.getUserType());
+            request.setAttribute(ParamName.PARAM_NAME_USER_TYPE, user.getUserType().toString());
         } catch (LogicException e) {
             throw new CommandException(e);
         }
-        String page = ConfigurationManager.getProperty(PathName.PATH_PAGE_TRAINER_INFORMATION);
-        return page;
+        return ConfigurationManager.getProperty(PathName.PATH_PAGE_TRAINER_INFORMATION);
     }
 }

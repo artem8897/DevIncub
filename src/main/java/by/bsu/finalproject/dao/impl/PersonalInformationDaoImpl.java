@@ -11,10 +11,14 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+
+/**
+ * Data access object for Student.
+ * @author A. Kuzmik
+ */
+
 
 public class PersonalInformationDaoImpl implements PersonalInformationDao<Integer, PersonInformation> {
 
@@ -39,22 +43,18 @@ public class PersonalInformationDaoImpl implements PersonalInformationDao<Intege
 
     public boolean isCreated(Integer id) throws DaoException {
 
-        boolean isInBase ;
-
         try (Connection cn = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement statement = cn.prepareStatement(Query.SQL_SELECT_USER_IN_FORMATION_BY_ID)){
 
             statement.setInt(1, id);
 
             try(ResultSet resultSet = statement.executeQuery()){
-                 isInBase = resultSet.next();
+                 return resultSet.first();
             }
-            // todo result set sam????
         } catch (SQLException | ConnectionPoolException e) {
             logger.debug(e);
             throw new DaoException(e);
         }
-        return isInBase;
     }
 
     public Integer findNumberOfRows() throws DaoException {
@@ -184,7 +184,6 @@ public class PersonalInformationDaoImpl implements PersonalInformationDao<Intege
             statement.setInt(2,currentPage);
             statement.setInt(3,recordPage);
 
-
             mapPerson = createPersonMap(statement);
 
         }catch (ConnectionPoolException | SQLException e){
@@ -203,6 +202,7 @@ public class PersonalInformationDaoImpl implements PersonalInformationDao<Intege
             statement.setInt(1, trainerId);
 
             try(ResultSet resultSet = statement.executeQuery()){
+
                 if(resultSet.next()){
                     number = resultSet.getInt(TablesColumnName.COUNT);
                 }
@@ -213,11 +213,6 @@ public class PersonalInformationDaoImpl implements PersonalInformationDao<Intege
             throw new DaoException(e);
         }
         return number;
-    }
-
-    @Override
-    public boolean delete(PersonInformation entity) {
-        return false;
     }
 
     public PersonInformation findPersonalInformation(Integer userId) throws DaoException {
@@ -249,35 +244,47 @@ public class PersonalInformationDaoImpl implements PersonalInformationDao<Intege
     @Override
     public boolean create(PersonInformation entity) throws DaoException {
 
-        boolean isCreated;
-
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement statement = connection.prepareStatement(Query.SQL_INSERT_USER_INFORMATION)){
 
-            isCreated = insertPersonInformationInDatabase(entity,statement);
+            return insertPersonInformationInDatabase(entity,statement);
 
         } catch (SQLException | ConnectionPoolException e) {
             logger.debug(e);
             throw new DaoException(e);
         }
-        return isCreated;
     }
 
     @Override
     public boolean update(PersonInformation entity) throws DaoException {
 
-        boolean isUpdated ;
-
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement statement = connection.prepareStatement(Query.SQL_UPDATE_PERSONAL_INFORMATION)) {
 
-            isUpdated = insertPersonInformationInDatabase(entity,statement);
+            return insertPersonInformationInDatabase(entity,statement);
+
+        }catch (ConnectionPoolException | SQLException e){
+
+            logger.error(e);
+            throw new DaoException(e);
+        }
+    }
+
+    public boolean updatePayStatus(Integer userId, Integer payStatus) throws DaoException {
+
+        //todo
+        try (Connection connection = ConnectionPool.INSTANCE.getConnection();
+             PreparedStatement statement = connection.prepareStatement(Query.SQL_UPDATE_STATUS_PAY)) {
+
+            statement.setInt(1, payStatus);
+            statement.setInt(2, userId);
+            int insertedRow = statement.executeUpdate();
+            return (insertedRow > 0);
 
         }catch (ConnectionPoolException | SQLException e){
             logger.debug(e);
             throw new DaoException(e);
         }
-        return isUpdated;
     }
 
     private Map<Integer, PersonInformation> createPersonMap(PreparedStatement statement) throws SQLException {
@@ -293,7 +300,7 @@ public class PersonalInformationDaoImpl implements PersonalInformationDao<Intege
                 personInformation.setSecondName(resultSet.getString(TablesColumnName.SECOND_NAME));
                 personInformation.setName(resultSet.getString(TablesColumnName.NAME));
                 personInformation.setSex(resultSet.getString(TablesColumnName.SEX));
-                personInformation.setHeight(resultSet.getInt(TablesColumnName.WEIGHT));
+                personInformation.setWeight(resultSet.getInt(TablesColumnName.WEIGHT));
                 personInformation.setHeight(resultSet.getInt(TablesColumnName.HEIGHT));
                 personInformationMap.put(personInformation.getId(),personInformation);
             }

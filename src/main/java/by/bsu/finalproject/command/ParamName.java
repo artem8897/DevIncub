@@ -63,6 +63,8 @@ public class ParamName {
     public static final String LOCALE = "local";
     public static final String PERSONAL_INFORMATION = "personal_information";
     public static final String TYPE = "type";
+    public static final String DISCOUNT = "discount";
+    public static final String INFO = "info";
 
 
 

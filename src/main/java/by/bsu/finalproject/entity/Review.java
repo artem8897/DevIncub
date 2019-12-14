@@ -33,4 +33,23 @@ public class Review implements Entity {
         this.review = review;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Review review1 = (Review) o;
+
+        if (rate != review1.rate) return false;
+        if (reviewId != review1.reviewId) return false;
+        return review != null ? review.equals(review1.review) : review1.review == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = rate;
+        result = 31 * result + reviewId;
+        result = 31 * result + (review != null ? review.hashCode() : 0);
+        return result;
+    }
 }

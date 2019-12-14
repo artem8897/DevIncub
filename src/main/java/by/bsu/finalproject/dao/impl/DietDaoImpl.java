@@ -14,6 +14,11 @@ import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Data access object for Diet.
+ * @author A. Kuzmik
+ */
+
 public class DietDaoImpl implements DietDao<Integer, Diet> {
     private static Logger logger = LogManager.getLogger(DietDaoImpl.class);
 
@@ -131,6 +136,10 @@ public class DietDaoImpl implements DietDao<Integer, Diet> {
               logger.error("data base mistake", e);
               connection.rollback();
               return false;
+          }finally {
+              if(connection != null){
+                  connection.setAutoCommit(true);
+              }//todo
           }
       } catch (SQLException | ConnectionPoolException e) {
           throw new DaoException(e);
@@ -140,23 +149,21 @@ public class DietDaoImpl implements DietDao<Integer, Diet> {
   }
 
     public boolean update(Integer userId, Diet entity) throws DaoException {
+
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement  statement = connection.prepareStatement(Query.SQL_UPDATE_DIET)) {
-            try{
+
                 statement.setInt(5,userId);
                 statement.setString(1, entity.getDietType());
                 statement.setInt(2, entity.getProteins());
                 statement.setInt(3,entity.getFats());
                 statement.setInt(4,entity.getCarbohydrates());
-                statement.executeUpdate();
+                int updatedRow = statement.executeUpdate();
                 logger.info("updated diet");
-                return true;
-            } catch (SQLException e) {
-                logger.error("wrong field",e);
-            }
+                return updatedRow > 0;
+
         }catch (ConnectionPoolException | SQLException e){
             throw new DaoException(e);
         }
-        return false;
     }
 }

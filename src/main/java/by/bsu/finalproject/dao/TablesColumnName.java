@@ -10,7 +10,6 @@ public class TablesColumnName {
     public static final String COLUMN_LABEL_PASSWORD = "password";
     public static final String COLUMN_LABEL_EMAIL = "email";
     public static final String COLUMN_LABEL_USERNAME = "username";
-    public static final String COLUMN_LABEL_SEX = "sex";
     public static final String COLUMN_LABEL_USER_TYPE ="usertype";
     public static final String REVIEW_ID = "review_id";
     public static final String REVIEW = "review";

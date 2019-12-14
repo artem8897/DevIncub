@@ -5,12 +5,11 @@
 <fmt:setBundle basename="local" />
 <html><head><title><fmt:message key="label.registration"/></title></head>
 <div class="w3-container w3-center">
+
     <c:import url="/jsp/header.jsp"/>
     <c:import url="/jsp/user_navigation.jsp"/>
-    <c:import url="/jsp/user_redirect.jsp"/>
 
         <div style="text-align: center;">
-
 
     <body>
     <form name="AddUserInformation" method="POST" action="controller"/>
@@ -55,22 +54,22 @@ ${wrongregistration}
     <br/>
 
 
-<%--    <c:set var = "user_type" value = "${user_type}"/>--%>
+    <c:set var = "user_type" value = "${user_type}"/>
 
-<%--    <br/>--%>
-<%--    <c:choose>--%>
-<%--        <c:when test="${user_type.equals('ADMIN')}">--%>
-<%--            <input type="hidden" name="redirect" value="controller?command=ADMIN_CHOOSE_PERSON">--%>
-<%--        </c:when>--%>
-<%--        <c:when test="${user_type.equals('USER')}">--%>
-<%--            <input type="hidden" name="redirect" value="controller?command=student_acc">--%>
-<%--        </c:when>--%>
-<%--    </c:choose></form><hr/>--%>
+    <br/>
+    <c:choose>
+        <c:when test="${user_type.equals('ADMIN')}">
+            <input type="hidden" name="redirect" value="controller?command=GO_TO_ADMIN">
+        </c:when>
+        <c:when test="${user_type.equals('USER')}">
+            <input type="hidden" name="redirect" value="controller?command=student_acc">
+        </c:when>
+    </c:choose></form><hr/>
 
 
     </form><hr/>
 
-    <a href="controller?command=logout"><fmt:message key="label.logout"/></a>
+    <c:import url="/jsp/footer.jsp"/>
 </body>
         </div>
 </div>

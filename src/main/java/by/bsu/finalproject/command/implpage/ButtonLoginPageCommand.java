@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 public class ButtonLoginPageCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
-        String page = ConfigurationManager.getProperty(PathName.PATH_LOGIN_PAGE);
-        return page;
+        return ConfigurationManager.getProperty(PathName.PATH_LOGIN_PAGE);
     }
 }

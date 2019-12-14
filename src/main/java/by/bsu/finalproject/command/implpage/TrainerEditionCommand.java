@@ -17,13 +17,14 @@ import java.util.Map;
 public class TrainerEditionCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
+
         InformationServiceImpl informationService = new InformationServiceImpl();
         HttpSession session = request.getSession(true);
         User user = ((User)(session.getAttribute(ParamName.USER_SESSION)));
         Map<Integer, PersonInformation> userMap ;
         int noOfRecords;
-        int currentPage = Integer.valueOf(request.getParameter(ParamName.CURRENT_PAGE));
-        int recordsPerPage = Integer.valueOf(request.getParameter(ParamName.RECORDS_PER_PAGE));
+        int currentPage = Integer.parseInt(request.getParameter(ParamName.CURRENT_PAGE));
+        int recordsPerPage = Integer.parseInt(request.getParameter(ParamName.RECORDS_PER_PAGE));
         try {
             userMap = informationService.findLimitTrainerMap(currentPage,recordsPerPage,user.getId());
             noOfRecords = informationService.findNumberOfRows();
@@ -39,6 +40,7 @@ public class TrainerEditionCommand implements ActionCommand {
         request.setAttribute(ParamName.CURRENT_PAGE, currentPage);
         request.setAttribute(ParamName.RECORDS_PER_PAGE,recordsPerPage);
         request.setAttribute(ParamName.PERSONAL_INFORMATION,userMap);
+
         return ConfigurationManager.getProperty(PathName.PATH_TRAINER_EDITION_USER);
 
     }

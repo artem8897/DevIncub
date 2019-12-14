@@ -14,7 +14,7 @@ public class DeleteUserCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
-
+        //todo
         int userId = Integer.parseInt(request.getParameter(ParamName.PARAM_NAME_USER_ID));
         String page ;
         UserServiceImpl userService = new UserServiceImpl();

@@ -89,5 +89,5 @@
 
 </form>
 </div>
-<a href="controller?command=logout"><fmt:message key="label.logout"/></a>
+<c:import url="/jsp/footer.jsp"/>
 </body></html>

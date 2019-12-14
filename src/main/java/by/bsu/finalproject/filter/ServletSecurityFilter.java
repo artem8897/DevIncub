@@ -1,5 +1,7 @@
 //package by.bsu.finalproject.filter;
 //
+//import by.bsu.finalproject.command.ParamName;
+//import by.bsu.finalproject.command.PathName;
 //import by.bsu.finalproject.entity.User;
 //import by.bsu.finalproject.entity.UserType;
 //
@@ -10,7 +12,7 @@
 //import javax.servlet.http.HttpSession;
 //import java.io.IOException;
 //
-//@WebFilter(urlPatterns = { "/controller" }, servletNames = { "MainServlet" })
+//@WebFilter(urlPatterns = { "/controller" })
 //public class ServletSecurityFilter implements Filter {
 //    public void init(FilterConfig fConfig) {
 //    }
@@ -18,16 +20,14 @@
 //                             FilterChain chain) throws IOException, ServletException {
 //            HttpServletRequest req = (HttpServletRequest) request;
 //            HttpServletResponse resp = (HttpServletResponse) response;
-//            HttpSession session = req.getSession();
-//            User user = (User) session.getAttribute("User");
-//            UserType type = user.getUserType();
-//            if (type == null) {
+//            HttpSession session = req.getSession(true);
+//            String userType = (String) session.getAttribute(ParamName.PARAM_NAME_USER_TYPE);
+//            if (userType == null) {
 //               RequestDispatcher dispatcher = request.getServletContext()
-//                        .getRequestDispatcher("/jsp/login.jsp");
+//                        .getRequestDispatcher(PathName.PATH_LOGIN_PAGE);
 //                dispatcher.forward(req, resp);
 //                return;
 //            }
-//            // pass the request along the filter chain
 //            chain.doFilter(request, response);
 //        }
 //    public void destroy() {

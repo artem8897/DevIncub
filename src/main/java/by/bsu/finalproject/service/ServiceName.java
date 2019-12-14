@@ -24,6 +24,8 @@ public class ServiceName {
     public static final String NAME = "name";
     public static final String REVIEW = "review";
     public static final String RATE = "rate";
+    public static final String TRAINING = "training";
+    public static final String DIET = "diet";
     public static final String EXPERIENCE = "work_experience";
     public static final String TRAINING_ID = "training_id";
     public static final String WORK_EXPERIENCE = "work_experience";

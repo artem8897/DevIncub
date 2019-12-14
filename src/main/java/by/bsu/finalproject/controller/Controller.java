@@ -18,11 +18,20 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Main servlet controller.
+ *
+ * @author A. Kuzmik
+ *
+ */
+
 @WebServlet("/controller")
 public class Controller extends HttpServlet {
 
     private static final Logger logger = LogManager.getLogger(Controller.class);
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
         try{
@@ -33,6 +42,7 @@ public class Controller extends HttpServlet {
     }
 
     }
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
         try{
@@ -40,19 +50,30 @@ public class Controller extends HttpServlet {
         } catch (CommandException e) {
             logger.error(e);
             response.sendError(500);
-//            response.sendRedirect(ConfigurationManager.getProperty(PathName.PATH_PAGE_ERROR));
         }
 
     }
+
+    /**
+     * Main method of this controller.
+     */
+
     private void processRequest(HttpServletRequest request,
                                 HttpServletResponse response) throws IOException, ServletException, CommandException {
 
-        String page ;
-        ActionCommand command = ActionFactory.defineCommand(request);
-        page = command.execute(request);
-        String redirect = (String) request.getAttribute(ParamName.REDIRECT);
-        logger.info(redirect);
+        logger.debug("Controller stars");
 
+        String page ;
+        // extract and define command name from the request
+        ActionCommand command = ActionFactory.defineCommand(request);
+        // define page
+        page = command.execute(request);
+        // get redirect address if exist
+        String redirect = (String) request.getAttribute(ParamName.REDIRECT);
+
+        logger.trace(redirect);
+
+        // if page path was defined send redirect or forward, if was not - redirect to index page
         if (page != null) {
             if(redirect == null){
                 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
@@ -67,11 +88,19 @@ public class Controller extends HttpServlet {
                     MessageManager.getProperty("message.nullpage"));
             response.sendRedirect(request.getContextPath() + page);
         }
+
+        logger.debug("Controller finished");
+
     }
+
+    /**
+     * destroying method of this controller.
+     */
 
     @Override
     public void destroy() {
         super.destroy();
+        // destroying connection pool
         try {
             ConnectionPool.INSTANCE.destroyPool();
         } catch (ConnectionPoolException e) {

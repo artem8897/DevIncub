@@ -4,6 +4,7 @@
 <%@ taglib prefix="ctg" uri="/WEB-INF/tld/custom.tld" %>
 <fmt:setLocale value="${local}" scope="session" />
 <fmt:setBundle basename="local" />
+<!DOCTYPE>
 <html><head><title><fmt:message key="label.registration"/></title></head>
 <body>
 <c:import url="/jsp/header.jsp"/>
@@ -23,6 +24,7 @@
     </br><fmt:message key="label.email"/> <br/>
 
     <input type="email" name="email"  value="${students['email']}" required/>
+    <label class="invalid-value-label"><c:if test="${ students['email'] eq 'wrong field'}">Incorrect mail</c:if></label>
     <br/><fmt:message key="label.password"/><br/>
     <input type="password" name="password" value="${students['password']}"  required pattern="[0-9a-zA-Z]{5,10}"/>
     <br/><fmt:message key="label.confirmpassword"/><br/>
@@ -32,8 +34,7 @@
 
 <br/>
 ${wrong_fields}
-<br/><tr bgcolor="#c8d8f8">
-    <td  valign=top colspan=2>
+<br/>
 
         <fmt:message key="label.choosesex"/>
 
@@ -41,7 +42,6 @@ ${wrong_fields}
 
         <input type="radio" name="sex" value="Female" > <fmt:message key="label.female"/>
 
-    </td>
 </tr>
 <br/>
 ${wrongregistration}
@@ -49,6 +49,5 @@ ${wrongregistration}
 <button class="w3-btn w3-hover-light-blue w3-round-large" name="command" value=registration ><fmt:message key="label.registration"/></button>
 </form><hr/>
 <a href="controller?command=gotologin"><fmt:message key="label.login"/></a>
-<ctg:table-revenue/>
 </div>
 </body></html>

@@ -117,7 +117,7 @@ public class DietServiceImpl implements DietService {
             map.put(ServiceName.CARBOHYDRATES,ServiceName.WRONG_FIELD);
         }
 
-        boolean isDIetTypeValid = DietValidator.INSTANCE.isValidDietType(diet.getDietType());
+        boolean isDIetTypeValid = diet.getDietType() != null && DietValidator.INSTANCE.isValidDietType(diet.getDietType());
 
         if(isDIetTypeValid){
             map.put(ServiceName.DIET_TYPE,diet.getDietType());

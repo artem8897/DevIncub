@@ -1,6 +1,7 @@
 package by.bsu.finalproject.command.implpage;
 
 import by.bsu.finalproject.command.ActionCommand;
+import by.bsu.finalproject.command.ParamName;
 import by.bsu.finalproject.command.PathName;
 import by.bsu.finalproject.entity.User;
 import by.bsu.finalproject.exception.CommandException;
@@ -14,14 +15,14 @@ import java.util.Map;
 public class ButtonAdminEditionAllCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
-        UserServiceImpl informationService = new UserServiceImpl();
+        UserServiceImpl userService = new UserServiceImpl();
         Map<Integer, User> userMap ;
         int noOfRecords;
-        int currentPage = Integer.valueOf(request.getParameter("currentPage"));
-        int recordsPerPage = Integer.valueOf(request.getParameter("recordsPerPage"));
+        int currentPage = Integer.parseInt(request.getParameter(ParamName.CURRENT_PAGE));
+        int recordsPerPage = Integer.parseInt(request.getParameter(ParamName.RECORDS_PER_PAGE));
         try {
-            userMap = informationService.findAllUserMap(currentPage,recordsPerPage);
-            noOfRecords = informationService.findNumberOfRows();
+            userMap = userService.findAllUserMap(currentPage,recordsPerPage);
+            noOfRecords = userService.findNumberOfRows();
         } catch (LogicException e) {
             throw new CommandException(e);
         }
@@ -29,10 +30,10 @@ public class ButtonAdminEditionAllCommand implements ActionCommand {
         if(noOfPages % recordsPerPage > 0){
             noOfPages++;
         }
-        request.setAttribute("noOfPages", noOfPages);
-        request.setAttribute("currentPage", currentPage);
-        request.setAttribute("recordsPerPage",recordsPerPage);
-        request.setAttribute("personal_information",userMap);
+        request.setAttribute(ParamName.NUMBER_OF_PAGES, noOfPages);
+        request.setAttribute(ParamName.CURRENT_PAGE, currentPage);
+        request.setAttribute(ParamName.RECORDS_PER_PAGE,recordsPerPage);
+        request.setAttribute(ParamName.PERSONAL_INFORMATION,userMap);
         return ConfigurationManager.getProperty(PathName.PATH_PAGE_ADMIN_EDITION_USER);
     }
 }

@@ -5,9 +5,10 @@
 <fmt:setBundle basename="local" />
 <html>
 <head>
-    <c:import url="/jsp/header.jsp"/>
-
-    <form name="Choose_trainer_and_pay" method="POST" action="controller"/>
+</head>
+<body>
+<c:import url="/jsp/header.jsp"/>
+<form name="Choose_trainer_and_pay" method="POST" action="controller"/>
     <input type="hidden" name="command" value=PAY />
         <input type="hidden" name="price" value="${price}"/>
         <input type="hidden" name="redirect" value="controller?command=student_acc">
@@ -23,16 +24,16 @@
 
             <select name="trainer_id">
                 <c:forEach var="item" items="${trainers}">
-                    <option value="${item.key}"/> ${item.value.name},${item.value.trainingType}
+                    <option value="${item.key}"/> ${item.value.trainerName},${item.value.trainingType}
                 </c:forEach>
             </select>
 
             <input type="password" name="card" value="" required pattern="[0-9]{10}"/>
         </h2>
         <button class="w3-btn w3-hover-light-blue w3-round-large"  name="command" value="PAY" ><fmt:message key="label.pay"/></button>
-        </form><hr/></head>
+        </form><hr/>
     </div>
-<body>
 
+<c:import url="/jsp/footer.jsp"/>
 </body>
 </html>

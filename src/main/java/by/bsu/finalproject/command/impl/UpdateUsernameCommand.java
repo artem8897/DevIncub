@@ -21,6 +21,7 @@ public class UpdateUsernameCommand implements ActionCommand {
             String username = request.getParameter(ParamName.PARAM_NAME_USERNAME);
             String redirect = request.getParameter(ParamName.REDIRECT);
             UserServiceImpl userService = new UserServiceImpl();
+            page = ConfigurationManager.getProperty(PathName.PATH_USER_PAGE);
             boolean wasCreated ;
             try {
                 wasCreated = userService.changeUsername(userId, username);
@@ -28,9 +29,9 @@ public class UpdateUsernameCommand implements ActionCommand {
                 throw new CommandException(e);
             }
             if(wasCreated){
-                page = ConfigurationManager.getProperty(PathName.PATH_USER_PAGE);
+                request.setAttribute(ParamName.REDIRECT, redirect);
             }else{
-                page = ConfigurationManager.getProperty(PathName.PATH_PAGE_TRAINER);
+
             }
             return page;
         }

@@ -12,8 +12,6 @@
 
         <button class="w3-btn w3-hover-light-blue w3-round-large" onclick="location.href='controller?command=show_all_trainers&currentPage=1&recordsPerPage=5'"><fmt:message key="label.display_trainers"/> </button>
 
-        <button class="w3-btn w3-hover-light-blue w3-round-large" onclick="location.href='controller?command=show_all_trainers'">adress </button>
-
         <form name="Choose_users_local" method="GET" action="controller">
 
             <input type="hidden" name="command" value="change_localization" />
@@ -28,7 +26,7 @@
 
             </td>
 
-            <td> <button class="w3-btn w3-hover-light-blue w3-round-large" name="command" value="change_localization"  ><fmt:message key="label.change_locale"/></button></td>
+            <td> <button class="w3-btn w3-hover-light-blue w3-round-large" name="command" value="change_localization"><fmt:message key="label.change_locale"/></button></td>
         </form>
     </div>
 
@@ -50,7 +48,7 @@
 </form><hr/>
 </div>
     <div style="text-align: center;">
-    <a href="controller?command=gotoregistration"><fmt:message key="label.registration"/></a>
-    <ctg:table-revenue/>
+
+        <button class="w3-btn w3-hover-light-blue w3-round-large" onclick="location.href='controller?command=gotoregistration'"><fmt:message key="label.registration"/></button>
 </div>
 </body></html>

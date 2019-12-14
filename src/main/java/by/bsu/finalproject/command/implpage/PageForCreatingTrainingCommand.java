@@ -16,16 +16,13 @@ import java.util.Map;
 
 public class PageForCreatingTrainingCommand implements ActionCommand {
 
-    private static final String TRAINING = "training";
-    private static final String DIET = "diet";
-
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
 
         String page;
         int noOfRecords;
-        int currentPage = Integer.valueOf(request.getParameter(ParamName.CURRENT_PAGE));
-        int recordsPerPage = Integer.valueOf(request.getParameter(ParamName.RECORDS_PER_PAGE));
+        int currentPage = Integer.parseInt(request.getParameter(ParamName.CURRENT_PAGE));
+        int recordsPerPage = Integer.parseInt(request.getParameter(ParamName.RECORDS_PER_PAGE));
         String type = request.getParameter(ParamName.TYPE);
 
         try {
@@ -34,15 +31,15 @@ public class PageForCreatingTrainingCommand implements ActionCommand {
             int trainerId = user.getId();
             InformationServiceImpl informationService = new InformationServiceImpl();
 
-            if(type.equals(TRAINING)){
+            if(type.equals(ParamName.TRAINING)){
                 noOfRecords = informationService.findNumberOfRowsStudentsWithPaidTraining(trainerId);
-            }else if(type.equals(DIET)){
+            }else if(type.equals(ParamName.DIET)){
                 noOfRecords = informationService.findNumberOfRowsStudentsWithNoDiet(trainerId);
             }else{
                 noOfRecords = informationService.findNumberOfRows();
             }
             Map<Integer, PersonInformation> personInformationMap = informationService.findStudentsByTrainer(trainerId, type, currentPage, recordsPerPage);
-            // toDo
+
             int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
             if(noOfPages % recordsPerPage > 0){
                 noOfPages++;

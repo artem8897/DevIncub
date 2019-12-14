@@ -69,4 +69,30 @@ public class Diet implements Entity {
                 ", fats=" + fats +
                 ", carbohydrates=" + carbohydrates;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Diet diet = (Diet) o;
+
+        if (id != diet.id) return false;
+        if (proteins != diet.proteins) return false;
+        if (fats != diet.fats) return false;
+        if (carbohydrates != diet.carbohydrates) return false;
+        if (dietType != null ? !dietType.equals(diet.dietType) : diet.dietType != null) return false;
+        return status != null ? status.equals(diet.status) : diet.status == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = dietType != null ? dietType.hashCode() : 0;
+        result = 31 * result + id;
+        result = 31 * result + proteins;
+        result = 31 * result + fats;
+        result = 31 * result + carbohydrates;
+        result = 31 * result + (status != null ? status.hashCode() : 0);
+        return result;
+    }
 }

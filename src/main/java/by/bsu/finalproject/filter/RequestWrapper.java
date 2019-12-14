@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 
 public class RequestWrapper extends HttpServletRequestWrapper {
+
     public RequestWrapper(HttpServletRequest servletRequest) {
         super(servletRequest);
     }
@@ -29,7 +30,7 @@ public class RequestWrapper extends HttpServletRequestWrapper {
         }
         return cleanXSS(value);
     }
-
+    @Override
     public String getHeader(String name) {
         String value = super.getHeader(name);
         if (value == null){

@@ -3,16 +3,18 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <fmt:setLocale value="${local}" scope="session" />
 <fmt:setBundle basename="local" />
+<!DOCTYPE>
 <html><head><title><fmt:message key="label.title" /></title></head>
 <body>
 <div style="text-align: center;">
 
     <form name="loginForm" method="POST" action="controller">
-<div class="w3-center">
+        <input type="hidden" name="redirect" value="controller?command=GO_TO_ADMIN">
+        <div class="w3-center">
         <c:import url="/jsp/header.jsp"/>
         <select name="user_id">
             <c:forEach var="item" items="${alltrainer}">
-                <option value="${item.key}"/> ${item.value}
+                <option value="${item.key}"/> ${item.value.trainerName}, ${item.value.id}
             </c:forEach>
         </select>
 
@@ -25,5 +27,8 @@
             </div>
         </div>
 </div>
-            <a href="controller?command=logout"><fmt:message key="label.logout"/></a>
+    </form>
+</div>
+<c:import url="/jsp/footer.jsp"/>
+
 </body></html>

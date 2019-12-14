@@ -7,10 +7,9 @@ import by.bsu.finalproject.manager.ConfigurationManager;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class ChangePasswordPage implements ActionCommand {
+public class ChangePasswordPageCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
-        String page = ConfigurationManager.getProperty(PathName.PATH_PAGE_PASSWORD);
-        return page;
+        return ConfigurationManager.getProperty(PathName.PATH_PAGE_PASSWORD);
     }
 }

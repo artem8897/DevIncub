@@ -30,8 +30,8 @@ public class ButtonAllUsersTrainingsCommand implements ActionCommand {
             TrainingServiceImpl trainingService = new TrainingServiceImpl();
             Map<Integer, Training> trainingMap ;
             int noOfRecords;
-            int currentPage = Integer.valueOf(request.getParameter("currentPage"));
-            int recordsPerPage = Integer.valueOf(request.getParameter("recordsPerPage"));
+            int currentPage = Integer.parseInt(request.getParameter(ParamName.CURRENT_PAGE));
+            int recordsPerPage = Integer.parseInt(request.getParameter(ParamName.RECORDS_PER_PAGE));
             try {
                 trainingMap = trainingService.findLimitTrainerMap(currentPage,recordsPerPage,userId);
                 noOfRecords = trainingService.findNumberOfRows(userId);
@@ -43,13 +43,12 @@ public class ButtonAllUsersTrainingsCommand implements ActionCommand {
             if(noOfPages % recordsPerPage > 0){
                 noOfPages++;
             }
-            request.setAttribute("noOfPages", noOfPages);
-            request.setAttribute("currentPage", currentPage);
-            request.setAttribute("recordsPerPage",recordsPerPage);
-            request.setAttribute("userId",userId);
+            request.setAttribute(ParamName.NUMBER_OF_PAGES, noOfPages);
+            request.setAttribute(ParamName.CURRENT_PAGE, currentPage);
+            request.setAttribute(ParamName.RECORDS_PER_PAGE,recordsPerPage);
+            request.setAttribute(ParamName.USER_ID,userId);
             request.setAttribute(ParamName.TRAINING, trainingMap);
 
-            String page = ConfigurationManager.getProperty(PathName.PATH_PAGE_ALL_USERS_TRAINING);
-            return page;
+            return ConfigurationManager.getProperty(PathName.PATH_PAGE_ALL_USERS_TRAINING);
     }
 }

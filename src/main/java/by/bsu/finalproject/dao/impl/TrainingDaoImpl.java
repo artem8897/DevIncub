@@ -11,10 +11,13 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+
+/**
+ * Data access object for Training.
+ * @author A. Kuzmik
+ */
 
 public class TrainingDaoImpl implements TrainingDao<Integer, Training> {
 
@@ -35,7 +38,6 @@ public class TrainingDaoImpl implements TrainingDao<Integer, Training> {
         }
         return trainingMap;
     }
-
     public Map<Integer, Training> findUsersTrainingMap(int userId) throws DaoException {
 
         Map<Integer, Training> trainingMap;
@@ -51,6 +53,20 @@ public class TrainingDaoImpl implements TrainingDao<Integer, Training> {
             throw new DaoException(e);
         }
         return trainingMap;
+    }
+
+    public boolean deleteTraining(Integer trainingId) throws DaoException {
+
+        try (Connection connection = ConnectionPool.INSTANCE.getConnection();
+             PreparedStatement statement = connection.prepareStatement(Query.SQL_DELETE_TRAINING)){
+
+            statement.setInt(1,trainingId);
+            int updatedRow = statement.executeUpdate();
+            return updatedRow > 0;
+
+        }catch (ConnectionPoolException | SQLException e){
+            throw new DaoException(e);
+        }
     }
 
     public Map<Integer, Training> findAllInLimit(int currentPage, int recordPage,int userId) throws DaoException {
@@ -119,12 +135,7 @@ public class TrainingDaoImpl implements TrainingDao<Integer, Training> {
         return training;
     }
 
-    @Override
-    public boolean delete(Training entity) {
-        return false;
-    }
 
-//    @Override
     public boolean create(Training entity) throws DaoException {
 
         int id ;
@@ -143,8 +154,7 @@ public class TrainingDaoImpl implements TrainingDao<Integer, Training> {
 
                     try(ResultSet resultSet = statement.getGeneratedKeys()){
 
-                        if(resultSet.next()){
-                            //todo resultSet.first()
+                        if(resultSet.first()){
                             id = resultSet.getInt(1);
                             logger.info("Created training");
                         }else{
@@ -153,7 +163,6 @@ public class TrainingDaoImpl implements TrainingDao<Integer, Training> {
                         }
                     }
                 }
-                int insertedRow = 0;
 
                 try(PreparedStatement secondStatement = connection.prepareStatement(Query.SQL_INSERT_USER_TRAINING)){
 
@@ -176,6 +185,8 @@ public class TrainingDaoImpl implements TrainingDao<Integer, Training> {
                 connection.rollback();
                 logger.error(e);
                 return false;
+            }finally {
+                    connection.setAutoCommit(true);
             }
         } catch (SQLException | ConnectionPoolException e) {
             throw new DaoException(e);
@@ -188,23 +199,20 @@ public class TrainingDaoImpl implements TrainingDao<Integer, Training> {
 
          try (Connection connection = ConnectionPool.INSTANCE.getConnection();
               PreparedStatement  statement = connection.prepareStatement(Query.SQL_UPDATE_TRAINING)) {
-             try{
+
                  statement.setInt(4,entity.getId());
                  statement.setString(1, entity.getDate());
                  statement.setString(2, entity.getPersonality());
                  statement.setString(3,entity.getTrainingType());
 
-                 statement.executeUpdate();
-                 logger.info("updated type user");
-                 return true;
-             } catch (SQLException e) {
-                 logger.error("wrong field");
-             }
+                 int updatedRow = statement.executeUpdate();
+                 return updatedRow > 0;
+
          }catch (ConnectionPoolException | SQLException e){
              throw new DaoException(e);
          }
-         return false;
      }
+
      private Map<Integer, Training> findTrainingMap(PreparedStatement statement) throws SQLException {
 
         Map<Integer, Training> trainingMap = new HashMap<>();

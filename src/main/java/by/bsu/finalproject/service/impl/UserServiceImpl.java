@@ -19,7 +19,7 @@ public class UserServiceImpl implements UserService {
 
     public Map<Integer, User> findAllUserMap(int currentPage, int recordPerPage) throws LogicException {
         Map<Integer, User> userMap ;
-        UserDaoImpl userDao = new UserDaoImpl();
+
         try {
             userMap = userDao.findAll(currentPage, recordPerPage);
         } catch (DaoException e) {
@@ -46,13 +46,12 @@ public class UserServiceImpl implements UserService {
 
     }
     public boolean register(String login,String pass,String confirmedPassword,String username,String sex, Map map) throws LogicException {
+
         try {
             boolean isMailOrUsernameInBase = userDao.isExistMailOrUsername(login,username);
-
             if(isMailOrUsernameInBase){
                 return false;
             }
-
             User user = new User();
             user.setEmail(login);
             user.setPassword(pass);
@@ -68,10 +67,10 @@ public class UserServiceImpl implements UserService {
                 user.setPassword(encryptedPassword);
 
                 return userDao.create(user);
+
             }else{
                 return false;
             }
-            // toDO
         } catch (DaoException e) {
             throw new LogicException(e);
         }
@@ -123,7 +122,7 @@ public class UserServiceImpl implements UserService {
     }
     private boolean validateUser(User user, Map<String, String> map, String confirmedPass){
 
-        boolean isLoginValid = user.getUsername() == null ? false : UserValidator.INSTANCE.isUsernameValid(user.getUsername());
+        boolean isLoginValid = user.getUsername() != null ? UserValidator.INSTANCE.isUsernameValid(user.getUsername())  : false ;
 
         if(isLoginValid){
             map.put(ServiceName.USERNAME,user.getUsername());
@@ -131,7 +130,7 @@ public class UserServiceImpl implements UserService {
             map.put(ServiceName.USERNAME,ServiceName.WRONG_FIELD);
         }
 
-        boolean isPassValid = user.getPassword() == null ? false : UserValidator.INSTANCE.isPasswordValid(user.getPassword())&&user.getPassword().equals(confirmedPass);
+        boolean isPassValid = user.getPassword() != null && UserValidator.INSTANCE.isPasswordValid(user.getPassword()) && user.getPassword().equals(confirmedPass);
 
         if(isPassValid){
             map.put(ServiceName.PASSWORD,user.getPassword());
@@ -139,7 +138,7 @@ public class UserServiceImpl implements UserService {
         }
 
         //toDO
-        boolean isMailValid = user.getEmail() == null ? false : UserValidator.INSTANCE.isEmailValid(user.getEmail());
+        boolean isMailValid = user.getEmail() != null && UserValidator.INSTANCE.isEmailValid(user.getEmail()) ;
 
         if(isMailValid){
             map.put(ServiceName.MAIL,user.getEmail());
@@ -149,6 +148,7 @@ public class UserServiceImpl implements UserService {
 
         return isLoginValid && isPassValid && isMailValid;
     }
+
     public Integer findNumberOfRows () throws LogicException {
 
         int number ;

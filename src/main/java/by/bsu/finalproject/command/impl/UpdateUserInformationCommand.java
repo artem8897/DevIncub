@@ -23,7 +23,7 @@ public class UpdateUserInformationCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
 
-        String page ;
+        String page = ConfigurationManager.getProperty(PathName.PATH_PAGE_INFORMATION);
         HttpSession session = request.getSession(true);
         User user = ((User)(session.getAttribute(ParamName.USER_SESSION)));
         int userId;
@@ -46,13 +46,11 @@ public class UpdateUserInformationCommand implements ActionCommand {
         } catch (LogicException e) {
             throw new CommandException(e);
         }
-
-        page = ConfigurationManager.getProperty(PathName.PATH_PAGE_INFORMATION);
-
         if(wasUpdated){
             request.setAttribute(ParamName.REDIRECT, redirect);
         }else{
             //todo
+            request.setAttribute(ParamName.USER_ID, userId);
             request.setAttribute(ParamName.STUDENTS,map);
             request.setAttribute(ParamName.MOV_ATTRIBUTE, ParamName.UPDATE);
             request.setAttribute(ParamName.PARAM_NAME_USER_TYPE, user.getUserType().toString());

@@ -3,16 +3,18 @@
 <fmt:setLocale value="${local}" scope="session" />
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <fmt:setBundle basename="local" scope="session" />
-<html>
+<!DOCTYPE>
+<html><head><title><fmt:message key="label.training_type"/></title></head>
 <body>
 <c:import url="/jsp/header.jsp"/>
 <c:import url="/jsp/user_navigation.jsp"/>
+<div style="text-align: center">
 <form name="Training" method="POST" action="controller"/>
 <c:set var="training" value="${training}"/>
 </br><fmt:message key="label.periodicity"/> <br/>
 <input type="date" name="date"  value="${training['date']}" required/>
 </br><fmt:message key="label.training_type"/> <br/>
-<input type="text" name="training type"  value="${training['training']}" required/>
+<input type="text" name="training type"  value="${training['training_type']}" required/>
 </br>personality <br/>
 <input type="text" name="personality"  value="${training['personality']}" required/>
 
@@ -28,6 +30,7 @@
     <c:when test="${move == 'UPDATE'}">
         <input type="hidden" name="training_id" value="${training['training_id']}">
         <button button class="w3-btn w3-hover-light-blue w3-round-large"  name="command" value=update_training ><fmt:message key="label.update_training"/></button>
+        <button button class="w3-btn w3-hover-light-blue w3-round-large"  name="command" value=delete_training ><fmt:message key="label.delete"/></button>
     </c:when>
 </c:choose>
 <br/>
@@ -47,6 +50,7 @@
     </c:when>
 </c:choose></form><hr/>
 
-</form><hr/>
+<c:import url="/jsp/footer.jsp"/>
+</div>
 </body>
 </html>

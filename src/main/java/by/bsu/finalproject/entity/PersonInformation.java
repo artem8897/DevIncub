@@ -9,6 +9,7 @@ public class PersonInformation implements Entity {
     private int weight;
     private int height;
     private int paidTraining;
+    private String paidStatus;
 
     public PersonInformation() {
     }
@@ -69,14 +70,49 @@ public class PersonInformation implements Entity {
         this.paidTraining = paidTraining;
     }
 
+    public String getPaidStatus() {
+        return paidStatus;
+    }
+
+    public void setPaidStatus(String paidStatus) {
+        this.paidStatus = paidStatus;
+    }
 
     @Override
     public String toString() {
-        return "id='" + id + '\'' + "</td></tr>"+
-                ", name='" + name + '\'' + "</td></tr>"+
-                ", secondName='" + secondName + '\'' + "</td></tr>"+
-                ", sex='" + sex + '\'' + "</td></tr>"+
-                ", weight='" + weight + '\'' + "</td></tr>"+
+        return "id='" + id + '\''+
+                ", name='" + name + '\''+
+                ", secondName='" + secondName + '\''+
+                ", sex='" + sex + '\'' +
+                ", weight='" + weight + '\''+
                 ", height='" + height + '\'';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        PersonInformation that = (PersonInformation) o;
+
+        if (id != that.id) return false;
+        if (weight != that.weight) return false;
+        if (height != that.height) return false;
+        if (paidTraining != that.paidTraining) return false;
+        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+        if (secondName != null ? !secondName.equals(that.secondName) : that.secondName != null) return false;
+        return sex != null ? sex.equals(that.sex) : that.sex == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (secondName != null ? secondName.hashCode() : 0);
+        result = 31 * result + (sex != null ? sex.hashCode() : 0);
+        result = 31 * result + weight;
+        result = 31 * result + height;
+        result = 31 * result + paidTraining;
+        return result;
     }
 }

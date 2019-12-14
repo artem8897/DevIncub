@@ -7,7 +7,7 @@ public enum PersonalInformationValidator {
 
     INSTANCE;
 
-    private static final String REGULAR_NAME = "[A-Z][a-z]{5,10}";
+    private static final String REGULAR_NAME = "(([А-Яа-я]{2,14})|([A-Za-z]{2,20}))";
     private static final String REGULAR_SEX = "[A-Za-z]{4,10}";
 
     public boolean isValidName(String name){
@@ -17,10 +17,10 @@ public enum PersonalInformationValidator {
 
     }
     public boolean isValidHeight(int height){
-        return height > 110 && height < 250 ? true : false;
+        return height > 110 && height < 250;
     }
     public boolean isValidWeight(int weight){
-        return weight > 40 && weight < 160 ? true : false;
+        return weight > 40 && weight < 160;
     }
 
     public boolean isValidSex(String sex){

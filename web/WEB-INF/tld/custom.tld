@@ -8,7 +8,7 @@
 <uri>customtags</uri>
 <tag>
     <name>table-revenue</name>
-    <tag-class>by.bsu.finalproject.tag.FooterTag</tag-class>
+    <tag-class>by.bsu.finalproject.tag.HeaderTag</tag-class>
     <body-content>scriptless</body-content>
     <attribute>
         <name>rows</name>

@@ -5,9 +5,7 @@
 <fmt:setBundle basename="local" />
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <title>Countries</title>
+<head><title><fmt:message key="label.training_type"/> </title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
 </head>
 <c:import url="/jsp/header.jsp"/>
@@ -31,7 +29,7 @@
             <td>${training.value.trainingType}</td>
 
             <input type="hidden" name="command" value="training_page"/>
-            <td><button button class="w3-btn w3-hover-light-blue w3-round-large" name="training" value=${training.key} ><fmt:message key="label.update_training"/></button><td>
+            <td><button class="w3-btn w3-hover-light-blue w3-round-large" name="training" value=${training.key} ><fmt:message key="label.update_training"/></button><td>
 
         </tr>
 
@@ -74,8 +72,7 @@
     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
+<c:import url="/jsp/footer.jsp"/>
 
 </body>
-</head>
-
 </html>

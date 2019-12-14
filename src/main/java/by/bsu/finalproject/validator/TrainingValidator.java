@@ -8,8 +8,8 @@ public enum TrainingValidator {
     INSTANCE;
 
     private static final String REGULAR_DATE = "[0-9]{4}-[0-9]{2}-[0-9]{2}";
-    private static final String REGULAR_PERSONALITY = "[A-Z a-z]{4,100}";
-    private static final String REGULAR_TRAINING_TYPE = "[A-Z a-z]{4,20}";
+    private static final String REGULAR_PERSONALITY = "(([А-Яа-я ]{2,100})|([A-Za-z ]{2,100}))";
+    private static final String REGULAR_TRAINING_TYPE = "(([А-Яа-я ]{2,40})|([A-Za-z ]{2,40}))";
 
 
     public boolean isValidDate(String date){

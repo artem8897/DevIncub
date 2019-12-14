@@ -46,7 +46,6 @@ public class CreateUserReviewCommand implements ActionCommand {
                 request.setAttribute("map",map);
                 request.setAttribute("field_with_wrong",
                         MessageManager.getProperty("message.wrongregistration"));
-
             } catch (DaoException e) {
                 throw new CommandException(e);
             }

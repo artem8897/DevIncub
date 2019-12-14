@@ -12,14 +12,14 @@ import by.bsu.finalproject.service.impl.InformationServiceImpl;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
-public class AdminChooseStudent implements ActionCommand {
+public class AdminChooseStudentCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
         InformationServiceImpl informationService = new InformationServiceImpl();
         Map<Integer, PersonInformation> userMap ;
         int noOfRecords;
-        int currentPage = Integer.valueOf(request.getParameter(ParamName.CURRENT_PAGE));
-        int recordsPerPage = Integer.valueOf(request.getParameter(ParamName.RECORDS_PER_PAGE));
+        int currentPage = Integer.parseInt(request.getParameter(ParamName.CURRENT_PAGE));
+        int recordsPerPage = Integer.parseInt(request.getParameter(ParamName.RECORDS_PER_PAGE));
         try {
             userMap = informationService.findLimitUserMap(currentPage,recordsPerPage);
             noOfRecords = informationService.findNumberOfRows();

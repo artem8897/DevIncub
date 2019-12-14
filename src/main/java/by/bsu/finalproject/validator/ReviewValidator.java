@@ -7,7 +7,7 @@ public enum  ReviewValidator {
 
     INSTANCE;
 
-    private static final String REGULAR_REVIEW = "([а-яА-яa-zA-Z,.)(]{5,100})";
+    private static final String REGULAR_REVIEW = "([а-яА-яa-zA-Z,.)( ]{5,100})";
 
     public boolean isValidReview(String review){
         Pattern pat = Pattern.compile(REGULAR_REVIEW);
@@ -16,7 +16,7 @@ public enum  ReviewValidator {
 
     }
     public boolean isValidRate(int rate){
-        return rate >= 0 && rate <= 10 ? true : false;
+        return rate >= 0 && rate <= 10 ;
     }
 
 }

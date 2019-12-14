@@ -3,13 +3,13 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <fmt:setLocale value="${local}" scope="session" />
 <fmt:setBundle basename="local" />
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head><title>Footer</title></head>
-<body class="w3-image">
+<body style ="text-align: center;">
 <hr/>
-<div style="text-align: center;">
-<div class="w3-animate-zoom w3-hide-small">
+<%--<div class="w3-animate-zoom w3-hide-small">--%>
     <button class="w3-btn w3-hover-border-blue-gray w3-round-large" onclick="Location.href='controller?command=logout'"><fmt:message key="label.logout"/></button>
-    <ctg:table-revenue/>
-</div>${requestScope.admin}
+   <br/>
+    <fmt:message key="footer.copyright"/>
 </body></html>

@@ -29,7 +29,7 @@
         <tr>
             <td> ${item.value.name}</td>
             <td>${item.value.secondName}</td>
-            <td><button button class="w3-btn w3-hover-light-blue w3-round-large" name="user_id" value=${item.key} > choose </button><td>
+            <td><button class="w3-btn w3-hover-light-blue w3-round-large" name="user_id" value=${item.key} ><fmt:message key="label.choose_student"/></button><td>
         </tr>
             </c:forEach>
         <hr/>
@@ -75,4 +75,5 @@
 <a href="controller?command=logout"><fmt:message key="label.logout"/></a>
     </div>
 </div>
+<c:import url="/jsp/footer.jsp"/>
 </body></html>

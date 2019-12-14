@@ -20,10 +20,10 @@ public class ChangeUserStatusCommand implements ActionCommand {
         HttpSession session = request.getSession(true);
         int adminId = ((User)(session.getAttribute(ParamName.USER_ATTRIBUTE))).getId();
 
-        String status = request.getParameter(ParamName.STATUS);
-        String userType = request.getParameter(ParamName.PARAM_NAME_USER_TYPE);
+        String status = request.getParameter(ParamName.STATUS).toUpperCase();
+        String userType = request.getParameter(ParamName.PARAM_NAME_USER_TYPE).toUpperCase();
         String redirect = request.getParameter(ParamName.REDIRECT);
-        String page = ConfigurationManager.getProperty(PathName.PATH_PAGE_ADMIN_EDITION_USER);
+        String page =  ConfigurationManager.getProperty(PathName.PATH_PAGE_TRAINER);
         UserServiceImpl userService = new UserServiceImpl();
         boolean wasChanged ;
         int userId = Integer.parseInt(request.getParameter(ParamName.PARAM_NAME_USER_ID));
@@ -35,8 +35,7 @@ public class ChangeUserStatusCommand implements ActionCommand {
         if(wasChanged){
             request.setAttribute(ParamName.REDIRECT, redirect);
         }else{
-//            request.setAttribute("this email or username is already exist",
-//                    MessageManager.getProperty(MESSAGE_WRONG_REGISTRATION));
+            request.setAttribute(ParamName.INFO, MessageManager.getProperty("message.wrongaction"));
         }
         return page;
 

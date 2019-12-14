@@ -7,7 +7,7 @@ import by.bsu.finalproject.entity.User;
 import by.bsu.finalproject.exception.CommandException;
 import by.bsu.finalproject.exception.LogicException;
 import by.bsu.finalproject.manager.ConfigurationManager;
-import by.bsu.finalproject.service.impl.PaymentService;
+import by.bsu.finalproject.service.impl.PaymentServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -21,14 +21,14 @@ public class PayCommand implements ActionCommand {
         int cardNumber = Integer.parseInt(request.getParameter(ParamName.CARD));
         String redirect = request.getParameter(ParamName.REDIRECT);
         int amountOfTraining = Integer.parseInt(request.getParameter(ParamName.TRAINING_AMOUNT));
-        int trainerId = Integer.parseInt(request.getParameter(ParamName.PARAM_TRAINING_ID));
-        PaymentService paymentService = new PaymentService();
+        int trainerId = Integer.parseInt(request.getParameter(ParamName.PARAM_NAME_TRAINER_ID));
+        PaymentServiceImpl paymentService = new PaymentServiceImpl();
         try {
-            boolean wasPaid = paymentService.patTraining(sum,cardNumber,user.getId(),amountOfTraining,trainerId);
+            boolean wasPaid = paymentService.payTraining(sum,cardNumber,user.getId(),amountOfTraining,trainerId);
             if(wasPaid){
                 request.setAttribute(ParamName.REDIRECT, redirect);
-            }{
-                request.setAttribute("info","message.some_problem_with_paid");
+            }else{
+                request.setAttribute(ParamName.INFO,"message.some_problem_with_paid");
             }
         } catch (LogicException e) {
             throw new CommandException(e);

@@ -43,6 +43,7 @@ public class CreateTrainerInformationCommand implements ActionCommand {
             throw new CommandException(e);
         }
         if(wasCreated){
+            session.setAttribute(ParamName.PARAM_NAME_USER_TYPE, user.getUserType().toString());
             request.setAttribute(ParamName.REDIRECT, redirect);
         }else{
             request.setAttribute(ParamName.PARAM_NAME_USER_TYPE, user.getUserType().toString());

@@ -17,9 +17,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Data access object for Trainer.
+ * @author A. Kuzmik
+ */
+
 public class TrainerDaoImpl implements TrainerDao<Integer, Trainer> {
 
-    private static final Logger logger = LogManager.getLogger(TrainingDaoImpl.class);
+    private static final Logger logger = LogManager.getLogger(TrainerDaoImpl.class);
 
     @Override
     public Map<Integer,Trainer> findAll() throws DaoException {
@@ -33,7 +38,7 @@ public class TrainerDaoImpl implements TrainerDao<Integer, Trainer> {
             while (resultSet.next()) {
                 Trainer trainer = new Trainer();
                 trainer.setId(resultSet.getInt(TablesColumnName.TRAINER_ID));
-                trainer.setName(resultSet.getString(TablesColumnName.NAME));
+                trainer.setTrainerName(resultSet.getString(TablesColumnName.NAME));
                 trainer.setTrainingType(resultSet.getString(TablesColumnName.TRAINING_TYPE));
                 trainer.setWorkExperience(resultSet.getInt(TablesColumnName.WORK_EXPERIENCE));
                 trainers.put(trainer.getId(),trainer);
@@ -45,22 +50,18 @@ public class TrainerDaoImpl implements TrainerDao<Integer, Trainer> {
     }
     public boolean isCreated(Integer id) throws DaoException {
 
-        boolean isInBase ;
-
         try (Connection cn = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement statement = cn.prepareStatement(Query.SQL_SELECT_TRAINER_BY_ID)){
 
             statement.setInt(1, id);
 
             try(ResultSet resultSet = statement.executeQuery()){
-                isInBase = resultSet.next();
+                return resultSet.first();
             }
-            // todo result set sam????
         } catch (SQLException | ConnectionPoolException e) {
             logger.debug(e);
             throw new DaoException(e);
         }
-        return isInBase;
     }
     public List<Trainer> findAllInLimit(int currentPage, int recordPage) throws DaoException {
 
@@ -77,7 +78,7 @@ public class TrainerDaoImpl implements TrainerDao<Integer, Trainer> {
                 while (resultSet.next()) {
                     Trainer trainer = new Trainer();
                     trainer.setId(resultSet.getInt(TablesColumnName.TRAINER_ID));
-                    trainer.setName(resultSet.getString(ParamName.PARAM_NAME_NAME));
+                    trainer.setTrainerName(resultSet.getString(ParamName.PARAM_NAME_NAME));
                     trainer.setTrainingType(resultSet.getString(TablesColumnName.TRAINING_TYPE));
                     trainer.setWorkExperience(resultSet.getInt(TablesColumnName.WORK_EXPERIENCE));
                     trainers.add(trainer);
@@ -96,7 +97,7 @@ public class TrainerDaoImpl implements TrainerDao<Integer, Trainer> {
              PreparedStatement statement = connection.prepareStatement(Query.SQL_CALCULATE_AMOUNT_OF_TRAINERS);
              ResultSet resultSet = statement.executeQuery()){
 
-            if(resultSet.next()){
+            if(resultSet.first()){
                 number = resultSet.getInt(TablesColumnName.COUNT);
             }
 
@@ -107,35 +108,21 @@ public class TrainerDaoImpl implements TrainerDao<Integer, Trainer> {
     }
 
 
-    @Override
-    public boolean delete(Trainer entity) {
-        return false;
-    }
-
 //    @Override
-    public boolean create(int trainerId, Trainer entity) throws DaoException {
-
-        int insertedRows;
+    public boolean create(Trainer trainer) throws DaoException {
 
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement statement = connection.prepareStatement(Query.SQL_INSERT_TRAINER, Statement.RETURN_GENERATED_KEYS)){
 
-            statement.setString(1,entity.getTrainingType());
-            statement.setString(2,entity.getName());
-            statement.setInt(3,entity.getWorkExperience());
-            statement.setInt(4,trainerId);
-
-            insertedRows = statement.executeUpdate();
+            statement.setString(1,trainer.getTrainingType());
+            statement.setString(2,trainer.getTrainerName());
+            statement.setInt(3,trainer.getWorkExperience());
+            statement.setInt(4,trainer.getId());
+            int insertedRows = statement.executeUpdate();
+            return insertedRows > 0;
 
         } catch (SQLException | ConnectionPoolException e) {
             throw new DaoException(e);
-        }
-        if(insertedRows > 0){
-            logger.info("Created trainer information");
-            return true;
-        }else{
-            logger.info("user wasn't created");
-            return false;
         }
     }
 
@@ -150,10 +137,10 @@ public class TrainerDaoImpl implements TrainerDao<Integer, Trainer> {
 
             try(ResultSet resultSet = st.executeQuery()){
 
-                if(resultSet.next()){
+                if(resultSet.first()){
 
                     trainer.setWorkExperience(resultSet.getInt(TablesColumnName.WORK_EXPERIENCE));
-                    trainer.setName(resultSet.getString(TablesColumnName.NAME));
+                    trainer.setTrainerName(resultSet.getString(TablesColumnName.NAME));
                     trainer.setTrainingType(resultSet.getString(TablesColumnName.TRAINING_TYPE));
                 }
             }
@@ -163,29 +150,21 @@ public class TrainerDaoImpl implements TrainerDao<Integer, Trainer> {
         return trainer;
     }
     @Override
-    public boolean update(Trainer entity) throws DaoException {
-
-        int updatedRow;
+    public boolean update(Trainer trainer) throws DaoException {
 
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement statement = connection.prepareStatement(Query.SQL_UPDATE_TRAINER)){
 
-            statement.setInt(4,entity.getId());
-            statement.setString(1,entity.getName());
-            statement.setString(3,entity.getTrainingType());
-            statement.setInt(2,entity.getWorkExperience());
-            updatedRow = statement.executeUpdate();
+            statement.setInt(4,trainer.getId());
+            statement.setString(1,trainer.getTrainerName());
+            statement.setString(3,trainer.getTrainingType());
+            statement.setInt(2,trainer.getWorkExperience());
+            int updatedRow = statement.executeUpdate();
+            return updatedRow > 0;
 
         } catch (SQLException | ConnectionPoolException e) {
             throw new DaoException(e);
         }
 
-        if(updatedRow > 0){
-            logger.info("Created trainer information");
-            return true;
-        }else{
-            logger.info("didn't crated");
-            return false;
-        }
     }
 }

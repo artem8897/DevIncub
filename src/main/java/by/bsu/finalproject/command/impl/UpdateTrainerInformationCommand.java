@@ -1,6 +1,7 @@
 package by.bsu.finalproject.command.impl;
 
 import by.bsu.finalproject.command.ActionCommand;
+import by.bsu.finalproject.command.MessageName;
 import by.bsu.finalproject.command.PathName;
 import by.bsu.finalproject.command.ParamName;
 import by.bsu.finalproject.entity.User;
@@ -17,8 +18,6 @@ import java.util.Map;
 
 public class UpdateTrainerInformationCommand implements ActionCommand {
 
-     private static final String MESSAGE_WRONG_REGISTRATION = "message.wrongregistration";
-
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
 
@@ -31,7 +30,6 @@ public class UpdateTrainerInformationCommand implements ActionCommand {
         HttpSession session = request.getSession(true);
         User user = ((User)(session.getAttribute(ParamName.USER_SESSION)));
         page = ConfigurationManager.getProperty(PathName.PATH_PAGE_TRAINER_INFORMATION);
-
         Map<String,String> map = new HashMap<>();
         TrainerServiceImpl trainerService = new TrainerServiceImpl();
         boolean wasCreated ;
@@ -45,7 +43,9 @@ public class UpdateTrainerInformationCommand implements ActionCommand {
         }else{
             request.setAttribute(ParamName.PARAM_NAME_USER_TYPE, user.getUserType().toString());
             request.setAttribute(ParamName.MOV_ATTRIBUTE, ParamName.UPDATE);
+            request.setAttribute(ParamName.INFO, MessageManager.getProperty(MessageName.MESSAGE_WRONG_FIELDS));
             request.setAttribute(ParamName.TRAINER_ATTRIBUTE,map);
+            request.setAttribute(ParamName.USER_ID, userId);
         }
         return page;
     }

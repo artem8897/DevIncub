@@ -3,20 +3,22 @@
 <fmt:setLocale value="${local}" scope="session" />
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <fmt:setBundle basename="local" scope="session" />
+<!DOCTYPE>
 <html>
 <body>
 <c:import url="/jsp/header.jsp"/>
+<c:import url="/jsp/user_navigation.jsp"/>
+<div style="text-align: -moz-center">
 <form name="Training" method="POST" action="controller"/>
 
 <br/><fmt:message key="label.password"/><br/>
 <input type="password" name="password" value= ""  required pattern="[0-9a-zA-Z]{5,10}"/>
 <br/><fmt:message key="label.confirmpassword"/><br/>
 <input type="password" name="password2" value= ""  required pattern="[0-9a-zA-Z]{5,10}"/>
-
-<button button class="w3-btn w3-hover-light-blue w3-round-large"  name="command" value=update_training ><fmt:message key="label.update_training"/></button>
-
-
-<c:set var = "user_type" value = "${user_type}"/>
+<br/>
+<button button class="w3-btn w3-hover-light-blue w3-round-large"  name="command" value=UPDATE_PASSWORD ><fmt:message key="label.change_password"/></button>
+</div>
+<c:set var = "user_type" value = "${user_type}" scope="session"/>
 
 <br/>
 <c:choose>
@@ -30,7 +32,6 @@
         <input type="hidden" name="redirect" value="controller?command=GO_TO_TRAINER">
     </c:when>
 </c:choose></form><hr/>
-
-</form><hr/>
+<c:import url="/jsp/footer.jsp"/>
 </body>
 </html>

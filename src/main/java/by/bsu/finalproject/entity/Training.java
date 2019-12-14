@@ -58,4 +58,31 @@ public class Training implements Entity {
                 ", periodicity='" + periodicity + '\'' +
                 ", id=" + id;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Training training = (Training) o;
+
+        if (id != training.id) return false;
+        if (trainingType != null ? !trainingType.equals(training.trainingType) : training.trainingType != null)
+            return false;
+        if (periodicity != null ? !periodicity.equals(training.periodicity) : training.periodicity != null)
+            return false;
+        if (personality != null ? !personality.equals(training.personality) : training.personality != null)
+            return false;
+        return status != null ? status.equals(training.status) : training.status == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = trainingType != null ? trainingType.hashCode() : 0;
+        result = 31 * result + (periodicity != null ? periodicity.hashCode() : 0);
+        result = 31 * result + (personality != null ? personality.hashCode() : 0);
+        result = 31 * result + id;
+        result = 31 * result + (status != null ? status.hashCode() : 0);
+        return result;
+    }
 }

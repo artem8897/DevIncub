@@ -3,12 +3,12 @@
 <fmt:setLocale value="${local}" scope="session" />
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <fmt:setBundle basename="local" />
+<!DOCTYPE>
 <html><head><title><fmt:message key="label.registration"/></title></head>
 <div class="w3-container w3-center">
     <body>
     <c:import url="/jsp/header.jsp"/>
     <c:import url="/jsp/user_navigation.jsp"/>
-    <c:import url="/jsp/user_redirect.jsp"/>
 
     <c:set var="trainers" value="${trainers}"/>
     <form name="AddTrainerInformation" method="POST" action="controller"/>
@@ -19,6 +19,8 @@
     <br/><fmt:message key="label.training_type"/><br/>
     <input type="text" name="training_type" value="${trainers['training_type']}" required pattern = "(([а-яА-я]{5,14})|([a-zA-Z]{2,20}))"/>
     <input type="hidden" name="user_id" value="${user_id}">
+    <br/>
+    ${info}
     <br/>
     <c:set var = "move" value = "${mov}"/>
     <br/>
@@ -32,8 +34,18 @@
         </c:when>
     </c:choose></form><hr/>
 
-    </form><hr/>
-    <a href="controller?command=logout"><fmt:message key="label.logout"/></a>
+    <c:set var = "user_type" value = "${user_type}"/>
+
+    <c:choose>
+        <c:when test="${user_type.equals('ADMIN')}">
+            <input type="hidden" name="redirect" value="controller?command=GO_TO_ADMIN">
+        </c:when>
+        <c:when test="${user_type.equals('TRAINER')}">
+            <input type="hidden" name="redirect" value="controller?command=GO_TO_TRAINER">
+        </c:when>
+    </c:choose></form><hr/>
+
+    <c:import url="/jsp/footer.jsp"/>
     </body>
 </div>
 </html>
