@@ -2,6 +2,11 @@ package by.bsu.finalproject.command;
 
 public class MessageName {
 
+    /**
+     * Holder for fields names of message names.
+     * @author Artem Kuzmik
+     */
+
     private MessageName(){
 
     }
@@ -14,5 +19,7 @@ public class MessageName {
     public static final String NO_USERS_EXIST = "message.no_users";
     public static final String NO_TRAINING_EXIST = "message.no_training";
     public static final String PROBLEMS_WITH_PAID = "message.some_problem_with_paid";
+    public static final String WRONG_ACTION = "message.wrongaction";
+    public static final String NULL_PAGE = "message.nullpage";
 
 }

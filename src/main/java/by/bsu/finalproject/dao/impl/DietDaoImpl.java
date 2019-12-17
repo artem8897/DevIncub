@@ -60,7 +60,7 @@ public class DietDaoImpl implements DietDao<Integer, Diet> {
             st.setInt(1, userId);
 
             try(ResultSet resultSet = st.executeQuery()){
-                return resultSet.next();
+                return resultSet.first();
             }
         } catch (SQLException | ConnectionPoolException e) {
             throw new DaoException(e);
@@ -78,7 +78,7 @@ public class DietDaoImpl implements DietDao<Integer, Diet> {
 
             try(ResultSet resultSet = st.executeQuery()){
 
-                if(resultSet.next()){
+                if(resultSet.first()){
                     diet.setUsername(resultSet.getInt(TablesColumnName.DIET_ID));
                     diet.setStatus(resultSet.getString(TablesColumnName.STATUS));
                     diet.setDietType(resultSet.getString(TablesColumnName.DIET_TYPE));
@@ -93,7 +93,7 @@ public class DietDaoImpl implements DietDao<Integer, Diet> {
         return diet;
     }
 
-//    @Override
+    @Override
     public boolean create(Diet entity,Integer userId) throws DaoException {
 
       int dietId ;
@@ -115,7 +115,6 @@ public class DietDaoImpl implements DietDao<Integer, Diet> {
                   logger.info("Created diet");
 
                   try (ResultSet resultSet = statement.getGeneratedKeys()){
-
                       if(resultSet.next()){
                           dietId = resultSet.getInt(1);
                       } else{
@@ -133,13 +132,11 @@ public class DietDaoImpl implements DietDao<Integer, Diet> {
               connection.commit();
 
           }catch (SQLException e){
-              logger.error("data base mistake", e);
+              logger.error("some diet exception", e);
               connection.rollback();
               return false;
           }finally {
-              if(connection != null){
-                  connection.setAutoCommit(true);
-              }//todo
+              connection.setAutoCommit(true);
           }
       } catch (SQLException | ConnectionPoolException e) {
           throw new DaoException(e);

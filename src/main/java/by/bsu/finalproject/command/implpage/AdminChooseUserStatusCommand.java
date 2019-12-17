@@ -11,6 +11,11 @@ import by.bsu.finalproject.service.impl.PaymentServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * Go to page for change users payment status command
+ * @author A. Kuzmik
+ */
+
 public class AdminChooseUserStatusCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) throws CommandException {

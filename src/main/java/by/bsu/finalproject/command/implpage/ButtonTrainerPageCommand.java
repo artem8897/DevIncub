@@ -14,6 +14,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Map;
 
+/**
+ * Go to page for updating trainer information command
+ * @author A. Kuzmik
+ */
+
+
 public class ButtonTrainerPageCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) throws CommandException {

@@ -11,13 +11,25 @@ import by.bsu.finalproject.validator.PersonalInformationValidator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+/**
+ * Service for student information
+ * @author A. Kuzmik
+ */
 
 public class InformationServiceImpl implements InformationService {
 
     private static final Logger logger = LogManager.getLogger(InformationServiceImpl.class);
+
     private PersonalInformationDaoImpl personalInformationDao = DaoFactory.INSTANCE.getPersonalInformationDao();
+
+    private static final String REGULAR_PAGE_NUMBER = "\\d{1,2}";
 
     public Map<Integer, PersonInformation> findAllPersonalInformationMap() throws LogicException {
 
@@ -31,14 +43,26 @@ public class InformationServiceImpl implements InformationService {
         return personInformationMap;
     }
 
-    public Map<Integer, PersonInformation> findLimitTrainerMap(int currentPage, int recordPage, int trainerId) throws LogicException {
+    public Map<Integer, PersonInformation> findLimitTrainerMap(String currentPageString, String recordPageString, int trainerId) throws LogicException {
 
-        Map<Integer, PersonInformation> personInformationMap ;
+        Map<Integer, PersonInformation> personInformationMap = new HashMap<>();
 
-        try {
-            personInformationMap = personalInformationDao.findAllByTrainerInLimit(currentPage,recordPage,trainerId);
-        } catch (DaoException e) {
-            throw new LogicException(e);
+        if(currentPageString != null && recordPageString != null){
+
+            int currentPage;
+            int recordsPerPage;
+            Pattern pat = Pattern.compile(REGULAR_PAGE_NUMBER);
+            Matcher matcherCurrent = pat.matcher(currentPageString);
+            Matcher matcherRecord = pat.matcher(recordPageString);
+            if(matcherCurrent.matches() && matcherRecord.matches()) {
+                currentPage = Integer.parseInt(currentPageString);
+                recordsPerPage = Integer.parseInt(recordPageString);
+                try {
+                    personInformationMap = personalInformationDao.findAllByTrainerInLimit(currentPage,recordsPerPage,trainerId);
+                } catch (DaoException e) {
+                    throw new LogicException(e);
+                }
+            }
         }
         return personInformationMap;
     }
@@ -117,34 +141,58 @@ public class InformationServiceImpl implements InformationService {
         return attributeMap;
     }
 
-    public Map<Integer, PersonInformation> findStudentsByTrainer(int trainerId, String condition, int currentPage, int recordPage) throws LogicException {
+    public Map<Integer, PersonInformation> findStudentsByTrainer(int trainerId, String condition, String currentPageString, String recordPageString) throws LogicException {
 
         Map<Integer, PersonInformation> personalInformationMap = new HashMap<>();
 
-        if(!condition.isBlank()){
-            try {
-                switch (condition){
-                    case ServiceName.DIET : personalInformationMap = personalInformationDao.findAllStudentsHavingNoDietByTrainerId(currentPage, recordPage, trainerId);
-                    break;
-                    case ServiceName.TRAINING : personalInformationMap = personalInformationDao.findAllStudentsHavingPaidTrainingsByTrainerId(currentPage, recordPage, trainerId);
-                    break;
-                    default: personalInformationMap = personalInformationDao.findAllByTrainerInLimit(currentPage, recordPage, trainerId);
+        if(currentPageString != null && recordPageString != null){
+
+            int currentPage;
+            int recordsPerPage;
+            Pattern pat = Pattern.compile(REGULAR_PAGE_NUMBER);
+            Matcher matcherCurrent = pat.matcher(currentPageString);
+            Matcher matcherRecord = pat.matcher(recordPageString);
+            if(matcherCurrent.matches() && matcherRecord.matches()) {
+                currentPage = Integer.parseInt(currentPageString);
+                recordsPerPage = Integer.parseInt(recordPageString);
+                if(!condition.isBlank()){
+                    try {
+                        switch (condition){
+                            case ServiceName.DIET : personalInformationMap = personalInformationDao.findAllStudentsHavingNoDietByTrainerId(currentPage, recordsPerPage, trainerId);
+                                break;
+                            case ServiceName.TRAINING : personalInformationMap = personalInformationDao.findAllStudentsHavingPaidTrainingsByTrainerId(currentPage, recordsPerPage, trainerId);
+                                break;
+                            default: personalInformationMap = personalInformationDao.findAllByTrainerInLimit(currentPage, recordsPerPage, trainerId);
+                        }
+                    } catch (DaoException e) {
+                        throw new LogicException(e);
+                    }
                 }
-            } catch (DaoException e) {
-            throw new LogicException(e);
             }
         }
         return personalInformationMap;
     }
 
-    public Map<Integer, PersonInformation> findLimitUserMap(int currentPage, int recordPage ) throws LogicException {
+    public Map<Integer, PersonInformation> findLimitUserMap(String currentPageString, String recordPageString ) throws LogicException {
 
-        Map<Integer, PersonInformation> personInformationMap ;
+        Map<Integer, PersonInformation> personInformationMap = new HashMap<>() ;
 
-        try {
-            personInformationMap = personalInformationDao.findAllInLimit(currentPage,recordPage);
-        } catch (DaoException e) {
-            throw new LogicException(e);
+        if(currentPageString != null && recordPageString != null){
+
+            int currentPage;
+            int recordsPerPage;
+            Pattern pat = Pattern.compile(REGULAR_PAGE_NUMBER);
+            Matcher matcherCurrent = pat.matcher(currentPageString);
+            Matcher matcherRecord = pat.matcher(recordPageString);
+            if(matcherCurrent.matches() && matcherRecord.matches()) {
+                currentPage = Integer.parseInt(currentPageString);
+                recordsPerPage = Integer.parseInt(recordPageString);
+                try {
+                    personInformationMap = personalInformationDao.findAllInLimit(currentPage,recordsPerPage);
+                } catch (DaoException e) {
+                    throw new LogicException(e);
+                }
+            }
         }
         return personInformationMap;
     }

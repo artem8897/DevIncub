@@ -7,6 +7,12 @@ import by.bsu.finalproject.manager.ConfigurationManager;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * Go to error page if was some mistake command
+ * @author A. Kuzmik
+ */
+
+
 public class ErrorPageCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) throws CommandException {

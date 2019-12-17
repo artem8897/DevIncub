@@ -13,6 +13,12 @@ import java.util.Queue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingDeque;
 
+/**
+ * The class provides connection pool.
+ *
+ * @author A. Kuzmik
+ */
+
 public enum ConnectionPool {
 
     INSTANCE;
@@ -41,22 +47,36 @@ public enum ConnectionPool {
             throw new RuntimeException("Initializing connection pool by.bsu.finalproject.exception",e);
         }
     }
+
+    /**
+     * Function of getting connection from connection pool
+     *
+     * @return free connection
+     */
+
     public Connection getConnection() throws ConnectionPoolException {
         Connection connection ;
         try {
             connection = connectionQueue.take();
             givenAwayConQueue.offer(connection);
+            logger.trace("Connection is successful");
         } catch (InterruptedException e) {
             logger.error(e);
             throw new ConnectionPoolException("Exception in taking connection",e);
         }
         return connection;
     }
+
+    /**
+     * Function of releasing one of taken connections and returning it into pool
+     *
+     * @param connection
+     */
+
     public void releaseConnection(Connection connection) throws ConnectionPoolException {
-        if(connection.getClass()==ProxyConnection.class){
+        if(connection.getClass() == ProxyConnection.class){
             try {
                 connection.setAutoCommit(true);
-                //todo!!!!!!!!!
             } catch (SQLException e) {
                 throw new ConnectionPoolException(e);
             }
@@ -67,6 +87,11 @@ public enum ConnectionPool {
             throw new ConnectionPoolException("Unknown connection");
         }
     }
+
+    /**
+     * Function of destroying connection pool
+     */
+
     public void destroyPool() throws ConnectionPoolException {
         for (int i = 0; i < DEFAULT_POOL_SIZE ; i++) {
             try {
@@ -79,6 +104,9 @@ public enum ConnectionPool {
         }
         deregisterDriver();
     }
+    /**
+     * Function of deregistration driver
+     */
     private void deregisterDriver(){
 
         DriverManager.getDrivers().asIterator().forEachRemaining(driver -> {

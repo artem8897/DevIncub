@@ -15,6 +15,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Map;
 
+/**
+ * Go to page for updating users training command
+ * @author A. Kuzmik
+ */
+
+
 public class ButtonTrainingPageCommand implements ActionCommand {
 
     @Override

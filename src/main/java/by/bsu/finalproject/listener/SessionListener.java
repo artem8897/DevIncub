@@ -8,7 +8,7 @@ import javax.servlet.http.HttpSessionBindingEvent;
 
 public class SessionListener implements HttpSessionAttributeListener {
 
-   Logger logger = LogManager.getLogger(SessionListener.class);
+   Logger logger = LogManager.getLogger();
 
     public void attributeRemoved(HttpSessionBindingEvent ev) {
     }

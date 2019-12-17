@@ -11,6 +11,11 @@ import java.io.IOException;
 
 public class HeaderTag extends TagSupport {
 
+    /**
+     * Custom tag for user role.
+     * @author A. Kuzmik
+     */
+
     @Override
     public int doStartTag() throws JspException {
 

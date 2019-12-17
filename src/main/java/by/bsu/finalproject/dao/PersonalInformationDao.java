@@ -16,6 +16,7 @@ public interface PersonalInformationDao<K, T extends Entity>{
     /**
      * Find all students
      * @return students map
+     * @throws DaoException
      */
 
     Map<K, T> findAllStudents() throws DaoException;
@@ -24,6 +25,7 @@ public interface PersonalInformationDao<K, T extends Entity>{
      * Create student at the specified personal information entity
      * @param student
      * @return price
+     * @throws DaoException
      */
 
     boolean create(T student) throws DaoException;
@@ -32,6 +34,7 @@ public interface PersonalInformationDao<K, T extends Entity>{
      * Define was created student information at the specified userId
      * @param studentId
      * @return boolean is exist information
+     * @throws DaoException
      */
 
     boolean isCreated(K studentId) throws DaoException;
@@ -39,6 +42,7 @@ public interface PersonalInformationDao<K, T extends Entity>{
     /**
      * Find number of students
      * @return number of students
+     * @throws DaoException
      */
 
     K findNumberOfRows() throws DaoException;
@@ -49,6 +53,7 @@ public interface PersonalInformationDao<K, T extends Entity>{
      * @param recordPage
      * @param currentPage
      * @return map of students
+     * @throws DaoException
      */
 
     Map<K, T> findAllByTrainerInLimit(int currentPage, int recordPage, int trainerId) throws DaoException;
@@ -58,6 +63,7 @@ public interface PersonalInformationDao<K, T extends Entity>{
      * @param recordPage
      * @param currentPage
      * @return map of students
+     * @throws DaoException
      */
 
     Map<K, T> findAllInLimit(int currentPage, int recordPage) throws DaoException;
@@ -68,6 +74,7 @@ public interface PersonalInformationDao<K, T extends Entity>{
      * @param trainerId
      * @param currentPage
      * @return map of students
+     * @throws DaoException
      */
 
     Map<K, T> findAllStudentsHavingPaidTrainingsByTrainerId(int currentPage, int recordPage, Integer trainerId) throws DaoException;
@@ -76,6 +83,7 @@ public interface PersonalInformationDao<K, T extends Entity>{
      * Define number of students with Paid trainings  at the specified trainerId
      * @param trainerId
      * @return map of students
+     * @throws DaoException
      */
 
     K findNumberOfRowsStudentsHavingPaid(int trainerId) throws DaoException;
@@ -86,6 +94,7 @@ public interface PersonalInformationDao<K, T extends Entity>{
      * @param id
      * @param currentPage
      * @return map of students
+     * @throws DaoException
      */
 
     Map<K, T> findAllStudentsHavingNoDietByTrainerId(int currentPage, int recordPage, Integer id) throws DaoException;
@@ -95,6 +104,7 @@ public interface PersonalInformationDao<K, T extends Entity>{
      * Define number of students with no diets  at the specified trainerId
      * @param trainerId
      * @return map of students
+     * @throws DaoException
      */
 
     K findNumberOfRowsStudentsWithNoDiet(int trainerId) throws DaoException;
@@ -103,6 +113,7 @@ public interface PersonalInformationDao<K, T extends Entity>{
      * Find students at the specified userId
      * @param userId
      * @return map of students
+     * @throws DaoException
      */
 
     T findPersonalInformation(K userId) throws DaoException;
@@ -113,6 +124,7 @@ public interface PersonalInformationDao<K, T extends Entity>{
      * @param userId
      * @param payStatus
      * @return boolean was updated
+     * @throws DaoException
      */
 
 
@@ -122,6 +134,7 @@ public interface PersonalInformationDao<K, T extends Entity>{
      * Update student at the specified personal information entity
      * @param student
      * @return boolean was updated
+     * @throws DaoException
      */
 
     boolean update(T student) throws DaoException;

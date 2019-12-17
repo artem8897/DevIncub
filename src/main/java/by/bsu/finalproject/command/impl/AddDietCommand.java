@@ -14,6 +14,11 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Add students diet command
+ * @author A. Kuzmik
+ */
+
 public class AddDietCommand implements ActionCommand {
 
     @Override

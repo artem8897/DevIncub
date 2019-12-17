@@ -3,6 +3,11 @@ package by.bsu.finalproject.command;
 import by.bsu.finalproject.command.impl.*;
 import by.bsu.finalproject.command.implpage.*;
 
+/**
+ * Storage all commands
+ * @author Artem Kuzmik
+ */
+
 public enum CommandType {
     LOGIN {
         {
@@ -237,7 +242,7 @@ public enum CommandType {
     },
     ADMIN_EDIT_USER{
         {
-            this.command = new ButtonAdminEditionAllCommand();
+            this.command = new ButtonAdminEditionAllUserStatusesCommand();
         }
     },
     STUDENT_ACC{

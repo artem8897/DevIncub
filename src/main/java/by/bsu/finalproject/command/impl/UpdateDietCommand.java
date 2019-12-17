@@ -16,6 +16,11 @@ import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Update diet for students command
+ * @author A. Kuzmik
+ */
+
 public class UpdateDietCommand implements ActionCommand {
 
     @Override

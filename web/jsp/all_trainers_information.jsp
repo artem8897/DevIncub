@@ -42,7 +42,7 @@
     <ul class="pagination">
         <c:if test="${currentPage != 0}">
             <li class="page-item">
-                <form name="previous" method="POST" action="controller">
+                <form name="previous" method="GET" action="controller">
                     <input type="hidden" name="command" value="show_all_trainers" />
                     <input type="hidden" name="currentPage" value="${currentPage-1}">
                     <input type="hidden" name="recordsPerPage" value="${recordsPerPage}">
@@ -61,7 +61,7 @@
                 </c:when>
                 <c:otherwise>
                     <li class="page-item">
-                        <form name="this" method="POST" action="controller">
+                        <form name="this" method="GET" action="controller">
                             <input type="hidden" name="command" value="show_all_trainers" />
                             <input type="hidden" name="currentPage" value="${i}">
                             <input type="hidden" name="recordsPerPage" value="${recordsPerPage}">
@@ -74,7 +74,7 @@
 
         <c:if test="${currentPage lt noOfPages}">
             <li class="page-item">
-                <form name="next" method="POST" action="controller">
+                <form name="next" method="GET" action="controller">
                     <input type="hidden" name="command" value="show_all_trainers" />
                     <input type="hidden" name="currentPage" value="${currentPage+1}">
                     <input type="hidden" name="recordsPerPage" value="${recordsPerPage}">

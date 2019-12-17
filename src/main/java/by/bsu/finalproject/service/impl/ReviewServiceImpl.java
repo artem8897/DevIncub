@@ -14,6 +14,11 @@ import by.bsu.finalproject.validator.ReviewValidator;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Service for review
+ * @author A. Kuzmik
+ */
+
 public class ReviewServiceImpl implements ReviewService {
 
     private ReviewDaoImpl reviewDao = DaoFactory.INSTANCE.getReviewDao();

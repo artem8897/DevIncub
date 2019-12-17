@@ -17,6 +17,11 @@ import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Create students review command
+ * @author A. Kuzmik
+ */
+
 public class CreateUserReviewCommand implements ActionCommand {
 
     @Override

@@ -6,6 +6,11 @@ import by.bsu.finalproject.manager.ConfigurationManager;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * Log out application command
+ * @author A. Kuzmik
+ */
+
 public class LogoutCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {

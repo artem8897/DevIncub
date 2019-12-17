@@ -62,6 +62,19 @@ public class PaymentDaoImpl implements PaymentDao {
             throw new DaoException(e);
         }
     }
+    public boolean searchDiscountDate(String date) throws DaoException {
+
+            try (Connection connection = ConnectionPool.INSTANCE.getConnection();
+                 PreparedStatement statement = connection.prepareStatement(Query.SQL_SELECT_DISCOUNT_DATE);
+                 ResultSet resultSet = statement.executeQuery()){
+
+                return resultSet.first();
+
+            }catch (ConnectionPoolException | SQLException e){
+                throw new DaoException(e);
+            }
+        }
+
     public Map<Integer, String> findAllPayStatuses() throws DaoException {
 
         Map<Integer, String> statusMap = new HashMap<>();

@@ -10,6 +10,11 @@ import by.bsu.finalproject.exception.CommandException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+/**
+ * Crate page for creating users training command
+ * @author A. Kuzmik
+ */
+
 public class ButtonEmptyTrainingPageCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) throws CommandException {

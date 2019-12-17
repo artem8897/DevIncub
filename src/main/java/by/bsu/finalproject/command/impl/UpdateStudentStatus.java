@@ -16,6 +16,11 @@ import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Update students pay status command
+ * @author A. Kuzmik
+ */
+
 public class UpdateStudentStatus implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) throws CommandException {

@@ -2,6 +2,11 @@ package by.bsu.finalproject.command;
 
 public class ParamName {
 
+    /**
+     * Holder for fields names of parameters names.
+     * @author Artem Kuzmik
+     */
+
     private ParamName(){
 
     }
@@ -65,6 +70,8 @@ public class ParamName {
     public static final String TYPE = "type";
     public static final String DISCOUNT = "discount";
     public static final String INFO = "info";
+    public static final String WRONG_ACTION = "wrongAction";
+    public static final String NULL_PAGE = "nullPage";
 
 
 

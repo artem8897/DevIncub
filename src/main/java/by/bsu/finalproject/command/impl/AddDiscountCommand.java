@@ -12,6 +12,10 @@ import by.bsu.finalproject.service.impl.PaymentServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * Add discount command
+ * @author A. Kuzmik
+ */
 
 public class AddDiscountCommand implements ActionCommand {
     @Override
@@ -32,8 +36,7 @@ public class AddDiscountCommand implements ActionCommand {
         if(wasCreated){
             request.setAttribute(ParamName.REDIRECT, redirect);
         }else{
-            request.setAttribute("this email or username is already exist",
-                    MessageManager.getProperty(MessageName.MESSAGE_WRONG_FIELDS));
+            request.setAttribute(ParamName.INFO, MessageManager.getProperty(MessageName.MESSAGE_WRONG_FIELDS));
         }
         return page;
     }

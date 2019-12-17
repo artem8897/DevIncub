@@ -15,6 +15,11 @@ import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Create trainer information command
+ * @author A. Kuzmik
+ */
+
 public class CreateTrainerInformationCommand implements ActionCommand {
 
      private static final String MESSAGE_WRONG_REGISTRATION = "message.wrongregistration";

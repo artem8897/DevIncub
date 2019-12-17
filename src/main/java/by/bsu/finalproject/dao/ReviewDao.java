@@ -20,6 +20,7 @@ public interface ReviewDao {
      * @param trainerId
      * @param review
      * @return boolean was review created
+     * @throws DaoException
      */
 
      boolean create(int userId, int trainerId, Review review) throws DaoException;
@@ -28,6 +29,7 @@ public interface ReviewDao {
      * Find reviews on trainer at the specified trainerId
      * @param id
      * @return map of reviews
+     * @throws DaoException
      */
 
      Map<Integer, Review> findAllByTrainer(Integer id) throws DaoException;
@@ -36,6 +38,7 @@ public interface ReviewDao {
      * Find reviews by student at the specified userId
      * @param id
      * @return map of reviews
+     * @throws DaoException
      */
 
      Map<Integer, Review> findAllByUser(Integer id) throws DaoException;

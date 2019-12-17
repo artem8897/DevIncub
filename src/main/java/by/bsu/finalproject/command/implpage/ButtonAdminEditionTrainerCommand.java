@@ -14,6 +14,11 @@ import by.bsu.finalproject.exception.LogicException;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
+/**
+ * Go to admin page for edition trainers command
+ * @author A. Kuzmik
+ */
+
 public class ButtonAdminEditionTrainerCommand implements ActionCommand {
 
     @Override

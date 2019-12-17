@@ -14,6 +14,11 @@ import by.bsu.finalproject.exception.LogicException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+/**
+ * Log in application command
+ * @author A. Kuzmik
+ */
+
 public class LoginCommand implements ActionCommand {
 
     private static final String MESSAGE_LOGIN_ERROR = "message.loginerror";

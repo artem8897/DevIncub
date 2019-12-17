@@ -10,6 +10,11 @@ import by.bsu.finalproject.exception.LogicException;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * Delete user command
+ * @author A. Kuzmik
+ */
+
 public class DeleteUserCommand implements ActionCommand {
 
     @Override

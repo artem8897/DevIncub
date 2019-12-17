@@ -19,6 +19,7 @@ public class Query {
     public static final String SQL_SELECT_TRAINERS_REVIEW = "SELECT review,review.review_id,rate FROM review JOIN user_review ON user_review.review_id = review.review_id JOIN trainer_information ON user_review.trainer_id = trainer_information.trainer_id WHERE trainer_information.trainer_id= ?";
 
 
+
     public static final String SQL_DELETE_TRAINING = "UPDATE training SET status = 'deleted' WHERE training_id = ?";
     public static final String SQL_UPDATE_TRAINING_PAID = "UPDATE user_trainer SET paid_training = paid_training - 1 WHERE user_trainer.user_id = ? ";
     public static final String SQL_INSERT_REVIEW = "INSERT mydb.review(review,rate) VALUES (?,?)";
@@ -76,5 +77,6 @@ public class Query {
 
     public static final String SQL_CALCULATE_PRICE_FOR_TRAININGS = "SELECT (price * discounts.discount_value * if(discount_amount IS NOT NULL, 100 - discount_date.discount_amount, 100))/10000  FROM discounts JOIN personal_information ON discounts.discount_id = personal_information.status_id, centerces_price LEFT JOIN discount_date ON CURRENT_DATE = discount_date.date WHERE personal_information.information_id = ? AND training_amount = ?";
     public static final String SQL_SELECT_MONEY_FROM_ACCOUNT = "SELECT money_amount FROM money_card WHERE account_number = ?";
+    public static final String SQL_SELECT_DISCOUNT_DATE = "SELECT date FROM discount_date WHERE date = ?";
 }
 

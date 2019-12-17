@@ -10,6 +10,11 @@ import by.bsu.finalproject.manager.MessageManager;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * Go to trainer page in case of success updating command
+ * @author A. Kuzmik
+ */
+
 public class TrainerMainAccCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) throws CommandException {

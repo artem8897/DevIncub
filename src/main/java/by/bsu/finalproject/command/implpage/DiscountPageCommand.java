@@ -8,20 +8,25 @@ import by.bsu.finalproject.manager.ConfigurationManager;
 import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class DiscountPageCommand implements ActionCommand {
+
+    private static final String DATE_PATTERN = "YYYY-MM-DD";
+
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-YY");
-        Date todaysDate = new Date();
-        Date noTimeDate;
-        try {
-           noTimeDate = dateFormat.parse(dateFormat.format(todaysDate));
-        } catch (ParseException e) {
-            throw new CommandException(e);
-        }
-        request.setAttribute("min",noTimeDate);
+        LocalDateTime localDateTimeMin = LocalDateTime.now().plusDays(1);
+        LocalDateTime localDateTimeMax = LocalDateTime.now().plusMonths(1);
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(DATE_PATTERN);
+        String stringDataMin = dateTimeFormatter.format(localDateTimeMin);
+        String stringDataMax = dateTimeFormatter.format(localDateTimeMax);
+
+        request.setAttribute("min",stringDataMin);
+        request.setAttribute("max",stringDataMax);
+
         String page = ConfigurationManager.getProperty(PathName.PATH_PAGE_DISCOUNT);
         return page;
     }

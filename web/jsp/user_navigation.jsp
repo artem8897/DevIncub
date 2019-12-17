@@ -55,14 +55,14 @@
                             <input type="hidden" name="recordsPerPage" value="5">
                             <button class="w3-btn w3-hover-light-blue w3-round-large" value="CHOOSE_USER_FOR_CREATING_DATA"><fmt:message key="label.set_diet"/></button>
                         </form> </td>
-                            <td>  <form name="SetTraining" method="POST" action="controller">
+                            <td>  <form name="SetTraining" method="GET" action="controller">
                             <input type="hidden" name="command" value="CHOOSE_USER_FOR_CREATING_DATA" />
                             <input type="hidden" name="currentPage" value="0">
                             <input type="hidden" name="type" value="training">
                             <input type="hidden" name="recordsPerPage" value="5">
                             <button class="w3-btn w3-hover-light-blue w3-round-large" value="CHOOSE_USER_FOR_CREATING_DATA"><fmt:message key="label.set_training"/></button>
                         </form> </td>
-                            <td>  <form name="SetTraining" method="POST" action="controller">
+                            <td>  <form name="SetTraining" method="GET" action="controller">
                             <input type="hidden" name="command" value="trainer_edition" />
                             <input type="hidden" name="currentPage" value="0">
                             <input type="hidden" name="recordsPerPage" value="5">
@@ -71,7 +71,14 @@
 
                             <td>  <button class="w3-btn w3-hover-green w3-round-large" onclick="location.href='controller?command=TRAINER_PAGE'"><fmt:message key="label.change_user_information"/> </button> </td>
 
-                            <td>  <button class="w3-btn w3-hover-green w3-round-large" onclick="location.href='controller?command=show_trainers_reviews&trainer_id=${User.id}'"><fmt:message key="label.display_reviews"/> </button> </td>
+                            </form> </td>
+                            <td>  <form name="SetTraining" method="GET" action="controller">
+                                <input type="hidden" name="command" value="show_trainers_reviews" />
+                                <input type="hidden" name="trainer_id" value="${User.id}">
+                                <button class="w3-btn w3-hover-light-blue w3-round-large" value="trainer_edition"><fmt:message key="label.display_reviews"/></button>
+                            </form> </td>
+
+<%--                            <td>  <button class="w3-btn w3-hover-green w3-round-large" onclick="location.href='controller?command=show_trainers_reviews&trainer_id=${User.id}'"><fmt:message key="label.display_reviews"/> </button> </td>--%>
 
                             <td>  <button class="w3-btn w3-hover-green w3-round-large" onclick="location.href='controller?command=GO_TO_PASSWORD'"><fmt:message key="label.change_password"/> </button> </td>
                         </div>

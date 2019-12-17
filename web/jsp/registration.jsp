@@ -14,7 +14,6 @@
 
     <button class="w3-btn w3-hover-light-blue w3-round-large" onclick="location.href='controller?command=show_all_trainers&currentPage=1&recordsPerPage=5'"><fmt:message key="label.display_trainers"/> </button>
 
-    <button class="w3-btn w3-hover-light-blue w3-round-large" onclick="location.href='controller?command=show_all_trainers'">adress </button>
 </div>
 <form name="RegistrationType" method="POST" action="controller"/>
 <input type="hidden" name="command" value=registration />

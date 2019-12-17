@@ -15,6 +15,7 @@ public interface PaymentDao {
      * @param trainingAmount
      * @param userId
      * @return price
+     * @throws DaoException
      */
 
      Double calcPrice(int userId, int trainingAmount) throws DaoException;
@@ -24,6 +25,7 @@ public interface PaymentDao {
      * @param discount
      * @param date
      * @return return boolean was discount date inserted
+     * @throws DaoException
      */
 
      boolean insertDiscountDate(String date, int discount) throws DaoException;
@@ -36,6 +38,7 @@ public interface PaymentDao {
      * @param userId
      * @param card
      * @return return boolean was payed training
+     * @throws DaoException
      */
 
      boolean payTraining(int card,int userId,double price,int trainingAmount,int trainerId) throws DaoException;

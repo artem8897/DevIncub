@@ -14,6 +14,11 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Registration in center command
+ * @author A. Kuzmik
+ */
+
 public class RegistrationCommand implements ActionCommand {
 
     @Override

@@ -15,6 +15,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Map;
 
+/**
+ * Go to with all users review command
+ * @author A. Kuzmik
+ */
+
 public class ButtonAllUsersReviewCommand implements ActionCommand {
 
   @Override

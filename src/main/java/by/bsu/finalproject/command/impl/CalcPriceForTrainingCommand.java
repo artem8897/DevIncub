@@ -20,6 +20,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Map;
 
+/**
+ * Calculate price for students command
+ * @author A. Kuzmik
+ */
+
 public class CalcPriceForTrainingCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) throws CommandException {

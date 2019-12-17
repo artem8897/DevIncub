@@ -1,12 +1,14 @@
 package by.bsu.finalproject.command.implpage;
 
 import by.bsu.finalproject.command.ActionCommand;
+import by.bsu.finalproject.command.MessageName;
 import by.bsu.finalproject.command.PathName;
 import by.bsu.finalproject.command.ParamName;
 import by.bsu.finalproject.entity.Training;
 import by.bsu.finalproject.entity.User;
 import by.bsu.finalproject.entity.UserType;
 import by.bsu.finalproject.manager.ConfigurationManager;
+import by.bsu.finalproject.manager.MessageManager;
 import by.bsu.finalproject.service.impl.TrainingServiceImpl;
 import by.bsu.finalproject.exception.CommandException;
 import by.bsu.finalproject.exception.LogicException;
@@ -14,6 +16,11 @@ import by.bsu.finalproject.exception.LogicException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Map;
+
+/**
+ * Go to review all trainers review command
+ * @author A. Kuzmik
+ */
 
 public class ButtonAllUsersTrainingsCommand implements ActionCommand {
 
@@ -30,15 +37,17 @@ public class ButtonAllUsersTrainingsCommand implements ActionCommand {
             TrainingServiceImpl trainingService = new TrainingServiceImpl();
             Map<Integer, Training> trainingMap ;
             int noOfRecords;
-            int currentPage = Integer.parseInt(request.getParameter(ParamName.CURRENT_PAGE));
-            int recordsPerPage = Integer.parseInt(request.getParameter(ParamName.RECORDS_PER_PAGE));
+            String currentPageString = (request.getParameter(ParamName.CURRENT_PAGE));
+            String recordPageString = (request.getParameter(ParamName.RECORDS_PER_PAGE));
             try {
-                trainingMap = trainingService.findLimitTrainerMap(currentPage,recordsPerPage,userId);
+                trainingMap = trainingService.findLimitTrainerMap(currentPageString,recordPageString,userId);
                 noOfRecords = trainingService.findNumberOfRows(userId);
             } catch (LogicException e) {
                 throw new CommandException(e);
             }
-
+        if(!trainingMap.isEmpty()) {
+            int currentPage = Integer.parseInt(currentPageString);
+            int recordsPerPage  = Integer.parseInt(recordPageString);
             int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
             if(noOfPages % recordsPerPage > 0){
                 noOfPages++;
@@ -50,5 +59,11 @@ public class ButtonAllUsersTrainingsCommand implements ActionCommand {
             request.setAttribute(ParamName.TRAINING, trainingMap);
 
             return ConfigurationManager.getProperty(PathName.PATH_PAGE_ALL_USERS_TRAINING);
+        }else{
+            request.setAttribute(ParamName.INFO, MessageManager.getProperty(MessageName.WRONG_ACTION));
+            return ConfigurationManager.getProperty(PathName.PATH_ADMIN_PAGE);
+        }
+
+
     }
 }

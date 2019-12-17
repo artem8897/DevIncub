@@ -13,6 +13,11 @@ import by.bsu.finalproject.exception.LogicException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+/**
+ * Update users password command
+ * @author A. Kuzmik
+ */
+
 public class UpdatePasswordCommand implements ActionCommand {
 
     @Override

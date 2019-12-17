@@ -8,6 +8,11 @@ import by.bsu.finalproject.exception.CommandException;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * Go to page for creating trainers information command
+ * @author A. Kuzmik
+ */
+
 public class ButtonEmptyTrainerPageCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) throws CommandException {

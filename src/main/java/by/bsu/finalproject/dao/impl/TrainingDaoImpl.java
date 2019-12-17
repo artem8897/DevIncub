@@ -34,6 +34,7 @@ public class TrainingDaoImpl implements TrainingDao<Integer, Training> {
             trainingMap = findTrainingMap(st);
 
         }catch (ConnectionPoolException | SQLException e){
+            logger.catching(e);
             throw new DaoException(e);
         }
         return trainingMap;
@@ -50,6 +51,7 @@ public class TrainingDaoImpl implements TrainingDao<Integer, Training> {
             trainingMap = findTrainingMap(statement);
 
         }catch (ConnectionPoolException | SQLException e){
+            logger.catching(e);
             throw new DaoException(e);
         }
         return trainingMap;
@@ -65,6 +67,7 @@ public class TrainingDaoImpl implements TrainingDao<Integer, Training> {
             return updatedRow > 0;
 
         }catch (ConnectionPoolException | SQLException e){
+            logger.catching(e);
             throw new DaoException(e);
         }
     }
@@ -83,6 +86,7 @@ public class TrainingDaoImpl implements TrainingDao<Integer, Training> {
             trainings = findTrainingMap(statement);
 
         }catch (ConnectionPoolException | SQLException e){
+            logger.catching(e);
             throw new DaoException(e);
         }
         return trainings;
@@ -105,6 +109,7 @@ public class TrainingDaoImpl implements TrainingDao<Integer, Training> {
             }
 
         }catch (ConnectionPoolException | SQLException e){
+            logger.catching(e);
             throw new DaoException(e);
         }
         return number;
@@ -130,68 +135,85 @@ public class TrainingDaoImpl implements TrainingDao<Integer, Training> {
                 }
             }
         } catch (SQLException | ConnectionPoolException e) {
+            logger.catching(e);
             throw new DaoException(e);
         }
         return training;
     }
 
 
-    public boolean create(Training entity) throws DaoException {
-
-        int id ;
+    public boolean create(Integer userId, Training entity) throws DaoException {
 
         try (Connection connection = ConnectionPool.INSTANCE.getConnection()) {
 
             connection.setAutoCommit(false);
 
             try{
-                try(PreparedStatement  statement = connection.prepareStatement(Query.SQL_INSERT_TRAINING, Statement.RETURN_GENERATED_KEYS)){
 
-                    statement.setString(1,entity.getDate());
-                    statement.setString(2,entity.getTrainingType());
-                    statement.setString(3,entity.getPersonality());
+                int trainingId ;
+
+                try(PreparedStatement  statement = connection.prepareStatement(Query.SQL_INSERT_TRAINING, Statement.RETURN_GENERATED_KEYS)) {
+
+                    statement.setString(1, entity.getDate());
+                    statement.setString(2, entity.getTrainingType());
+                    statement.setString(3, entity.getPersonality());
                     statement.executeUpdate();
 
-                    try(ResultSet resultSet = statement.getGeneratedKeys()){
+                    try (ResultSet resultSet = statement.getGeneratedKeys()) {
 
-                        if(resultSet.first()){
-                            id = resultSet.getInt(1);
+                        if (resultSet.first()) {
+                            trainingId = resultSet.getInt(1);
                             logger.info("Created training");
-                        }else{
+                        } else {
                             connection.rollback();
                             return false;
                         }
                     }
                 }
 
-                try(PreparedStatement secondStatement = connection.prepareStatement(Query.SQL_INSERT_USER_TRAINING)){
+                boolean wasTrainingInserted = insertUserTraining(connection, userId, trainingId);
+                boolean wasPaymentUpdated = updateUserPaid(connection, userId);
 
-                    secondStatement.setInt(1, entity.getId());
-                    secondStatement.setInt(2, id);
-                    secondStatement.executeUpdate();
-                    //todo
-                    logger.info("Created users_training");
+                if(wasTrainingInserted && wasPaymentUpdated){
+                    connection.commit();
+                    return true;
+                }else{
+                    connection.rollback();
+                    return false;
                 }
-                try(PreparedStatement secondStatement = connection.prepareStatement(Query.SQL_UPDATE_TRAINING_PAID)){
-
-                    secondStatement.setInt(1, entity.getId());
-                    secondStatement.executeUpdate();
-                    logger.info("Created users_training");
-                }
-
-                connection.commit();
-
             }catch (SQLException e){
                 connection.rollback();
-                logger.error(e);
+                logger.catching(e);
                 return false;
             }finally {
-                    connection.setAutoCommit(true);
+                connection.setAutoCommit(true);
             }
         } catch (SQLException | ConnectionPoolException e) {
+            logger.catching(e);
             throw new DaoException(e);
         }
-        return true;
+    }
+    private boolean insertUserTraining(Connection connection, int userId, int trainingId) throws SQLException {
+
+        try(PreparedStatement secondStatement = connection.prepareStatement(Query.SQL_INSERT_USER_TRAINING)){
+
+            secondStatement.setInt(1, userId);
+            secondStatement.setInt(2, trainingId);
+            int insertedRow = secondStatement.executeUpdate();
+            logger.info("Created users_training");
+            return insertedRow > 0;
+
+        }
+    }
+    private boolean updateUserPaid(Connection connection, int userId) throws SQLException {
+        try(PreparedStatement secondStatement = connection.prepareStatement(Query.SQL_UPDATE_TRAINING_PAID)){
+
+            secondStatement.setInt(1, userId);
+            int updatedRow  = secondStatement.executeUpdate();
+            logger.info("updated users_paid");
+            return updatedRow > 0;
+
+        }
     }
 
     @Override

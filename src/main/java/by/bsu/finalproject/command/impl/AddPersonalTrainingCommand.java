@@ -14,6 +14,11 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Add students training command
+ * @author A. Kuzmik
+ */
+
 public class AddPersonalTrainingCommand implements ActionCommand {
 
     @Override

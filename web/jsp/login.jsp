@@ -10,7 +10,12 @@
     <c:import url="/jsp/header.jsp"/>
     <div class="w3-panel w3-green w3-opacity w3-center">
 
-        <button class="w3-btn w3-hover-light-blue w3-round-large" onclick="location.href='controller?command=show_all_trainers&currentPage=1&recordsPerPage=5'"><fmt:message key="label.display_trainers"/> </button>
+        <form name="Trainers" method="GET" action="controller">
+            <input type="hidden" name="currentPage" value="1" required pattern="[0-9]{0,2}">
+            <input type="hidden" name="recordsPerPage" value="5" required pattern="[0-9]{0,2}">
+            <button class="w3-btn w3-hover-light-blue w3-round-large"  name="command" value=show_all_trainers><fmt:message key="label.display_trainers"/></button>
+        </form>
+<%--        <button class="w3-btn w3-hover-light-blue w3-round-large" onclick="location.href='controller?command=show_all_trainers&currentPage=1&recordsPerPage=5'"><fmt:message key="label.display_trainers"/> </button>--%>
 
         <form name="Choose_users_local" method="GET" action="controller">
 

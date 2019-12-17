@@ -16,6 +16,11 @@ import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Add students information command
+ * @author A. Kuzmik
+ */
+
 public class AddStudentInformationCommand implements ActionCommand {
 
     @Override
@@ -45,8 +50,7 @@ public class AddStudentInformationCommand implements ActionCommand {
             session.setAttribute(ParamName.PARAM_NAME_USER_TYPE, user.getUserType().toString());
         }else{
             request.setAttribute(ParamName.MOV_ATTRIBUTE, ParamName.ADD);
-            request.setAttribute(ParamName.INFO,
-                    MessageManager.getProperty(MessageName.SUCCESS_UPDATE));
+            request.setAttribute(ParamName.INFO, MessageManager.getProperty(MessageName.MESSAGE_WRONG_FIELDS));
             request.setAttribute(ParamName.STUDENTS, map);
         }
         return page;

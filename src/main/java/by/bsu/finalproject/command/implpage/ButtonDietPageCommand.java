@@ -16,6 +16,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Map;
 
+/**
+ * Go to page for update users diet command
+ * @author A. Kuzmik
+ */
+
 public class ButtonDietPageCommand implements ActionCommand {
 
     @Override

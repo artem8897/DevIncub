@@ -16,6 +16,11 @@ import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Update students training command
+ * @author A. Kuzmik
+ */
+
 public class UpdateTrainingCommand implements ActionCommand {
 
      private static final String MESSAGE_WRONG_REGISTRATION = "message.wrongregistration";

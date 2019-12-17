@@ -48,7 +48,7 @@ public class ReviewDaoImpl implements ReviewDao {
                             logger.info("Created review");
                         }else {
                             connection.rollback();
-                            logger.error("wrong field");
+                            logger.error("Did not created");
                             return false;
                         }
                     }
@@ -67,7 +67,7 @@ public class ReviewDaoImpl implements ReviewDao {
                     return true;
                 }else{
                     connection.rollback();
-                    logger.error("wrong field");
+                    logger.error("Did not created users_review");
                     return false;
                 }
             }catch (SQLException e){
@@ -75,9 +75,7 @@ public class ReviewDaoImpl implements ReviewDao {
                 connection.rollback();
                 return false;
             }finally {
-                if(connection != null){
-                    connection.setAutoCommit(true);
-                }//todo
+                connection.setAutoCommit(true);
             }
         } catch (SQLException | ConnectionPoolException e) {
             throw new DaoException(e);

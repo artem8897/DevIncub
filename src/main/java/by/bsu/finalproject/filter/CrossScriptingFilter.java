@@ -6,6 +6,11 @@ import javax.servlet.annotation.WebInitParam;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
+/**
+ * XSS protection Filter
+ * @author A. Kuzmik
+ */
+
 @WebFilter(urlPatterns = { "/*" },  initParams = {
         @WebInitParam(name = "xss_protect", value = "XSS", description = "protect xss") })
 public class CrossScriptingFilter implements Filter {

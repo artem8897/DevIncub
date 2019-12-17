@@ -16,6 +16,11 @@ import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Update trainers information command
+ * @author A. Kuzmik
+ */
+
 public class UpdateTrainerInformationCommand implements ActionCommand {
 
     @Override

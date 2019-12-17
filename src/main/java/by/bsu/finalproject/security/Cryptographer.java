@@ -8,12 +8,22 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+/**
+ * Cryptographer password
+ * @author A. Kuzmik
+ */
+
 public class Cryptographer {
 
     private static final String HASHING_TYPE = "SHA-1";
     private static final String ENCODING = "utf-8";
     private static final Logger logger = LogManager.getLogger(Cryptographer.class);
 
+    /**
+     * encrypt password using SHA-1
+     * @param password
+     * @return encrypted password
+     */
     public String encrypt(String password){
 
         byte[] bytes = null;

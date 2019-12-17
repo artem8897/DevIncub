@@ -10,6 +10,11 @@ import by.bsu.finalproject.manager.MessageManager;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * Go to admin page in case of success command
+ * @author A. Kuzmik
+ */
+
 public class AdminMainAccCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) throws CommandException {

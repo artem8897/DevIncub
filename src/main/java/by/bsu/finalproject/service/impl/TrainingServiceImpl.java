@@ -8,22 +8,30 @@ import by.bsu.finalproject.service.TrainingService;
 import by.bsu.finalproject.exception.DaoException;
 import by.bsu.finalproject.exception.LogicException;
 import by.bsu.finalproject.validator.TrainingValidator;
-import by.bsu.finalproject.validator.UserValidator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+/**
+ * Service for training
+ * @author A. Kuzmik
+ */
 
 public class TrainingServiceImpl implements TrainingService {
 
     private static final Logger logger = LogManager.getLogger(TrainingServiceImpl.class);
+
     private TrainingDaoImpl trainingDao = DaoFactory.INSTANCE.getTrainingDao();
+
+    private static final String REGULAR_PAGE_NUMBER = "\\d{1,2}";
 
     public boolean createPersonalTrainingForUser(int userId, String periodicity, String trainingType, String personality, Map map) throws LogicException {
 
         Training training = new Training();
-        training.setId(userId);
         training.setTrainingType(trainingType);
         training.setPeriodicity(periodicity);
         training.setPersonality(personality);
@@ -33,7 +41,7 @@ public class TrainingServiceImpl implements TrainingService {
         if(isValidTraining){
 
             try {
-                return trainingDao.create(training);
+                return trainingDao.create(userId, training);
             } catch (DaoException e) {
                 throw new LogicException(e);
             }
@@ -49,14 +57,26 @@ public class TrainingServiceImpl implements TrainingService {
         }
     }
 
-    public Map<Integer, Training> findLimitTrainerMap(int currentPage, int recordPage, int userId ) throws LogicException {
+    public Map<Integer, Training> findLimitTrainerMap(String currentPageString, String recordPageString, int userId ) throws LogicException {
 
-        Map<Integer, Training> trainingMap ;
+        Map<Integer, Training> trainingMap = new HashMap<>() ;
 
-        try {
-            trainingMap = trainingDao.findAllInLimit(currentPage,recordPage, userId);
-        } catch (DaoException e) {
-            throw new LogicException(e);
+        if(currentPageString != null && recordPageString != null){
+
+            int currentPage;
+            int recordsPerPage;
+            Pattern pat = Pattern.compile(REGULAR_PAGE_NUMBER);
+            Matcher matcherCurrent = pat.matcher(currentPageString);
+            Matcher matcherRecord = pat.matcher(recordPageString);
+            if(matcherCurrent.matches() && matcherRecord.matches()) {
+                currentPage = Integer.parseInt(currentPageString);
+                recordsPerPage = Integer.parseInt(recordPageString);
+                try {
+                    trainingMap = trainingDao.findAllInLimit(currentPage,recordsPerPage, userId);
+                } catch (DaoException e) {
+                    throw new LogicException(e);
+                }
+            }
         }
         return trainingMap;
     }

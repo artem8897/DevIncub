@@ -1,5 +1,10 @@
 package by.bsu.finalproject.security;
 
+/**
+ * XSS protection class
+ * @author A. Kuzmik
+ */
+
 public class XssSecurity {
 
         private final static String LEFT_TAG = "<";

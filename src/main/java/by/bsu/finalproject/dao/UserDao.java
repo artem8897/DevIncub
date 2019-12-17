@@ -17,6 +17,7 @@ public interface UserDao<K,S, T extends Entity>  {
     /**
      * Find all users
      * @return users map
+     * @throws DaoException
      */
 
     Map<K, T> findAll(K currentPage, K recordPerPage) throws DaoException;
@@ -25,6 +26,7 @@ public interface UserDao<K,S, T extends Entity>  {
      * Create user at the specified user entity
      * @param user
      * @return boolean was created user
+     * @throws DaoException
      */
 
     boolean create(T user) throws DaoException;
@@ -34,6 +36,7 @@ public interface UserDao<K,S, T extends Entity>  {
      * @param email
      * @param login
      * @return boolean is exist user
+     * @throws DaoException
      */
 
     boolean isExistMailOrUsername(S email, S login) throws DaoException;
@@ -42,6 +45,7 @@ public interface UserDao<K,S, T extends Entity>  {
      * Delete a user at the specified userId
      * @param userId
      * @return  boolean was deleted
+     * @throws DaoException
      */
 
     boolean deleteUser(K userId) throws DaoException;
@@ -52,6 +56,7 @@ public interface UserDao<K,S, T extends Entity>  {
      * @param status
      * @param userType
      * @return boolean was updated user
+     * @throws DaoException
      */
 
     boolean changeUserStatus(K userId , S status, UserType userType) throws DaoException;
@@ -61,6 +66,7 @@ public interface UserDao<K,S, T extends Entity>  {
      * @param userId
      * @param username
      * @return boolean was updated training
+     * @throws DaoException
      */
 
     boolean updateUsername(K userId, S username) throws DaoException;
@@ -70,6 +76,7 @@ public interface UserDao<K,S, T extends Entity>  {
      * @param userId
      * @param password
      * @return boolean was updated training
+     * @throws DaoException
      */
 
     boolean updatePassword(K userId, S password) throws DaoException;
@@ -78,6 +85,7 @@ public interface UserDao<K,S, T extends Entity>  {
      * Find user at the specified email
      * @param email
      * @return map of training
+     * @throws DaoException
      */
 
     T findEntityByEmail(S email) throws DaoException;
@@ -85,6 +93,7 @@ public interface UserDao<K,S, T extends Entity>  {
     /**
      * Find number of users
      * @return number of users
+     * @throws DaoException
      */
 
     K findNumberOfRows() throws DaoException;

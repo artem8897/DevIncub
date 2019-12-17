@@ -7,6 +7,11 @@ import by.bsu.finalproject.manager.ConfigurationManager;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * Go to page for registration command
+ * @author A. Kuzmik
+ */
+
 public class ButtonRegistrationPageCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) throws CommandException {

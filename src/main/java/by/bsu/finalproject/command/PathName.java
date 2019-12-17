@@ -2,6 +2,10 @@ package by.bsu.finalproject.command;
 
 public class PathName {
 
+    /**
+     * Holder for fields names of path names.
+     * @author Artem Kuzmik
+     */
     private PathName(){
 
     };

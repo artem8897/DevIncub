@@ -11,6 +11,12 @@ import by.bsu.finalproject.exception.DaoException;
 import by.bsu.finalproject.service.impl.TrainerServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
+
+/**
+ * Go to page for creation users review command
+ * @author A. Kuzmik
+ */
+
 public class ButtonReviewPageCommand implements ActionCommand {
 
      @Override

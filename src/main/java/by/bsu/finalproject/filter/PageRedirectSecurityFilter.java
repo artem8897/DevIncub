@@ -7,6 +7,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Page redirect for illegal access Filter
+ * @author A. Kuzmik
+ */
+
+
 @WebFilter( urlPatterns = { "/jsp/*" }, initParams = {
         @WebInitParam(name = "INDEX_PATH", value = "/index.jsp", description = "security filter") })
 public class PageRedirectSecurityFilter implements Filter {

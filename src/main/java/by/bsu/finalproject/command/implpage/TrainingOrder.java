@@ -7,6 +7,11 @@ import by.bsu.finalproject.exception.CommandException;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * Go to page for choose trainer command
+ * @author A. Kuzmik
+ */
+
 public class TrainingOrder implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) throws CommandException {

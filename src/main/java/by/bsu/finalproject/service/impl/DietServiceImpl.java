@@ -14,9 +14,15 @@ import org.apache.logging.log4j.Logger;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Service for Diet.
+ * @author A. Kuzmik
+ */
+
 public class DietServiceImpl implements DietService {
 
     private static final Logger logger = LogManager.getLogger(DietServiceImpl.class);
+
     private DietDaoImpl dietDao = DaoFactory.INSTANCE.getDietDao();
 
     public boolean addInformation(int userId, String dietType,int carbohydrates,int fats,int proteins, Map map) throws LogicException {

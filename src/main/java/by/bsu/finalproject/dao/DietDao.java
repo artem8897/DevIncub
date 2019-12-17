@@ -15,6 +15,7 @@ public interface DietDao<K, T extends Entity> {
 
     /**
      * @return map all users diets
+     * @throws DaoException
      */
 
     Map<K, T> findAll() throws DaoException;
@@ -22,7 +23,8 @@ public interface DietDao<K, T extends Entity> {
     /**
      * Delete a diet at the specified dietId
      * @param dietId
-     * @return
+     * @return boolean if was  deleted
+     * @throws DaoException
      */
 
     boolean delete(K dietId);
@@ -31,7 +33,8 @@ public interface DietDao<K, T extends Entity> {
      * Create a diet at the specified userId
      * @param entity
      * @param userId
-     * @return
+     * @return boolean if was created
+     * @throws DaoException
      */
 
     boolean create(T entity, K userId) throws DaoException;
@@ -40,15 +43,17 @@ public interface DietDao<K, T extends Entity> {
      * Update a diet at the specified userId
      * @param entity
      * @param userId
-     * @return
+     * @return boolean if was updated
+     * @throws DaoException
      */
 
     boolean update(K userId, T entity) throws DaoException;
 
     /**
-     * Update a diet at the specified userId
+     * Find a diet at the specified userId
      * @param userId
      * @return diet entity
+     * @throws DaoException
      */
 
     T findUsersDiet(K userId) throws DaoException;

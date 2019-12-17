@@ -11,6 +11,11 @@ import by.bsu.finalproject.service.impl.TrainingServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * Delete students training command
+ * @author A. Kuzmik
+ */
+
 public class DeleteTrainingCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) throws CommandException {

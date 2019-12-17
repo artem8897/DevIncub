@@ -12,6 +12,11 @@ import by.bsu.finalproject.exception.LogicException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+/**
+ * Update username command
+ * @author A. Kuzmik
+ */
+
 public class UpdateUsernameCommand implements ActionCommand {
         @Override
         public String execute(HttpServletRequest request) throws CommandException {

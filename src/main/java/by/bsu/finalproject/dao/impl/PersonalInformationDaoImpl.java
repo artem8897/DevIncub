@@ -52,7 +52,7 @@ public class PersonalInformationDaoImpl implements PersonalInformationDao<Intege
                  return resultSet.first();
             }
         } catch (SQLException | ConnectionPoolException e) {
-            logger.debug(e);
+            logger.catching(e);
             throw new DaoException(e);
         }
     }
@@ -70,7 +70,7 @@ public class PersonalInformationDaoImpl implements PersonalInformationDao<Intege
             }
 
         }catch (ConnectionPoolException | SQLException e){
-            logger.debug(e);
+            logger.catching(e);
             throw new DaoException(e);
         }
         return number;
@@ -90,7 +90,7 @@ public class PersonalInformationDaoImpl implements PersonalInformationDao<Intege
             personInformationMap = createPersonMap(statement);
 
         }catch (ConnectionPoolException | SQLException e){
-            logger.debug(e);
+            logger.catching(e);
             throw new DaoException(e);
         }
         return personInformationMap;
@@ -108,7 +108,7 @@ public class PersonalInformationDaoImpl implements PersonalInformationDao<Intege
             personInformationMap = createPersonMap(statement);
 
         }catch (ConnectionPoolException | SQLException e){
-            logger.debug(e);
+            logger.catching(e);
             throw new DaoException(e);
         }
         return personInformationMap;
@@ -126,7 +126,7 @@ public class PersonalInformationDaoImpl implements PersonalInformationDao<Intege
             mapPerson = createPersonMap(statement);
 
         }catch (ConnectionPoolException | SQLException e){
-            logger.debug(e);
+            logger.catching(e);
             throw new DaoException(e);
         }
         return mapPerson;
@@ -146,7 +146,7 @@ public class PersonalInformationDaoImpl implements PersonalInformationDao<Intege
             mapPerson = createPersonMap(statement);
 
         }catch (ConnectionPoolException | SQLException e){
-            logger.debug(e);
+            logger.catching(e);
             throw new DaoException(e);
         }
         return mapPerson;
@@ -167,7 +167,7 @@ public class PersonalInformationDaoImpl implements PersonalInformationDao<Intege
             }
 
         }catch (ConnectionPoolException | SQLException e){
-            logger.debug(e);
+            logger.catching(e);
             throw new DaoException(e);
         }
         return number;
@@ -187,7 +187,7 @@ public class PersonalInformationDaoImpl implements PersonalInformationDao<Intege
             mapPerson = createPersonMap(statement);
 
         }catch (ConnectionPoolException | SQLException e){
-            logger.debug(e);
+            logger.catching(e);
             throw new DaoException(e);
         }
         return mapPerson;
@@ -209,7 +209,7 @@ public class PersonalInformationDaoImpl implements PersonalInformationDao<Intege
             }
 
         }catch (ConnectionPoolException | SQLException e){
-            logger.debug(e);
+            logger.catching(e);
             throw new DaoException(e);
         }
         return number;
@@ -235,7 +235,7 @@ public class PersonalInformationDaoImpl implements PersonalInformationDao<Intege
                 }
             }
         } catch (SQLException | ConnectionPoolException e) {
-            logger.debug(e);
+            logger.catching(e);
             throw new DaoException(e);
         }
         return personInformation;
@@ -250,7 +250,7 @@ public class PersonalInformationDaoImpl implements PersonalInformationDao<Intege
             return insertPersonInformationInDatabase(entity,statement);
 
         } catch (SQLException | ConnectionPoolException e) {
-            logger.debug(e);
+            logger.catching(e);
             throw new DaoException(e);
         }
     }
@@ -264,8 +264,7 @@ public class PersonalInformationDaoImpl implements PersonalInformationDao<Intege
             return insertPersonInformationInDatabase(entity,statement);
 
         }catch (ConnectionPoolException | SQLException e){
-
-            logger.error(e);
+            logger.catching(e);
             throw new DaoException(e);
         }
     }
@@ -282,7 +281,7 @@ public class PersonalInformationDaoImpl implements PersonalInformationDao<Intege
             return (insertedRow > 0);
 
         }catch (ConnectionPoolException | SQLException e){
-            logger.debug(e);
+            logger.catching(e);
             throw new DaoException(e);
         }
     }

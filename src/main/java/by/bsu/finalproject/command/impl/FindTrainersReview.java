@@ -13,6 +13,11 @@ import by.bsu.finalproject.exception.LogicException;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
+/**
+ * Find trainers review command
+ * @author A. Kuzmik
+ */
+
 public class FindTrainersReview implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) throws CommandException {

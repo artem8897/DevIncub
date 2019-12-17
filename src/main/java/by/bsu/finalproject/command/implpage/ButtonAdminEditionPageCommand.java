@@ -8,6 +8,11 @@ import by.bsu.finalproject.exception.CommandException;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * Go to page for admin update command
+ * @author A. Kuzmik
+ */
+
 public class ButtonAdminEditionPageCommand implements ActionCommand {
 
     @Override

@@ -9,7 +9,7 @@
 <body style ="text-align: center;">
 <hr/>
 <%--<div class="w3-animate-zoom w3-hide-small">--%>
-    <button class="w3-btn w3-hover-border-blue-gray w3-round-large" onclick="Location.href='controller?command=logout'"><fmt:message key="label.logout"/></button>
+    <a href='controller?command=logout'><fmt:message key="label.logout"/></a>
    <br/>
     <fmt:message key="footer.copyright"/>
 </body></html>

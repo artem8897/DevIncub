@@ -3,6 +3,12 @@ package by.bsu.finalproject.filter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 
+/**
+ * Request wrapper for Cross Scripting Filter
+ * @author A. Kuzmik
+ */
+
+
 public class RequestWrapper extends HttpServletRequestWrapper {
 
     public RequestWrapper(HttpServletRequest servletRequest) {

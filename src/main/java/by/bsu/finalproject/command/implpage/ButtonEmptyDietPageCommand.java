@@ -7,6 +7,10 @@ import by.bsu.finalproject.manager.ConfigurationManager;
 import by.bsu.finalproject.exception.CommandException;
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * Go to page for creating users diet command
+ * @author A. Kuzmik
+ */
 
 public class ButtonEmptyDietPageCommand implements ActionCommand {
     @Override

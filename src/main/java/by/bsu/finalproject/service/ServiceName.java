@@ -1,5 +1,10 @@
 package by.bsu.finalproject.service;
 
+/**
+ * Holder for fields names of service names.
+ * @author Artem Kuzmik
+ */
+
 public class ServiceName {
     private ServiceName(){
 

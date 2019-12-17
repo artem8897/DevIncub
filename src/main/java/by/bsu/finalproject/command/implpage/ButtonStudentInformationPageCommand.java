@@ -17,6 +17,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Map;
 
+/**
+ * Go to page for updating users information command
+ * @author A. Kuzmik
+ */
+
 public class ButtonStudentInformationPageCommand implements ActionCommand {
 
     @Override

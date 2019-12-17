@@ -12,6 +12,11 @@ import by.bsu.finalproject.service.impl.PaymentServiceImpl;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+/**
+ * Pay for training command
+ * @author A. Kuzmik
+ */
+
 public class PayCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) throws CommandException {

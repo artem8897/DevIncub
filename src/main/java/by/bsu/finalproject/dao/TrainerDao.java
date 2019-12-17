@@ -17,6 +17,7 @@ public interface TrainerDao<K, T extends Entity> {
     /**
      * Find all trainers
      * @return trainers map
+     * @throws DaoException
      */
 
     Map<K, T> findAll() throws DaoException;
@@ -25,6 +26,7 @@ public interface TrainerDao<K, T extends Entity> {
      * Update trainer at the specified trainer entity
      * @param trainer
      * @return boolean was updated
+     * @throws DaoException
      */
 
     boolean update(T trainer) throws DaoException;
@@ -33,6 +35,7 @@ public interface TrainerDao<K, T extends Entity> {
      * Define was created trainer information at the specified trainerId
      * @param id
      * @return boolean is exist information
+     * @throws DaoException
      */
 
     boolean isCreated(K id) throws DaoException;
@@ -42,6 +45,7 @@ public interface TrainerDao<K, T extends Entity> {
      * @param recordPage
      * @param currentPage
      * @return list of trainers
+     * @throws DaoException
      */
 
     List<T> findAllInLimit(int currentPage, int recordPage) throws DaoException;
@@ -49,6 +53,7 @@ public interface TrainerDao<K, T extends Entity> {
     /**
      * Find number of trainers
      * @return number of trainers
+     * @throws DaoException
      */
 
     Integer findNumberOfRows() throws DaoException;
@@ -57,6 +62,7 @@ public interface TrainerDao<K, T extends Entity> {
      * Create trainer information at the specified trainer entity
      * @param trainer
      * @return boolean was created information
+     * @throws DaoException
      */
 
     boolean create(T trainer) throws DaoException;
@@ -66,6 +72,7 @@ public interface TrainerDao<K, T extends Entity> {
      * Find trainer at the specified trainerID
      * @param trainerId
      * @return map of trainers
+     * @throws DaoException
      */
 
     T findTrainerInformation(int trainerId) throws DaoException;

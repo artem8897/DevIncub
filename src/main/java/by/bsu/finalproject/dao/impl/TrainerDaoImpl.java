@@ -44,6 +44,7 @@ public class TrainerDaoImpl implements TrainerDao<Integer, Trainer> {
                 trainers.put(trainer.getId(),trainer);
             }
         }catch (ConnectionPoolException | SQLException e){
+            logger.catching(e);
             throw new DaoException(e);
         }
         return trainers;
@@ -59,7 +60,7 @@ public class TrainerDaoImpl implements TrainerDao<Integer, Trainer> {
                 return resultSet.first();
             }
         } catch (SQLException | ConnectionPoolException e) {
-            logger.debug(e);
+            logger.catching(e);
             throw new DaoException(e);
         }
     }
@@ -85,6 +86,7 @@ public class TrainerDaoImpl implements TrainerDao<Integer, Trainer> {
                 }
             }
         }catch (ConnectionPoolException | SQLException e){
+            logger.catching(e);
             throw new DaoException(e);
         }
         return trainers;
@@ -102,13 +104,14 @@ public class TrainerDaoImpl implements TrainerDao<Integer, Trainer> {
             }
 
         }catch (ConnectionPoolException | SQLException e){
+            logger.catching(e);
             throw new DaoException(e);
         }
         return number;
     }
 
 
-//    @Override
+    @Override
     public boolean create(Trainer trainer) throws DaoException {
 
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();
@@ -122,10 +125,12 @@ public class TrainerDaoImpl implements TrainerDao<Integer, Trainer> {
             return insertedRows > 0;
 
         } catch (SQLException | ConnectionPoolException e) {
+            logger.catching(e);
             throw new DaoException(e);
         }
     }
 
+    @Override
     public Trainer findTrainerInformation(int trainerId) throws DaoException {
 
         Trainer trainer = new Trainer();
@@ -145,6 +150,7 @@ public class TrainerDaoImpl implements TrainerDao<Integer, Trainer> {
                 }
             }
         } catch (SQLException | ConnectionPoolException e) {
+            logger.catching(e);
             throw new DaoException(e);
         }
         return trainer;
@@ -163,6 +169,7 @@ public class TrainerDaoImpl implements TrainerDao<Integer, Trainer> {
             return updatedRow > 0;
 
         } catch (SQLException | ConnectionPoolException e) {
+            logger.catching(e);
             throw new DaoException(e);
         }
 

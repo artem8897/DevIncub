@@ -83,6 +83,7 @@ public class UserDaoImpl implements UserDao<Integer, String, User> {
                 return resultSet.first();
             }
         } catch (SQLException | ConnectionPoolException e) {
+            logger.catching(e);
             throw new DaoException(e);
         }
     }
@@ -98,6 +99,7 @@ public class UserDaoImpl implements UserDao<Integer, String, User> {
 
 
         }catch (ConnectionPoolException | SQLException e){
+            logger.catching(e);
             throw new DaoException(e);
         }
     }
@@ -113,6 +115,7 @@ public class UserDaoImpl implements UserDao<Integer, String, User> {
                 return updatedRow > 0;
 
         }catch (ConnectionPoolException | SQLException e){
+            logger.catching(e);
             throw new DaoException(e);
         }
     }
@@ -128,6 +131,7 @@ public class UserDaoImpl implements UserDao<Integer, String, User> {
                 return insertedRow > 0;
 
         }catch (ConnectionPoolException | SQLException e){
+            logger.catching(e);
             throw new DaoException(e);
         }
     }
@@ -142,6 +146,7 @@ public class UserDaoImpl implements UserDao<Integer, String, User> {
                 return insertedRow > 0;
 
             }catch (ConnectionPoolException | SQLException e){
+                logger.catching(e);
                 throw new DaoException(e);
             }
     }
@@ -167,6 +172,7 @@ public class UserDaoImpl implements UserDao<Integer, String, User> {
                 }
             }
         } catch (SQLException | ConnectionPoolException e) {
+            logger.catching(e);
             throw new DaoException(e);
         }
         return user;
@@ -185,6 +191,7 @@ public class UserDaoImpl implements UserDao<Integer, String, User> {
                 }
 
         }catch (ConnectionPoolException | SQLException e){
+            logger.catching(e);
             throw new DaoException(e);
         }
         return number;

@@ -1,5 +1,10 @@
 package by.bsu.finalproject.dao;
 
+/**
+ * Holder for fields names of database.
+ * @author Artem Kuzmik
+ */
+
 public class TablesColumnName {
 
     private TablesColumnName(){

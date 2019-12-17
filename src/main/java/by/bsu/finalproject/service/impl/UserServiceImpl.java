@@ -11,20 +11,44 @@ import by.bsu.finalproject.exception.DaoException;
 import by.bsu.finalproject.exception.LogicException;
 import by.bsu.finalproject.validator.UserValidator;
 
+import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+/**
+ * Service for user
+ * @author A. Kuzmik
+ */
 
 public class UserServiceImpl implements UserService {
 
     private UserDaoImpl userDao = DaoFactory.INSTANCE.getUserDao();
 
-    public Map<Integer, User> findAllUserMap(int currentPage, int recordPerPage) throws LogicException {
-        Map<Integer, User> userMap ;
+    private static final String REGULAR_PAGE_NUMBER = "\\d{1,2}";
 
-        try {
-            userMap = userDao.findAll(currentPage, recordPerPage);
-        } catch (DaoException e) {
-            throw new LogicException(e);
+    public Map<Integer, User> findAllUserMap(String currentPageString, String recordPageString) throws LogicException {
+
+        Map<Integer, User> userMap = new HashMap<>();
+
+        if(currentPageString != null && recordPageString != null){
+
+            int currentPage;
+            int recordsPerPage;
+            Pattern pat = Pattern.compile(REGULAR_PAGE_NUMBER);
+            Matcher matcherCurrent = pat.matcher(currentPageString);
+            Matcher matcherRecord = pat.matcher(recordPageString);
+            if(matcherCurrent.matches() && matcherRecord.matches()) {
+                currentPage = Integer.parseInt(currentPageString);
+                recordsPerPage = Integer.parseInt(recordPageString);
+                try {
+                    userMap = userDao.findAll(currentPage, recordsPerPage);
+                } catch (DaoException e) {
+                    throw new LogicException(e);
+                }
+            }
         }
+
         return userMap;
     }
 
@@ -84,8 +108,7 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    public boolean
-    changeUserStatus(int userId,int adminId, String status, String userType) throws LogicException {
+    public boolean changeUserStatus(int userId,int adminId, String status, String userType) throws LogicException {
 
         UserType type = UserType.valueOf(userType);
 

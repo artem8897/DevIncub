@@ -13,7 +13,7 @@
 <input type="number" name="discount"  value="" required pattern="[0-9]{0,2}"/>
 </br><fmt:message key="label.date"/> <br/>
     </br>
-<input type="date" name="date"  value="" required max="${min}+30" min="${min}"/>
+<input type="date" name="date" max="${max}" min="${min}" value="${min}"/>
     <button class="w3-btn w3-hover-light-blue w3-round-large" name="command" value="add_discount"><fmt:message key="label.add_discount"/></button>
 <input type="hidden" name="redirect" value="controller?command=GO_TO_ADMIN">
     <br/>

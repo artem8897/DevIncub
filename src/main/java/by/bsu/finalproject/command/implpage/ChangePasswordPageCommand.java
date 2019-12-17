@@ -7,6 +7,12 @@ import by.bsu.finalproject.manager.ConfigurationManager;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * Go to page for updating users password command
+ * @author A. Kuzmik
+ */
+
+
 public class ChangePasswordPageCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) throws CommandException {

@@ -9,13 +9,23 @@ import by.bsu.finalproject.exception.DaoException;
 import by.bsu.finalproject.exception.LogicException;
 import by.bsu.finalproject.validator.TrainerInformationValidator;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+/**
+ * Service for Trainer
+ * @author A. Kuzmik
+ */
 
 public class TrainerServiceImpl implements TrainerService {
 
     private TrainerDaoImpl trainerDao = DaoFactory.INSTANCE.getTrainerDao();
+
+    private static final String REGULAR_PAGE_NUMBER = "\\d{1,2}";
 
     public Map<Integer, Trainer> findAllTrainerMap() throws LogicException {
 
@@ -38,17 +48,30 @@ public class TrainerServiceImpl implements TrainerService {
     }
 
 
-    public List<Trainer> findLimitTrainerMap(int currentPage,int recordPage ) throws LogicException {
+    public List<Trainer> findLimitTrainerMap(String currentPageString,String recordPageString ) throws LogicException {
 
-        List<Trainer> trainerList ;
+        List<Trainer> trainerList = new ArrayList<>();
 
-        try {
-            trainerList = trainerDao.findAllInLimit(currentPage,recordPage);
-        } catch (DaoException e) {
-            throw new LogicException(e);
+        if(currentPageString != null && recordPageString != null){
+
+            int currentPage;
+            int recordsPerPage;
+            Pattern pat = Pattern.compile(REGULAR_PAGE_NUMBER);
+            Matcher matcherCurrent = pat.matcher(currentPageString);
+            Matcher matcherRecord = pat.matcher(recordPageString);
+            if(matcherCurrent.matches() && matcherRecord.matches()) {
+                currentPage = Integer.parseInt(currentPageString);
+                recordsPerPage = Integer.parseInt(recordPageString);
+                try {
+                    trainerList = trainerDao.findAllInLimit(currentPage,recordsPerPage);
+                } catch (DaoException e) {
+                    throw new LogicException(e);
+                }
+            }
         }
         return trainerList;
     }
+
     public Integer findNumberOfRows () throws LogicException {
 
         int number = 0 ;

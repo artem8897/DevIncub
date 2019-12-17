@@ -21,6 +21,6 @@
         <location>/jsp/error/error.jsp</location>
     </error-page>
     <listener>
-        <listener-class>by.bsu.finalproject.listener.SessionListener</listener-class>
+        <listener-class>by.bsu.finalproject.listener.RequestListener</listener-class>
     </listener>
 </web-app>
