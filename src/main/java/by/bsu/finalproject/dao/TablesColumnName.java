@@ -34,7 +34,7 @@ public class TablesColumnName {
     public static final String PROTEINS = "proteins";
     public static final String CARBOHYDRATES = "carbohydrates";
     public static final String FATS = "fats";
-    public final static String STATUS = "status";
+    public static final String STATUS = "status";
     public static final String TRAINING_ID = "training_id";
     public static final String PERSONALITY = "personality";
     public static final String DATE = "date";

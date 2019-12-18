@@ -14,8 +14,10 @@ import javax.servlet.http.HttpServletRequest;
  */
 
 public class ButtonEmptyTrainerPageCommand implements ActionCommand {
+
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
+
         request.setAttribute(ParamName.MOV_ATTRIBUTE, ParamName.ADD);
         return ConfigurationManager.getProperty(PathName.PATH_PAGE_TRAINER_INFORMATION);
     }

@@ -7,8 +7,7 @@ public class PathName {
      * @author Artem Kuzmik
      */
     private PathName(){
-
-    };
+    }
 
     public static final String PATH_REGISTRATION_PAGE="path.page.registration";
     public static final String PATH_LOGIN_PAGE = "path.page.login";

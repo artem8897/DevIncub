@@ -24,14 +24,14 @@ public class ButtonAdminEditionTrainerCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
 
-        String page;
+        String page = ConfigurationManager.getProperty(PathName.ADMIN_EDITION_TRAINER);
         TrainerServiceImpl trainerService = new TrainerServiceImpl();
 
         try {
             Map<Integer, Trainer> personInformationMap = trainerService.findAllTrainerMap();
+
             if(!personInformationMap.isEmpty()){
                 request.setAttribute(ParamName.ALL_TRAINER_ATTRIBUTE, personInformationMap);
-                page = ConfigurationManager.getProperty(PathName.ADMIN_EDITION_TRAINER);
             }else{
                 page = ConfigurationManager.getProperty(PathName.PATH_ADMIN_PAGE);
                 request.setAttribute(ParamName.INFO, MessageManager.getProperty(MessageName.NO_TRAINERS_EXIST));

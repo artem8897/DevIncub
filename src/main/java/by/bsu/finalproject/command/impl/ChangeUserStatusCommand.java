@@ -1,6 +1,7 @@
 package by.bsu.finalproject.command.impl;
 
 import by.bsu.finalproject.command.ActionCommand;
+import by.bsu.finalproject.command.MessageName;
 import by.bsu.finalproject.command.PathName;
 import by.bsu.finalproject.command.ParamName;
 import by.bsu.finalproject.entity.User;
@@ -19,28 +20,37 @@ import javax.servlet.http.HttpSession;
  */
 
 public class ChangeUserStatusCommand implements ActionCommand {
+
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
 
-        HttpSession session = request.getSession(true);
-        int adminId = ((User)(session.getAttribute(ParamName.USER_ATTRIBUTE))).getId();
-
-        String status = request.getParameter(ParamName.STATUS).toUpperCase();
-        String userType = request.getParameter(ParamName.PARAM_NAME_USER_TYPE).toUpperCase();
-        String redirect = request.getParameter(ParamName.REDIRECT);
         String page =  ConfigurationManager.getProperty(PathName.PATH_PAGE_TRAINER);
-        UserServiceImpl userService = new UserServiceImpl();
-        boolean wasChanged ;
-        int userId = Integer.parseInt(request.getParameter(ParamName.PARAM_NAME_USER_ID));
-        try {
-            wasChanged = userService.changeUserStatus(userId, adminId, status, userType);
-        } catch (LogicException e) {
-            throw new CommandException(e);
-        }
-        if(wasChanged){
-            request.setAttribute(ParamName.REDIRECT, redirect);
+        HttpSession session = request.getSession(true);
+        User user = (User) session.getAttribute(ParamName.USER_ATTRIBUTE);
+
+        if(user != null) {
+
+            int adminId = ((User) (session.getAttribute(ParamName.USER_ATTRIBUTE))).getId();
+
+            String status = request.getParameter(ParamName.STATUS).toUpperCase();
+            String userType = request.getParameter(ParamName.PARAM_NAME_USER_TYPE).toUpperCase();
+            String redirect = request.getParameter(ParamName.REDIRECT);
+            UserServiceImpl userService = new UserServiceImpl();
+            boolean wasChanged;
+            int userId = Integer.parseInt(request.getParameter(ParamName.PARAM_NAME_USER_ID));
+            try {
+                wasChanged = userService.changeUserStatus(userId, adminId, status, userType);
+            } catch (LogicException e) {
+                throw new CommandException(e);
+            }
+            if (wasChanged) {
+                request.setAttribute(ParamName.REDIRECT, redirect);
+            } else {
+                request.setAttribute(ParamName.INFO, MessageManager.getProperty(MessageName.WRONG_ACTION));
+            }
+
         }else{
-            request.setAttribute(ParamName.INFO, MessageManager.getProperty("message.wrongaction"));
+            page = ConfigurationManager.getProperty(PathName.PATH_LOGIN_PAGE);
         }
         return page;
 

@@ -25,8 +25,8 @@ public class LoginCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
-        String page;
-        User user;
+
+        String page = ConfigurationManager.getProperty(PathName.PATH_LOGIN_PAGE);
         String email = request.getParameter(ParamName.PARAM_NAME_EMAIL);
         String pass = request.getParameter(ParamName.PARAM_NAME_PASSWORD);
         UserServiceImpl userService = new UserServiceImpl();
@@ -34,10 +34,10 @@ public class LoginCommand implements ActionCommand {
         TrainerServiceImpl trainerService = new TrainerServiceImpl();
 
         try {
-
-            user = userService.findUserInBase(email, pass);
+           User user = userService.findUserInBase(email, pass);
 
             if (user != null) {
+
                 HttpSession session = request.getSession(true);
                 session.setAttribute(ParamName.USER_ATTRIBUTE, user);
                 session.setAttribute(ParamName.PARAM_NAME_USER_TYPE, user.getUserType().toString());
@@ -70,9 +70,8 @@ public class LoginCommand implements ActionCommand {
                         page = ConfigurationManager.getProperty(PathName.PATH_PAGE_ERROR);
                 }
             } else {
-                request.setAttribute("errorLoginPassMessage",
+                request.setAttribute(ParamName.WRONG_MAIL_OR_PASSWORD,
                         MessageManager.getProperty(MESSAGE_LOGIN_ERROR));
-                page = ConfigurationManager.getProperty(PathName.PATH_LOGIN_PAGE);
             }
         } catch (LogicException e) {
             throw new CommandException(e);

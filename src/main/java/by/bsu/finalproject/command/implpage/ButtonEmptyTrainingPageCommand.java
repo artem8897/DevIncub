@@ -16,16 +16,24 @@ import javax.servlet.http.HttpSession;
  */
 
 public class ButtonEmptyTrainingPageCommand implements ActionCommand {
+
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
+
+        String page = ConfigurationManager.getProperty(PathName.PATH_TRAINING_PAGE);
         HttpSession session = request.getSession(true);
         User user = ((User)(session.getAttribute(ParamName.USER_SESSION)));
-        String page = ConfigurationManager.getProperty(PathName.PATH_TRAINING_PAGE);
-        int id = Integer.parseInt(request.getParameter(ParamName.USER_ID));
-        request.setAttribute(ParamName.USER_ID, id);
-        request.setAttribute(ParamName.MOV_ATTRIBUTE, ParamName.ADD);
-        request.setAttribute(ParamName.PARAM_NAME_USER_TYPE, user.getUserType().toString());
 
+        if (user != null) {
+
+            int id = Integer.parseInt(request.getParameter(ParamName.USER_ID));
+            request.setAttribute(ParamName.USER_ID, id);
+            request.setAttribute(ParamName.MOV_ATTRIBUTE, ParamName.ADD);
+            request.setAttribute(ParamName.PARAM_NAME_USER_TYPE, user.getUserType().toString());
+
+        }else{
+            page = ConfigurationManager.getProperty(PathName.PATH_LOGIN_PAGE);
+        }
         return page;
     }
 }

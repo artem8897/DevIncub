@@ -33,6 +33,7 @@ public enum DietValidator {
      */
 
     public boolean isValidDietType(String dietType){
+
         Pattern pat = Pattern.compile(REGULAR_DIET_TYPE);
         Matcher matcher = pat.matcher(dietType);
         return matcher.matches();

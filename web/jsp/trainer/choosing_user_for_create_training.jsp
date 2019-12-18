@@ -8,9 +8,10 @@
     <title>Countries</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
 </head>
-<c:import url="/jsp/header.jsp"/>
-<body class="m-3">
 
+<c:import url="/jsp/header.jsp"/>
+<c:import url="/jsp/user_navigation.jsp"/>
+<body >
 
 <table class="table table-striped table-bordered table-sm">
     <tr>

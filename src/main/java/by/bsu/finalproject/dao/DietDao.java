@@ -21,15 +21,6 @@ public interface DietDao<K, T extends Entity> {
     Map<K, T> findAll() throws DaoException;
 
     /**
-     * Delete a diet at the specified dietId
-     * @param dietId
-     * @return boolean if was  deleted
-     * @throws DaoException
-     */
-
-    boolean delete(K dietId);
-
-    /**
      * Create a diet at the specified userId
      * @param entity
      * @param userId

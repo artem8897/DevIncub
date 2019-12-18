@@ -197,7 +197,7 @@ public enum CommandType {
     },
     CHOOSE_USER_FOR_CREATING_DATA{
         {
-            this.command = new PageForCreatingTrainingCommand();
+            this.command = new PageForCreateChangeAppointmentCommand();
         }
     },
     EMPTYDIET{

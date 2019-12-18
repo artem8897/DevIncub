@@ -18,15 +18,18 @@ public class RequestWrapper extends HttpServletRequestWrapper {
     public String[] getParameterValues(String parameter) {
 
         String[] values = super.getParameterValues(parameter);
-        if (values==null)  {
-            return null;
+
+        if (values!=null)  {
+            int count = values.length;
+            String[] encodedValues = new String[count];
+            for (int i = 0; i < count; i++) {
+                encodedValues[i] = cleanXSS(values[i]);
+            }
+            return encodedValues;
         }
-        int count = values.length;
-        String[] encodedValues = new String[count];
-        for (int i = 0; i < count; i++) {
-            encodedValues[i] = cleanXSS(values[i]);
-        }
-        return encodedValues;
+
+        return values;
+
     }
 
     public String getParameter(String parameter) {

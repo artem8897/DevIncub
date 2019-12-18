@@ -13,10 +13,10 @@ import javax.servlet.http.HttpServletRequest;
  */
 
 public class TrainingOrder implements ActionCommand {
+
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
 
-        String page = ConfigurationManager.getProperty(PathName.PATH_PAGE_CHOOSE_TRAINER);
-        return page;
+        return ConfigurationManager.getProperty(PathName.PATH_PAGE_CHOOSE_TRAINER);
     }
 }

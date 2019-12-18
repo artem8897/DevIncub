@@ -8,18 +8,16 @@ public class DietValidatorTest {
     private String dietType = "low calorite";
     private int fats = 133;
 
+    @Test
+    public void isParameterValidTest(){
 
-        @Test
-        public void  isParameterValidTest(){
+        boolean isValidFats = DietValidator.INSTANCE.isValidParameter(fats);
+        Assert.assertTrue(isValidFats);
 
-            boolean isValidFats = DietValidator.INSTANCE.isValidParameter(fats);
-            Assert.assertTrue(isValidFats);
-
-        }
-        @Test
-        public void isDietTypeValidTest(){
-            boolean isValidDiet = DietValidator.INSTANCE.isValidDietType(dietType);
-            Assert.assertTrue(isValidDiet);
-
-        }
     }
+    @Test
+    public void isDietTypeValidTest(){
+        boolean isValidDiet = DietValidator.INSTANCE.isValidDietType(dietType);
+        Assert.assertTrue(isValidDiet);
+    }
+}

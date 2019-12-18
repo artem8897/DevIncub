@@ -25,25 +25,33 @@ public class ButtonTrainingPageCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
+
         String page;
-        Map training;
         HttpSession session = request.getSession(true);
         User user = ((User)(session.getAttribute(ParamName.USER_SESSION)));
-        TrainingServiceImpl trainingService = new TrainingServiceImpl();
-        int trainingId = Integer.parseInt(request.getParameter(ParamName.TRAINING));
-        try{
-            training = trainingService.findTrainingById(trainingId);
-            if(training == null){
-                page = ConfigurationManager.getProperty(PathName.PATH_PAGE_TRAINER);
-                request.setAttribute(ParamName.INFO, MessageManager.getProperty(MessageName.NO_TRAINING_EXIST));
-            }else {
-                request.setAttribute(ParamName.MOV_ATTRIBUTE, ParamName.UPDATE);
-                request.setAttribute(ParamName.TRAINING, training);
-                request.setAttribute(ParamName.PARAM_NAME_USER_TYPE, user.getUserType().toString());
-                page = ConfigurationManager.getProperty(PathName.PATH_TRAINING_PAGE);
+
+        if (user != null) {
+
+            TrainingServiceImpl trainingService = new TrainingServiceImpl();
+            int trainingId = Integer.parseInt(request.getParameter(ParamName.TRAINING));
+
+            try {
+                Map<String, String> mapTraining = trainingService.findTrainingById(trainingId);
+
+                if (mapTraining == null) {
+                    page = ConfigurationManager.getProperty(PathName.PATH_PAGE_TRAINER);
+                    request.setAttribute(ParamName.INFO, MessageManager.getProperty(MessageName.NO_TRAINING_EXIST));
+                } else {
+                    request.setAttribute(ParamName.MOV_ATTRIBUTE, ParamName.UPDATE);
+                    request.setAttribute(ParamName.TRAINING, mapTraining);
+                    request.setAttribute(ParamName.PARAM_NAME_USER_TYPE, user.getUserType().toString());
+                    page = ConfigurationManager.getProperty(PathName.PATH_TRAINING_PAGE);
+                }
+            } catch (LogicException e) {
+                throw new CommandException(e);
             }
-        } catch (LogicException e) {
-            throw new CommandException(e);
+        }else{
+            page = ConfigurationManager.getProperty(PathName.PATH_LOGIN_PAGE);
         }
         return page;
     }

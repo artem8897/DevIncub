@@ -22,34 +22,44 @@ import java.util.Map;
  */
 
 public class TrainerEditionCommand implements ActionCommand {
+
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
 
-        InformationServiceImpl informationService = new InformationServiceImpl();
+        String page;
         HttpSession session = request.getSession(true);
         User user = ((User)(session.getAttribute(ParamName.USER_SESSION)));
-        Map<Integer, PersonInformation> userMap ;
-        int noOfRecords;
-        String currentPageString = (request.getParameter(ParamName.CURRENT_PAGE));
-        String recordPageString = (request.getParameter(ParamName.RECORDS_PER_PAGE));
-        try {
-            userMap = informationService.findLimitTrainerMap(currentPageString,recordPageString,user.getId());
-            noOfRecords = informationService.findNumberOfRows();
-        } catch (LogicException e) {
-            throw new CommandException(e);
-        }
-        if(!userMap.isEmpty()) {
-            int currentPage = Integer.parseInt(currentPageString);
-            int recordsPerPage  = Integer.parseInt(recordPageString);
-            request.setAttribute(ParamName.NUMBER_OF_PAGES, noOfRecords);
-            request.setAttribute(ParamName.CURRENT_PAGE, currentPage);
-            request.setAttribute(ParamName.RECORDS_PER_PAGE,recordsPerPage);
-            request.setAttribute(ParamName.PERSONAL_INFORMATION,userMap);
 
-            return ConfigurationManager.getProperty(PathName.PATH_TRAINER_EDITION_USER);
+        if (user != null) {
+
+            int noOfRecords;
+            InformationServiceImpl informationService = new InformationServiceImpl();
+            String currentPageString = (request.getParameter(ParamName.CURRENT_PAGE));
+            String recordPageString = (request.getParameter(ParamName.RECORDS_PER_PAGE));
+            Map<Integer, PersonInformation> userMap;
+
+            try {
+                userMap = informationService.findLimitTrainerMap(currentPageString, recordPageString, user.getId());
+                noOfRecords = informationService.findNumberOfRows();
+            } catch (LogicException e) {
+                throw new CommandException(e);
+            }
+
+            if (!userMap.isEmpty()) {
+                int currentPage = Integer.parseInt(currentPageString);
+                int recordsPerPage = Integer.parseInt(recordPageString);
+                request.setAttribute(ParamName.NUMBER_OF_PAGES, noOfRecords);
+                request.setAttribute(ParamName.CURRENT_PAGE, currentPage);
+                request.setAttribute(ParamName.RECORDS_PER_PAGE, recordsPerPage);
+                request.setAttribute(ParamName.PERSONAL_INFORMATION, userMap);
+                page = ConfigurationManager.getProperty(PathName.PATH_TRAINER_EDITION_USER);
+            } else {
+                request.setAttribute(ParamName.INFO, MessageManager.getProperty(MessageName.WRONG_ACTION));
+                page = ConfigurationManager.getProperty(PathName.PATH_ADMIN_PAGE);
+            }
         }else{
-            request.setAttribute(ParamName.INFO, MessageManager.getProperty(MessageName.WRONG_ACTION));
-            return ConfigurationManager.getProperty(PathName.PATH_ADMIN_PAGE);
+            page = ConfigurationManager.getProperty(PathName.PATH_LOGIN_PAGE);
         }
+        return page;
     }
 }

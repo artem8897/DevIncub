@@ -14,20 +14,22 @@ import java.util.Date;
 
 public class DiscountPageCommand implements ActionCommand {
 
-    private static final String DATE_PATTERN = "YYYY-MM-DD";
+    private static final String DATE_PATTERN = "yyyy-MM-dd";
 
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
-        LocalDateTime localDateTimeMin = LocalDateTime.now().plusDays(1);
-        LocalDateTime localDateTimeMax = LocalDateTime.now().plusMonths(1);
+
+        LocalDateTime localDateTimeMin = LocalDateTime.now().plusDays(18);
+        LocalDateTime localDateTimeMax = LocalDateTime.now().plusMonths(2);
+
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(DATE_PATTERN);
+
         String stringDataMin = dateTimeFormatter.format(localDateTimeMin);
         String stringDataMax = dateTimeFormatter.format(localDateTimeMax);
 
         request.setAttribute("min",stringDataMin);
         request.setAttribute("max",stringDataMax);
 
-        String page = ConfigurationManager.getProperty(PathName.PATH_PAGE_DISCOUNT);
-        return page;
+        return ConfigurationManager.getProperty(PathName.PATH_PAGE_DISCOUNT);
     }
 }

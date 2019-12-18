@@ -10,8 +10,8 @@
     <c:import url="/jsp/header.jsp"/>
     <c:import url="/jsp/user_navigation.jsp"/>
 
-    <c:set var="trainers" value="${trainers}"/>
     <form name="AddTrainerInformation" method="POST" action="controller"/>
+    <c:set var="trainers" value="${trainers}"/>
     </br><fmt:message key="label.work_experience"/> <br/>
     <input type="text" name="work_experience"  value="${trainers['work_experience']}" required pattern = "([0-9]{1,2})"/>
     <br/><fmt:message key="label.name"/><br/>
@@ -32,7 +32,8 @@
         <c:when test="${move == 'UPDATE'}">
             <button button class="w3-btn w3-hover-light-blue w3-round-large"  name="command" value=update_trainer_information ><fmt:message key="label.change_trainer_information"/></button>
         </c:when>
-    </c:choose></form><hr/>
+    </c:choose><hr/>
+
 
     <c:set var = "user_type" value = "${user_type}"/>
 
@@ -43,7 +44,9 @@
         <c:when test="${user_type.equals('TRAINER')}">
             <input type="hidden" name="redirect" value="controller?command=GO_TO_TRAINER">
         </c:when>
-    </c:choose></form><hr/>
+    </c:choose>
+    </form>
+    <hr/>
 
     <c:import url="/jsp/footer.jsp"/>
     </body>

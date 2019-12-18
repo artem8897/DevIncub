@@ -1,8 +1,5 @@
 package by.bsu.finalproject.controller;
-import by.bsu.finalproject.command.ActionFactory;
-import by.bsu.finalproject.command.ActionCommand;
-import by.bsu.finalproject.command.ParamName;
-import by.bsu.finalproject.command.PathName;
+import by.bsu.finalproject.command.*;
 import by.bsu.finalproject.connectionpool.ConnectionPool;
 import by.bsu.finalproject.manager.ConfigurationManager;
 import by.bsu.finalproject.manager.MessageManager;
@@ -51,7 +48,11 @@ public class Controller extends HttpServlet {
         }
     }
     /**
-     * Main method of this controller.
+     * Processes the request by obtaining a command from the {@link javax.servlet.http.HttpServletRequest} object,
+     * execute this command and redirects or forwards on destination page depending on the result of the command execution.
+     *
+     * @throws IOException
+     * @throws ServletException
      */
 
     private void processRequest(HttpServletRequest request,
@@ -77,7 +78,7 @@ public class Controller extends HttpServlet {
             }
         } else {
             page = ConfigurationManager.getProperty(PathName.PATH_INDEX_PAGE);
-            request.getSession().setAttribute(ParamName.NULL_PAGE, MessageManager.getProperty("message.nullpage"));
+            request.getSession().setAttribute(ParamName.NULL_PAGE, MessageManager.getProperty(MessageName.NULL_PAGE));
             response.sendRedirect(request.getContextPath() + page);
         }
 

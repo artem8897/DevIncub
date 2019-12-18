@@ -22,27 +22,36 @@ public class UpdatePasswordCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
+
+        String page = ConfigurationManager.getProperty(PathName.PATH_PAGE_PASSWORD);
         HttpSession session = request.getSession(true);
         User user = ((User)(session.getAttribute(ParamName.USER_SESSION)));
-        int userId = user.getId();
-        String page ;
-        String password = request.getParameter(ParamName.PARAM_NAME_PASSWORD);
-        Cryptographer cryptographer = new Cryptographer();
-        String redirect = request.getParameter(ParamName.REDIRECT);
-        String encryptedPassword = cryptographer.encrypt(password);
-        UserServiceImpl userService = new UserServiceImpl();
-        page = ConfigurationManager.getProperty(PathName.PATH_PAGE_PASSWORD);
-        boolean wasCreated ;
-        try {
-            wasCreated = userService.changePassword(userId, encryptedPassword);
-        } catch (LogicException e) {
-            throw new CommandException(e);
-        }
-        if(wasCreated){
-            request.setAttribute(ParamName.REDIRECT, redirect);
+
+        if(user != null) {
+
+            int userId = user.getId();
+            String password = request.getParameter(ParamName.PARAM_NAME_PASSWORD);
+            Cryptographer cryptographer = new Cryptographer();
+            String redirect = request.getParameter(ParamName.REDIRECT);
+            String encryptedPassword = cryptographer.encrypt(password);
+            UserServiceImpl userService = new UserServiceImpl();
+
+            boolean wasCreated;
+
+            try {
+                wasCreated = userService.changePassword(userId, encryptedPassword);
+            } catch (LogicException e) {
+                throw new CommandException(e);
+            }
+            if (wasCreated) {
+                request.setAttribute(ParamName.REDIRECT, redirect);
+            } else {
+                request.setAttribute(ParamName.PARAM_NAME_USER_TYPE, user.getUserType().toString());
+            }
         }else{
-            request.setAttribute(ParamName.PARAM_NAME_USER_TYPE, user.getUserType().toString());
+           page = ConfigurationManager.getProperty(PathName.PATH_LOGIN_PAGE);
         }
+
         return page;
     }
 }

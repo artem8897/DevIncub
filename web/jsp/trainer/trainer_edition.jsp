@@ -25,39 +25,23 @@
                 <td>${user.value.secondName}</td>
                 <td>${user.value.weight}</td>
                 <td>${user.value.height}</td>
-<%--          todo reddddddddddddddddddddddddddddddddddddddddddddddddddd
 
-                        сделать ридеректом!!!
+                <td> <form name="changeTraining" method="POST" action="controller">
+                    <input type="hidden" name="command" value="all_users_training_page" />
+                    <input type="hidden" name="user_id" value="${user.key}" />
+                    <button class="w3-btn w3-hover-light-blue w3-round-large" value="all_users_training_page"><fmt:message key="label.update_training"/></button>
+                    </form>
+                </td>
 
- --%>
-                <td><button button class="w3-btn w3-hover-green w3-round-large" onclick="location.href='controller?command=button_diet_page&user_id=${user.key}'" ><fmt:message key="label.update_diet"/> </button></td>
-                <td><button button class="w3-btn w3-hover-light-blue w3-round-large" onclick="location.href='controller?command=empty_review&user_id=${user.key}'"><fmt:message key="label.review"/></button></td>
-                <td><button button class="w3-btn w3-hover-light-blue w3-round-large" onclick="location.href='controller?command=all_users_training_page&user_id=${user.key}&recordsPerPage=5&currentPage=0'" ><fmt:message key="label.update_training"/> </button></td>
-
-                <td><button class="w3-btn w3-hover-border-blue w3-round-large" onclick="location.href='controller?command=show_trainers_reviews&trainer_id=${user.key}'" ><fmt:message key="label.display_reviews"/> </button></td>
+                <td> <form name="changeDiet" method="POST" action="controller">
+                    <input type="hidden" name="command" value="button_diet_page" />
+                    <input type="hidden" name="user_id" value="${user.key}" />
+                    <button class="w3-btn w3-hover-light-blue w3-round-large" value="button_diet_page"><fmt:message key="label.update_diet"/></button>
+                     </form>
+                </td>
             </tr>
         </c:forEach>
     </table>
-
-<%--    <form name="loginForm" method="POST" action="controller">--%>
-
-<%--        <select name="user_id">--%>
-<%--            <c:forEach var="item" items="${alluser}">--%>
-<%--                <option value="${item.key}"/> ${item.value}--%>
-<%--            </c:forEach>--%>
-<%--        </select>--%>
-<%--        <hr/>--%>
-
-<%--        <div class="w3-container w3-center">--%>
-<%--            <div class="w3-bar w3-padding-large w3-padding-24">--%>
-
-<%--                <button button class="w3-btn w3-hover-green w3-round-large" name="command" value=button_diet_page >diet</button>--%>
-<%--                <button button class="w3-btn w3-hover-light-blue w3-round-large" name="command" value=empty_review >review</button>--%>
-<%--                <button button class="w3-btn w3-hover-light-blue w3-round-large" name="command" value=all_users_training_page >training </button>--%>
-<%--                <input type="submit" name="command" value=showalluserscommand />--%>
-<%--                <input type="submit" name="command" value=all_personal_information />--%>
-<%--            </div>--%>
-<%--        </div>--%>
 
         <nav aria-label="Navigation for trainer">
             <ul class="pagination">

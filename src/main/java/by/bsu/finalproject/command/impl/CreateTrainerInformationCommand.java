@@ -1,6 +1,7 @@
 package by.bsu.finalproject.command.impl;
 
 import by.bsu.finalproject.command.ActionCommand;
+import by.bsu.finalproject.command.MessageName;
 import by.bsu.finalproject.command.PathName;
 import by.bsu.finalproject.command.ParamName;
 import by.bsu.finalproject.entity.User;
@@ -22,39 +23,42 @@ import java.util.Map;
 
 public class CreateTrainerInformationCommand implements ActionCommand {
 
-     private static final String MESSAGE_WRONG_REGISTRATION = "message.wrongregistration";
-
-     @Override
+    @Override
     public String execute(HttpServletRequest request) throws CommandException {
 
-        String page ;
+        String page = ConfigurationManager.getProperty(PathName.PATH_PAGE_TRAINER_INFORMATION);
         HttpSession session = request.getSession(true);
+        User user = (User) session.getAttribute(ParamName.USER_ATTRIBUTE);
 
-        String name = request.getParameter(ParamName.PARAM_NAME_NAME);
-        String trainingType = request.getParameter(ParamName.PARAM_TRAINING_TYPE);
-        String redirect = request.getParameter(ParamName.REDIRECT);
-        int workExperience = Integer.parseInt(request.getParameter(ParamName.PARAM_WORK_EXPERIENCE));
-        User user = ((User)(session.getAttribute(ParamName.USER_ATTRIBUTE)));
-        int userId = user.getId();
-        page = ConfigurationManager.getProperty(PathName.PATH_PAGE_TRAINER_INFORMATION);
+        if(user != null) {
 
-        Map<String,String> map = new HashMap<>();
+            String name = request.getParameter(ParamName.PARAM_NAME_NAME);
+            String trainingType = request.getParameter(ParamName.PARAM_TRAINING_TYPE);
+            String redirect = request.getParameter(ParamName.REDIRECT);
+            int workExperience = Integer.parseInt(request.getParameter(ParamName.PARAM_WORK_EXPERIENCE));
+            int userId = user.getId();
 
-        TrainerServiceImpl trainerService = new TrainerServiceImpl();
-        boolean wasCreated ;
-        try {
-            wasCreated = trainerService.createTrainer(userId,name,workExperience,trainingType,map);
-        } catch (LogicException e) {
-            throw new CommandException(e);
-        }
-        if(wasCreated){
-            session.setAttribute(ParamName.PARAM_NAME_USER_TYPE, user.getUserType().toString());
-            request.setAttribute(ParamName.REDIRECT, redirect);
+            Map<String, String> map = new HashMap<>();
+
+            TrainerServiceImpl trainerService = new TrainerServiceImpl();
+            boolean wasCreated;
+
+            try {
+                wasCreated = trainerService.createTrainer(userId, name, workExperience, trainingType, map);
+            } catch (LogicException e) {
+                throw new CommandException(e);
+            }
+            if (wasCreated) {
+                session.setAttribute(ParamName.PARAM_NAME_USER_TYPE, user.getUserType().toString());
+                request.setAttribute(ParamName.REDIRECT, redirect);
+            } else {
+                request.setAttribute(ParamName.PARAM_NAME_USER_TYPE, user.getUserType().toString());
+                request.setAttribute(ParamName.TRAINER_ATTRIBUTE, map);
+                request.setAttribute(ParamName.INFO,
+                        MessageManager.getProperty(MessageName.MESSAGE_WRONG_FIELDS));
+            }
         }else{
-            request.setAttribute(ParamName.PARAM_NAME_USER_TYPE, user.getUserType().toString());
-            request.setAttribute(ParamName.TRAINER_ATTRIBUTE,map);
-            request.setAttribute("this email or username is already exist",
-                    MessageManager.getProperty(MESSAGE_WRONG_REGISTRATION));
+           page = ConfigurationManager.getProperty(PathName.PATH_LOGIN_PAGE);
         }
         return page;
     }

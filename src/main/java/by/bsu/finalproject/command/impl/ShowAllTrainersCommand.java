@@ -22,8 +22,10 @@ import java.util.regex.Pattern;
  */
 
 public class ShowAllTrainersCommand implements ActionCommand {
+
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
+
         TrainerServiceImpl trainerService = new TrainerServiceImpl();
         List<Trainer> trainerList ;
         int noOfRecords;

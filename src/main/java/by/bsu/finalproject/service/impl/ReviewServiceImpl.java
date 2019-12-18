@@ -46,13 +46,11 @@ public class ReviewServiceImpl implements ReviewService {
     public Map<Integer, Review> findReview(int userId, UserType userType) throws LogicException {
 
         Map<Integer, Review> reviewMap = new HashMap<>();
-
         try {
-            switch (userType){
-                case USER: reviewMap = reviewDao.findAllByUser(userId);
-                break;
-                case TRAINER:  reviewMap = reviewDao.findAllByTrainer(userId);
-                break;
+            if(userType.equals(UserType.USER)){
+                reviewMap = reviewDao.findAllByUser(userId);
+            }else if(userType.equals(UserType.TRAINER)){
+                reviewMap = reviewDao.findAllByTrainer(userId);
             }
         } catch (DaoException e) {
             throw new LogicException(e);

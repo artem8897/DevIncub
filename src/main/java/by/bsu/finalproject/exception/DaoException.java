@@ -1,6 +1,11 @@
 package by.bsu.finalproject.exception;
 
+/**
+ * Created for signal that an database access object exception of some sort has occurred.
+ */
+
 public class DaoException extends Exception {
+
     public DaoException() {
     }
 

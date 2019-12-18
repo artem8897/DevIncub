@@ -16,6 +16,6 @@
 <hr/>
 ${info}
 </body>
-<c:import url="footer.jsp"/>
+<c:import url="../footer.jsp"/>
 </div>
 </html>

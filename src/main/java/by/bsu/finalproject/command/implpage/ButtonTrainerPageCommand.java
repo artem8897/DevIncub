@@ -21,26 +21,36 @@ import java.util.Map;
 
 
 public class ButtonTrainerPageCommand implements ActionCommand {
+
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
-        try {
-            HttpSession session = request.getSession(true);
-            User user = ((User)(session.getAttribute(ParamName.USER_SESSION)));
+
+        String page =  ConfigurationManager.getProperty(PathName.PATH_PAGE_TRAINER_INFORMATION);
+        HttpSession session = request.getSession(true);
+        User user = ((User)(session.getAttribute(ParamName.USER_SESSION)));
+
+        if (user != null) {
+
             int userId;
+            Map<String, String> trainer;
             if (user.getUserType() == UserType.TRAINER) {
                 userId = user.getId();
-            }else {
+            } else {
                 userId = Integer.parseInt(request.getParameter(ParamName.USER_ID));
             }
             TrainerServiceImpl trainerService = new TrainerServiceImpl();
-            Map <String, String> trainer = trainerService.findTrainerInformation(userId);
+            try {
+                trainer = trainerService.findTrainerInformation(userId);
+            } catch (LogicException e) {
+                throw new CommandException(e);
+            }
             request.setAttribute(ParamName.MOV_ATTRIBUTE, ParamName.UPDATE);
-            request.setAttribute(ParamName.USER_ID,userId);
-            request.setAttribute(ParamName.TRAINER_ATTRIBUTE,trainer);
+            request.setAttribute(ParamName.USER_ID, userId);
+            request.setAttribute(ParamName.TRAINER_ATTRIBUTE, trainer);
             request.setAttribute(ParamName.PARAM_NAME_USER_TYPE, user.getUserType().toString());
-        } catch (LogicException e) {
-            throw new CommandException(e);
+        }else{
+            page = ConfigurationManager.getProperty(PathName.PATH_LOGIN_PAGE);
         }
-        return ConfigurationManager.getProperty(PathName.PATH_PAGE_TRAINER_INFORMATION);
+        return page;
     }
 }

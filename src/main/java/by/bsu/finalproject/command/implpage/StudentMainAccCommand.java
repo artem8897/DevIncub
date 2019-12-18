@@ -16,8 +16,10 @@ import javax.servlet.http.HttpServletRequest;
  */
 
 public class StudentMainAccCommand implements ActionCommand {
+
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
+
         request.setAttribute(ParamName.INFO, MessageManager.getProperty(MessageName.SUCCESS_UPDATE));
         return ConfigurationManager.getProperty(PathName.PATH_USER_PAGE);
 

@@ -28,6 +28,7 @@ public class AddStudentInformationCommand implements ActionCommand {
 
         String page = ConfigurationManager.getProperty(PathName.PATH_PAGE_INFORMATION);
         HttpSession session = request.getSession(true);
+        User user = ((User)(session.getAttribute(ParamName.USER_ATTRIBUTE)));
         String name = request.getParameter(ParamName.PARAM_NAME_NAME);
         String redirect = request.getParameter(ParamName.REDIRECT);
         String secondName = request.getParameter(ParamName.PARAM_NAME_SECOND_NAME);
@@ -36,7 +37,6 @@ public class AddStudentInformationCommand implements ActionCommand {
         String sex = request.getParameter(ParamName.PARAM_NAME_SEX);
         Map<String,String> map = new HashMap<>();
 
-        User user = ((User)(session.getAttribute(ParamName.USER_ATTRIBUTE)));
         int userId = user.getId();
         InformationServiceImpl logic = new InformationServiceImpl();
         boolean wasCreated;

@@ -1,7 +1,6 @@
 package by.bsu.finalproject.service;
 
 import by.bsu.finalproject.entity.User;
-import by.bsu.finalproject.entity.UserType;
 import by.bsu.finalproject.exception.LogicException;
 
 import java.util.Map;

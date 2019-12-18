@@ -9,6 +9,10 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.Executor;
 
+/**
+ * Creates protect {@link by.bsu.finalproject.connectionpool.ConnectionPool} from getting wild connections.
+ */
+
 public class ProxyConnection implements Connection {
 
     private Connection connection;

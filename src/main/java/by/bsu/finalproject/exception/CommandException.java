@@ -1,6 +1,11 @@
 package by.bsu.finalproject.exception;
 
+/**
+ * Created for signal that an command exception of some sort has occurred.
+ */
+
 public class CommandException extends Exception {
+
     public CommandException() {
     }
 

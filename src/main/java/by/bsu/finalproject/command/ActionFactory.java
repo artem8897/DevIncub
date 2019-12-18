@@ -12,6 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 
 public class ActionFactory {
 
+    private ActionFactory(){
+
+    }
     /**
      * Defines command
      * @return ActionCommand

@@ -13,8 +13,10 @@ import javax.servlet.http.HttpServletRequest;
  */
 
 public class ButtonRegistrationPageCommand implements ActionCommand {
+
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
+
         return ConfigurationManager.getProperty(PathName.PATH_REGISTRATION_PAGE);
     }
 }

@@ -1,6 +1,11 @@
 package by.bsu.finalproject.exception;
 
+/**
+ * Created for signal that an Connection pool exception of some sort has occurred.
+ */
+
 public class ConnectionPoolException extends Exception {
+
     public ConnectionPoolException(String reason) {
         super(reason);
     }

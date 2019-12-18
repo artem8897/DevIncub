@@ -14,8 +14,8 @@ public class ParamName {
     public static final String PARAM_TRAINING_ID = "training_id";
     public static final String USER_ID = "user_id";
     public static final String USER_SESSION = "User";
-    public final static String MOV_ATTRIBUTE = "mov";
-    public final static String UPDATE = "UPDATE";
+    public static final  String MOV_ATTRIBUTE = "mov";
+    public static final  String UPDATE = "UPDATE";
     public static final String PARAM_NAME_DIET_TYPE = "diet_type";
     public static final String PARAM_NAME_PROTEINS = "proteins";
     public static final String PARAM_NAME_FATS = "fats";
@@ -43,11 +43,11 @@ public class ParamName {
     public static final String ALL_TRAINER_ATTRIBUTE = "alltrainer";
     public static final String REVIEW = "review";
     public static final String TRAINING = "training";
-    public final static String DIET_TYPE = "diet_type";
-    public final static String PROTEINS = "proteins";
-    public final static String FATS = "fats";
-    public final static String CARBOHYDRATES = "carbohydrates";
-    public final static String STATUS = "status";
+    public static final  String DIET_TYPE = "diet_type";
+    public static final  String PROTEINS = "proteins";
+    public static final  String FATS = "fats";
+    public static final  String CARBOHYDRATES = "carbohydrates";
+    public static final  String STATUS = "status";
     public static final String STUDENTS = "students";
     public static final String ADD = "ADD";
     public static final String TRAINER_ATTRIBUTE = "trainers";
@@ -72,6 +72,8 @@ public class ParamName {
     public static final String INFO = "info";
     public static final String WRONG_ACTION = "wrongAction";
     public static final String NULL_PAGE = "nullPage";
+    public static final String MAP = "map";
+    public static final String WRONG_MAIL_OR_PASSWORD = "errorLoginPassMessage";
 
 
 

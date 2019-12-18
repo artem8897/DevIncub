@@ -29,30 +29,38 @@ public class UpdateDietCommand implements ActionCommand {
         String page = ConfigurationManager.getProperty(PathName.PATH_DIET_PAGE);
         HttpSession session = request.getSession(true);
         User user = ((User)(session.getAttribute(ParamName.USER_SESSION)));
-        int userId = Integer.parseInt(request.getParameter(ParamName.PARAM_NAME_USER_ID));
-        String dietType = request.getParameter(ParamName.PARAM_NAME_DIET_TYPE);
-        int proteins = Integer.parseInt(request.getParameter(ParamName.PARAM_NAME_PROTEINS));
-        String redirect = request.getParameter(ParamName.REDIRECT);
-        int fats = Integer.parseInt(request.getParameter(ParamName.PARAM_NAME_FATS));
-        int carbohydrates = Integer.parseInt(request.getParameter(ParamName.PARAM_NAME_CARBOHYDRATES));
 
-        Map<String,String> map = new HashMap<>();
+        if(user != null) {
 
-        DietServiceImpl dietService = new DietServiceImpl();
-        boolean wasCreated ;
-        try {
-            wasCreated = dietService.updateDiet(userId,dietType,carbohydrates,fats,proteins,map);
-        } catch (LogicException e) {
-            throw new CommandException(e);
-        }
-        if(wasCreated){
-            request.setAttribute(ParamName.REDIRECT, redirect);
+            int userId = Integer.parseInt(request.getParameter(ParamName.PARAM_NAME_USER_ID));
+            String dietType = request.getParameter(ParamName.PARAM_NAME_DIET_TYPE);
+            int proteins = Integer.parseInt(request.getParameter(ParamName.PARAM_NAME_PROTEINS));
+            String redirect = request.getParameter(ParamName.REDIRECT);
+            int fats = Integer.parseInt(request.getParameter(ParamName.PARAM_NAME_FATS));
+            int carbohydrates = Integer.parseInt(request.getParameter(ParamName.PARAM_NAME_CARBOHYDRATES));
+
+            Map<String, String> map = new HashMap<>();
+
+            DietServiceImpl dietService = new DietServiceImpl();
+            boolean wasCreated;
+
+            try {
+                wasCreated = dietService.updateDiet(userId, dietType, carbohydrates, fats, proteins, map);
+            } catch (LogicException e) {
+                throw new CommandException(e);
+            }
+
+            if (wasCreated) {
+                request.setAttribute(ParamName.REDIRECT, redirect);
+            } else {
+                request.setAttribute(ParamName.MOV_ATTRIBUTE, ParamName.UPDATE);
+                request.setAttribute(ParamName.PARAM_NAME_USER_TYPE, user.getUserType().toString());
+                request.setAttribute(ParamName.INFO, MessageManager.getProperty(MessageName.MESSAGE_WRONG_FIELDS));
+                request.setAttribute(ParamName.DIET, map);
+                request.setAttribute(ParamName.USER_ID, userId);
+            }
         }else{
-            request.setAttribute(ParamName.MOV_ATTRIBUTE, ParamName.UPDATE);
-            request.setAttribute(ParamName.PARAM_NAME_USER_TYPE, user.getUserType().toString());
-            request.setAttribute(ParamName.INFO, MessageManager.getProperty(MessageName.MESSAGE_WRONG_FIELDS));
-            request.setAttribute(ParamName.DIET,map);
-            request.setAttribute(ParamName.USER_ID, userId);
+           page = ConfigurationManager.getProperty(PathName.PATH_LOGIN_PAGE);
         }
         return page;
     }

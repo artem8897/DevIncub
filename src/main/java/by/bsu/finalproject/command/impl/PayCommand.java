@@ -1,6 +1,7 @@
 package by.bsu.finalproject.command.impl;
 
 import by.bsu.finalproject.command.ActionCommand;
+import by.bsu.finalproject.command.MessageName;
 import by.bsu.finalproject.command.ParamName;
 import by.bsu.finalproject.command.PathName;
 import by.bsu.finalproject.entity.User;
@@ -20,25 +21,35 @@ import javax.servlet.http.HttpSession;
 public class PayCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
+
+        String page = ConfigurationManager.getProperty(PathName.PATH_USER_PAGE);
         HttpSession session = request.getSession(true);
-        User user = ((User)(session.getAttribute(ParamName.USER_SESSION)));
-        double sum = Double.parseDouble(request.getParameter(ParamName.PRICE));
-        int cardNumber = Integer.parseInt(request.getParameter(ParamName.CARD));
-        String redirect = request.getParameter(ParamName.REDIRECT);
-        int amountOfTraining = Integer.parseInt(request.getParameter(ParamName.TRAINING_AMOUNT));
-        int trainerId = Integer.parseInt(request.getParameter(ParamName.PARAM_NAME_TRAINER_ID));
-        PaymentServiceImpl paymentService = new PaymentServiceImpl();
-        try {
-            boolean wasPaid = paymentService.payTraining(sum,cardNumber,user.getId(),amountOfTraining,trainerId);
-            if(wasPaid){
-                request.setAttribute(ParamName.REDIRECT, redirect);
-            }else{
-                request.setAttribute(ParamName.INFO,"message.some_problem_with_paid");
+        User user = (User) session.getAttribute(ParamName.USER_ATTRIBUTE);
+
+        if(user != null) {
+
+            double sum = Double.parseDouble(request.getParameter(ParamName.PRICE));
+            int cardNumber = Integer.parseInt(request.getParameter(ParamName.CARD));
+            String redirect = request.getParameter(ParamName.REDIRECT);
+            int amountOfTraining = Integer.parseInt(request.getParameter(ParamName.TRAINING_AMOUNT));
+            int trainerId = Integer.parseInt(request.getParameter(ParamName.PARAM_NAME_TRAINER_ID));
+
+            PaymentServiceImpl paymentService = new PaymentServiceImpl();
+
+            try {
+                boolean wasPaid = paymentService.payTraining(sum, cardNumber, user.getId(), amountOfTraining, trainerId);
+                if (wasPaid) {
+                    request.setAttribute(ParamName.REDIRECT, redirect);
+                } else {
+                    request.setAttribute(ParamName.INFO, MessageName.PROBLEMS_WITH_PAID);
+                }
+            } catch (LogicException e) {
+                throw new CommandException(e);
             }
-        } catch (LogicException e) {
-            throw new CommandException(e);
+        }else{
+            page = ConfigurationManager.getProperty(PathName.PATH_LOGIN_PAGE);
         }
-        return ConfigurationManager.getProperty(PathName.PATH_USER_PAGE);
+        return page;
 
     }
 }

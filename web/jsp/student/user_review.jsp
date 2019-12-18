@@ -8,7 +8,6 @@
     <script>
     function validate() {
 
-        // const rules = new RegExp("\\w[\\d\\w]{2,}@\\w+\\.\\w{2,4}");
         var val = document.getElementById('textArea_id').value;
         var form = document.getElementById('form_id');
 

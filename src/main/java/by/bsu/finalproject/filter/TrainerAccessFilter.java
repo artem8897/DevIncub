@@ -7,7 +7,6 @@ import by.bsu.finalproject.manager.ConfigurationManager;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
-import javax.servlet.annotation.WebInitParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -17,31 +16,30 @@ import java.io.IOException;
  * @author A. Kuzmik
  */
 
+@WebFilter(filterName = "TrainerFilter", urlPatterns = { "/jsp/trainer/*" }, dispatcherTypes = { DispatcherType.FORWARD,
+        DispatcherType.REQUEST })
+public class TrainerAccessFilter implements Filter {
 
-@WebFilter( urlPatterns = { "/jsp/*" }, initParams = {
-        @WebInitParam(name = "INDEX_PATH", value = "/index.jsp", description = "security filter") })
-public class PageRedirectSecurityFilter implements Filter {
-    private String indexPath;
-    public void init(FilterConfig fConfig)  {
-        indexPath = fConfig.getInitParameter("INDEX_PATH");
+    @Override
+    public void init(FilterConfig filterConfig) {
     }
 
-    public void doFilter(ServletRequest request, ServletResponse response,
-                         FilterChain chain) throws IOException, ServletException {
+    @Override
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
         String role = (String) httpRequest.getSession().getAttribute(ParamName.PARAM_NAME_USER_TYPE);
 
-        if (role == null) {
+        if (role == null || !role.toUpperCase().equals(UserType.ADMIN.toString())) {
             RequestDispatcher dispatcher = httpRequest.getServletContext()
                     .getRequestDispatcher(ConfigurationManager.getProperty(PathName.PATH_LOGIN_PAGE));
             dispatcher.forward(httpRequest, httpResponse);
         } else {
             chain.doFilter(httpRequest, httpResponse);
         }
-        httpResponse.sendRedirect(httpRequest.getContextPath() + indexPath);
-        chain.doFilter(request, response);
     }
+
     public void destroy() {
     }
 }

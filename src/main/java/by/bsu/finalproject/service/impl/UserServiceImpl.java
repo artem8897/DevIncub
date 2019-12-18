@@ -143,6 +143,18 @@ public class UserServiceImpl implements UserService {
             throw new LogicException(e);
         }
     }
+    public Integer findNumberOfRows () throws LogicException {
+
+        int number ;
+
+        try {
+            number = userDao.findNumberOfRows();
+        } catch (DaoException e) {
+            throw new LogicException(e);
+        }
+        return number;
+    }
+
     private boolean validateUser(User user, Map<String, String> map, String confirmedPass){
 
         boolean isLoginValid = user.getUsername() != null ? UserValidator.INSTANCE.isUsernameValid(user.getUsername())  : false ;
@@ -172,15 +184,5 @@ public class UserServiceImpl implements UserService {
         return isLoginValid && isPassValid && isMailValid;
     }
 
-    public Integer findNumberOfRows () throws LogicException {
 
-        int number ;
-
-        try {
-            number = userDao.findNumberOfRows();
-        } catch (DaoException e) {
-            throw new LogicException(e);
-        }
-        return number;
-    }
 }

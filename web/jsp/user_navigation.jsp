@@ -74,7 +74,6 @@
                             </form> </td>
                             <td>  <form name="SetTraining" method="GET" action="controller">
                                 <input type="hidden" name="command" value="show_trainers_reviews" />
-                                <input type="hidden" name="trainer_id" value="${User.id}">
                                 <button class="w3-btn w3-hover-light-blue w3-round-large" value="trainer_edition"><fmt:message key="label.display_reviews"/></button>
                             </form> </td>
 

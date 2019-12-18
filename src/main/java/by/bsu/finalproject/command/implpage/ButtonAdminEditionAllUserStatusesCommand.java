@@ -20,13 +20,17 @@ import java.util.Map;
  */
 
 public class ButtonAdminEditionAllUserStatusesCommand implements ActionCommand {
+
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
+
+        String page = ConfigurationManager.getProperty(PathName.PATH_PAGE_ADMIN_EDITION_USER);
         UserServiceImpl userService = new UserServiceImpl();
         Map<Integer, User> userMap ;
         int noOfRecords;
         String currentPageString = (request.getParameter(ParamName.CURRENT_PAGE));
         String recordPageString = (request.getParameter(ParamName.RECORDS_PER_PAGE));
+
         try {
             userMap = userService.findAllUserMap(currentPageString,recordPageString);
             noOfRecords = userService.findNumberOfRows();
@@ -44,11 +48,11 @@ public class ButtonAdminEditionAllUserStatusesCommand implements ActionCommand {
             request.setAttribute(ParamName.CURRENT_PAGE, currentPage);
             request.setAttribute(ParamName.RECORDS_PER_PAGE, recordsPerPage);
             request.setAttribute(ParamName.PERSONAL_INFORMATION, userMap);
-            return ConfigurationManager.getProperty(PathName.PATH_PAGE_ADMIN_EDITION_USER);
         }else{
             request.setAttribute(ParamName.INFO, MessageManager.getProperty(MessageName.WRONG_ACTION));
-            return ConfigurationManager.getProperty(PathName.PATH_ADMIN_PAGE);
+            page =  ConfigurationManager.getProperty(PathName.PATH_ADMIN_PAGE);
         }
+        return page;
     }
 }
 

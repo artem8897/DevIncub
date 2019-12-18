@@ -20,7 +20,8 @@ import java.util.Map;
  */
 
 public class DietDaoImpl implements DietDao<Integer, Diet> {
-    private static Logger logger = LogManager.getLogger(DietDaoImpl.class);
+
+    private static final Logger logger = LogManager.getLogger(DietDaoImpl.class);
 
     @Override
     public Map<Integer, Diet> findAll() throws DaoException {
@@ -47,10 +48,6 @@ public class DietDaoImpl implements DietDao<Integer, Diet> {
         return diets;
     }
 
-    @Override
-    public boolean delete(Integer dietId) {
-        return false;
-    }
 
     public boolean isUsersDietExist(Integer userId) throws DaoException {
 

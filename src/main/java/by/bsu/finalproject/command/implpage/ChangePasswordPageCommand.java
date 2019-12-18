@@ -14,8 +14,10 @@ import javax.servlet.http.HttpServletRequest;
 
 
 public class ChangePasswordPageCommand implements ActionCommand {
+
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
+
         return ConfigurationManager.getProperty(PathName.PATH_PAGE_PASSWORD);
     }
 }
