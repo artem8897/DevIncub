@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <fmt:setLocale value="${local}" scope="session" />
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -8,6 +7,7 @@
 <head>
 <body>
 <c:import url="/jsp/header.jsp"/>
+<c:import url="/jsp/user_navigation.jsp"/>
 
     <form name="Choose_trainer_and_pay" method="POST" action="controller"/>
     <input type="hidden" name="command" value=GO_TO_PAY />

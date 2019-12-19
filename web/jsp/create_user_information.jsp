@@ -9,10 +9,11 @@
     <c:import url="/jsp/header.jsp"/>
     <c:import url="/jsp/user_navigation.jsp"/>
 
-        <div style="text-align: center;">
+    <div style="text-align: center;">
 
     <body>
     <form name="AddUserInformation" method="POST" action="controller"/>
+    <input type="hidden" name="redirect" value="controller?command=student_acc">
     <c:set var="students" value="${students}"/>
     </br><fmt:message key="label.name"/> <br/>
     <input type="text" name="name" value="${students['name']}" required pattern = "(([А-Яа-я]{3,14})|([A-Za-z]{2,20}))"/>
@@ -32,7 +33,6 @@
         <input type="radio" name="sex" value="Male" checked> <fmt:message key="label.male"/>
 
         <input type="radio" name="sex" value="Female" > <fmt:message key="label.female"/>
-
     </td>
 </tr>
     <input type="hidden" name="user_id" value="${user_id}"/>
@@ -41,7 +41,6 @@ ${wrongregistration}
 <br/>
     <br/>
     <c:set var = "move" value = "${mov}"/>
-
     <br/>
     <c:choose>
         <c:when test="${move == 'ADD'}">
@@ -52,23 +51,11 @@ ${wrongregistration}
         </c:when>
     </c:choose>
     <br/>
-
-
-    <c:set var = "user_type" value = "${user_type}"/>
-
     <br/>
-    <c:choose>
-        <c:when test="${user_type.equals('ADMIN')}">
-            <input type="hidden" name="redirect" value="controller?command=GO_TO_ADMIN">
-        </c:when>
-        <c:when test="${user_type.equals('USER')}">
-            <input type="hidden" name="redirect" value="controller?command=student_acc">
-        </c:when>
-    </c:choose></form><hr/>
-
-
+    <c:set var = "user_type" value = "${user_type}"/>
+    <c:if test="${user_type.equals('ADMIN')}">
+    </c:if>
     </form><hr/>
-
     <c:import url="/jsp/footer.jsp"/>
 </body>
         </div>

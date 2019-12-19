@@ -74,6 +74,7 @@ public class ParamName {
     public static final String NULL_PAGE = "nullPage";
     public static final String MAP = "map";
     public static final String WRONG_MAIL_OR_PASSWORD = "errorLoginPassMessage";
+    public static final String WRONG_FIELDS = "wrong_fields";
 
 
 

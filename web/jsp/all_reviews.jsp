@@ -19,6 +19,5 @@
     </c:forEach>
 </table>
 </div>
-</form>
 </body>
 </html>

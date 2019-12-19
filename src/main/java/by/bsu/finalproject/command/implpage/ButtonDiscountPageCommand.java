@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
-public class DiscountPageCommand implements ActionCommand {
+public class ButtonDiscountPageCommand implements ActionCommand {
 
     private static final String DATE_PATTERN = "yyyy-MM-dd";
 

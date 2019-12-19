@@ -121,16 +121,18 @@ public class UserServiceImpl implements UserService {
             throw new LogicException(e);
         }
     }
-    public boolean changePassword(int userId, String password) throws LogicException {
+    public boolean changePassword(int userId, String confirmedPassword, String password) throws LogicException {
 
-        if(password==null){
-            return false;
+        if(password!=null && password.equals(confirmedPassword)){
+            Cryptographer cryptographer = new Cryptographer();
+            String encryptedPassword = cryptographer.encrypt(password);
+            try {
+                return userDao.updatePassword(userId ,encryptedPassword);
+            } catch (DaoException e) {
+                throw new LogicException(e);
+            }
         }
-        try {
-            return userDao.updatePassword(userId ,password);
-        } catch (DaoException e) {
-            throw new LogicException(e);
-        }
+        return false;
     }
     public boolean changeUsername(int userId, String username) throws LogicException {
 

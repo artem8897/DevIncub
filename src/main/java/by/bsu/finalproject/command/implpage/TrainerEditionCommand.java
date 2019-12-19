@@ -40,7 +40,7 @@ public class TrainerEditionCommand implements ActionCommand {
 
             try {
                 userMap = informationService.findLimitTrainerMap(currentPageString, recordPageString, user.getId());
-                noOfRecords = informationService.findNumberOfRows();
+                noOfRecords = informationService.findNumberOfRowsStudentsWithPaidTraining(user.getId());
             } catch (LogicException e) {
                 throw new CommandException(e);
             }

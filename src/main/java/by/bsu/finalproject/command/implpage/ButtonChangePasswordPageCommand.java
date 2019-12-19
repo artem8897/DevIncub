@@ -1,26 +1,23 @@
 package by.bsu.finalproject.command.implpage;
 
 import by.bsu.finalproject.command.ActionCommand;
-import by.bsu.finalproject.command.MessageName;
-import by.bsu.finalproject.command.ParamName;
 import by.bsu.finalproject.command.PathName;
 import by.bsu.finalproject.exception.CommandException;
 import by.bsu.finalproject.manager.ConfigurationManager;
-import by.bsu.finalproject.manager.MessageManager;
 
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * Go to admin page in case of success command
+ * Go to page for updating users password command
  * @author A. Kuzmik
  */
 
-public class AdminMainAccCommand implements ActionCommand {
+
+public class ButtonChangePasswordPageCommand implements ActionCommand {
+
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
 
-        request.setAttribute(ParamName.INFO, MessageManager.getProperty(MessageName.SUCCESS_UPDATE));
-        return ConfigurationManager.getProperty(PathName.PATH_ADMIN_PAGE);
-
+        return ConfigurationManager.getProperty(PathName.PATH_PAGE_PASSWORD);
     }
 }

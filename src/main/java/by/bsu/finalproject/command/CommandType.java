@@ -31,12 +31,12 @@ public enum CommandType {
     },
     DISCOUNT{
         {
-            this.command = new DiscountPageCommand();
+            this.command = new ButtonDiscountPageCommand();
         }
     },
     GO_TO_PASSWORD{
         {
-           this.command = new ChangePasswordPageCommand();
+           this.command = new ButtonChangePasswordPageCommand();
         }
     },
     GOTOREGISTRATION {
@@ -56,7 +56,7 @@ public enum CommandType {
     },
     GO_TO_ADMIN{
         {
-            this.command = new AdminMainAccCommand();
+            this.command = new AdminMainPageCommand();
         }
     },
     ADDINFORMATIONCOMMAND{

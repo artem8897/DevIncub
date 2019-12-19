@@ -28,7 +28,8 @@
 
                 <td> <form name="changeTraining" method="POST" action="controller">
                     <input type="hidden" name="command" value="all_users_training_page" />
-                    <input type="hidden" name="user_id" value="${user.key}" />
+                    <input type="hidden" name="currentPage" value="0">
+                    <input type="hidden" name="recordsPerPage" value="5">                    <input type="hidden" name="user_id" value="${user.key}" />
                     <button class="w3-btn w3-hover-light-blue w3-round-large" value="all_users_training_page"><fmt:message key="label.update_training"/></button>
                     </form>
                 </td>

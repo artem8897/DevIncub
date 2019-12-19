@@ -8,6 +8,7 @@ import by.bsu.finalproject.entity.User;
 import by.bsu.finalproject.exception.CommandException;
 import by.bsu.finalproject.exception.LogicException;
 import by.bsu.finalproject.manager.ConfigurationManager;
+import by.bsu.finalproject.manager.MessageManager;
 import by.bsu.finalproject.service.impl.PaymentServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
@@ -41,7 +42,7 @@ public class PayCommand implements ActionCommand {
                 if (wasPaid) {
                     request.setAttribute(ParamName.REDIRECT, redirect);
                 } else {
-                    request.setAttribute(ParamName.INFO, MessageName.PROBLEMS_WITH_PAID);
+                    request.setAttribute(ParamName.INFO, MessageManager.getProperty(MessageName.PROBLEMS_WITH_PAID));
                 }
             } catch (LogicException e) {
                 throw new CommandException(e);

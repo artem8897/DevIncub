@@ -60,12 +60,13 @@ public interface UserService {
     /**
      * Update password at the specified userId
      * @param userId
+     * @param confirmedPassword
      * @param password
      * @return boolean was updated training
      * @throws LogicException
      */
 
-    boolean changePassword(int userId, String password) throws LogicException;
+    boolean changePassword(int userId, String confirmedPassword, String password) throws LogicException;
 
     /**
      * Update username at the specified userId

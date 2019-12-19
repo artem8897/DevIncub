@@ -1,6 +1,7 @@
 package by.bsu.finalproject.command.impl;
 
 import by.bsu.finalproject.command.ActionCommand;
+import by.bsu.finalproject.command.MessageName;
 import by.bsu.finalproject.command.PathName;
 import by.bsu.finalproject.command.ParamName;
 import by.bsu.finalproject.entity.User;
@@ -31,15 +32,14 @@ public class UpdatePasswordCommand implements ActionCommand {
 
             int userId = user.getId();
             String password = request.getParameter(ParamName.PARAM_NAME_PASSWORD);
-            Cryptographer cryptographer = new Cryptographer();
+            String confirmedPassword = request.getParameter(ParamName.PARAM_NAME_CONFIRMED_PASSWORD2);
             String redirect = request.getParameter(ParamName.REDIRECT);
-            String encryptedPassword = cryptographer.encrypt(password);
             UserServiceImpl userService = new UserServiceImpl();
 
             boolean wasCreated;
 
             try {
-                wasCreated = userService.changePassword(userId, encryptedPassword);
+                wasCreated = userService.changePassword(userId, password, confirmedPassword);
             } catch (LogicException e) {
                 throw new CommandException(e);
             }
@@ -49,7 +49,8 @@ public class UpdatePasswordCommand implements ActionCommand {
                 request.setAttribute(ParamName.PARAM_NAME_USER_TYPE, user.getUserType().toString());
             }
         }else{
-           page = ConfigurationManager.getProperty(PathName.PATH_LOGIN_PAGE);
+           page = ConfigurationManager.getProperty(PathName.PATH_PAGE_PASSWORD);
+           request.setAttribute(ParamName.INFO, MessageName.MESSAGE_WRONG_FIELDS);
         }
 
         return page;

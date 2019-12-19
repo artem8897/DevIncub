@@ -16,7 +16,7 @@ public enum UserValidator {
     private static final String REGULAR_MAIL = "[A-Za-z0-9]{4,20}@[a-z]{3,7}.[a-z]{2,3}";
     private static final String REGULAR_PASSWORD = "[0-9a-zA-Z]{5,12}";
     private static final String REGULAR_USERNAME = "[0-9a-zA-Z_]{5,12}";
-    private static final String REGULAR_USER_TYPE = "[A-Za-z]{4,10}";
+    private static final String REGULAR_USER_TYPE = "[A-Za-z]{1,2}[A-Za-z0-9]{6,8}";
 
     /**
      * Validate email

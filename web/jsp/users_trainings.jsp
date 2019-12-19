@@ -37,37 +37,55 @@
 </table>
     </form>
 </div>
+<nav aria-label="Navigation for trainer">
+    <ul class="pagination">
+        <c:if test="${currentPage != 0}">
+            <li class="page-item">
+                <form name="previous" method="POST" action="controller">
+                    <input type="hidden" name="command" value="all_users_training_page" />
+                    <input type="hidden" name="user_id" value="${user_id}"/>
+                    <input type="hidden" name="currentPage" value="${currentPage-1}">
+                    <input type="hidden" name="recordsPerPage" value="${recordsPerPage}">
+                    <button class="page-link" name="command" value="all_users_training_page">Previous</button>
+                </form>
+            </li>
+        </c:if>
 
-    <nav aria-label="Navigation for trainer">
-        <ul class="pagination">
-            <c:if test="${currentPage != 0}">
-                <li class="page-item"><a class="page-link"
-                                         href="controller?command=all_users_training_page&recordsPerPage=${recordsPerPage}&currentPage=${currentPage-1}&user_id=${userId}">Previous</a>
-                </li>
-            </c:if>
+        <c:forEach begin="0" end="${noOfPages}" var="i">
+            <c:choose>
+                <c:when test="${currentPage eq i}">
 
-            <c:forEach begin="0" end="${noOfPages}" var="i">
-                <c:choose>
-                    <c:when test="${currentPage eq i}">
-                        <li class="page-item active"><a class="page-link">
-                                ${i} <span class="sr-only">(current)</span></a>
-                        </li>
-                    </c:when>
-                    <c:otherwise>
-                        <li class="page-item"><a class="page-link"
-                                                 href="controller?command=all_users_training_page&recordsPerPage=${recordsPerPage}&currentPage=${i}&user_id=${userId}">${i}</a>
-                        </li>
-                    </c:otherwise>
-                </c:choose>
-            </c:forEach>
+                    <li class="page-item active"><a class="page-link">
+                            ${i} <span class="sr-only">(current)</span></a>
+                    </li>
+                </c:when>
+                <c:otherwise>
+                    <li class="page-item">
+                        <form name="this" method="POST" action="controller">
+                            <input type="hidden" name="command" value="all_users_training_page" />
+                            <input type="hidden" name="user_id" value="${user_id}"/>
+                            <input type="hidden" name="currentPage" value="${i}">
+                            <input type="hidden" name="recordsPerPage" value="${recordsPerPage}">
+                            <button class="page-link" name="command" value="all_users_training_page">${i}</button>
+                        </form>
+                    </li>
+                </c:otherwise>
+            </c:choose>
+        </c:forEach>
 
-            <c:if test="${currentPage lt noOfPages}">
-                <li class="page-item"><a class="page-link"
-                                         href="controller?command=all_users_training_page&recordsPerPage=${recordsPerPage}&currentPage=${currentPage+1}&user_id=${userId}">Next</a>
-                </li>
-            </c:if>
-        </ul>
-    </nav>
+        <c:if test="${currentPage lt noOfPages}">
+            <li class="page-item">
+                <form name="next" method="POST" action="controller">
+                    <input type="hidden" name="command" value="all_users_training_page" />
+                    <input type="hidden" name="user_id" value="${user_id}"/>
+                    <input type="hidden" name="currentPage" value="${currentPage+1}">
+                    <input type="hidden" name="recordsPerPage" value="${recordsPerPage}">
+                    <button class="page-link" name="command" value="all_users_training_page">Next</button>
+                </form>
+            </li>
+        </c:if>
+    </ul>
+</nav>
 
     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>

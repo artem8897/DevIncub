@@ -29,8 +29,7 @@ public class RegistrationCommand implements ActionCommand {
         String confirmedPassword = request.getParameter(ParamName.PARAM_NAME_CONFIRMED_PASSWORD2);
         String email = request.getParameter(ParamName.PARAM_NAME_EMAIL);
         String redirect = request.getParameter(ParamName.REDIRECT);
-//        EmailAcceptor emailAcceptor = new EmailAcceptor();
-//        emailAcceptor.sendMessage(email);
+
         String username = request.getParameter(ParamName.PARAM_NAME_USERNAME);
         String sex = request.getParameter(ParamName.PARAM_NAME_SEX);
 
@@ -46,11 +45,13 @@ public class RegistrationCommand implements ActionCommand {
         page = ConfigurationManager.getProperty(PathName.PATH_REGISTRATION_PAGE);
         if(wasCreated){
             request.setAttribute(ParamName.REDIRECT, redirect);
+            //        EmailAcceptor emailAcceptor = new EmailAcceptor();
+//       emailAcceptor.sendMessage(email);
         }else{
             if(map.isEmpty()){
-                request.setAttribute("wrong_fields", MessageManager.getProperty(MessageName.MESSAGE_WRONG_REGISTRATION));
+                request.setAttribute(ParamName.WRONG_FIELDS, MessageManager.getProperty(MessageName.MESSAGE_WRONG_REGISTRATION));
             }else{
-                request.setAttribute("wrong_fields", MessageManager.getProperty(MessageName.MESSAGE_WRONG_FIELDS));
+                request.setAttribute(ParamName.WRONG_FIELDS, MessageManager.getProperty(MessageName.MESSAGE_WRONG_FIELDS));
             }
             request.setAttribute(ParamName.STUDENTS, map);
         }

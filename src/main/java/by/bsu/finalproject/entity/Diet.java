@@ -61,14 +61,7 @@ public class Diet implements Entity {
         this.id = id;
     }
 
-    @Override
-    public String toString() {
-        return "dietType='" + dietType + '\'' +
-                ", id=" + id +
-                ", proteins=" + proteins +
-                ", fats=" + fats +
-                ", carbohydrates=" + carbohydrates;
-    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -94,5 +87,14 @@ public class Diet implements Entity {
         result = 31 * result + carbohydrates;
         result = 31 * result + (status != null ? status.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "dietType='" + dietType + '\'' +
+                ", id=" + id +
+                ", proteins=" + proteins +
+                ", fats=" + fats +
+                ", carbohydrates=" + carbohydrates;
     }
 }

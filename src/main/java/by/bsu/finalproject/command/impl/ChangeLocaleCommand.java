@@ -21,6 +21,7 @@ public class ChangeLocaleCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
+
         String page = ConfigurationManager.getProperty(PathName.PATH_LOGIN_PAGE);
         HttpSession session = request.getSession(true);
         String locale = request.getParameter(ParamName.LOCALE);

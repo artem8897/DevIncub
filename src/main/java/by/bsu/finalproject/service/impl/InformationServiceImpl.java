@@ -113,15 +113,17 @@ public class InformationServiceImpl implements InformationService {
         boolean isValidPersonalInformation = ValidatePersonalInformation(person, map );
 
         if(isValidPersonalInformation){
-
             try {
-                return personalInformationDao.create(person);
+                boolean isAlreadyExist = personalInformationDao.isCreated(userId);
+                if(!isAlreadyExist) {
+                    return personalInformationDao.create(person);
+                }
             } catch (DaoException e) {
                 throw new LogicException(e);
             }
-        }else{
-            return false;
         }
+        return false;
+
     }
 
     public Map<String, String> findPersonalInformation(int userId) throws LogicException {
