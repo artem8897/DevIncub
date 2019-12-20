@@ -17,7 +17,7 @@ import java.util.Map;
  * @author A. Kuzmik
  */
 
-public class ButtonReviewPageCommand implements ActionCommand {
+public class ReviewPageCommand implements ActionCommand {
 
      @Override
 

@@ -20,35 +20,36 @@ import javax.servlet.http.HttpSession;
  */
 
 public class UpdateUsernameCommand implements ActionCommand {
-        @Override
-        public String execute(HttpServletRequest request) throws CommandException {
 
-            String page = ConfigurationManager.getProperty(PathName.PATH_USER_PAGE);
-            HttpSession session = request.getSession(true);
-            User user = (User) session.getAttribute(ParamName.USER_ATTRIBUTE);
+    @Override
+    public String execute(HttpServletRequest request) throws CommandException {
+        //todo
+        String page = ConfigurationManager.getProperty(PathName.PATH_USER_PAGE);
+        HttpSession session = request.getSession(true);
+        User user = (User) session.getAttribute(ParamName.USER_ATTRIBUTE);
 
-            if(user != null) {
+        if (user != null) {
 
-                int userId = user.getId();
-                String username = request.getParameter(ParamName.PARAM_NAME_USERNAME);
-                String redirect = request.getParameter(ParamName.REDIRECT);
-                UserServiceImpl userService = new UserServiceImpl();
+            int userId = user.getId();
+            String username = request.getParameter(ParamName.PARAM_NAME_USERNAME);
+            String redirect = request.getParameter(ParamName.REDIRECT);
+            UserServiceImpl userService = new UserServiceImpl();
 
-                boolean wasCreated;
+            boolean wasCreated;
 
-                try {
-                    wasCreated = userService.changeUsername(userId, username);
-                } catch (LogicException e) {
-                    throw new CommandException(e);
-                }
-                if (wasCreated) {
-                    request.setAttribute(ParamName.REDIRECT, redirect);
-                } else {
-                    request.setAttribute(ParamName.INFO, MessageManager.getProperty(MessageName.MESSAGE_WRONG_FIELDS));
-                }
-            }else{
-                page = ConfigurationManager.getProperty(PathName.PATH_LOGIN_PAGE);
+            try {
+                wasCreated = userService.changeUsername(userId, username);
+            } catch (LogicException e) {
+                throw new CommandException(e);
             }
-            return page;
+            if (wasCreated) {
+                request.setAttribute(ParamName.REDIRECT, redirect);
+            } else {
+                request.setAttribute(ParamName.INFO, MessageManager.getProperty(MessageName.MESSAGE_WRONG_FIELDS));
+            }
+        } else {
+            page = ConfigurationManager.getProperty(PathName.PATH_LOGIN_PAGE);
         }
+        return page;
     }
+}

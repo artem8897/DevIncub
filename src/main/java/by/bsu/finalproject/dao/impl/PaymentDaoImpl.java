@@ -62,7 +62,7 @@ public class PaymentDaoImpl implements PaymentDao {
             throw new DaoException(e);
         }
     }
-    public boolean searchDiscountDate(String date) throws DaoException {
+    public boolean isDiscountDateExist(String date) throws DaoException {
 
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement statement = connection.prepareStatement(Query.SQL_SELECT_DISCOUNT_DATE)){
@@ -75,6 +75,25 @@ public class PaymentDaoImpl implements PaymentDao {
         }catch (ConnectionPoolException | SQLException e){
             throw new DaoException(e);
         }
+    }
+    public Map<Integer, String> findDiscountDates() throws DaoException {
+
+        Map<Integer, String> discountMap = new HashMap<>();
+
+        try (Connection connection = ConnectionPool.INSTANCE.getConnection();
+             PreparedStatement statement = connection.prepareStatement(Query.SQL_SELECT_DISCOUNT_DATE_AND_PRICE);
+             ResultSet resultSet = statement.executeQuery()){
+
+            while (resultSet.next()) {
+                Integer id = resultSet.getInt(1);
+                String value = resultSet.getString(2);
+                discountMap.put(id,value);
+            }
+
+        }catch (ConnectionPoolException | SQLException e){
+            throw new DaoException(e);
+        }
+        return discountMap;
     }
 
     public Map<Integer, String> findAllPayStatuses() throws DaoException {

@@ -1,6 +1,6 @@
 package by.bsu.finalproject.command;
 
-import by.bsu.finalproject.command.implpage.ButtonLoginPageCommand;
+import by.bsu.finalproject.command.implpage.LoginPageCommand;
 import by.bsu.finalproject.manager.MessageManager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,7 +25,7 @@ public class ActionFactory {
         ActionCommand current = new WrongCommand();
         String action = request.getParameter(ParamName.PARAM_NAME_COMMAND);
         if (action == null || action.isEmpty()) {
-            return new ButtonLoginPageCommand();
+            return new LoginPageCommand();
         }
         try {
             CommandType currentEnum = CommandType.valueOf(action.toUpperCase());

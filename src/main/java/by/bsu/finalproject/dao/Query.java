@@ -78,5 +78,7 @@ public class Query {
     public static final String SQL_CALCULATE_PRICE_FOR_TRAININGS = "SELECT (price * discounts.discount_value * if(discount_amount IS NOT NULL, 100 - discount_date.discount_amount, 100))/10000  FROM discounts JOIN personal_information ON discounts.discount_id = personal_information.status_id, centerces_price LEFT JOIN discount_date ON CURRENT_DATE = discount_date.date WHERE personal_information.information_id = ? AND training_amount = ?";
     public static final String SQL_SELECT_MONEY_FROM_ACCOUNT = "SELECT money_amount FROM money_card WHERE account_number = ?";
     public static final String SQL_SELECT_DISCOUNT_DATE = "SELECT date FROM discount_date WHERE date = ?";
+    public static final String SQL_SELECT_DISCOUNT_DATE_AND_PRICE = "SELECT date, discount_amount FROM discount_date WHERE date = ?";
+
 }
 

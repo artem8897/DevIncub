@@ -20,7 +20,7 @@ import java.util.Map;
  */
 
 
-public class ButtonTrainerPageCommand implements ActionCommand {
+public class UpdatingTrainerInformationPageCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request) throws CommandException {

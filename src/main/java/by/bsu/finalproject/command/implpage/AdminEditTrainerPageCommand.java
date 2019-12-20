@@ -19,7 +19,7 @@ import java.util.Map;
  * @author A. Kuzmik
  */
 
-public class ButtonAdminEditionTrainerCommand implements ActionCommand {
+public class AdminEditTrainerPageCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request) throws CommandException {

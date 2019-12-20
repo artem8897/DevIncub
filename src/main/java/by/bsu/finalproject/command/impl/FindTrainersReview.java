@@ -26,6 +26,7 @@ public class FindTrainersReview implements ActionCommand {
 
         HttpSession session = request.getSession(true);
         User user = (User) session.getAttribute(ParamName.USER_ATTRIBUTE);
+
         int trainerId;
 
         if(user != null && user.getUserType() == UserType.TRAINER){

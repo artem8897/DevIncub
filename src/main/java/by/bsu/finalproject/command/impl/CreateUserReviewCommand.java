@@ -36,7 +36,7 @@ public class CreateUserReviewCommand implements ActionCommand {
 
             String message = request.getParameter(ParamName.PARAM_NAME_MESSAGE);
             int trainerId = Integer.parseInt(request.getParameter(ParamName.PARAM_NAME_TRAINER_ID));
-            int userId = ((User) (session.getAttribute(ParamName.USER_ATTRIBUTE))).getId();
+            int userId = user.getId();
             int rate = Integer.parseInt(request.getParameter(ParamName.PARAM_NAME_RATE));
             String redirect = request.getParameter(ParamName.REDIRECT);
             ReviewServiceImpl reviewService = new ReviewServiceImpl();

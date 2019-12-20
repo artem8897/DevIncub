@@ -8,15 +8,16 @@ import by.bsu.finalproject.manager.ConfigurationManager;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * Go to page for registration command
+ * Go to page for updating users password command
  * @author A. Kuzmik
  */
 
-public class ButtonRegistrationPageCommand implements ActionCommand {
+
+public class ChangePasswordPageCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
 
-        return ConfigurationManager.getProperty(PathName.PATH_REGISTRATION_PAGE);
+        return ConfigurationManager.getProperty(PathName.PATH_PAGE_PASSWORD);
     }
 }

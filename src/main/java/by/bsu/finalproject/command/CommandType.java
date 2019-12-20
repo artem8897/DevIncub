@@ -31,27 +31,27 @@ public enum CommandType {
     },
     DISCOUNT{
         {
-            this.command = new ButtonDiscountPageCommand();
+            this.command = new CreatingDiscountPageCommand();
         }
     },
     GO_TO_PASSWORD{
         {
-           this.command = new ButtonChangePasswordPageCommand();
+           this.command = new ChangePasswordPageCommand();
         }
     },
     GOTOREGISTRATION {
         {
-            this.command = new ButtonRegistrationPageCommand();
+            this.command = new RegistrationPageCommand();
         }
     },
     GOTOLOGIN {
         {
-            this.command = new ButtonLoginPageCommand();
+            this.command = new LoginPageCommand();
         }
     },
     GO_TO_TRAINER{
         {
-            this.command = new TrainerMainAccCommand();
+            this.command = new TrainerMainPageCommand();
         }
     },
     GO_TO_ADMIN{
@@ -61,33 +61,33 @@ public enum CommandType {
     },
     ADDINFORMATIONCOMMAND{
         {
-            this.command = new AddStudentInformationCommand();
+            this.command = new CreateStudentInformationCommand();
         }
     },
     UPDATE_USER_INFORMATION_PAGE {
         {
-            this.command = new ButtonStudentInformationPageCommand();
+            this.command = new UpdatingStudentInformationPageCommand();
         }
     },
     ADD_DIET{
         {
-            this.command = new AddDietCommand();
+            this.command = new CreateDietCommand();
         }
 
     },
     ADD_PERSONAL_TRAINING{
         {
-            this.command = new AddPersonalTrainingCommand();
+            this.command = new CreatePersonalTrainingCommand();
         }
     },
     ADD_DISCOUNT{
         {
-            this.command = new AddDiscountCommand();
+            this.command = new CreateDiscountCommand();
         }
     },
     EMPTY_REVIEW{
         {
-            this.command = new ButtonReviewPageCommand();
+            this.command = new ReviewPageCommand();
         }
     },
     UPDATE_PAY_STATUS{
@@ -107,7 +107,7 @@ public enum CommandType {
     },
     EMPTY_TRAINING_PAGE{
         {
-            this.command = new ButtonEmptyTrainingPageCommand();
+            this.command = new CreatingTrainingPageCommand();
         }
     },
     ADMIN_STATUS{
@@ -117,7 +117,7 @@ public enum CommandType {
     },
     BUTTON_DIET_PAGE{
         {
-            this.command = new ButtonDietPageCommand();
+            this.command = new DietPageForEditCommand();
         }
     },
     USER_INFORMATION_UPDATE{
@@ -127,7 +127,7 @@ public enum CommandType {
     },
     CHANGE_USER_STATUS{
         {
-            this.command = new ChangeUserStatusCommand();
+            this.command = new UpdateUserStatusCommand();
         }
     },
     DELETE_USER{
@@ -147,12 +147,12 @@ public enum CommandType {
     },
     EDITION_PAGE_COMMAND{
         {
-            this.command = new ButtonAdminEditionPageCommand();
+            this.command = new AdminEditStudentPageCommand();
         }
     },
     EDITION_TRAINER{
         {
-            this.command = new ButtonAdminEditionTrainerCommand();
+            this.command = new AdminEditTrainerPageCommand();
         }
     },
     UPDATE_TRAINER_INFORMATION{
@@ -162,7 +162,7 @@ public enum CommandType {
     },
     TRAINER_PAGE {
         {
-            this.command = new ButtonTrainerPageCommand();
+            this.command = new UpdatingTrainerInformationPageCommand();
         }
     },
     UPDATE_DIET{
@@ -177,22 +177,22 @@ public enum CommandType {
     },
     EMPTY_USER_INFORMATION_PAGE {
         {
-            this.command = new ButtonEmptyInformationPageCommand();
+            this.command = new CreatingStudentInformationPageCommand();
         }
     },
     TRAINING_PAGE{
         {
-            this.command = new ButtonTrainingPageCommand();
+            this.command = new UpdatingTrainingPageCommand();
         }
     },
     ALL_USERS_TRAINING_PAGE{
         {
-            this.command = new ButtonAllUsersTrainingsCommand();
+            this.command = new UsersTrainingsPageCommand();
         }
     },
     TRAINER_EDITION{
         {
-            this.command = new TrainerEditionCommand();
+            this.command = new TrainerEditAppointmentsPageCommand();
         }
     },
     CHOOSE_USER_FOR_CREATING_DATA{
@@ -202,7 +202,7 @@ public enum CommandType {
     },
     EMPTYDIET{
         {
-            this.command= new ButtonEmptyDietPageCommand();
+            this.command= new CreatingDietPageCommand();
         }
     },
     SHOW_ALL_TRAINERS{
@@ -212,7 +212,7 @@ public enum CommandType {
     },
     EMPTY_TRAINER{
         {
-            this.command = new ButtonEmptyTrainerPageCommand();
+            this.command = new CreatingTrainerInformationPageCommand();
         }
     },
     SHOW_TRAINERS_REVIEWS{
@@ -237,17 +237,17 @@ public enum CommandType {
     },
     ADMIN_CHOOSE_PERSON{
         {
-            this.command = new AdminChooseStudentCommand();
+            this.command = new AdminChooseStudentPageCommand();
         }
     },
     ADMIN_EDIT_USER{
         {
-            this.command = new ButtonAdminEditionAllUserStatusesCommand();
+            this.command = new AdminEditUserStatusesPageCommand();
         }
     },
     STUDENT_ACC{
         {
-            this.command = new StudentMainAccCommand();
+            this.command = new StudentMainPageCommand();
         }
     },
     CHANGE_LOCALIZATION{

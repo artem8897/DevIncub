@@ -21,12 +21,13 @@ import java.util.Map;
  * @author A. Kuzmik
  */
 
-public class AddStudentInformationCommand implements ActionCommand {
+public class CreateStudentInformationCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
 
         String page = ConfigurationManager.getProperty(PathName.PATH_PAGE_INFORMATION);
+
         HttpSession session = request.getSession(true);
         User user = ((User)(session.getAttribute(ParamName.USER_ATTRIBUTE)));
 

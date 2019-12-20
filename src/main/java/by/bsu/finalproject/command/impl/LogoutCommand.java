@@ -14,8 +14,10 @@ import javax.servlet.http.HttpServletRequest;
 public class LogoutCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
+
         String page = ConfigurationManager.getProperty(PathName.PATH_INDEX_PAGE);
         request.getSession().invalidate();
+
         return page;
     }
 }

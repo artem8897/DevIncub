@@ -136,15 +136,20 @@ public class UserServiceImpl implements UserService {
     }
     public boolean changeUsername(int userId, String username) throws LogicException {
 
-        if(username==null){
-            return false;
+        if(username!=null){
+            try {
+                boolean isExist = userDao.isExistMailOrUsername(null, username);
+                if(!isExist){
+                    return userDao.updateUsername(userId, username);
+                }
+            } catch (DaoException e) {
+                throw new LogicException(e);
+            }
         }
-        try {
-            return userDao.updateUsername(userId, username);
-        } catch (DaoException e) {
-            throw new LogicException(e);
-        }
+        return false;
+
     }
+
     public Integer findNumberOfRows () throws LogicException {
 
         int number ;

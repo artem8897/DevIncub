@@ -9,31 +9,32 @@ import by.bsu.finalproject.exception.CommandException;
 import by.bsu.finalproject.exception.LogicException;
 import by.bsu.finalproject.manager.ConfigurationManager;
 import by.bsu.finalproject.manager.MessageManager;
-import by.bsu.finalproject.service.impl.TrainingServiceImpl;
+import by.bsu.finalproject.service.impl.PaymentServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
- * Delete students training command
+ * Add discount command
  * @author A. Kuzmik
  */
 
-public class DeleteTrainingCommand implements ActionCommand {
-
+public class CreateDiscountCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
 
-        String page = ConfigurationManager.getProperty(PathName.PATH_USER_PAGE);
+        String page = ConfigurationManager.getProperty(PathName.PATH_ADMIN_PAGE);
 
-        int trainingId = Integer.parseInt(request.getParameter(ParamName.PARAM_TRAINING_ID));
+        String date = request.getParameter(ParamName.PARAM_NAME_DATE);
+        int discount = Integer.parseInt(request.getParameter(ParamName.DISCOUNT));
         String redirect = request.getParameter(ParamName.REDIRECT);
-        TrainingServiceImpl trainingService = new TrainingServiceImpl();
+
+        PaymentServiceImpl logic = new PaymentServiceImpl();
 
         boolean wasCreated;
 
         try {
-            wasCreated = trainingService.deleteTraining(trainingId);
+            wasCreated = logic.addDiscount(date, discount);
         } catch (LogicException e) {
             throw new CommandException(e);
         }
@@ -45,3 +46,4 @@ public class DeleteTrainingCommand implements ActionCommand {
         return page;
     }
 }
+

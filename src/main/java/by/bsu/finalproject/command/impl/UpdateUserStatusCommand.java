@@ -19,7 +19,7 @@ import javax.servlet.http.HttpSession;
  * @author A. Kuzmik
  */
 
-public class ChangeUserStatusCommand implements ActionCommand {
+public class UpdateUserStatusCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request) throws CommandException {

@@ -21,7 +21,7 @@ import java.util.Map;
  * @author A. Kuzmik
  */
 
-public class TrainerEditionCommand implements ActionCommand {
+public class TrainerEditAppointmentsPageCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request) throws CommandException {

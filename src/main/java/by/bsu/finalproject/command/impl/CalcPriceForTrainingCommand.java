@@ -27,6 +27,7 @@ public class CalcPriceForTrainingCommand implements ActionCommand {
     public String execute(HttpServletRequest request) throws CommandException {
 
         String page = ConfigurationManager.getProperty(PathName.PATH_USER_PAGE);
+
         HttpSession session = request.getSession(true);
         User user = (User) session.getAttribute(ParamName.USER_ATTRIBUTE);
 

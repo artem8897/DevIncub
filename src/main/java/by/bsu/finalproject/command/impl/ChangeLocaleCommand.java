@@ -24,6 +24,7 @@ public class ChangeLocaleCommand implements ActionCommand {
 
         String page = ConfigurationManager.getProperty(PathName.PATH_LOGIN_PAGE);
         HttpSession session = request.getSession(true);
+
         String locale = request.getParameter(ParamName.LOCALE);
         if(EN.equals(locale) || RU.equals(locale)){
             session.setAttribute(ParamName.LOCALE,locale);

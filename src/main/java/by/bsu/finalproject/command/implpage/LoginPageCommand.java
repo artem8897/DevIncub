@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
  * @author A. Kuzmik
  */
 
-public class ButtonLoginPageCommand implements ActionCommand {
+public class LoginPageCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request) throws CommandException {

@@ -21,7 +21,7 @@ import java.util.Map;
  * @author A. Kuzmik
  */
 
-public class ButtonStudentInformationPageCommand implements ActionCommand {
+public class UpdatingStudentInformationPageCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request) throws CommandException {

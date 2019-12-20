@@ -20,7 +20,7 @@ import java.util.Map;
  * @author A. Kuzmik
  */
 
-public class ButtonAllUsersReviewCommand implements ActionCommand {
+public class UsersReviewPageCommand implements ActionCommand {
 
   @Override
 

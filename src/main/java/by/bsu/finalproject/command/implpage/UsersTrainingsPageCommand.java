@@ -22,7 +22,7 @@ import java.util.Map;
  * @author A. Kuzmik
  */
 
-public class ButtonAllUsersTrainingsCommand implements ActionCommand {
+public class UsersTrainingsPageCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request) throws CommandException {

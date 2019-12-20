@@ -11,15 +11,17 @@ import by.bsu.finalproject.manager.MessageManager;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * Go to trainer page in case of success updating command
+ * Go to student page in case of success updating command
  * @author A. Kuzmik
  */
 
-public class TrainerMainAccCommand implements ActionCommand {
+public class StudentMainPageCommand implements ActionCommand {
+
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
 
         request.setAttribute(ParamName.INFO, MessageManager.getProperty(MessageName.SUCCESS_UPDATE));
-        return ConfigurationManager.getProperty(PathName.PATH_PAGE_TRAINER);
+        return ConfigurationManager.getProperty(PathName.PATH_USER_PAGE);
+
     }
 }

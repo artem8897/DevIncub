@@ -29,7 +29,7 @@ public class PageForCreateChangeAppointmentCommand implements ActionCommand {
     public String execute(HttpServletRequest request) throws CommandException {
 
         String page;
-        HttpSession session = request.getSession(true);
+        HttpSession session = request.getSession();
         User user = ((User)(session.getAttribute(ParamName.USER_SESSION)));
 
         if (user != null) {

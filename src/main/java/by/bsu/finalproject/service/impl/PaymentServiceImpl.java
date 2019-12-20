@@ -21,7 +21,7 @@ public class PaymentServiceImpl implements PaymentService {
 
         if(value>0 && value<1000 && date != null ){
             try {
-                boolean isExist = paymentDao.searchDiscountDate(date);
+                boolean isExist = paymentDao.isDiscountDateExist(date);
                 if(!isExist){
                     return paymentDao.insertDiscountDate(date, value);
                 }

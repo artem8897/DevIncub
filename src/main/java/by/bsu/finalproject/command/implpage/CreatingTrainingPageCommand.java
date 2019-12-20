@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
  * @author A. Kuzmik
  */
 
-public class ButtonEmptyTrainingPageCommand implements ActionCommand {
+public class CreatingTrainingPageCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
