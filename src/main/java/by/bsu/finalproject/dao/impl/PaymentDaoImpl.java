@@ -149,9 +149,11 @@ public class PaymentDaoImpl implements PaymentDao {
                         int createdBankBillRow = preparedStatement.executeUpdate();
                         isCreatedBankBill = createdBankBillRow > 0;
                     }
+
                     try (PreparedStatement preparedStatement = connection.prepareStatement(Query.SQL_FIND_USERS_TRAINER)) {
                         usersTrainerKey = findUserTrainerKey(preparedStatement, userId, trainerId);
                     }
+
                     if(usersTrainerKey > 0){
                         try (PreparedStatement preparedStatement = connection.prepareStatement(Query.SQL_UPDATE_PAID_TRAINING)){
 
@@ -177,6 +179,7 @@ public class PaymentDaoImpl implements PaymentDao {
                     }
                 }
                 logger.info("problems with paying");
+                connection.rollback();
                 return false;
 
             }catch (SQLException e){
