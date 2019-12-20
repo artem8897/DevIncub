@@ -11,6 +11,7 @@ public class MessageName {
 
     }
 
+    public static final String MESSAGE_LOGIN_ERROR = "message.loginerror";
     public static final String MESSAGE_WRONG_REGISTRATION = "message.wrongregistration";
     public static final String MESSAGE_WRONG_FIELDS = "message.wrong_fields";
     public static final String SUCCESS_UPDATE = "message.success_update";

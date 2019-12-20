@@ -47,7 +47,7 @@ public class UsersTrainingsPageCommand implements ActionCommand {
             String recordPageString = (request.getParameter(ParamName.RECORDS_PER_PAGE));
 
             try {
-                trainingMap = trainingService.findLimitTrainerMap(currentPageString, recordPageString, userId);
+                trainingMap = trainingService.findUsersTrainings(currentPageString, recordPageString, userId);
                 noOfRecords = trainingService.findNumberOfRows(userId);
             } catch (LogicException e) {
                 throw new CommandException(e);

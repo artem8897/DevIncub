@@ -66,7 +66,7 @@ public interface TrainingService {
      * @throws LogicException
      */
 
-    Map<Integer, Training> findLimitTrainerMap(String currentPageString, String recordPageString, int userId ) throws LogicException;
+    Map<Integer, Training> findUsersTrainings(String currentPageString, String recordPageString, int userId ) throws LogicException;
 
     /**
      * Find number of trainings

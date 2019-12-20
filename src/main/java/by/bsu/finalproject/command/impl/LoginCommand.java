@@ -1,5 +1,6 @@
 package by.bsu.finalproject.command.impl;
 import by.bsu.finalproject.command.ActionCommand;
+import by.bsu.finalproject.command.MessageName;
 import by.bsu.finalproject.command.PathName;
 import by.bsu.finalproject.command.ParamName;
 import by.bsu.finalproject.manager.MessageManager;
@@ -20,8 +21,6 @@ import javax.servlet.http.HttpSession;
  */
 
 public class LoginCommand implements ActionCommand {
-
-    private static final String MESSAGE_LOGIN_ERROR = "message.loginerror";
 
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
@@ -71,7 +70,7 @@ public class LoginCommand implements ActionCommand {
                 }
             } else {
                 request.setAttribute(ParamName.WRONG_MAIL_OR_PASSWORD,
-                        MessageManager.getProperty(MESSAGE_LOGIN_ERROR));
+                        MessageManager.getProperty(MessageName.MESSAGE_LOGIN_ERROR));
             }
         } catch (LogicException e) {
             throw new CommandException(e);

@@ -50,7 +50,7 @@ public class AdminChooseStudentPageCommand implements ActionCommand {
             request.setAttribute(ParamName.PERSONAL_INFORMATION,userMap);
             page = ConfigurationManager.getProperty(PathName.PATH_PAGE_ADMIN_CHOOSE_PERSON);
         }else{
-            request.setAttribute(ParamName.INFO, MessageManager.getProperty(MessageName.WRONG_ACTION));
+            request.setAttribute(ParamName.INFO, MessageManager.getProperty(MessageName.NO_USERS_EXIST));
             page = ConfigurationManager.getProperty(PathName.PATH_ADMIN_PAGE);
         }
         return page;

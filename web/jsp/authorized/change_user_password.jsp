@@ -16,6 +16,7 @@
 <br/><fmt:message key="label.confirmpassword"/><br/>
 <input type="password" name="password2" value= ""  required pattern="[0-9a-zA-Z]{5,10}"/>
 <br/>
+    <br/><span style="color: darkred">${info}</span><br/>
 <button button class="w3-btn w3-hover-light-blue w3-round-large"  name="command" value=UPDATE_PASSWORD ><fmt:message key="label.change_password"/></button>
 </div>
 <c:set var = "user_type" value = "${user_type}" scope="session"/>

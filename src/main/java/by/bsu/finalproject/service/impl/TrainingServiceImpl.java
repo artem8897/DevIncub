@@ -57,7 +57,7 @@ public class TrainingServiceImpl implements TrainingService {
         }
     }
 
-    public Map<Integer, Training> findLimitTrainerMap(String currentPageString, String recordPageString, int userId ) throws LogicException {
+    public Map<Integer, Training> findUsersTrainings(String currentPageString, String recordPageString, int userId ) throws LogicException {
 
         Map<Integer, Training> trainingMap = new HashMap<>() ;
 

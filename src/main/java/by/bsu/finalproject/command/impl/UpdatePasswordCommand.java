@@ -47,10 +47,11 @@ public class UpdatePasswordCommand implements ActionCommand {
                 request.setAttribute(ParamName.REDIRECT, redirect);
             } else {
                 request.setAttribute(ParamName.PARAM_NAME_USER_TYPE, user.getUserType().toString());
+                request.setAttribute(ParamName.INFO, MessageName.MESSAGE_WRONG_FIELDS);
             }
         }else{
            page = ConfigurationManager.getProperty(PathName.PATH_PAGE_PASSWORD);
-           request.setAttribute(ParamName.INFO, MessageName.MESSAGE_WRONG_FIELDS);
+           request.setAttribute(ParamName.INFO, MessageName.WRONG_ACTION);
         }
 
         return page;

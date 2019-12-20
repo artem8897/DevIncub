@@ -48,7 +48,7 @@
 
                     <tr>
                         <div class="w3-text">
-                            <td> <form name="SetDiet" method="POST" action="controller">
+                            <td> <form name="SetDiet" method="GET" action="controller">
                             <input type="hidden" name="command" value="CHOOSE_USER_FOR_CREATING_DATA" />
                             <input type="hidden" name="currentPage" value="1">
                             <input type="hidden" name="type" value="diet">

@@ -43,10 +43,10 @@ public class EditAppointmentPageCommand implements ActionCommand {
             try {
                 int trainerId = user.getId();
 
-                if (type.equals(ParamName.TRAINING)) {
+                if (ParamName.TRAINING.equals(type)) {
                     noOfRecords = informationService.findNumberOfRowsStudentsWithPaidTraining(trainerId);
                     request.setAttribute(ParamName.INFO, MessageManager.getProperty(MessageName.NO_TRAINING_EXIST));
-                } else if (type.equals(ParamName.DIET)) {
+                } else if (ParamName.DIET.equals(type)) {
                     noOfRecords = informationService.findNumberOfRowsStudentsWithNoDiet(trainerId);
                     request.setAttribute(ParamName.INFO, MessageManager.getProperty(MessageName.NO_DIET_EXIST));
                 } else {
@@ -73,7 +73,6 @@ public class EditAppointmentPageCommand implements ActionCommand {
                     }else{
                         page = ConfigurationManager.getProperty(PathName.PATH_PAGE_TRAINER);
                     }
-                    request.setAttribute(ParamName.INFO, MessageManager.getProperty(MessageName.NO_TRAINING_EXIST));
                 }
             } catch (LogicException e) {
                 throw new CommandException(e);
