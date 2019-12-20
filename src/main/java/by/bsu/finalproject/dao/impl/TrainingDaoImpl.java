@@ -19,7 +19,7 @@ import java.util.Map;
  * @author A. Kuzmik
  */
 
-public class TrainingDaoImpl implements TrainingDao<Integer, Training> {
+public class TrainingDaoImpl implements TrainingDao {
 
     private static Logger logger = LogManager.getLogger(TrainingDaoImpl.class);
 

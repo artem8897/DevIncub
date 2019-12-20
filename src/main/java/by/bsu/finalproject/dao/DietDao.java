@@ -1,6 +1,6 @@
 package by.bsu.finalproject.dao;
 
-import by.bsu.finalproject.entity.Entity;
+import by.bsu.finalproject.entity.Diet;
 import by.bsu.finalproject.exception.DaoException;
 
 import java.util.Map;
@@ -11,14 +11,14 @@ import java.util.Map;
  * @author A. Kuzmik
  */
 
-public interface DietDao<K, T extends Entity> {
+public interface DietDao {
 
     /**
      * @return map all users diets
      * @throws DaoException
      */
 
-    Map<K, T> findAllDiets() throws DaoException;
+    Map<Integer, Diet> findAllDiets() throws DaoException;
 
     /**
      * Create a diet at the specified userId
@@ -28,7 +28,7 @@ public interface DietDao<K, T extends Entity> {
      * @throws DaoException
      */
 
-    boolean create(T entity, K userId) throws DaoException;
+    boolean create(Diet entity, Integer userId) throws DaoException;
 
     /**
      * Update a diet at the specified userId
@@ -38,7 +38,7 @@ public interface DietDao<K, T extends Entity> {
      * @throws DaoException
      */
 
-    boolean update(K userId, T entity) throws DaoException;
+    boolean update(Integer userId, Diet entity) throws DaoException;
 
     /**
      * Find a diet at the specified userId
@@ -47,5 +47,5 @@ public interface DietDao<K, T extends Entity> {
      * @throws DaoException
      */
 
-    T findUsersDiet(K userId) throws DaoException;
+    Diet findUsersDiet(Integer userId) throws DaoException;
 }

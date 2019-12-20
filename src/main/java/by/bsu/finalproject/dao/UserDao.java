@@ -1,6 +1,6 @@
 package by.bsu.finalproject.dao;
 
-import by.bsu.finalproject.entity.Entity;
+import by.bsu.finalproject.entity.User;
 import by.bsu.finalproject.entity.UserType;
 import by.bsu.finalproject.exception.DaoException;
 
@@ -12,7 +12,7 @@ import java.util.Map;
  * @author A. Kuzmik
  */
 
-public interface UserDao<K,S, T extends Entity>  {
+public interface UserDao {
 
     /**
      * Find all users
@@ -20,7 +20,7 @@ public interface UserDao<K,S, T extends Entity>  {
      * @throws DaoException
      */
 
-    Map<K, T> findAllUsers(K currentPage, K recordPerPage) throws DaoException;
+    Map<Integer, User> findAllUsers(int currentPage, int recordPerPage) throws DaoException;
 
     /**
      * Create user at the specified user entity
@@ -29,7 +29,7 @@ public interface UserDao<K,S, T extends Entity>  {
      * @throws DaoException
      */
 
-    boolean createUser(T user) throws DaoException;
+    boolean createUser(User user) throws DaoException;
 
     /**
      * Define was created user at the specified email and login
@@ -39,7 +39,7 @@ public interface UserDao<K,S, T extends Entity>  {
      * @throws DaoException
      */
 
-    boolean isExistMailOrUsername(S email, S login) throws DaoException;
+    boolean isExistMailOrUsername(String email, String login) throws DaoException;
 
     /**
      * Delete a user at the specified userId
@@ -48,7 +48,7 @@ public interface UserDao<K,S, T extends Entity>  {
      * @throws DaoException
      */
 
-    boolean deleteUser(K userId) throws DaoException;
+    boolean deleteUser(int userId) throws DaoException;
 
     /**
      * Update status and userType at the specified userId
@@ -59,7 +59,7 @@ public interface UserDao<K,S, T extends Entity>  {
      * @throws DaoException
      */
 
-    boolean changeUserStatus(K userId , S status, UserType userType) throws DaoException;
+    boolean changeUserStatus(int userId , String status, UserType userType) throws DaoException;
 
     /**
      * Update username at the specified userId
@@ -69,7 +69,7 @@ public interface UserDao<K,S, T extends Entity>  {
      * @throws DaoException
      */
 
-    boolean updateUsername(K userId, S username) throws DaoException;
+    boolean updateUsername(int userId, String username) throws DaoException;
 
     /**
      * Update password at the specified userId
@@ -79,7 +79,7 @@ public interface UserDao<K,S, T extends Entity>  {
      * @throws DaoException
      */
 
-    boolean updatePassword(K userId, S password) throws DaoException;
+    boolean updatePassword(int userId, String password) throws DaoException;
 
     /**
      * Find user at the specified email
@@ -88,7 +88,7 @@ public interface UserDao<K,S, T extends Entity>  {
      * @throws DaoException
      */
 
-    T findEntityByEmail(S email) throws DaoException;
+    User findEntityByEmail(String email) throws DaoException;
 
     /**
      * Find number of users
@@ -96,5 +96,5 @@ public interface UserDao<K,S, T extends Entity>  {
      * @throws DaoException
      */
 
-    K findNumberOfRows() throws DaoException;
+    int findNumberOfRows() throws DaoException;
 }

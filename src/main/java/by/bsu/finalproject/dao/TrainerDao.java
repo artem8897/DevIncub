@@ -1,6 +1,6 @@
 package by.bsu.finalproject.dao;
 
-import by.bsu.finalproject.entity.Entity;
+import by.bsu.finalproject.entity.Trainer;
 import by.bsu.finalproject.exception.DaoException;
 
 import java.util.List;
@@ -12,7 +12,7 @@ import java.util.Map;
  * @author A. Kuzmik
  */
 
-public interface TrainerDao<K, T extends Entity> {
+public interface TrainerDao {
 
     /**
      * Find all trainers
@@ -20,7 +20,7 @@ public interface TrainerDao<K, T extends Entity> {
      * @throws DaoException
      */
 
-    Map<K, T> findAllTrainers() throws DaoException;
+    Map<Integer, Trainer> findAllTrainers() throws DaoException;
 
     /**
      * Update trainer at the specified trainer entity
@@ -29,7 +29,7 @@ public interface TrainerDao<K, T extends Entity> {
      * @throws DaoException
      */
 
-    boolean updateTrainer(T trainer) throws DaoException;
+    boolean updateTrainer(Trainer trainer) throws DaoException;
 
     /**
      * Define was created trainer information at the specified trainerId
@@ -38,7 +38,7 @@ public interface TrainerDao<K, T extends Entity> {
      * @throws DaoException
      */
 
-    boolean isCreated(K id) throws DaoException;
+    boolean isCreated(int id) throws DaoException;
 
     /**
      * Find limited amount of all trainers
@@ -48,7 +48,7 @@ public interface TrainerDao<K, T extends Entity> {
      * @throws DaoException
      */
 
-    List<T> findTrainersList(int currentPage, int recordPage) throws DaoException;
+    List<Trainer> findTrainersList(int currentPage, int recordPage) throws DaoException;
 
     /**
      * Find number of trainers
@@ -56,7 +56,7 @@ public interface TrainerDao<K, T extends Entity> {
      * @throws DaoException
      */
 
-    Integer findTrainersNumber() throws DaoException;
+    int findTrainersNumber() throws DaoException;
 
     /**
      * Create trainer information at the specified trainer entity
@@ -65,7 +65,7 @@ public interface TrainerDao<K, T extends Entity> {
      * @throws DaoException
      */
 
-    boolean createTrainer(T trainer) throws DaoException;
+    boolean createTrainer(Trainer trainer) throws DaoException;
 
 
     /**
@@ -75,5 +75,5 @@ public interface TrainerDao<K, T extends Entity> {
      * @throws DaoException
      */
 
-    T findTrainerInformation(int trainerId) throws DaoException;
+    Trainer findTrainerInformation(int trainerId) throws DaoException;
 }

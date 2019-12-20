@@ -22,7 +22,7 @@ import java.util.Map;
  * @author A. Kuzmik
  */
 
-public class TrainerDaoImpl implements TrainerDao<Integer, Trainer> {
+public class TrainerDaoImpl implements TrainerDao {
 
     private static final Logger logger = LogManager.getLogger(TrainerDaoImpl.class);
 

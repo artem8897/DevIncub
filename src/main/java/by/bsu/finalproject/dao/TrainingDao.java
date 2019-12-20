@@ -1,6 +1,6 @@
 package by.bsu.finalproject.dao;
 
-import by.bsu.finalproject.entity.Entity;
+import by.bsu.finalproject.entity.Training;
 import by.bsu.finalproject.exception.DaoException;
 
 import java.util.Map;
@@ -11,7 +11,7 @@ import java.util.Map;
  * @author A. Kuzmik
  */
 
-public interface TrainingDao<K, T extends Entity> {
+public interface TrainingDao {
 
     /**
      * Find all trainings
@@ -19,7 +19,7 @@ public interface TrainingDao<K, T extends Entity> {
      * @throws DaoException
      */
 
-    Map<K, T> findAll() throws DaoException;
+    Map<Integer, Training> findAll() throws DaoException;
 
     /**
      * Delete a training at the specified trainingId
@@ -28,7 +28,7 @@ public interface TrainingDao<K, T extends Entity> {
      * @throws DaoException
      */
 
-    boolean deleteTraining(K trainingId) throws DaoException;
+    boolean deleteTraining(int trainingId) throws DaoException;
 
     /**
      * Create training information at the specified training entity
@@ -38,7 +38,7 @@ public interface TrainingDao<K, T extends Entity> {
      * @throws DaoException
      */
 
-    boolean createTraining(K userId, T training) throws DaoException;
+    boolean createTraining(int userId, Training training) throws DaoException;
 
     /**
      * Update training at the specified training entity
@@ -47,7 +47,7 @@ public interface TrainingDao<K, T extends Entity> {
      * @throws DaoException
      */
 
-    boolean update(T training) throws DaoException;
+    boolean update(Training training) throws DaoException;
 
     /**
      * Find all trainings at the specified userId
@@ -56,7 +56,7 @@ public interface TrainingDao<K, T extends Entity> {
      * @throws DaoException
      */
 
-    Map<K, T> findUsersTrainingMap(int userId) throws DaoException;
+    Map<Integer, Training> findUsersTrainingMap(int userId) throws DaoException;
 
     /**
      * Find limited amount of trainings at the specified userId
@@ -65,7 +65,7 @@ public interface TrainingDao<K, T extends Entity> {
      * @throws DaoException
      */
 
-    Map<K, T> findUsersTrainings(int currentPage, int recordPage, int userId) throws DaoException;
+    Map<Integer, Training> findUsersTrainings(int currentPage, int recordPage, int userId) throws DaoException;
 
     /**
      * Find number of trainings
@@ -73,7 +73,7 @@ public interface TrainingDao<K, T extends Entity> {
      * @throws DaoException
      */
 
-    Integer findNumberOfTrainings(int userId) throws DaoException;
+    int findNumberOfTrainings(int userId) throws DaoException;
 
     /**
      * Find trainer at the specified trainingId
@@ -82,6 +82,6 @@ public interface TrainingDao<K, T extends Entity> {
      * @throws DaoException
      */
 
-    T findTrainingById(int trainingId) throws DaoException;
+    Training findTrainingById(int trainingId) throws DaoException;
 
     }

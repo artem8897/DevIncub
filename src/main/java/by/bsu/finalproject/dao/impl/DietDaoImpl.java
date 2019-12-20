@@ -19,7 +19,7 @@ import java.util.Map;
  * @author A. Kuzmik
  */
 
-public class DietDaoImpl implements DietDao<Integer, Diet> {
+public class DietDaoImpl implements DietDao {
 
     private static final Logger logger = LogManager.getLogger(DietDaoImpl.class);
 

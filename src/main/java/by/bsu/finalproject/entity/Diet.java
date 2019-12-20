@@ -1,6 +1,8 @@
 package by.bsu.finalproject.entity;
 
-public class Diet implements Entity {
+import java.io.Serializable;
+
+public class Diet implements Serializable, Cloneable {
 
     private String dietType;
     private int id;

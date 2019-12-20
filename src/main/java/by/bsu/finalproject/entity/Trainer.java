@@ -1,6 +1,8 @@
 package by.bsu.finalproject.entity;
 
-public class Trainer implements Entity {
+import java.io.Serializable;
+
+public class Trainer implements Serializable, Cloneable {
 
     private int id;
     private int workExperience;

@@ -20,7 +20,7 @@ import java.util.Map;
  */
 
 
-public class StudentDaoImpl implements StudentDao<Integer, Student> {
+public class StudentDaoImpl implements StudentDao {
 
     private static final Logger logger = LogManager.getLogger(StudentDaoImpl.class);
 

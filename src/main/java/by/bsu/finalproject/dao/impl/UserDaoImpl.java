@@ -20,12 +20,12 @@ import java.util.Map;
  * @author A. Kuzmik
  */
 
-public class UserDaoImpl implements UserDao<Integer, String, User> {
+public class UserDaoImpl implements UserDao {
 
     private static final Logger logger = LogManager.getLogger(UserDaoImpl.class);
 
     @Override
-    public Map<Integer, User> findAllUsers(Integer currentPage, Integer recordPerPage) throws DaoException {
+    public Map<Integer, User> findAllUsers(int currentPage, int recordPerPage) throws DaoException {
 
         Map<Integer, User> users = new HashMap<>();
 
@@ -88,7 +88,7 @@ public class UserDaoImpl implements UserDao<Integer, String, User> {
         }
     }
 
-    public boolean deleteUser(Integer userId) throws DaoException {
+    public boolean deleteUser(int userId) throws DaoException {
 
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement  statement = connection.prepareStatement(Query.SQL_DELETE_USER)) {
@@ -102,7 +102,7 @@ public class UserDaoImpl implements UserDao<Integer, String, User> {
             throw new DaoException(e);
         }
     }
-    public boolean changeUserStatus(Integer userId , String status, UserType userType) throws DaoException {
+    public boolean changeUserStatus(int userId , String status, UserType userType) throws DaoException {
 
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement  statement = connection.prepareStatement(Query.SQL_CHANGE_STATUS_USER)) {
@@ -119,7 +119,7 @@ public class UserDaoImpl implements UserDao<Integer, String, User> {
         }
     }
 
-    public boolean updateUsername(Integer userId, String username) throws DaoException{
+    public boolean updateUsername(int userId, String username) throws DaoException{
 
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement  statement = connection.prepareStatement(Query.SQL_UPDATE_USERNAME)) {
@@ -135,7 +135,7 @@ public class UserDaoImpl implements UserDao<Integer, String, User> {
         }
     }
 
-    public boolean updatePassword(Integer userId, String password) throws DaoException{
+    public boolean updatePassword(int userId, String password) throws DaoException{
 
             try (Connection connection = ConnectionPool.INSTANCE.getConnection();
                  PreparedStatement  statement = connection.prepareStatement(Query.SQL_UPDATE_USER_PASSWORD)) {
@@ -177,7 +177,7 @@ public class UserDaoImpl implements UserDao<Integer, String, User> {
         return user;
     }
 
-    public Integer findNumberOfRows() throws DaoException {
+    public int findNumberOfRows() throws DaoException {
 
         int number = 0 ;
 
