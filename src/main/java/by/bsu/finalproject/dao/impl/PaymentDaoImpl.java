@@ -123,10 +123,27 @@ public class PaymentDaoImpl implements PaymentDao {
             connection.setAutoCommit(false);
 
             try{
-                int moneyOnCard = calcMoneyOnCard(connection, card);
+                int moneyOnCard ;
 
+                try( PreparedStatement statement = connection.prepareStatement(Query.SQL_SELECT_MONEY_FROM_ACCOUNT)){
+                    moneyOnCard = calcMoneyOnCard(statement, card);
+                }
                 if(moneyOnCard>=price){
-                    payProcess(connection, price, card);
+
+                    try(PreparedStatement preparedStatement = connection.prepareStatement(Query.SQL_UPDATE_MONEY_CARD)){
+
+                        preparedStatement.setDouble(1,price);
+                        preparedStatement.setInt(2,card);
+                        preparedStatement.executeUpdate();
+
+                    }
+                    try (PreparedStatement preparedStatement = connection.prepareStatement(Query.SQL_CREATE_BANK_TRANSACTION_INFORMATION)){
+
+                        preparedStatement.setDouble(1,price);
+                        preparedStatement.setInt(2,card);
+                        preparedStatement.executeUpdate();
+                    }
+
                     createStudentsPaidTrainings(connection, userId, trainerId, trainingAmount);
                 } else{
                     logger.info("no money");
@@ -147,37 +164,20 @@ public class PaymentDaoImpl implements PaymentDao {
         }
     }
 
-    private int calcMoneyOnCard(Connection connection, int card) throws SQLException {
+    private int calcMoneyOnCard(PreparedStatement statement, int card) throws SQLException {
 
         int moneyOnCard = 0;
 
-        try( PreparedStatement statement = connection.prepareStatement(Query.SQL_SELECT_MONEY_FROM_ACCOUNT)){
-            statement.setInt(1,card);
+        statement.setInt(1,card);
 
-            try(ResultSet resultSet = statement.executeQuery()){
-
-                if(resultSet.first()){
-                    moneyOnCard = resultSet.getInt(1);
-                }
+        try(ResultSet resultSet = statement.executeQuery()){
+            if(resultSet.first()){
+                moneyOnCard = resultSet.getInt(1);
             }
         }
         return moneyOnCard;
     }
 
-    private void payProcess(Connection connection, double price, int card) throws SQLException {
-
-        try(PreparedStatement preparedStatement = connection.prepareStatement(Query.SQL_UPDATE_MONEY_CARD)){
-
-            preparedStatement.setDouble(1,price);
-            preparedStatement.setInt(2,card);
-
-        }
-        try (PreparedStatement preparedStatement = connection.prepareStatement(Query.SQL_CREATE_BANK_TRANSACTION_INFORMATION)){
-
-            preparedStatement.setDouble(1,price);
-            preparedStatement.setInt(2,card);
-        }
-    }
     private void createStudentsPaidTrainings(Connection connection, int userId, int trainerId, int trainingAmount) throws SQLException {
 
         boolean userHasTrainer = false ;
