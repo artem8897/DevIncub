@@ -29,7 +29,7 @@ public class PaymentDaoImpl implements PaymentDao {
         double price = 0;
 
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();
-             PreparedStatement statement = connection.prepareStatement(Query.SQL_CALCULATE_PRICE_FOR_TRAININGS);){
+             PreparedStatement statement = connection.prepareStatement(Query.SQL_CALCULATE_PRICE_FOR_TRAININGS)){
 
             statement.setInt(1,userId);
             statement.setInt(2,trainingAmount);
@@ -124,6 +124,7 @@ public class PaymentDaoImpl implements PaymentDao {
 
             try{
                 int moneyOnCard ;
+                int usersTrainerKey;
 
                 try( PreparedStatement statement = connection.prepareStatement(Query.SQL_SELECT_MONEY_FROM_ACCOUNT)){
                     moneyOnCard = calcMoneyOnCard(statement, card);
@@ -143,8 +144,22 @@ public class PaymentDaoImpl implements PaymentDao {
                         preparedStatement.setInt(2,card);
                         preparedStatement.executeUpdate();
                     }
+                    try (PreparedStatement preparedStatement = connection.prepareStatement(Query.SQL_FIND_USERS_TRAINER)) {
+                        usersTrainerKey = createStudentsPaidTrainings(preparedStatement, userId, trainerId);
+                    }
+                    if(usersTrainerKey > 0){
+                        try (PreparedStatement preparedStatement = connection.prepareStatement(Query.SQL_UPDATE_PAID_TRAINING)){
+                            preparedStatement.setInt(1,trainingAmount);
+                            preparedStatement.setInt(2,usersTrainerKey);
+                        }
+                    }else{
+                        try (PreparedStatement preparedStatement = connection.prepareStatement(Query.SQL_CREATE_USERS_TRAINER_WITH_PAID_TRAININGS)){
+                            preparedStatement.setInt(1,trainingAmount);
+                            preparedStatement.setInt(2,userId);
+                            preparedStatement.setInt(3,trainerId);
+                        }
+                    }
 
-                    createStudentsPaidTrainings(connection, userId, trainerId, trainingAmount);
                 } else{
                     logger.info("no money");
                     return false;
@@ -178,36 +193,20 @@ public class PaymentDaoImpl implements PaymentDao {
         return moneyOnCard;
     }
 
-    private void createStudentsPaidTrainings(Connection connection, int userId, int trainerId, int trainingAmount) throws SQLException {
+    private int createStudentsPaidTrainings(PreparedStatement statement, int userId, int trainerId) throws SQLException {
 
-        boolean userHasTrainer = false ;
-        int userTrainerKey = -1;
+        int userTrainerKey = 0;
 
-        try (PreparedStatement preparedStatement = connection.prepareStatement(Query.SQL_FIND_USERS_TRAINER)){
+        statement.setInt(1,userId);
+        statement.setInt(2,trainerId);
 
-            preparedStatement.setInt(1,userId);
-            preparedStatement.setInt(2,trainerId);
+        try(ResultSet resultSet = statement.executeQuery()){
 
-            try(ResultSet resultSet = preparedStatement.executeQuery()){
-
-               if(resultSet.first()){
-                   userHasTrainer = true;
-                   userTrainerKey = resultSet.getInt(1);
-               }
+            if(resultSet.first()){
+                userTrainerKey = resultSet.getInt(1);
             }
         }
-        if(userHasTrainer){
-            try (PreparedStatement preparedStatement = connection.prepareStatement(Query.SQL_UPDATE_PAID_TRAINING)){
-                preparedStatement.setInt(1,trainingAmount);
-                preparedStatement.setInt(2,userTrainerKey);
-            }
-        }else{
-            try (PreparedStatement preparedStatement = connection.prepareStatement(Query.SQL_CREATE_USERS_TRAINER_WITH_PAID_TRAININGS)){
-                preparedStatement.setInt(1,trainingAmount);
-                preparedStatement.setInt(2,userId);
-                preparedStatement.setInt(3,trainerId);
-            }
-        }
+        return userTrainerKey;
     }
-
 }
+
