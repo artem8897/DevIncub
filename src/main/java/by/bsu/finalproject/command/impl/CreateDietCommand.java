@@ -4,7 +4,6 @@ import by.bsu.finalproject.command.ActionCommand;
 import by.bsu.finalproject.command.MessageName;
 import by.bsu.finalproject.command.PathName;
 import by.bsu.finalproject.command.ParamName;
-import by.bsu.finalproject.entity.User;
 import by.bsu.finalproject.service.impl.DietServiceImpl;
 import by.bsu.finalproject.manager.ConfigurationManager;
 import by.bsu.finalproject.manager.MessageManager;
@@ -12,7 +11,6 @@ import by.bsu.finalproject.exception.CommandException;
 import by.bsu.finalproject.exception.LogicException;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,6 +20,8 @@ import java.util.Map;
  */
 
 public class CreateDietCommand implements ActionCommand {
+
+    private DietServiceImpl logic = new DietServiceImpl();
 
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
@@ -36,8 +36,6 @@ public class CreateDietCommand implements ActionCommand {
         int userId = Integer.parseInt(request.getParameter(ParamName.USER_ID));
 
         Map<String, String> map = new HashMap<>();
-
-        DietServiceImpl logic = new DietServiceImpl();
 
         boolean wasCreated;
 

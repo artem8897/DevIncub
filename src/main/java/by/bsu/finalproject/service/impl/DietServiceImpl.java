@@ -66,14 +66,11 @@ public class DietServiceImpl implements DietService {
     }
     public boolean isDietExist(int userId) throws LogicException {
 
-        boolean isExist ;
-
         try {
-            isExist = dietDao.isUsersDietExist(userId);
+            return dietDao.isUsersDietExist(userId);
         } catch (DaoException e) {
             throw new LogicException(e);
         }
-        return isExist;
     }
 
     public  boolean updateDiet(int userId, String dietType,String carbohydrates,String fats,String proteins,  Map<String, String> map) throws LogicException {

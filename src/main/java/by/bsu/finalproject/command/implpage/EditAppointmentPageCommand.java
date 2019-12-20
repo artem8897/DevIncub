@@ -25,6 +25,8 @@ import java.util.Map;
 
 public class EditAppointmentPageCommand implements ActionCommand {
 
+    private StudentServiceImpl informationService = new StudentServiceImpl();
+
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
 
@@ -38,7 +40,6 @@ public class EditAppointmentPageCommand implements ActionCommand {
             String currentPageString = (request.getParameter(ParamName.CURRENT_PAGE));
             String recordPageString = (request.getParameter(ParamName.RECORDS_PER_PAGE));
             String type = request.getParameter(ParamName.TYPE);
-            StudentServiceImpl informationService = new StudentServiceImpl();
 
             try {
                 int trainerId = user.getId();

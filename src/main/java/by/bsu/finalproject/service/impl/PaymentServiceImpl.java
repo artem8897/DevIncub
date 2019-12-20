@@ -77,6 +77,7 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     public Map<Integer, String> selectStatuses() throws LogicException {
+
         try {
             return paymentDao.findAllPayStatuses();
         } catch (DaoException e) {

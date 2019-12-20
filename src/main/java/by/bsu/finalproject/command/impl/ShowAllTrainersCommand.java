@@ -23,10 +23,11 @@ import java.util.regex.Pattern;
 
 public class ShowAllTrainersCommand implements ActionCommand {
 
+    private TrainerServiceImpl trainerService = new TrainerServiceImpl();
+
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
 
-        TrainerServiceImpl trainerService = new TrainerServiceImpl();
         List<Trainer> trainerList ;
         int noOfRecords;
         String currentPageString = request.getParameter(ParamName.CURRENT_PAGE);

@@ -63,7 +63,7 @@ public class TrainerServiceImpl implements TrainerService {
                 currentPage = Integer.parseInt(currentPageString);
                 recordsPerPage = Integer.parseInt(recordPageString);
                 try {
-                    trainerList = trainerDao.findLimitTrainersList(currentPage,recordsPerPage);
+                    trainerList = trainerDao.findTrainersList(currentPage,recordsPerPage);
                 } catch (DaoException e) {
                     throw new LogicException(e);
                 }
@@ -75,7 +75,7 @@ public class TrainerServiceImpl implements TrainerService {
     public Integer findNumberOfRows () throws LogicException {
 
         try {
-             return trainerDao.findNumberOfRows();
+             return trainerDao.findTrainersNumber();
         } catch (DaoException e) {
             throw new LogicException(e);
         }
@@ -94,7 +94,7 @@ public class TrainerServiceImpl implements TrainerService {
             trainer.setWorkExperience(Integer.parseInt(experience));
 
             try {
-                return trainerDao.create(trainer);
+                return trainerDao.createTrainer(trainer);
             } catch (DaoException e) {
                 throw new LogicException(e);
             }

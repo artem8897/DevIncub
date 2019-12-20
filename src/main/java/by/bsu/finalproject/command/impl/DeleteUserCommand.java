@@ -19,6 +19,8 @@ import javax.servlet.http.HttpSession;
 
 public class DeleteUserCommand implements ActionCommand {
 
+    private UserServiceImpl userService = new UserServiceImpl();
+
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
         //todo
@@ -29,12 +31,10 @@ public class DeleteUserCommand implements ActionCommand {
         }
         int userId = Integer.parseInt(request.getParameter(ParamName.PARAM_NAME_USER_ID));
         String page ;
-        UserServiceImpl userService = new UserServiceImpl();
         boolean wasDeleted ;
         try {
             wasDeleted = userService.deleteUser(userId);
-        } catch (
-                LogicException e) {
+        } catch (LogicException e) {
             throw new CommandException(e);
         }
         if(wasDeleted){

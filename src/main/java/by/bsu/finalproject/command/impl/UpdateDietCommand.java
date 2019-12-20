@@ -23,6 +23,8 @@ import java.util.Map;
 
 public class UpdateDietCommand implements ActionCommand {
 
+    private DietServiceImpl dietService = new DietServiceImpl();
+
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
 
@@ -41,7 +43,6 @@ public class UpdateDietCommand implements ActionCommand {
 
             Map<String, String> map = new HashMap<>();
 
-            DietServiceImpl dietService = new DietServiceImpl();
             boolean wasCreated;
 
             try {

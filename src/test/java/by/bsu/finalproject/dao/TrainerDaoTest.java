@@ -42,7 +42,7 @@ public class TrainerDaoTest {
         trainer.setTrainerName(name);
         trainer.setWorkExperience(experience);
 
-         trainerDao.create(trainer);
+         trainerDao.createTrainer(trainer);
 
         Trainer actualTrainer = trainerDao.findTrainerInformation(userId);
 
@@ -85,7 +85,7 @@ public class TrainerDaoTest {
         trainer.setTrainerName(name);
         trainer.setWorkExperience(experience);
 
-        trainerList = trainerDao.findLimitTrainersList(0,10);
+        trainerList = trainerDao.findTrainersList(0,10);
 
         boolean isExist = trainerList.contains(trainer);
 

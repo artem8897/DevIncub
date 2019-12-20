@@ -20,6 +20,8 @@ import javax.servlet.http.HttpServletRequest;
 
 public class UpdateStudentStatus implements ActionCommand {
 
+    private StudentServiceImpl logic = new StudentServiceImpl();
+
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
 
@@ -28,7 +30,6 @@ public class UpdateStudentStatus implements ActionCommand {
         int userId = Integer.parseInt(request.getParameter(ParamName.USER_ID));
         int status = Integer.parseInt(request.getParameter(ParamName.STATUS));
         String redirect = request.getParameter(ParamName.REDIRECT);
-        StudentServiceImpl logic = new StudentServiceImpl();
 
         boolean wasUpdated;
 

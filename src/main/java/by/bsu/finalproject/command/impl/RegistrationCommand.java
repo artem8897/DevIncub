@@ -21,6 +21,8 @@ import java.util.Map;
 
 public class RegistrationCommand implements ActionCommand {
 
+    private UserServiceImpl userService = new UserServiceImpl();
+
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
 
@@ -35,7 +37,6 @@ public class RegistrationCommand implements ActionCommand {
 
         Map<String,String> map = new HashMap<>();
 
-        UserServiceImpl userService = new UserServiceImpl();
         boolean wasCreated ;
         try {
             wasCreated = userService.register(email,password,confirmedPassword,username,sex,map);

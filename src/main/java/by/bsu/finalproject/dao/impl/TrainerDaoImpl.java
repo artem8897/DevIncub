@@ -64,7 +64,7 @@ public class TrainerDaoImpl implements TrainerDao<Integer, Trainer> {
             throw new DaoException(e);
         }
     }
-    public List<Trainer> findLimitTrainersList(int currentPage, int recordPage) throws DaoException {
+    public List<Trainer> findTrainersList(int currentPage, int recordPage) throws DaoException {
 
         List<Trainer> trainers = new ArrayList<>();
 
@@ -91,7 +91,7 @@ public class TrainerDaoImpl implements TrainerDao<Integer, Trainer> {
         }
         return trainers;
     }
-    public Integer findNumberOfRows() throws DaoException {
+    public Integer findTrainersNumber() throws DaoException {
 
       int number = 0;
 
@@ -112,7 +112,7 @@ public class TrainerDaoImpl implements TrainerDao<Integer, Trainer> {
 
 
     @Override
-    public boolean create(Trainer trainer) throws DaoException {
+    public boolean createTrainer(Trainer trainer) throws DaoException {
 
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement statement = connection.prepareStatement(Query.SQL_INSERT_TRAINER, Statement.RETURN_GENERATED_KEYS)){

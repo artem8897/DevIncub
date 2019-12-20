@@ -17,12 +17,13 @@ import javax.servlet.http.HttpServletRequest;
 
 public class AdminChooseUserStatusCommand implements ActionCommand {
 
+    private PaymentServiceImpl paymentService = new PaymentServiceImpl();
+
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
 
         int userId = Integer.parseInt(request.getParameter(ParamName.USER_ID));
         try {
-            PaymentServiceImpl paymentService = new PaymentServiceImpl();
             request.setAttribute(ParamName.USER_ID, userId);
             request.setAttribute(ParamName.STATUS,paymentService.selectStatuses());
         } catch (LogicException e) {

@@ -24,6 +24,7 @@ public class ActionFactory {
     public static ActionCommand defineCommand(HttpServletRequest request) {
 
         ActionCommand current = new WrongPageCommand();
+
         String action = request.getParameter(ParamName.PARAM_NAME_COMMAND);
         if (action == null || action.isEmpty()) {
             return new LoginPageCommand();

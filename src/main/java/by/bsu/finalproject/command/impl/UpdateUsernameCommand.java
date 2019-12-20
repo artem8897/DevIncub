@@ -21,6 +21,8 @@ import javax.servlet.http.HttpSession;
 
 public class UpdateUsernameCommand implements ActionCommand {
 
+    private UserServiceImpl userService = new UserServiceImpl();
+
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
         //todo
@@ -33,7 +35,6 @@ public class UpdateUsernameCommand implements ActionCommand {
             int userId = user.getId();
             String username = request.getParameter(ParamName.PARAM_NAME_USERNAME);
             String redirect = request.getParameter(ParamName.REDIRECT);
-            UserServiceImpl userService = new UserServiceImpl();
 
             boolean wasCreated;
 

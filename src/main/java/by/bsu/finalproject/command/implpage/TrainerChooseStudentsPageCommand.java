@@ -23,6 +23,8 @@ import java.util.Map;
 
 public class TrainerChooseStudentsPageCommand implements ActionCommand {
 
+    private StudentServiceImpl informationService = new StudentServiceImpl();
+
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
 
@@ -33,7 +35,6 @@ public class TrainerChooseStudentsPageCommand implements ActionCommand {
         if (user != null) {
 
             int noOfRecords;
-            StudentServiceImpl informationService = new StudentServiceImpl();
             String currentPageString = (request.getParameter(ParamName.CURRENT_PAGE));
             String recordPageString = (request.getParameter(ParamName.RECORDS_PER_PAGE));
             Map<Integer, Student> userMap;

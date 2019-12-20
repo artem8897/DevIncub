@@ -21,6 +21,9 @@ import java.util.Map;
  */
 
 public class FindTrainersReview implements ActionCommand {
+
+    private ReviewServiceImpl reviewService = new ReviewServiceImpl();
+
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
 
@@ -34,7 +37,6 @@ public class FindTrainersReview implements ActionCommand {
         }else{
             trainerId = Integer.parseInt(request.getParameter(ParamName.PARAM_NAME_TRAINER_ID));
         }
-        ReviewServiceImpl reviewService = new ReviewServiceImpl();
         Map<Integer, Review> reviewMap;
 
         try {

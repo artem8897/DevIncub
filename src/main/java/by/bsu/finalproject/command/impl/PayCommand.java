@@ -20,6 +20,9 @@ import javax.servlet.http.HttpSession;
  */
 
 public class PayCommand implements ActionCommand {
+
+    private PaymentServiceImpl paymentService = new PaymentServiceImpl();
+
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
 
@@ -35,7 +38,6 @@ public class PayCommand implements ActionCommand {
             String amountOfTraining = request.getParameter(ParamName.TRAINING_AMOUNT);
             int trainerId = Integer.parseInt(request.getParameter(ParamName.PARAM_NAME_TRAINER_ID));
 
-            PaymentServiceImpl paymentService = new PaymentServiceImpl();
 
             try {
                 boolean wasPaid = paymentService.payTraining(sum, cardNumber, user.getId(), amountOfTraining, trainerId);

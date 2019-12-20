@@ -21,11 +21,12 @@ import java.util.Map;
 
 public class AdminEditUserStatusesPageCommand implements ActionCommand {
 
+    private UserServiceImpl userService = new UserServiceImpl();
+
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
 
         String page = ConfigurationManager.getProperty(PathName.PATH_PAGE_ADMIN_EDITION_USER);
-        UserServiceImpl userService = new UserServiceImpl();
         Map<Integer, User> userMap ;
         int noOfRecords;
         String currentPageString = (request.getParameter(ParamName.CURRENT_PAGE));

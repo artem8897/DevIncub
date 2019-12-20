@@ -21,11 +21,12 @@ import java.util.Map;
 
 public class AdminChooseStudentPageCommand implements ActionCommand {
 
+    private StudentServiceImpl informationService = new StudentServiceImpl();
+
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
 
         String page;
-        StudentServiceImpl informationService = new StudentServiceImpl();
         Map<Integer, Student> userMap ;
         int noOfRecords;
         String currentPageString = request.getParameter(ParamName.CURRENT_PAGE);

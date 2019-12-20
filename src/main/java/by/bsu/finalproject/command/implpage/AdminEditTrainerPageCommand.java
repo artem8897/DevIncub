@@ -21,11 +21,12 @@ import java.util.Map;
 
 public class AdminEditTrainerPageCommand implements ActionCommand {
 
+    private TrainerServiceImpl trainerService = new TrainerServiceImpl();
+
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
 
         String page = ConfigurationManager.getProperty(PathName.ADMIN_EDITION_TRAINER);
-        TrainerServiceImpl trainerService = new TrainerServiceImpl();
 
         try {
             Map<Integer, Trainer> personInformationMap = trainerService.findAllTrainerMap();

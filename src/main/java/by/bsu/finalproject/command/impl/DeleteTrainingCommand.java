@@ -21,6 +21,8 @@ import javax.servlet.http.HttpSession;
 
 public class DeleteTrainingCommand implements ActionCommand {
 
+    private TrainingServiceImpl trainingService = new TrainingServiceImpl();
+
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
 
@@ -28,7 +30,6 @@ public class DeleteTrainingCommand implements ActionCommand {
 
         int trainingId = Integer.parseInt(request.getParameter(ParamName.PARAM_TRAINING_ID));
         String redirect = request.getParameter(ParamName.REDIRECT);
-        TrainingServiceImpl trainingService = new TrainingServiceImpl();
 
         boolean wasCreated;
 

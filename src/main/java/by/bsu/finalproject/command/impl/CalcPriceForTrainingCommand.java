@@ -23,6 +23,10 @@ import java.util.Map;
  */
 
 public class CalcPriceForTrainingCommand implements ActionCommand {
+
+    private PaymentServiceImpl paymentService = new PaymentServiceImpl();
+    private TrainerServiceImpl trainerService = new TrainerServiceImpl();
+
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
 
@@ -34,9 +38,7 @@ public class CalcPriceForTrainingCommand implements ActionCommand {
         if(user != null) {
 
             String amountOfTrainings = request.getParameter(ParamName.TRAINING_AMOUNT);
-            PaymentServiceImpl paymentService = new PaymentServiceImpl();
-            TrainerServiceImpl trainerService = new TrainerServiceImpl();
-            Map<Integer, Trainer> trainerMap;
+             Map<Integer, Trainer> trainerMap;
 
             try {
                 trainerMap = trainerService.findAllTrainerMap();

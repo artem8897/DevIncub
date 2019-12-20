@@ -23,6 +23,8 @@ import java.util.Map;
 
 public class UpdateTrainingCommand implements ActionCommand {
 
+    private TrainingServiceImpl trainingService = new TrainingServiceImpl();
+
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
 
@@ -40,8 +42,6 @@ public class UpdateTrainingCommand implements ActionCommand {
             String redirect = request.getParameter(ParamName.REDIRECT);
 
             Map<String, String> map = new HashMap<>();
-
-            TrainingServiceImpl trainingService = new TrainingServiceImpl();
 
             boolean wasCreated;
 

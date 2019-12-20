@@ -23,6 +23,8 @@ import java.util.Map;
 
 public class EditDietPageCommand implements ActionCommand {
 
+    private DietServiceImpl dietService = new DietServiceImpl();
+
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
 
@@ -38,8 +40,6 @@ public class EditDietPageCommand implements ActionCommand {
             } else {
                 userId = Integer.parseInt(request.getParameter(ParamName.USER_ID));
             }
-
-            DietServiceImpl dietService = new DietServiceImpl();
 
             try {
                 boolean isDietExist = dietService.isDietExist(userId);

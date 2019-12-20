@@ -24,6 +24,8 @@ import java.util.Map;
 
 public class UpdateUserInformationCommand implements ActionCommand {
 
+    private StudentServiceImpl logic = new StudentServiceImpl();
+
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
 
@@ -48,7 +50,6 @@ public class UpdateUserInformationCommand implements ActionCommand {
             String sex = request.getParameter(ParamName.PARAM_NAME_SEX);
 
             Map<String, String> map = new HashMap<>();
-            StudentServiceImpl logic = new StudentServiceImpl();
             boolean wasUpdated;
 
             try {

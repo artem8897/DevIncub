@@ -23,6 +23,8 @@ import java.util.Map;
 
 public class CreatePersonalTrainingCommand implements ActionCommand {
 
+    private TrainingServiceImpl trainingService = new TrainingServiceImpl();
+
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
 
@@ -36,7 +38,6 @@ public class CreatePersonalTrainingCommand implements ActionCommand {
 
         Map<String, String> map = new HashMap<>();
 
-        TrainingServiceImpl trainingService = new TrainingServiceImpl();
         boolean wasCreated;
         try {
             wasCreated = trainingService.createPersonalTrainingForUser(userId, periodicity, trainingType, personality, map);

@@ -22,6 +22,8 @@ import java.util.Map;
 
 public class UpdatingTrainerInformationPageCommand implements ActionCommand {
 
+    private TrainerServiceImpl trainerService = new TrainerServiceImpl();
+
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
 
@@ -38,7 +40,6 @@ public class UpdatingTrainerInformationPageCommand implements ActionCommand {
             } else {
                 userId = Integer.parseInt(request.getParameter(ParamName.USER_ID));
             }
-            TrainerServiceImpl trainerService = new TrainerServiceImpl();
             try {
                 trainer = trainerService.findTrainerInformation(userId);
             } catch (LogicException e) {

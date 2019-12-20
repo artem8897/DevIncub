@@ -48,7 +48,7 @@ public interface TrainerDao<K, T extends Entity> {
      * @throws DaoException
      */
 
-    List<T> findLimitTrainersList(int currentPage, int recordPage) throws DaoException;
+    List<T> findTrainersList(int currentPage, int recordPage) throws DaoException;
 
     /**
      * Find number of trainers
@@ -56,7 +56,7 @@ public interface TrainerDao<K, T extends Entity> {
      * @throws DaoException
      */
 
-    Integer findNumberOfRows() throws DaoException;
+    Integer findTrainersNumber() throws DaoException;
 
     /**
      * Create trainer information at the specified trainer entity
@@ -65,7 +65,7 @@ public interface TrainerDao<K, T extends Entity> {
      * @throws DaoException
      */
 
-    boolean create(T trainer) throws DaoException;
+    boolean createTrainer(T trainer) throws DaoException;
 
 
     /**

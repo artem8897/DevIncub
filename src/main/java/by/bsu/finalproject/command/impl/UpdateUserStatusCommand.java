@@ -21,6 +21,8 @@ import javax.servlet.http.HttpSession;
 
 public class UpdateUserStatusCommand implements ActionCommand {
 
+    private UserServiceImpl userService = new UserServiceImpl();
+
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
 
@@ -35,7 +37,6 @@ public class UpdateUserStatusCommand implements ActionCommand {
             String status = request.getParameter(ParamName.STATUS).toUpperCase();
             String userType = request.getParameter(ParamName.PARAM_NAME_USER_TYPE).toUpperCase();
             String redirect = request.getParameter(ParamName.REDIRECT);
-            UserServiceImpl userService = new UserServiceImpl();
             boolean wasChanged;
             int userId = Integer.parseInt(request.getParameter(ParamName.PARAM_NAME_USER_ID));
             try {

@@ -21,6 +21,8 @@ import javax.servlet.http.HttpSession;
 
 public class UpdatePasswordCommand implements ActionCommand {
 
+    private UserServiceImpl userService = new UserServiceImpl();
+
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
 
@@ -34,7 +36,6 @@ public class UpdatePasswordCommand implements ActionCommand {
             String password = request.getParameter(ParamName.PARAM_NAME_PASSWORD);
             String confirmedPassword = request.getParameter(ParamName.PARAM_NAME_CONFIRMED_PASSWORD2);
             String redirect = request.getParameter(ParamName.REDIRECT);
-            UserServiceImpl userService = new UserServiceImpl();
 
             boolean wasCreated;
 

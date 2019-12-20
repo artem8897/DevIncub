@@ -93,52 +93,52 @@ public class DietDaoImpl implements DietDao<Integer, Diet> {
     @Override
     public boolean create(Diet entity,Integer userId) throws DaoException {
 
-      int dietId ;
+        int dietId;
 
-      try (Connection connection = ConnectionPool.INSTANCE.getConnection()){
+        try (Connection connection = ConnectionPool.INSTANCE.getConnection()) {
 
-          connection.setAutoCommit(false);
+            connection.setAutoCommit(false);
 
-          try{
+            try {
 
-              try(PreparedStatement statement = connection.prepareStatement(Query.SQL_INSERT_DIET, Statement.RETURN_GENERATED_KEYS)){
+                try (PreparedStatement statement = connection.prepareStatement(Query.SQL_INSERT_DIET, Statement.RETURN_GENERATED_KEYS)) {
 
-                  statement.setString(1,entity.getDietType());
-                  statement.setInt(2,entity.getFats());
-                  statement.setInt(3,entity.getProteins());
-                  statement.setInt(4,entity.getCarbohydrates());
-                  statement.executeUpdate();
+                    statement.setString(1, entity.getDietType());
+                    statement.setInt(2, entity.getFats());
+                    statement.setInt(3, entity.getProteins());
+                    statement.setInt(4, entity.getCarbohydrates());
+                    statement.executeUpdate();
 
-                  logger.info("Created diet");
+                    logger.info("Created diet");
 
-                  try (ResultSet resultSet = statement.getGeneratedKeys()){
-                      if(resultSet.next()){
-                          dietId = resultSet.getInt(1);
-                      } else{
-                          connection.rollback();
-                          return false;
-                      }
-                  }
-              }
-              try(PreparedStatement statement = connection.prepareStatement(Query.SQL_INSERT_USER_DIET)) {
+                    try (ResultSet resultSet = statement.getGeneratedKeys()) {
+                        if (resultSet.next()) {
+                            dietId = resultSet.getInt(1);
+                        } else {
+                            connection.rollback();
+                            return false;
+                        }
+                    }
+                }
+                try (PreparedStatement statement = connection.prepareStatement(Query.SQL_INSERT_USER_DIET)) {
 
-                  statement.setInt(1, userId);
-                  statement.setInt(2, dietId);
-                  statement.executeUpdate();
-              }
-              connection.commit();
+                    statement.setInt(1, userId);
+                    statement.setInt(2, dietId);
+                    statement.executeUpdate();
+                }
+                connection.commit();
+                logger.info("Created users_training");
+                return true;
 
-          }catch (SQLException e){
-              logger.error("some diet exception", e);
-              connection.rollback();
-              return false;
-          }
-      } catch (SQLException | ConnectionPoolException e) {
-          throw new DaoException(e);
-      }
-      logger.info("Created users_training");
-      return true;
-  }
+            } catch (SQLException e) {
+                logger.error("some diet exception", e);
+                connection.rollback();
+                return false;
+            }
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DaoException(e);
+        }
+    }
 
     public boolean update(Integer userId, Diet entity) throws DaoException {
 

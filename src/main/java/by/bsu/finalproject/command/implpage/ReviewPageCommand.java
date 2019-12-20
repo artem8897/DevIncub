@@ -19,13 +19,12 @@ import java.util.Map;
 
 public class ReviewPageCommand implements ActionCommand {
 
-     @Override
+    private TrainerServiceImpl trainerService = new TrainerServiceImpl();
 
+    @Override
     public String execute(HttpServletRequest request) throws CommandException {
 
         try {
-            //todo
-            TrainerServiceImpl trainerService = new TrainerServiceImpl();
             Map<Integer, Trainer> trainerMap = trainerService.findAllTrainerMap();
             request.setAttribute(ParamName.TRAINER_ATTRIBUTE, trainerMap);
         } catch (LogicException e) {

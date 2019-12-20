@@ -24,6 +24,8 @@ import java.util.Map;
 
 public class UsersTrainingsPageCommand implements ActionCommand {
 
+    private TrainingServiceImpl trainingService = new TrainingServiceImpl();
+
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
 
@@ -40,7 +42,6 @@ public class UsersTrainingsPageCommand implements ActionCommand {
                 userId = Integer.parseInt(request.getParameter(ParamName.USER_ID));
             }
 
-            TrainingServiceImpl trainingService = new TrainingServiceImpl();
             Map<Integer, Training> trainingMap;
             int noOfRecords;
             String currentPageString = (request.getParameter(ParamName.CURRENT_PAGE));

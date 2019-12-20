@@ -12,6 +12,7 @@ import by.bsu.finalproject.manager.MessageManager;
 import by.bsu.finalproject.exception.CommandException;
 import by.bsu.finalproject.exception.DaoException;
 import by.bsu.finalproject.exception.LogicException;
+import by.bsu.finalproject.service.impl.TrainerServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -24,6 +25,9 @@ import java.util.Map;
  */
 
 public class CreateUserReviewCommand implements ActionCommand {
+
+    private TrainerServiceImpl trainerService = new TrainerServiceImpl();
+    private ReviewServiceImpl reviewService = new ReviewServiceImpl();
 
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
@@ -39,25 +43,19 @@ public class CreateUserReviewCommand implements ActionCommand {
             int userId = user.getId();
             String rate = request.getParameter(ParamName.PARAM_NAME_RATE);
             String redirect = request.getParameter(ParamName.REDIRECT);
-            ReviewServiceImpl reviewService = new ReviewServiceImpl();
             boolean wasCreated;
             Map<String, String> map = new HashMap<>();
             try {
                 wasCreated = reviewService.createReview(userId, message, rate, trainerId, map);
-            } catch (LogicException e) {
-                throw new CommandException(e);
-            }
-            if (wasCreated) {
-                request.setAttribute(ParamName.REDIRECT, redirect);
-            } else {
-                try {
-                    TrainerDaoImpl trainerDao = new TrainerDaoImpl();
-                    request.setAttribute(ParamName.TRAINER_ATTRIBUTE, trainerDao.findAllTrainers());
+                if (wasCreated) {
+                    request.setAttribute(ParamName.REDIRECT, redirect);
+                } else {
+                    request.setAttribute(ParamName.TRAINER_ATTRIBUTE, trainerService.findAllTrainerMap());
                     request.setAttribute(ParamName.MAP, map);
                     request.setAttribute(ParamName.INFO, MessageManager.getProperty(MessageName.MESSAGE_WRONG_FIELDS));
-                } catch (DaoException e) {
-                    throw new CommandException(e);
                 }
+            } catch (LogicException e) {
+                throw new CommandException(e);
             }
         }else{
             page = ConfigurationManager.getProperty(PathName.PATH_LOGIN_PAGE);

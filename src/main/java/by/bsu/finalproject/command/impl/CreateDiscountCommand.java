@@ -20,6 +20,9 @@ import javax.servlet.http.HttpSession;
  */
 
 public class CreateDiscountCommand implements ActionCommand {
+
+    private PaymentServiceImpl logic = new PaymentServiceImpl();
+
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
 
@@ -29,7 +32,6 @@ public class CreateDiscountCommand implements ActionCommand {
         String discount = request.getParameter(ParamName.DISCOUNT);
         String redirect = request.getParameter(ParamName.REDIRECT);
 
-        PaymentServiceImpl logic = new PaymentServiceImpl();
 
         boolean wasCreated;
 

@@ -23,6 +23,8 @@ import java.util.Map;
 
 public class CreateStudentInformationCommand implements ActionCommand {
 
+    private StudentServiceImpl logic = new StudentServiceImpl();
+
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
 
@@ -42,7 +44,6 @@ public class CreateStudentInformationCommand implements ActionCommand {
             Map<String, String> map = new HashMap<>();
 
             int userId = user.getId();
-            StudentServiceImpl logic = new StudentServiceImpl();
             boolean wasCreated;
             try {
                 wasCreated = logic.addInformation(userId, name, secondName, sex, weight, height, map);

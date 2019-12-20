@@ -22,15 +22,16 @@ import javax.servlet.http.HttpSession;
 
 public class LoginCommand implements ActionCommand {
 
+    private StudentServiceImpl informationService = new StudentServiceImpl();
+    private TrainerServiceImpl trainerService = new TrainerServiceImpl();
+    private UserServiceImpl userService = new UserServiceImpl();
+
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
 
         String page = ConfigurationManager.getProperty(PathName.PATH_LOGIN_PAGE);
         String email = request.getParameter(ParamName.PARAM_NAME_EMAIL);
         String pass = request.getParameter(ParamName.PARAM_NAME_PASSWORD);
-        UserServiceImpl userService = new UserServiceImpl();
-        StudentServiceImpl informationService = new StudentServiceImpl();
-        TrainerServiceImpl trainerService = new TrainerServiceImpl();
 
         try {
            User user = userService.findUserInBase(email, pass);
