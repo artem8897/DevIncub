@@ -33,7 +33,7 @@ public class AdminEditUserStatusesPageCommand implements ActionCommand {
 
         try {
             userMap = userService.findAllUserMap(currentPageString,recordPageString);
-            noOfRecords = userService.findNumberOfRows();
+            noOfRecords = userService.findNumberOfUsers();
         } catch (LogicException e) {
             throw new CommandException(e);
         }

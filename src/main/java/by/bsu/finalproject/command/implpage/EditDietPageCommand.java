@@ -21,7 +21,7 @@ import java.util.Map;
  * @author A. Kuzmik
  */
 
-public class DietPageForEditCommand implements ActionCommand {
+public class EditDietPageCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request) throws CommandException {

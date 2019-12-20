@@ -25,7 +25,7 @@ public interface ReviewService {
      * @throws LogicException
      */
 
-    boolean createReview(int userId, String userReview, int rate, int trainerId, Map map) throws LogicException;
+    boolean createReview(int userId, String userReview, int rate, int trainerId,  Map<String, String> map) throws LogicException;
 
     /**
      * Find reviews on trainer at the specified trainerId

@@ -60,7 +60,6 @@ public class ReviewDaoImpl implements ReviewDao {
                     statement.setInt(3, reviewId);
                     createdRow = statement.executeUpdate();
                 }
-
                 if(createdRow > 0){
                     connection.commit();
                     logger.info("Created users_review");
@@ -74,8 +73,6 @@ public class ReviewDaoImpl implements ReviewDao {
                 logger.error(e);
                 connection.rollback();
                 return false;
-            }finally {
-                connection.setAutoCommit(true);
             }
         } catch (SQLException | ConnectionPoolException e) {
             throw new DaoException(e);

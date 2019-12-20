@@ -23,7 +23,7 @@ import java.util.Map;
  */
 
 
-public class PageForCreateChangeAppointmentCommand implements ActionCommand {
+public class EditAppointmentPageCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request) throws CommandException {

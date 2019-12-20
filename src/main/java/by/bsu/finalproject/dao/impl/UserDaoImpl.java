@@ -36,8 +36,8 @@ public class UserDaoImpl implements UserDao<Integer, String, User> {
                 st.setInt(2,recordPerPage);
 
                 try(ResultSet resultSet = st.executeQuery()){
-                    while (resultSet.next()) {
 
+                    while (resultSet.next()) {
                         User user = new User();
                         user.setId(resultSet.getInt(TablesColumnName.COLUMN_LABEL_ID));
                         user.setEmail(resultSet.getString(TablesColumnName.COLUMN_LABEL_EMAIL));
@@ -96,7 +96,6 @@ public class UserDaoImpl implements UserDao<Integer, String, User> {
                 statement.setInt(1, userId);
                 int insertedRow = statement.executeUpdate();
                 return insertedRow > 0;
-
 
         }catch (ConnectionPoolException | SQLException e){
             logger.catching(e);

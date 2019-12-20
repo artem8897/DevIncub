@@ -27,7 +27,7 @@
         </tr>
             <c:forEach var="item" items="${personal_information}">
         <tr>
-            <td> ${item.value.name}</td>
+            <td>${item.value.name}</td>
             <td>${item.value.secondName}</td>
             <td><button class="w3-btn w3-hover-light-blue w3-round-large" name="user_id" value=${item.key} ><fmt:message key="label.choose_student"/></button><td>
         </tr>

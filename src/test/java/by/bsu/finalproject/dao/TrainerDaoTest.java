@@ -5,28 +5,23 @@ import by.bsu.finalproject.dao.impl.TrainerDaoImpl;
 import by.bsu.finalproject.entity.Trainer;
 import by.bsu.finalproject.exception.ConnectionPoolException;
 import by.bsu.finalproject.exception.DaoException;
-import by.bsu.finalproject.exception.LogicException;
-import by.bsu.finalproject.service.ServiceName;
 import org.junit.Test;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 
 import java.sql.Connection;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class TrainerDaoTest {
 
     private final String DATABASE_URL = ("jdbc:mysql://localhost:3306/new_schema?useUnicode=true&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true");
-    Connection connection;
-    TrainerDaoImpl trainerDao = DaoFactory.INSTANCE.getTrainerDao();
-    int userId = 12;
-    String name = "admin";
-    int experience = 12;
-    String trainingType = "hard working";
+    private Connection connection;
+    private TrainerDaoImpl trainerDao = DaoFactory.INSTANCE.getTrainerDao();
+    private int userId = 12;
+    private String name = "admin";
+    private int experience = 12;
+    private String trainingType = "hard working";
 
     @BeforeTest
     void beforeTest() throws ConnectionPoolException {
@@ -72,7 +67,7 @@ public class TrainerDaoTest {
         trainer.setTrainingType(trainingType);
         trainer.setWorkExperience(18);
 
-        trainerDao.update(trainer);
+        trainerDao.updateTrainer(trainer);
 
         Trainer actualTrainer = trainerDao.findTrainerInformation(userId);
 

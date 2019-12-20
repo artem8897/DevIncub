@@ -2,7 +2,6 @@ package by.bsu.finalproject.filter;
 
 import by.bsu.finalproject.command.ParamName;
 import by.bsu.finalproject.command.PathName;
-import by.bsu.finalproject.entity.UserType;
 import by.bsu.finalproject.manager.ConfigurationManager;
 
 import javax.servlet.*;
@@ -20,7 +19,8 @@ import java.io.IOException;
 
 @WebFilter( urlPatterns = { "/jsp/authorized/*" }, initParams = {
         @WebInitParam(name = "INDEX_PATH", value = "/index.jsp", description = "security filter") })
-public class PageRedirectSecurityFilter implements Filter {
+
+public class AuthorizedAccessFilter implements Filter {
     private String indexPath;
     public void init(FilterConfig fConfig)  {
         indexPath = fConfig.getInitParameter("INDEX_PATH");

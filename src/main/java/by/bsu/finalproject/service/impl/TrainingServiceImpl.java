@@ -29,7 +29,7 @@ public class TrainingServiceImpl implements TrainingService {
 
     private static final String REGULAR_PAGE_NUMBER = "\\d{1,2}";
 
-    public boolean createPersonalTrainingForUser(int userId, String periodicity, String trainingType, String personality, Map map) throws LogicException {
+    public boolean createPersonalTrainingForUser(int userId, String periodicity, String trainingType, String personality, Map<String, String> map) throws LogicException {
 
         Training training = new Training();
         training.setTrainingType(trainingType);
@@ -41,7 +41,7 @@ public class TrainingServiceImpl implements TrainingService {
         if(isValidTraining){
 
             try {
-                return trainingDao.create(userId, training);
+                return trainingDao.createTraining(userId, training);
             } catch (DaoException e) {
                 throw new LogicException(e);
             }
@@ -72,7 +72,7 @@ public class TrainingServiceImpl implements TrainingService {
                 currentPage = Integer.parseInt(currentPageString);
                 recordsPerPage = Integer.parseInt(recordPageString);
                 try {
-                    trainingMap = trainingDao.findAllInLimit(currentPage,recordsPerPage, userId);
+                    trainingMap = trainingDao.findUsersTrainings(currentPage,recordsPerPage, userId);
                 } catch (DaoException e) {
                     throw new LogicException(e);
                 }
@@ -82,7 +82,7 @@ public class TrainingServiceImpl implements TrainingService {
     }
     public Integer findNumberOfRows (int userId) throws LogicException {
         try {
-             return trainingDao.findNumberOfRows(userId);
+             return trainingDao.findNumberOfTrainings(userId);
         } catch (DaoException e) {
             throw new LogicException(e);
         }
@@ -98,7 +98,7 @@ public class TrainingServiceImpl implements TrainingService {
         }
         return trainingMap;
     }
-    public  boolean updateTraining(int trainingId,String personality, String periodicity, String trainingType, Map map) throws LogicException {
+    public  boolean updateTraining(int trainingId,String personality, String periodicity, String trainingType, Map<String, String> map) throws LogicException {
 
         Training training = new Training();
 

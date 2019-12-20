@@ -72,7 +72,7 @@ public class TrainingDaoImpl implements TrainingDao<Integer, Training> {
         }
     }
 
-    public Map<Integer, Training> findAllInLimit(int currentPage, int recordPage,int userId) throws DaoException {
+    public Map<Integer, Training> findUsersTrainings(int currentPage, int recordPage, int userId) throws DaoException {
 
         Map<Integer, Training> trainings;
 
@@ -92,7 +92,7 @@ public class TrainingDaoImpl implements TrainingDao<Integer, Training> {
         return trainings;
     }
 
-    public Integer findNumberOfRows(int userId) throws DaoException {
+    public Integer findNumberOfTrainings(int userId) throws DaoException {
 
         int number = 0 ;
 
@@ -142,7 +142,7 @@ public class TrainingDaoImpl implements TrainingDao<Integer, Training> {
     }
 
 
-    public boolean create(Integer userId, Training entity) throws DaoException {
+    public boolean createTraining(Integer userId, Training entity) throws DaoException {
 
         try (Connection connection = ConnectionPool.INSTANCE.getConnection()) {
 
@@ -185,8 +185,6 @@ public class TrainingDaoImpl implements TrainingDao<Integer, Training> {
                 connection.rollback();
                 logger.catching(e);
                 return false;
-            }finally {
-                connection.setAutoCommit(true);
             }
         } catch (SQLException | ConnectionPoolException e) {
             logger.catching(e);
@@ -206,6 +204,7 @@ public class TrainingDaoImpl implements TrainingDao<Integer, Training> {
         }
     }
     private boolean updateUserPaid(Connection connection, int userId) throws SQLException {
+
         try(PreparedStatement secondStatement = connection.prepareStatement(Query.SQL_UPDATE_TRAINING_PAID)){
 
             secondStatement.setInt(1, userId);

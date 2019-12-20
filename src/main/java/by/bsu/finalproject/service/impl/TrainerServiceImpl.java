@@ -74,17 +74,14 @@ public class TrainerServiceImpl implements TrainerService {
 
     public Integer findNumberOfRows () throws LogicException {
 
-        int number = 0 ;
-
         try {
-            number = trainerDao.findNumberOfRows();
+             return trainerDao.findNumberOfRows();
         } catch (DaoException e) {
             throw new LogicException(e);
         }
-        return number;
     }
 
-    public boolean createTrainer(int userId, String name,int experience, String trainingType, Map map) throws LogicException {
+    public boolean createTrainer(int userId, String name,int experience, String trainingType, Map<String, String> map) throws LogicException {
 
         Trainer trainer = new Trainer();
         trainer.setId(userId);
@@ -106,7 +103,7 @@ public class TrainerServiceImpl implements TrainerService {
         // toDO
         }
     }
-    public  boolean updateTrainerInformation(int trainerId,String name, int workExperience, String trainingType, Map map) throws LogicException {
+    public  boolean updateTrainerInformation(int trainerId,String name, int workExperience, String trainingType, Map<String, String> map) throws LogicException {
 
         Trainer trainer = new Trainer();
         trainer.setId(trainerId);
@@ -119,7 +116,7 @@ public class TrainerServiceImpl implements TrainerService {
         if(isTrainerInformationValid){
 
             try {
-                return trainerDao.update(trainer);
+                return trainerDao.updateTrainer(trainer);
             } catch (DaoException e) {
                 throw new LogicException(e);
             }

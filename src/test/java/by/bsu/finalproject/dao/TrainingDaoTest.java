@@ -11,7 +11,6 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import java.sql.Connection;
-import java.util.Map;
 
 public class TrainingDaoTest {
 
@@ -42,7 +41,7 @@ public class TrainingDaoTest {
         training.setPeriodicity(date);
         training.setPersonality(personality);
 
-        trainingDao.create(userId, training);
+        trainingDao.createTraining(userId, training);
 
         Training createdTraining = trainingDao.findTrainingById(1);
 

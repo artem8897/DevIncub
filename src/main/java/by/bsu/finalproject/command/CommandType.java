@@ -117,7 +117,7 @@ public enum CommandType {
     },
     BUTTON_DIET_PAGE{
         {
-            this.command = new DietPageForEditCommand();
+            this.command = new EditDietPageCommand();
         }
     },
     USER_INFORMATION_UPDATE{
@@ -192,12 +192,12 @@ public enum CommandType {
     },
     TRAINER_EDITION{
         {
-            this.command = new TrainerEditAppointmentsPageCommand();
+            this.command = new TrainerChooseStudentsPageCommand();
         }
     },
     CHOOSE_USER_FOR_CREATING_DATA{
         {
-            this.command = new PageForCreateChangeAppointmentCommand();
+            this.command = new EditAppointmentPageCommand();
         }
     },
     EMPTYDIET{

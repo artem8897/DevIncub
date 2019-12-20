@@ -24,7 +24,7 @@ public interface TrainingService {
      * @throws LogicException
      */
 
-    boolean createPersonalTrainingForUser(int userId, String periodicity, String trainingType, String personality, Map map) throws LogicException;
+    boolean createPersonalTrainingForUser(int userId, String periodicity, String trainingType, String personality, Map<String, String> map) throws LogicException;
 
     /**
      * Update training at the specified training entity
@@ -37,7 +37,7 @@ public interface TrainingService {
      * @throws LogicException
      */
 
-    boolean updateTraining(int trainingId,String personality, String periodicity, String trainingType, Map map) throws LogicException;
+    boolean updateTraining(int trainingId,String personality, String periodicity, String trainingType,  Map<String, String> map) throws LogicException;
 
     /**
      * Delete a training at the specified trainingId

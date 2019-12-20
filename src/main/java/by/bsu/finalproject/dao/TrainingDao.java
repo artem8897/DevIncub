@@ -24,7 +24,7 @@ public interface TrainingDao<K, T extends Entity> {
     /**
      * Delete a training at the specified trainingId
      * @param trainingId
-     * @return
+     * @return true if was deleted
      * @throws DaoException
      */
 
@@ -32,13 +32,13 @@ public interface TrainingDao<K, T extends Entity> {
 
     /**
      * Create training information at the specified training entity
-     * @param training
+     * @param training id user training
      * @param userId
      * @return boolean was created training
      * @throws DaoException
      */
 
-    boolean create(K userId, T training) throws DaoException;
+    boolean createTraining(K userId, T training) throws DaoException;
 
     /**
      * Update training at the specified training entity
@@ -65,7 +65,7 @@ public interface TrainingDao<K, T extends Entity> {
      * @throws DaoException
      */
 
-    Map<K, T> findAllInLimit(int currentPage, int recordPage,int userId) throws DaoException;
+    Map<K, T> findUsersTrainings(int currentPage, int recordPage, int userId) throws DaoException;
 
     /**
      * Find number of trainings
@@ -73,7 +73,7 @@ public interface TrainingDao<K, T extends Entity> {
      * @throws DaoException
      */
 
-    Integer findNumberOfRows(int userId) throws DaoException;
+    Integer findNumberOfTrainings(int userId) throws DaoException;
 
     /**
      * Find trainer at the specified trainingId

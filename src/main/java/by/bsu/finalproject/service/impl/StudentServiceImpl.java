@@ -98,7 +98,7 @@ public class StudentServiceImpl implements StudentService {
         }
     }
 
-    public boolean addInformation(int userId, String name,String secondName,String sex, int weight, int height, Map map) throws LogicException {
+    public boolean addInformation(int userId, String name,String secondName,String sex, int weight, int height, Map<String, String> map) throws LogicException {
 
         Student person = new Student();
         person.setId(userId);
@@ -206,7 +206,7 @@ public class StudentServiceImpl implements StudentService {
         }
     }
 
-    public  boolean updateUserInformation(int userId, String name,String secondName,String sex, int weight, int height, Map map) throws LogicException {
+    public  boolean updateUserInformation(int userId, String name,String secondName,String sex, int weight, int height,  Map<String, String> map) throws LogicException {
 
         Student person = new Student();
         person.setId(userId);

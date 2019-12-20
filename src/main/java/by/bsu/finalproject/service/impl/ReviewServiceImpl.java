@@ -23,7 +23,7 @@ public class ReviewServiceImpl implements ReviewService {
 
     private ReviewDaoImpl reviewDao = DaoFactory.INSTANCE.getReviewDao();
 
-    public boolean createReview(int userId, String userReview, int rate, int trainerId, Map map) throws LogicException {
+    public boolean createReview(int userId, String userReview, int rate, int trainerId, Map<String, String> map) throws LogicException {
 
         Review review = new Review();
         userReview = XssSecurity.protectFromXssAttack(userReview);

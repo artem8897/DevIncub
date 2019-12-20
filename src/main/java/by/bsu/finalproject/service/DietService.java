@@ -24,7 +24,7 @@ public interface DietService {
      * @throws LogicException
      */
 
-    boolean addInformation(int userId, String dietType,int carbohydrates,int fats,int proteins, Map map) throws LogicException;
+    boolean addInformation(int userId, String dietType,int carbohydrates,int fats,int proteins, Map<String, String> map) throws LogicException;
 
     /**
      * Find if valid a diet at the specified userId
@@ -47,5 +47,5 @@ public interface DietService {
      * @throws LogicException
      */
 
-    boolean updateDiet(int userId, String dietType,int carbohydrates,int fats,int proteins, Map map)  throws LogicException;
+    boolean updateDiet(int userId, String dietType,int carbohydrates,int fats,int proteins,  Map<String, String> map)  throws LogicException;
 }

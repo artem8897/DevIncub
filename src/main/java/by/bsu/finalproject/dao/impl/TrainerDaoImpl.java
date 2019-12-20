@@ -156,7 +156,7 @@ public class TrainerDaoImpl implements TrainerDao<Integer, Trainer> {
         return trainer;
     }
     @Override
-    public boolean update(Trainer trainer) throws DaoException {
+    public boolean updateTrainer(Trainer trainer) throws DaoException {
 
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement statement = connection.prepareStatement(Query.SQL_UPDATE_TRAINER)){

@@ -35,7 +35,7 @@ public interface UserService {
      * @throws LogicException
      */
 
-    boolean register(String login,String pass,String confirmedPassword,String username,String sex, Map map) throws LogicException;
+    boolean register(String login,String pass,String confirmedPassword,String username,String sex, Map<String, String> map) throws LogicException;
 
     /**
      * Delete a user at the specified userId
@@ -94,7 +94,7 @@ public interface UserService {
      * @throws LogicException
      */
 
-    Integer findNumberOfRows() throws LogicException;
+    Integer findNumberOfUsers() throws LogicException;
 
 
 }

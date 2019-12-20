@@ -29,7 +29,7 @@ public interface TrainerDao<K, T extends Entity> {
      * @throws DaoException
      */
 
-    boolean update(T trainer) throws DaoException;
+    boolean updateTrainer(T trainer) throws DaoException;
 
     /**
      * Define was created trainer information at the specified trainerId

@@ -69,7 +69,7 @@ public class UserServiceImpl implements UserService {
         }
 
     }
-    public boolean register(String login,String pass,String confirmedPassword,String username,String sex, Map map) throws LogicException {
+    public boolean register(String login,String pass,String confirmedPassword,String username,String sex, Map<String, String> map) throws LogicException {
 
         try {
             boolean isMailOrUsernameInBase = userDao.isExistMailOrUsername(login,username);
@@ -112,7 +112,7 @@ public class UserServiceImpl implements UserService {
 
         UserType type = UserType.valueOf(userType);
 
-        if(status == null || type== null || userId == adminId){
+        if(status == null || userId == adminId){
             return false;
         }
         try {
@@ -150,21 +150,18 @@ public class UserServiceImpl implements UserService {
 
     }
 
-    public Integer findNumberOfRows () throws LogicException {
-
-        int number ;
+    public Integer findNumberOfUsers() throws LogicException {
 
         try {
-            number = userDao.findNumberOfRows();
+            return userDao.findNumberOfRows();
         } catch (DaoException e) {
             throw new LogicException(e);
         }
-        return number;
     }
 
     private boolean validateUser(User user, Map<String, String> map, String confirmedPass){
 
-        boolean isLoginValid = user.getUsername() != null ? UserValidator.INSTANCE.isUsernameValid(user.getUsername())  : false ;
+        boolean isLoginValid = user.getUsername() != null && UserValidator.INSTANCE.isUsernameValid(user.getUsername()) ;
 
         if(isLoginValid){
             map.put(ServiceName.USERNAME,user.getUsername());
@@ -179,7 +176,6 @@ public class UserServiceImpl implements UserService {
             map.put(ServiceName.CONFIRMED_PASSWORD,user.getPassword());
         }
 
-        //toDO
         boolean isMailValid = user.getEmail() != null && UserValidator.INSTANCE.isEmailValid(user.getEmail()) ;
 
         if(isMailValid){

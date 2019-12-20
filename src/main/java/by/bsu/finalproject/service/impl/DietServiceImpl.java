@@ -25,7 +25,7 @@ public class DietServiceImpl implements DietService {
 
     private DietDaoImpl dietDao = DaoFactory.INSTANCE.getDietDao();
 
-    public boolean addInformation(int userId, String dietType,int carbohydrates,int fats,int proteins, Map map) throws LogicException {
+    public boolean addInformation(int userId, String dietType,int carbohydrates,int fats,int proteins,  Map<String, String> map) throws LogicException {
 
         Diet diet = new Diet();
         diet.setDietType(dietType);
@@ -75,7 +75,7 @@ public class DietServiceImpl implements DietService {
         return isExist;
     }
 
-    public  boolean updateDiet(int userId, String dietType,int carbohydrates,int fats,int proteins, Map map) throws LogicException {
+    public  boolean updateDiet(int userId, String dietType,int carbohydrates,int fats,int proteins,  Map<String, String> map) throws LogicException {
 
         Diet diet = new Diet();
         diet.setDietType(dietType);
