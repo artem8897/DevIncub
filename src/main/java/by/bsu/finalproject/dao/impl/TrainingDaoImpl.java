@@ -171,8 +171,17 @@ public class TrainingDaoImpl implements TrainingDao<Integer, Training> {
                     }
                 }
 
-                boolean wasTrainingInserted = insertUserTraining(connection, userId, trainingId);
-                boolean wasPaymentUpdated = updateUserPaid(connection, userId);
+                boolean wasTrainingInserted ;
+
+                try(PreparedStatement secondStatement = connection.prepareStatement(Query.SQL_INSERT_USER_TRAINING)){
+                    wasTrainingInserted = insertUserTraining(secondStatement, userId, trainingId);
+                }
+
+                boolean wasPaymentUpdated ;
+
+                try(PreparedStatement secondStatement = connection.prepareStatement(Query.SQL_UPDATE_TRAINING_PAID)){
+                    wasPaymentUpdated = updateUserPaid(secondStatement, userId);
+                }
 
                 if(wasTrainingInserted && wasPaymentUpdated){
                     connection.commit();
@@ -191,28 +200,22 @@ public class TrainingDaoImpl implements TrainingDao<Integer, Training> {
             throw new DaoException(e);
         }
     }
-    private boolean insertUserTraining(Connection connection, int userId, int trainingId) throws SQLException {
-
-        try(PreparedStatement secondStatement = connection.prepareStatement(Query.SQL_INSERT_USER_TRAINING)){
+    private boolean insertUserTraining(PreparedStatement secondStatement, int userId, int trainingId) throws SQLException {
 
             secondStatement.setInt(1, userId);
             secondStatement.setInt(2, trainingId);
             int insertedRow = secondStatement.executeUpdate();
             logger.info("Created users_training");
             return insertedRow > 0;
-
-        }
     }
-    private boolean updateUserPaid(Connection connection, int userId) throws SQLException {
 
-        try(PreparedStatement secondStatement = connection.prepareStatement(Query.SQL_UPDATE_TRAINING_PAID)){
+    private boolean updateUserPaid(PreparedStatement thirdStatement, int userId) throws SQLException {
 
-            secondStatement.setInt(1, userId);
-            int updatedRow  = secondStatement.executeUpdate();
-            logger.info("updated users_paid");
-            return updatedRow > 0;
+        thirdStatement.setInt(1, userId);
+        int updatedRow  = thirdStatement.executeUpdate();
+        logger.info("updated users_paid");
+        return updatedRow > 0;
 
-        }
     }
 
     @Override
