@@ -20,6 +20,7 @@ public class RequestWrapper extends HttpServletRequestWrapper {
         String[] values = super.getParameterValues(parameter);
 
         if (values!=null)  {
+
             int count = values.length;
             String[] encodedValues = new String[count];
             for (int i = 0; i < count; i++) {
@@ -27,29 +28,32 @@ public class RequestWrapper extends HttpServletRequestWrapper {
             }
             return encodedValues;
         }
-
         return values;
-
     }
 
     public String getParameter(String parameter) {
+
         String value = super.getParameter(parameter);
-        if (value == null) {
-            return null;
+
+        if (value != null) {
+            return cleanXSS(value);
         }
-        return cleanXSS(value);
+        return null;
     }
+
     @Override
     public String getHeader(String name) {
-        String value = super.getHeader(name);
-        if (value == null){
-            return null;
-        }
-        return cleanXSS(value);
 
+        String value = super.getHeader(name);
+
+        if (value != null){
+            return cleanXSS(value);
+        }
+        return null;
     }
 
     private String cleanXSS(String value) {
+
         value = value.replaceAll("<", "& lt;").replaceAll(">", "& gt;");
         value = value.replaceAll("\\(", "& #40;").replaceAll("\\)", "& #41;");
         value = value.replaceAll("'", "& #39;");

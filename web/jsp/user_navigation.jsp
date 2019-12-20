@@ -71,13 +71,11 @@
 
                             <td>  <button class="w3-btn w3-hover-green w3-round-large" onclick="location.href='controller?command=TRAINER_PAGE'"><fmt:message key="label.change_user_information"/> </button> </td>
 
-                            </form> </td>
                             <td>  <form name="SetTraining" method="GET" action="controller">
                                 <input type="hidden" name="command" value="show_trainers_reviews" />
                                 <button class="w3-btn w3-hover-light-blue w3-round-large" value="trainer_edition"><fmt:message key="label.display_reviews"/></button>
                             </form> </td>
 
-<%--                            <td>  <button class="w3-btn w3-hover-green w3-round-large" onclick="location.href='controller?command=show_trainers_reviews&trainer_id=${User.id}'"><fmt:message key="label.display_reviews"/> </button> </td>--%>
 
                             <td>  <button class="w3-btn w3-hover-green w3-round-large" onclick="location.href='controller?command=GO_TO_PASSWORD'"><fmt:message key="label.change_password"/> </button> </td>
                         </div>

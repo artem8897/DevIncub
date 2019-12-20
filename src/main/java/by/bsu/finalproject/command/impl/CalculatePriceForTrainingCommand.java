@@ -22,7 +22,7 @@ import java.util.Map;
  * @author A. Kuzmik
  */
 
-public class CalcPriceForTrainingCommand implements ActionCommand {
+public class CalculatePriceForTrainingCommand implements ActionCommand {
 
     private PaymentServiceImpl paymentService = new PaymentServiceImpl();
     private TrainerServiceImpl trainerService = new TrainerServiceImpl();

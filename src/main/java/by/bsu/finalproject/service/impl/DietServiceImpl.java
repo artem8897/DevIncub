@@ -38,7 +38,7 @@ public class DietServiceImpl implements DietService {
             diet.setProteins(Integer.parseInt(proteins));
 
             try {
-                return dietDao.create(diet, userId);
+                return dietDao.createDiet(diet, userId);
             } catch (DaoException e) {
                 throw new LogicException(e);
             }
@@ -85,7 +85,7 @@ public class DietServiceImpl implements DietService {
             diet.setCarbohydrates(Integer.parseInt(carbohydrates));
             diet.setFats(Integer.parseInt(fats));
             try {
-                return dietDao.update(userId,diet);
+                return dietDao.updateDiet(userId,diet);
             } catch (DaoException e) {
                 throw new LogicException(e);
             }

@@ -20,8 +20,6 @@ public class PaymentServiceImpl implements PaymentService {
 
     private PaymentDaoImpl paymentDao = DaoFactory.INSTANCE.getPaymentDao();
 
-    private static final String REGULAR_NUMBER = "\\d{1,9}";
-
     public boolean addDiscount(String date, String discount) throws LogicException {
 
         boolean isValidDate = PaymentValidator.INSTANCE.isValidDate(date);
@@ -46,8 +44,9 @@ public class PaymentServiceImpl implements PaymentService {
     public double calcPriceForTraining(int userId, String trainingAmount) throws LogicException {
 
         double price = 0;
+        boolean isValidAmount = PaymentValidator.INSTANCE.isValidDiscount(trainingAmount);
 
-        if(isValidNumber(trainingAmount)){
+        if(isValidAmount){
 
             int trainingAmountNumber = Integer.parseInt(trainingAmount);
 
@@ -83,11 +82,5 @@ public class PaymentServiceImpl implements PaymentService {
         } catch (DaoException e) {
             throw new LogicException(e);
         }
-    }
-
-    private boolean isValidNumber(String number){
-        Pattern pat = Pattern.compile(REGULAR_NUMBER);
-        Matcher matcher = pat.matcher(number);
-        return matcher.matches();
     }
 }

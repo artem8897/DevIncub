@@ -1,7 +1,6 @@
 package by.bsu.finalproject.command;
 
 import by.bsu.finalproject.command.implpage.LoginPageCommand;
-import by.bsu.finalproject.command.implpage.WrongPageCommand;
 import by.bsu.finalproject.manager.MessageManager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,19 +22,21 @@ public class ActionFactory {
 
     public static ActionCommand defineCommand(HttpServletRequest request) {
 
-        ActionCommand current = new WrongPageCommand();
+        ActionCommand current ;
 
         String action = request.getParameter(ParamName.PARAM_NAME_COMMAND);
+
         if (action == null || action.isEmpty()) {
             return new LoginPageCommand();
         }
+
         try {
             CommandType currentEnum = CommandType.valueOf(action.toUpperCase());
             current = currentEnum.getCurrentCommand();
         } catch (IllegalArgumentException e) {
-            request.setAttribute(ParamName.WRONG_ACTION, action
-                    + MessageManager.getProperty(MessageName.WRONG_ACTION));
+            current = new LoginPageCommand();
         }
+
         return current;
     }
 }

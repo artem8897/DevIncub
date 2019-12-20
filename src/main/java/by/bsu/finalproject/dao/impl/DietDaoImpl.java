@@ -91,7 +91,7 @@ public class DietDaoImpl implements DietDao {
     }
 
     @Override
-    public boolean create(Diet entity,Integer userId) throws DaoException {
+    public boolean createDiet(Diet entity, Integer userId) throws DaoException {
 
         int dietId;
 
@@ -140,7 +140,7 @@ public class DietDaoImpl implements DietDao {
         }
     }
 
-    public boolean update(Integer userId, Diet entity) throws DaoException {
+    public boolean updateDiet(Integer userId, Diet entity) throws DaoException {
 
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement  statement = connection.prepareStatement(Query.SQL_UPDATE_DIET)) {

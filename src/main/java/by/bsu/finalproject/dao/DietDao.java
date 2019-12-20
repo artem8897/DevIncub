@@ -28,7 +28,7 @@ public interface DietDao {
      * @throws DaoException
      */
 
-    boolean create(Diet entity, Integer userId) throws DaoException;
+    boolean createDiet(Diet entity, Integer userId) throws DaoException;
 
     /**
      * Update a diet at the specified userId
@@ -38,7 +38,7 @@ public interface DietDao {
      * @throws DaoException
      */
 
-    boolean update(Integer userId, Diet entity) throws DaoException;
+    boolean updateDiet(Integer userId, Diet entity) throws DaoException;
 
     /**
      * Find a diet at the specified userId

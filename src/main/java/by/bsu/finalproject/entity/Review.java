@@ -1,8 +1,6 @@
 package by.bsu.finalproject.entity;
 
-import java.io.Serializable;
-
-public class Review implements Serializable, Cloneable {
+public class Review {
 
     private int rate;
     private int reviewId;

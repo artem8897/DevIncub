@@ -14,7 +14,6 @@ public enum DaoFactory {
     private TrainingDaoImpl trainingDao = new TrainingDaoImpl();
     private TrainerDaoImpl trainerDao = new TrainerDaoImpl();
 
-
     public DietDaoImpl getDietDao(){
         return dietDao;
     }

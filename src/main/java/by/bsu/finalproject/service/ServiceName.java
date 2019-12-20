@@ -6,6 +6,7 @@ package by.bsu.finalproject.service;
  */
 
 public class ServiceName {
+
     private ServiceName(){
 
     }

@@ -2,7 +2,7 @@ package by.bsu.finalproject.entity;
 
 import java.io.Serializable;
 
-public class Trainer implements Serializable, Cloneable {
+public class Trainer {
 
     private int id;
     private int workExperience;

@@ -227,7 +227,7 @@ public enum CommandType {
     },
     GO_TO_PAY {
         {
-            this.command = new CalcPriceForTrainingCommand();
+            this.command = new CalculatePriceForTrainingCommand();
         }
     },
     PAY{

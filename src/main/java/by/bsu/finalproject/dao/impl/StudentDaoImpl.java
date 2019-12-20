@@ -114,7 +114,7 @@ public class StudentDaoImpl implements StudentDao {
         return personInformationMap;
     }
 
-    public Map<Integer, Student> findAllStudentsByTrainerId(Integer id) throws DaoException {
+    public Map<Integer, Student> findAllStudentsByTrainerId(int id) throws DaoException {
 
         Map<Integer, Student> mapPerson ;
 
@@ -132,7 +132,7 @@ public class StudentDaoImpl implements StudentDao {
         return mapPerson;
     }
 
-    public Map<Integer, Student> findStudentsWithPaidTrainings(int currentPage, int recordPage, Integer id) throws DaoException {
+    public Map<Integer, Student> findStudentsWithPaidTrainings(int currentPage, int recordPage, int id) throws DaoException {
 
         Map<Integer, Student> mapPerson ;
 
@@ -151,7 +151,7 @@ public class StudentDaoImpl implements StudentDao {
         }
         return mapPerson;
     }
-    public Integer findNumberOfStudentsWhoPaid(int trainerId) throws DaoException {
+    public int findNumberOfStudentsWhoPaid(int trainerId) throws DaoException {
 
         int number = 0;
 
@@ -173,7 +173,7 @@ public class StudentDaoImpl implements StudentDao {
         return number;
     }
 
-    public Map<Integer, Student> findStudentsWithNoDiet(int currentPage, int recordPage, Integer id) throws DaoException {
+    public Map<Integer, Student> findStudentsWithNoDiet(int currentPage, int recordPage, int id) throws DaoException {
 
         Map<Integer, Student> mapPerson ;
 
@@ -192,7 +192,7 @@ public class StudentDaoImpl implements StudentDao {
         }
         return mapPerson;
     }
-    public Integer findNumberStudentsWithNoDiet(int trainerId) throws DaoException {
+    public int findNumberStudentsWithNoDiet(int trainerId) throws DaoException {
 
         int number = 0;
 
@@ -215,7 +215,7 @@ public class StudentDaoImpl implements StudentDao {
         return number;
     }
 
-    public Student findStudentInformation(Integer userId) throws DaoException {
+    public Student findStudentInformation(int userId) throws DaoException {
 
         Student student = new Student();
 
@@ -269,7 +269,7 @@ public class StudentDaoImpl implements StudentDao {
         }
     }
 
-    public boolean updatePayStatus(Integer userId, Integer payStatus) throws DaoException {
+    public boolean updatePayStatus(int userId, int payStatus) throws DaoException {
 
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement statement = connection.prepareStatement(Query.SQL_UPDATE_STATUS_PAY)) {

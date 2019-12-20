@@ -1,8 +1,6 @@
 package by.bsu.finalproject.entity;
 
-import java.io.Serializable;
-
-public class Training implements Serializable, Cloneable {
+public class Training {
 
     private String trainingType;
     private String periodicity;

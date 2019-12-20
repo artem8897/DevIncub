@@ -2,11 +2,9 @@ package by.bsu.finalproject.dao;
 
 import by.bsu.finalproject.connectionpool.ConnectionPool;
 import by.bsu.finalproject.dao.impl.DietDaoImpl;
-import by.bsu.finalproject.dao.impl.PaymentDaoImpl;
 import by.bsu.finalproject.entity.Diet;
 import by.bsu.finalproject.exception.ConnectionPoolException;
 import by.bsu.finalproject.exception.DaoException;
-import by.bsu.finalproject.service.ServiceName;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -40,7 +38,7 @@ public class DietDaoTest {
         diet.setFats(123);
         diet.setCarbohydrates(120);
         diet.setProteins(111);
-        dietDao.create(diet, 68);
+        dietDao.createDiet(diet, 68);
         Diet createdDiet = dietDao.findUsersDiet(userId);
 
         Assert.assertEquals(diet, createdDiet);
@@ -62,7 +60,7 @@ public class DietDaoTest {
         diet.setFats(123);
         diet.setCarbohydrates(120);
         diet.setProteins(111);
-        dietDao.update(68,diet);
+        dietDao.updateDiet(68,diet);
         Diet createdDiet = dietDao.findUsersDiet(userId);
 
         Assert.assertEquals(diet, createdDiet);

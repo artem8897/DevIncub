@@ -1,8 +1,6 @@
 package by.bsu.finalproject.entity;
 
-import java.io.Serializable;
-
-public class Student implements Serializable, Cloneable {
+public class Student {
 
     private int id;
     private String name;

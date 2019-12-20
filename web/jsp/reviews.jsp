@@ -14,6 +14,13 @@
             <ul>
                 <td><c:out value="${item.value.review}"/></td>
                 <td><c:out value="${item.value.rate}"/></td>
+                <c:set var = "user_type" value = "${user_type}"/>
+
+                <br/>
+<%--                <c:if test="${user_type.equals('ADMIN')}">--%>
+<%--                    <input type="hidden" name="redirect" value="controller?command=GO_TO_ADMIN">--%>
+<%--                    <button class="w3-btn w3-hover-light-blue w3-round-large" name="command" value=delete_review ><fmt:message key="label.registration"/></button>--%>
+<%--                </c:if>--%>
             </ul>
         </tr>
     </c:forEach>
