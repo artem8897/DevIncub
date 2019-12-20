@@ -20,7 +20,7 @@ public interface PaymentService {
      * @throws LogicException
      */
 
-    double calcPriceForTraining(int userId, int trainingAmount) throws LogicException;
+    double calcPriceForTraining(int userId, String trainingAmount) throws LogicException;
 
     /**
      * Insert discount date
@@ -30,7 +30,7 @@ public interface PaymentService {
      * @throws LogicException
      */
 
-    boolean addDiscount(String date, int value) throws LogicException ;
+    boolean addDiscount(String date, String value) throws LogicException ;
 
     /**
      * pay a price for training at the specified userId and trainerId
@@ -43,7 +43,7 @@ public interface PaymentService {
      * @throws LogicException
      */
 
-    boolean payTraining(double sum, int cardNumber, int userId, int trainingAmount, int trainerId) throws LogicException;
+    boolean payTraining(double sum, String cardNumber, int userId, String trainingAmount, int trainerId) throws LogicException;
 
     /**
      * Find all statuses

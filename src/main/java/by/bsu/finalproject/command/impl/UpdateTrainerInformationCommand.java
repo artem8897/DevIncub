@@ -35,7 +35,7 @@ public class UpdateTrainerInformationCommand implements ActionCommand {
             String trainingType = request.getParameter(ParamName.PARAM_TRAINING_TYPE);
             String name = request.getParameter(ParamName.PARAM_NAME_NAME);
             String redirect = request.getParameter(ParamName.REDIRECT);
-            int workExperience = Integer.parseInt(request.getParameter(ParamName.PARAM_WORK_EXPERIENCE));
+            String workExperience = request.getParameter(ParamName.PARAM_WORK_EXPERIENCE);
             int userId = Integer.parseInt(request.getParameter(ParamName.USER_ID));
 
             Map<String, String> map = new HashMap<>();

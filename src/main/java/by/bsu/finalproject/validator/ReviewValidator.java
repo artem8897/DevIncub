@@ -13,6 +13,7 @@ public enum  ReviewValidator {
     INSTANCE;
 
     private static final String REGULAR_REVIEW = "([а-яА-яa-zA-Z,.)( ]{5,100})";
+    private static final String REGULAR_NUMBER = "\\d{1,9}";
 
     /**
      * Validate review
@@ -29,12 +30,20 @@ public enum  ReviewValidator {
 
     /**
      * Validate students rate
-     * @param rate
+     * @param rateString
      * @return true if the rate is valid
      */
 
-    public boolean isValidRate(int rate){
-        return rate >= 0 && rate <= 10 ;
+    public boolean isValidRate(String rateString){
+
+        Pattern pat = Pattern.compile(REGULAR_NUMBER);
+        Matcher matcher = pat.matcher(rateString);
+        if(matcher.matches()){
+            int rate = Integer.parseInt(rateString);
+            return rate >= 0 && rate <= 10 ;
+        }else{
+            return false;
+        }
     }
 
 }

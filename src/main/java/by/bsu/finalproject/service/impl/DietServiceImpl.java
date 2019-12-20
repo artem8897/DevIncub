@@ -25,17 +25,18 @@ public class DietServiceImpl implements DietService {
 
     private DietDaoImpl dietDao = DaoFactory.INSTANCE.getDietDao();
 
-    public boolean addInformation(int userId, String dietType,int carbohydrates,int fats,int proteins,  Map<String, String> map) throws LogicException {
+    public boolean addInformation(int userId, String dietType,String carbohydrates,String fats,String proteins,  Map<String, String> map) throws LogicException {
 
-        Diet diet = new Diet();
-        diet.setDietType(dietType);
-        diet.setFats(fats);
-        diet.setCarbohydrates(carbohydrates);
-        diet.setProteins(proteins);
-
-        boolean isCorrectDiet = validateDiet(diet, map);
+        boolean isCorrectDiet = validateDiet(dietType, carbohydrates, fats, proteins, map);
 
         if(isCorrectDiet){
+
+            Diet diet = new Diet();
+            diet.setDietType(dietType);
+            diet.setFats(Integer.parseInt(fats));
+            diet.setCarbohydrates(Integer.parseInt(carbohydrates));
+            diet.setProteins(Integer.parseInt(proteins));
+
             try {
                 return dietDao.create(diet, userId);
             } catch (DaoException e) {
@@ -75,17 +76,17 @@ public class DietServiceImpl implements DietService {
         return isExist;
     }
 
-    public  boolean updateDiet(int userId, String dietType,int carbohydrates,int fats,int proteins,  Map<String, String> map) throws LogicException {
+    public  boolean updateDiet(int userId, String dietType,String carbohydrates,String fats,String proteins,  Map<String, String> map) throws LogicException {
 
-        Diet diet = new Diet();
-        diet.setDietType(dietType);
-        diet.setProteins(proteins);
-        diet.setCarbohydrates(carbohydrates);
-        diet.setFats(fats);
-
-        boolean isCorrectDiet = validateDiet(diet, map);
+        boolean isCorrectDiet = validateDiet(dietType, carbohydrates, fats, proteins, map);
 
         if(isCorrectDiet){
+
+            Diet diet = new Diet();
+            diet.setDietType(dietType);
+            diet.setProteins(Integer.parseInt(proteins));
+            diet.setCarbohydrates(Integer.parseInt(carbohydrates));
+            diet.setFats(Integer.parseInt(fats));
             try {
                 return dietDao.update(userId,diet);
             } catch (DaoException e) {
@@ -97,36 +98,36 @@ public class DietServiceImpl implements DietService {
         }
     }
 
-    private boolean validateDiet(Diet diet, Map<String, String> map){
+    private boolean validateDiet(String dietType,String carbohydrates,String fats,String proteins, Map<String, String> map){
 
-        boolean isValidProteins = DietValidator.INSTANCE.isValidParameter(diet.getProteins());
+        boolean isValidProteins =  proteins != null && DietValidator.INSTANCE.isValidParameter(proteins);
 
         if(isValidProteins){
-            map.put(ServiceName.PROTEINS,String.valueOf(diet.getProteins()));
+            map.put(ServiceName.PROTEINS, proteins);
         }else{
             map.put(ServiceName.PROTEINS,ServiceName.WRONG_FIELD);
         }
 
-        boolean isValidFats = DietValidator.INSTANCE.isValidParameter(diet.getFats());
+        boolean isValidFats = fats != null && DietValidator.INSTANCE.isValidParameter(fats);
 
         if(isValidFats){
-            map.put(ServiceName.FATS,String.valueOf(diet.getFats()));
+            map.put(ServiceName.FATS, fats);
         }else{
             map.put(ServiceName.FATS,ServiceName.WRONG_FIELD);
         }
 
-        boolean isValidCarbohydrates = DietValidator.INSTANCE.isValidParameter(diet.getCarbohydrates());
+        boolean isValidCarbohydrates = carbohydrates != null && DietValidator.INSTANCE.isValidParameter(carbohydrates);
 
         if(isValidCarbohydrates){
-            map.put(ServiceName.CARBOHYDRATES,String.valueOf(diet.getCarbohydrates()));
+            map.put(ServiceName.CARBOHYDRATES, carbohydrates);
         }else{
             map.put(ServiceName.CARBOHYDRATES,ServiceName.WRONG_FIELD);
         }
 
-        boolean isDIetTypeValid = diet.getDietType() != null && DietValidator.INSTANCE.isValidDietType(diet.getDietType());
+        boolean isDIetTypeValid = dietType != null && DietValidator.INSTANCE.isValidDietType(dietType);
 
         if(isDIetTypeValid){
-            map.put(ServiceName.DIET_TYPE,diet.getDietType());
+            map.put(ServiceName.DIET_TYPE, dietType);
         }else{
             map.put(ServiceName.DIET_TYPE,ServiceName.WRONG_FIELD);
         }

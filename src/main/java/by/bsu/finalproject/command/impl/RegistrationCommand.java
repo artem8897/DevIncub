@@ -33,7 +33,7 @@ public class RegistrationCommand implements ActionCommand {
         String username = request.getParameter(ParamName.PARAM_NAME_USERNAME);
         String sex = request.getParameter(ParamName.PARAM_NAME_SEX);
 
-        Map<Object,Boolean> map = new HashMap<>();
+        Map<String,String> map = new HashMap<>();
 
         UserServiceImpl userService = new UserServiceImpl();
         boolean wasCreated ;

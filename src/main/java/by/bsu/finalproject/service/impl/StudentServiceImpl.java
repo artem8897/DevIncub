@@ -7,7 +7,7 @@ import by.bsu.finalproject.service.StudentService;
 import by.bsu.finalproject.exception.DaoException;
 import by.bsu.finalproject.exception.LogicException;
 import by.bsu.finalproject.service.ServiceName;
-import by.bsu.finalproject.validator.PersonalInformationValidator;
+import by.bsu.finalproject.validator.StudentInformationValidator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -24,9 +24,7 @@ import java.util.regex.Pattern;
 public class StudentServiceImpl implements StudentService {
 
     private static final Logger logger = LogManager.getLogger(StudentServiceImpl.class);
-
     private StudentDaoImpl personalInformationDao = DaoFactory.INSTANCE.getPersonalInformationDao();
-
     private static final String REGULAR_PAGE_NUMBER = "\\d{1,2}";
 
     public Map<Integer, Student> findAllPersonalInformationMap() throws LogicException {
@@ -45,18 +43,19 @@ public class StudentServiceImpl implements StudentService {
 
         Map<Integer, Student> personInformationMap = new HashMap<>();
 
-        if(currentPageString != null && recordPageString != null){
+        if (currentPageString != null && recordPageString != null) {
 
             int currentPage;
             int recordsPerPage;
-            Pattern pat = Pattern.compile(REGULAR_PAGE_NUMBER);
-            Matcher matcherCurrent = pat.matcher(currentPageString);
-            Matcher matcherRecord = pat.matcher(recordPageString);
-            if(matcherCurrent.matches() && matcherRecord.matches()) {
+
+            boolean isCurrentPageValid = isPageValid(currentPageString);
+            boolean isRecordsPerPageValid = isPageValid(recordPageString);
+
+            if (isCurrentPageValid && isRecordsPerPageValid) {
                 currentPage = Integer.parseInt(currentPageString);
                 recordsPerPage = Integer.parseInt(recordPageString);
                 try {
-                    personInformationMap = personalInformationDao.findStudentsByTrainer(currentPage,recordsPerPage,trainerId);
+                    personInformationMap = personalInformationDao.findStudentsByTrainer(currentPage, recordsPerPage, trainerId);
                 } catch (DaoException e) {
                     throw new LogicException(e);
                 }
@@ -75,6 +74,7 @@ public class StudentServiceImpl implements StudentService {
         }
     }
     public boolean updatePaymentStatus(int userId, int paymentStatus) throws LogicException {
+
         try {
             return personalInformationDao.updatePayStatus(userId, paymentStatus);
         } catch (DaoException e) {
@@ -98,22 +98,23 @@ public class StudentServiceImpl implements StudentService {
         }
     }
 
-    public boolean addInformation(int userId, String name,String secondName,String sex, int weight, int height, Map<String, String> map) throws LogicException {
+    public boolean addInformation(int userId, String name,String secondName,String sex, String weight, String height, Map<String, String> map) throws LogicException {
 
-        Student person = new Student();
-        person.setId(userId);
-        person.setSex(sex);
-        person.setName(name);
-        person.setHeight(height);
-        person.setWeight(weight);
-        person.setSecondName(secondName);
+        boolean isValidPersonalInformation = ValidatePersonalInformation(name, secondName, sex, weight, height, map);
 
-        boolean isValidPersonalInformation = ValidatePersonalInformation(person, map );
+        if (isValidPersonalInformation) {
 
-        if(isValidPersonalInformation){
+            Student person = new Student();
+            person.setId(userId);
+            person.setSex(sex);
+            person.setName(name);
+            person.setHeight(Integer.parseInt(height));
+            person.setWeight(Integer.parseInt(weight));
+            person.setSecondName(secondName);
+
             try {
                 boolean isAlreadyExist = personalInformationDao.isCreated(userId);
-                if(!isAlreadyExist) {
+                if (!isAlreadyExist) {
                     return personalInformationDao.createStudent(person);
                 }
             } catch (DaoException e) {
@@ -121,7 +122,6 @@ public class StudentServiceImpl implements StudentService {
             }
         }
         return false;
-
     }
 
     public Map<String, String> findPersonalInformation(int userId) throws LogicException {
@@ -149,10 +149,11 @@ public class StudentServiceImpl implements StudentService {
 
             int currentPage;
             int recordsPerPage;
-            Pattern pat = Pattern.compile(REGULAR_PAGE_NUMBER);
-            Matcher matcherCurrent = pat.matcher(currentPageString);
-            Matcher matcherRecord = pat.matcher(recordPageString);
-            if(matcherCurrent.matches() && matcherRecord.matches()) {
+
+            boolean isCurrentPageValid = isPageValid(currentPageString);
+            boolean isRecordsPerPageValid = isPageValid(recordPageString);
+
+            if(isCurrentPageValid && isRecordsPerPageValid) {
                 currentPage = Integer.parseInt(currentPageString);
                 recordsPerPage = Integer.parseInt(recordPageString);
                 if(!condition.isBlank()){
@@ -181,10 +182,11 @@ public class StudentServiceImpl implements StudentService {
 
             int currentPage;
             int recordsPerPage;
-            Pattern pat = Pattern.compile(REGULAR_PAGE_NUMBER);
-            Matcher matcherCurrent = pat.matcher(currentPageString);
-            Matcher matcherRecord = pat.matcher(recordPageString);
-            if(matcherCurrent.matches() && matcherRecord.matches()) {
+
+            boolean isCurrentPageValid = isPageValid(currentPageString);
+            boolean isRecordsPerPageValid = isPageValid(recordPageString);
+
+            if(isRecordsPerPageValid && isCurrentPageValid) {
                 currentPage = Integer.parseInt(currentPageString);
                 recordsPerPage = Integer.parseInt(recordPageString);
                 try {
@@ -206,19 +208,19 @@ public class StudentServiceImpl implements StudentService {
         }
     }
 
-    public  boolean updateUserInformation(int userId, String name,String secondName,String sex, int weight, int height,  Map<String, String> map) throws LogicException {
+    public boolean updateUserInformation(int userId, String name,String secondName,String sex, String weight, String height,  Map<String, String> map) throws LogicException {
 
-        Student person = new Student();
-        person.setId(userId);
-        person.setSex(sex);
-        person.setName(name);
-        person.setHeight(height);
-        person.setWeight(weight);
-        person.setSecondName(secondName);
-
-        boolean isValidPersonalInformation = ValidatePersonalInformation(person, map );
+        boolean isValidPersonalInformation = ValidatePersonalInformation(name, secondName, sex, weight, height, map);
 
         if(isValidPersonalInformation){
+
+            Student person = new Student();
+            person.setId(userId);
+            person.setSex(sex);
+            person.setName(name);
+            person.setHeight(Integer.parseInt(height));
+            person.setWeight(Integer.parseInt(weight));
+            person.setSecondName(secondName);
 
             try {
                 return personalInformationDao.updateStudent(person);
@@ -230,49 +232,55 @@ public class StudentServiceImpl implements StudentService {
         }
     }
 
-    private boolean ValidatePersonalInformation(Student student, Map<String,String> map){
+    private boolean ValidatePersonalInformation(String name,String secondName,String sex, String weight, String height, Map<String,String> map){
 
-        boolean isValidHeight = PersonalInformationValidator.INSTANCE.isValidHeight(student.getHeight());
+        boolean isValidHeight = height != null &&  StudentInformationValidator.INSTANCE.isValidHeight(height);
 
         if(isValidHeight){
-            map.put(ServiceName.HEIGHT,String.valueOf(student.getHeight()));
+            map.put(ServiceName.HEIGHT, height);
         }else{
             map.put(ServiceName.HEIGHT,ServiceName.WRONG_FIELD);
         }
 
-        boolean isValidWeight = PersonalInformationValidator.INSTANCE.isValidWeight(student.getWeight());
+        boolean isValidWeight = weight != null && StudentInformationValidator.INSTANCE.isValidWeight(weight);
 
         if(isValidWeight){
-            map.put(ServiceName.WEIGHT,String.valueOf(student.getWeight()));
+            map.put(ServiceName.WEIGHT, weight);
         }else{
             map.put(ServiceName.WEIGHT,ServiceName.WRONG_FIELD);
         }
 
-        boolean isValidSex = student.getSex() != null && PersonalInformationValidator.INSTANCE.isValidSex(student.getSex());
+        boolean isValidSex = sex != null && StudentInformationValidator.INSTANCE.isValidSex(sex);
 
         if(isValidSex){
-            map.put(ServiceName.SEX, student.getSex());
+            map.put(ServiceName.SEX, sex);
         }else{
             map.put(ServiceName.SEX,ServiceName.WRONG_FIELD);
         }
 
-        boolean isValidSecondName = student.getSecondName() != null && PersonalInformationValidator.INSTANCE.isValidName(student.getSecondName());
+        boolean isValidSecondName = secondName != null && StudentInformationValidator.INSTANCE.isValidName(secondName);
 
         if(isValidSecondName){
-            map.put(ServiceName.SECOND_NAME, student.getSecondName());
+            map.put(ServiceName.SECOND_NAME, secondName);
         }else{
             map.put(ServiceName.SECOND_NAME,ServiceName.WRONG_FIELD);
         }
 
-        boolean isValidName = student.getName() != null && PersonalInformationValidator.INSTANCE.isValidName(student.getName());
+        boolean isValidName = name != null && StudentInformationValidator.INSTANCE.isValidName(name);
 
         if(isValidName){
-            map.put(ServiceName.NAME, student.getName());
+            map.put(ServiceName.NAME, name);
         }else{
             map.put(ServiceName.NAME,ServiceName.WRONG_FIELD);
         }
 
         return isValidHeight && isValidWeight && isValidSex && isValidSecondName && isValidName;
+    }
 
+    private boolean isPageValid(String page){
+
+        Pattern pat = Pattern.compile(REGULAR_PAGE_NUMBER);
+        Matcher matcher = pat.matcher(page);
+        return matcher.matches();
     }
 }

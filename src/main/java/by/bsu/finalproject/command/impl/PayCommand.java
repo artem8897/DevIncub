@@ -30,9 +30,9 @@ public class PayCommand implements ActionCommand {
         if(user != null) {
 
             double sum = Double.parseDouble(request.getParameter(ParamName.PRICE));
-            int cardNumber = Integer.parseInt(request.getParameter(ParamName.CARD));
+            String cardNumber = request.getParameter(ParamName.CARD);
             String redirect = request.getParameter(ParamName.REDIRECT);
-            int amountOfTraining = Integer.parseInt(request.getParameter(ParamName.TRAINING_AMOUNT));
+            String amountOfTraining = request.getParameter(ParamName.TRAINING_AMOUNT);
             int trainerId = Integer.parseInt(request.getParameter(ParamName.PARAM_NAME_TRAINER_ID));
 
             PaymentServiceImpl paymentService = new PaymentServiceImpl();

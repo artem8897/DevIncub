@@ -14,17 +14,24 @@ public enum TrainerInformationValidator {
 
     private static final String REGULAR_TRAINING_TYPE = "(([А-Яа-я ]{2,40})|([A-Za-z ]{2,40}))";
     private static final String REGULAR_NAME = "(([А-Яа-я]{2,14})|([A-Za-z]{2,20}))";
+    private static final String REGULAR_NUMBER = "\\d{1,9}";
 
     /**
      * Validate experience of work
-     * @param workExperience
+     * @param workExperienceString
      * @return true if the experience is valid
      */
 
-    public boolean isWorkExperienceValid(int workExperience){
+    public boolean isWorkExperienceValid(String workExperienceString){
 
-        return workExperience >= 0 && workExperience < 40 ;
-
+        Pattern pat = Pattern.compile(REGULAR_NUMBER);
+        Matcher matcher = pat.matcher(workExperienceString);
+        if(matcher.matches()){
+            int workExperience = Integer.parseInt(workExperienceString);
+            return workExperience >= 0 && workExperience < 40 ;
+        }else{
+            return false;
+        }
     }
 
     /**

@@ -1,10 +1,8 @@
 package by.bsu.finalproject.controller;
 import by.bsu.finalproject.command.*;
-import by.bsu.finalproject.connectionpool.ConnectionPool;
 import by.bsu.finalproject.manager.ConfigurationManager;
 import by.bsu.finalproject.manager.MessageManager;
 import by.bsu.finalproject.exception.CommandException;
-import by.bsu.finalproject.exception.ConnectionPoolException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -81,23 +79,6 @@ public class Controller extends HttpServlet {
             request.getSession().setAttribute(ParamName.NULL_PAGE, MessageManager.getProperty(MessageName.NULL_PAGE));
             response.sendRedirect(request.getContextPath() + page);
         }
-
         logger.debug("Controller finished");
-
-    }
-
-    /**
-     * destroying method of this controller.
-     */
-
-    @Override
-    public void destroy() {
-        super.destroy();
-        // destroying connection pool
-        try {
-            ConnectionPool.INSTANCE.destroyPool();
-        } catch (ConnectionPoolException e) {
-            logger.error(e);
-        }
     }
 }

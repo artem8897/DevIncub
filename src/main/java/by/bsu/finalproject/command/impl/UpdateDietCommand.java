@@ -32,12 +32,12 @@ public class UpdateDietCommand implements ActionCommand {
 
         if(user != null) {
 
-            int userId = Integer.parseInt(request.getParameter(ParamName.PARAM_NAME_USER_ID));
             String dietType = request.getParameter(ParamName.PARAM_NAME_DIET_TYPE);
-            int proteins = Integer.parseInt(request.getParameter(ParamName.PARAM_NAME_PROTEINS));
+            String proteins = request.getParameter(ParamName.PARAM_NAME_PROTEINS);
             String redirect = request.getParameter(ParamName.REDIRECT);
-            int fats = Integer.parseInt(request.getParameter(ParamName.PARAM_NAME_FATS));
-            int carbohydrates = Integer.parseInt(request.getParameter(ParamName.PARAM_NAME_CARBOHYDRATES));
+            String fats = request.getParameter(ParamName.PARAM_NAME_FATS);
+            String carbohydrates = request.getParameter(ParamName.PARAM_NAME_CARBOHYDRATES);
+            int userId = Integer.parseInt(request.getParameter(ParamName.USER_ID));
 
             Map<String, String> map = new HashMap<>();
 

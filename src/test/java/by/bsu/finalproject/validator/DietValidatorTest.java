@@ -6,7 +6,7 @@ import org.junit.Test;
 public class DietValidatorTest {
 
     private String dietType = "low calorite";
-    private int fats = 133;
+    private String fats = "133";
 
     @Test
     public void isParameterValidTest(){

@@ -34,7 +34,7 @@ public interface StudentService {
      * @throws LogicException
      */
 
-    boolean addInformation(int userId, String name,String secondName,String sex, int weight, int height,  Map<String, String> map) throws LogicException;
+    boolean addInformation(int userId, String name,String secondName,String sex, String weight, String height,  Map<String, String> map) throws LogicException;
 
 
     /**
@@ -67,7 +67,7 @@ public interface StudentService {
      * @throws LogicException
      */
 
-    boolean updateUserInformation(int userId, String name,String secondName,String sex, int weight, int height, Map<String, String> map) throws LogicException;
+    boolean updateUserInformation(int userId, String name,String secondName,String sex, String weight, String height, Map<String, String> map) throws LogicException;
 
 
     /**

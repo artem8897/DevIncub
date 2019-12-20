@@ -26,7 +26,7 @@ public class CreateDiscountCommand implements ActionCommand {
         String page = ConfigurationManager.getProperty(PathName.PATH_ADMIN_PAGE);
 
         String date = request.getParameter(ParamName.PARAM_NAME_DATE);
-        int discount = Integer.parseInt(request.getParameter(ParamName.DISCOUNT));
+        String discount = request.getParameter(ParamName.DISCOUNT);
         String redirect = request.getParameter(ParamName.REDIRECT);
 
         PaymentServiceImpl logic = new PaymentServiceImpl();

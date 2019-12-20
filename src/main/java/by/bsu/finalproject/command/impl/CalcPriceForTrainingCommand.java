@@ -33,7 +33,7 @@ public class CalcPriceForTrainingCommand implements ActionCommand {
 
         if(user != null) {
 
-            int amountOfTrainings = Integer.parseInt(request.getParameter(ParamName.TRAINING_AMOUNT));
+            String amountOfTrainings = request.getParameter(ParamName.TRAINING_AMOUNT);
             PaymentServiceImpl paymentService = new PaymentServiceImpl();
             TrainerServiceImpl trainerService = new TrainerServiceImpl();
             Map<Integer, Trainer> trainerMap;

@@ -13,17 +13,24 @@ public enum DietValidator {
     INSTANCE;
 
     private static final String REGULAR_DIET_TYPE = "[A-Z a-z]{6,20}";
+    private static final String REGULAR_NUMBER = "\\d{1,9}";
 
     /**
      * Validate parameters for diet
-     * @param parameter
+     * @param parameterString
      * @return true if the parameter is valid
      */
 
-    public boolean isValidParameter(int parameter){
+    public boolean isValidParameter(String parameterString){
 
-        return parameter > 0 && parameter < 3000 ;
-
+        Pattern pat = Pattern.compile(REGULAR_NUMBER);
+        Matcher matcher = pat.matcher(parameterString);
+        if(matcher.matches()){
+            int parameter = Integer.parseInt(parameterString);
+            return parameter > 0 && parameter < 3000 ;
+        }else{
+            return false;
+        }
     }
 
     /**

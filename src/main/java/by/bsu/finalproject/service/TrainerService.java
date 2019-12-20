@@ -25,7 +25,7 @@ public interface TrainerService {
      * @throws LogicException
      */
 
-    boolean createTrainer(int userId, String name,int experience, String trainingType, Map<String, String> map) throws LogicException;
+    boolean createTrainer(int userId, String name,String experience, String trainingType, Map<String, String> map) throws LogicException;
 
     /**
      * Update trainer at the specified trainer entity
@@ -38,7 +38,7 @@ public interface TrainerService {
      * @throws LogicException
      */
 
-    boolean updateTrainerInformation(int trainerId,String name, int workExperience, String trainingType, Map<String, String> map) throws LogicException;
+    boolean updateTrainerInformation(int trainerId,String name, String workExperience, String trainingType, Map<String, String> map) throws LogicException;
 
     /**
      * Find trainer at the specified trainerID

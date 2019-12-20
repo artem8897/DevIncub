@@ -29,11 +29,12 @@ public class TrainingServiceImpl implements TrainingService {
 
     private static final String REGULAR_PAGE_NUMBER = "\\d{1,2}";
 
-    public boolean createPersonalTrainingForUser(int userId, String periodicity, String trainingType, String personality, Map<String, String> map) throws LogicException {
+
+    public boolean createPersonalTrainingForUser(int userId, String date, String trainingType, String personality, Map<String, String> map) throws LogicException {
 
         Training training = new Training();
         training.setTrainingType(trainingType);
-        training.setPeriodicity(periodicity);
+        training.setPeriodicity(date);
         training.setPersonality(personality);
 
         boolean isValidTraining = validateTraining(training, map);
@@ -50,6 +51,7 @@ public class TrainingServiceImpl implements TrainingService {
         }
     }
     public boolean deleteTraining(int trainingId) throws LogicException {
+
         try {
             return trainingDao.deleteTraining(trainingId);
         } catch (DaoException e) {

@@ -81,17 +81,17 @@ public class TrainerServiceImpl implements TrainerService {
         }
     }
 
-    public boolean createTrainer(int userId, String name,int experience, String trainingType, Map<String, String> map) throws LogicException {
+    public boolean createTrainer(int userId, String name,String experience, String trainingType, Map<String, String> map) throws LogicException {
 
-        Trainer trainer = new Trainer();
-        trainer.setId(userId);
-        trainer.setTrainingType(trainingType);
-        trainer.setTrainerName(name);
-        trainer.setWorkExperience(experience);
-
-        boolean isTrainerInformationValid = validateTrainerInformation(trainer, map);
+        boolean isTrainerInformationValid = validateTrainerInformation(name, experience, trainingType, map);
 
         if(isTrainerInformationValid){
+
+            Trainer trainer = new Trainer();
+            trainer.setId(userId);
+            trainer.setTrainingType(trainingType);
+            trainer.setTrainerName(name);
+            trainer.setWorkExperience(Integer.parseInt(experience));
 
             try {
                 return trainerDao.create(trainer);
@@ -103,17 +103,17 @@ public class TrainerServiceImpl implements TrainerService {
         // toDO
         }
     }
-    public  boolean updateTrainerInformation(int trainerId,String name, int workExperience, String trainingType, Map<String, String> map) throws LogicException {
+    public  boolean updateTrainerInformation(int trainerId,String name, String workExperience, String trainingType, Map<String, String> map) throws LogicException {
 
-        Trainer trainer = new Trainer();
-        trainer.setId(trainerId);
-        trainer.setTrainerName(name);
-        trainer.setTrainingType(trainingType);
-        trainer.setWorkExperience(workExperience);
-
-        boolean isTrainerInformationValid = validateTrainerInformation(trainer, map);
+        boolean isTrainerInformationValid = validateTrainerInformation(name, workExperience, trainingType, map);
 
         if(isTrainerInformationValid){
+
+            Trainer trainer = new Trainer();
+            trainer.setId(trainerId);
+            trainer.setTrainingType(trainingType);
+            trainer.setTrainerName(name);
+            trainer.setWorkExperience(Integer.parseInt(workExperience));
 
             try {
                 return trainerDao.updateTrainer(trainer);
@@ -142,28 +142,28 @@ public class TrainerServiceImpl implements TrainerService {
         return map;
     }
 
-    private boolean validateTrainerInformation(Trainer trainer, Map<String, String> map){
+    private boolean validateTrainerInformation(String name, String workExperience, String trainingType, Map<String, String> map){
 
-        boolean isNameValid = trainer.getTrainerName() != null && TrainerInformationValidator.INSTANCE.isValidName(trainer.getTrainerName());
+        boolean isNameValid = name != null && TrainerInformationValidator.INSTANCE.isValidName(name);
 
         if(isNameValid){
-            map.put(ServiceName.NAME,trainer.getTrainerName());
+            map.put(ServiceName.NAME, name);
         }else{
             map.put(ServiceName.NAME,ServiceName.WRONG_FIELD);
         }
 
-        boolean isExperienceValid = TrainerInformationValidator.INSTANCE.isWorkExperienceValid(trainer.getWorkExperience());
+        boolean isExperienceValid = workExperience != null && TrainerInformationValidator.INSTANCE.isWorkExperienceValid(workExperience);
 
         if(isExperienceValid){
-            map.put(ServiceName.EXPERIENCE,String.valueOf(trainer.getWorkExperience()));
+            map.put(ServiceName.EXPERIENCE,workExperience);
         }else{
             map.put(ServiceName.EXPERIENCE,ServiceName.WRONG_FIELD);
         }
 
-        boolean isTrainingTypeValid = trainer.getTrainingType() != null && TrainerInformationValidator.INSTANCE.isValidDietType(trainer.getTrainingType());
+        boolean isTrainingTypeValid = trainingType != null && TrainerInformationValidator.INSTANCE.isValidDietType(trainingType);
 
         if(isTrainingTypeValid){
-            map.put(ServiceName.TRAINING_TYPE,trainer.getTrainingType());
+            map.put(ServiceName.TRAINING_TYPE, trainingType);
         }else{
             map.put(ServiceName.TRAINING_TYPE,ServiceName.WRONG_FIELD);
         }

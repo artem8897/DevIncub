@@ -7,32 +7,32 @@ public class StudentValidatorTest {
 
     private String name = "Артем";
     private String secondName = "Kuzmik";
-    private int weight = 133;
-    private int height = 188;
+    private String weight = "133";
+    private String height = "188";
 
     @Test
     public void isNameValidTest() {
-        boolean isValidFats = PersonalInformationValidator.INSTANCE.isValidName(name);
+        boolean isValidFats = StudentInformationValidator.INSTANCE.isValidName(name);
         Assert.assertTrue(isValidFats);
 
     }
 
     @Test
     public void isSecondNameValidTest() {
-        boolean isValidDiet = PersonalInformationValidator.INSTANCE.isValidName(secondName);
+        boolean isValidDiet = StudentInformationValidator.INSTANCE.isValidName(secondName);
         Assert.assertTrue(isValidDiet);
 
     }
 
     @Test
     public void isHeightValidTest() {
-        boolean isValidDiet = PersonalInformationValidator.INSTANCE.isValidWeight(height);
+        boolean isValidDiet = StudentInformationValidator.INSTANCE.isValidWeight(height);
         Assert.assertTrue(isValidDiet);
     }
 
     @Test
     public void isWeightValidTest() {
-        boolean isValidDiet = PersonalInformationValidator.INSTANCE.isValidHeight(weight);
+        boolean isValidDiet = StudentInformationValidator.INSTANCE.isValidHeight(weight);
         Assert.assertTrue(isValidDiet);
     }
 }

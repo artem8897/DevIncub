@@ -36,8 +36,8 @@ public class CreateStudentInformationCommand implements ActionCommand {
             String name = request.getParameter(ParamName.PARAM_NAME_NAME);
             String redirect = request.getParameter(ParamName.REDIRECT);
             String secondName = request.getParameter(ParamName.PARAM_NAME_SECOND_NAME);
-            int weight = Integer.parseInt(request.getParameter(ParamName.PARAM_NAME_WEIGHT));
-            int height = Integer.parseInt(request.getParameter(ParamName.PARAM_NAME_HEIGHT));
+            String weight = request.getParameter(ParamName.PARAM_NAME_WEIGHT);
+            String height = request.getParameter(ParamName.PARAM_NAME_HEIGHT);
             String sex = request.getParameter(ParamName.PARAM_NAME_SEX);
             Map<String, String> map = new HashMap<>();
 

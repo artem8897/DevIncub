@@ -124,8 +124,10 @@ public class UserServiceImpl implements UserService {
     public boolean changePassword(int userId, String confirmedPassword, String password) throws LogicException {
 
         if(password!=null && password.equals(confirmedPassword)){
+
             Cryptographer cryptographer = new Cryptographer();
             String encryptedPassword = cryptographer.encrypt(password);
+
             try {
                 return userDao.updatePassword(userId ,encryptedPassword);
             } catch (DaoException e) {
