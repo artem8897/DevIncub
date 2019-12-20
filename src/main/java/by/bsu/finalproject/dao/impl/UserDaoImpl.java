@@ -25,7 +25,7 @@ public class UserDaoImpl implements UserDao<Integer, String, User> {
     private static final Logger logger = LogManager.getLogger(UserDaoImpl.class);
 
     @Override
-    public Map<Integer, User> findAll(Integer currentPage, Integer recordPerPage) throws DaoException {
+    public Map<Integer, User> findAllUsers(Integer currentPage, Integer recordPerPage) throws DaoException {
 
         Map<Integer, User> users = new HashMap<>();
 
@@ -54,7 +54,7 @@ public class UserDaoImpl implements UserDao<Integer, String, User> {
             return users;
     }
 
-    public boolean create(User user) throws DaoException {
+    public boolean createUser(User user) throws DaoException {
 
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement  statement = connection.prepareStatement(Query.SQL_INSERT_USER)) {

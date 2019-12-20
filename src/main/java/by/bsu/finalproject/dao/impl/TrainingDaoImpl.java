@@ -179,8 +179,8 @@ public class TrainingDaoImpl implements TrainingDao<Integer, Training> {
 
                 boolean wasPaymentUpdated ;
 
-                try(PreparedStatement secondStatement = connection.prepareStatement(Query.SQL_UPDATE_TRAINING_PAID)){
-                    wasPaymentUpdated = updateUserPaid(secondStatement, userId);
+                try(PreparedStatement thirdStatement = connection.prepareStatement(Query.SQL_UPDATE_TRAINING_PAID)){
+                    wasPaymentUpdated = updateUserPaid(thirdStatement, userId);
                 }
 
                 if(wasTrainingInserted && wasPaymentUpdated){

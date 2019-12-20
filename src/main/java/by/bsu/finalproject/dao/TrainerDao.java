@@ -20,7 +20,7 @@ public interface TrainerDao<K, T extends Entity> {
      * @throws DaoException
      */
 
-    Map<K, T> findAll() throws DaoException;
+    Map<K, T> findAllTrainers() throws DaoException;
 
     /**
      * Update trainer at the specified trainer entity
@@ -48,7 +48,7 @@ public interface TrainerDao<K, T extends Entity> {
      * @throws DaoException
      */
 
-    List<T> findAllInLimit(int currentPage, int recordPage) throws DaoException;
+    List<T> findLimitTrainersList(int currentPage, int recordPage) throws DaoException;
 
     /**
      * Find number of trainers

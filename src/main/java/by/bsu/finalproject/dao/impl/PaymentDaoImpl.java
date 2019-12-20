@@ -104,11 +104,11 @@ public class PaymentDaoImpl implements PaymentDao {
              PreparedStatement statement = connection.prepareStatement(Query.SQL_SELECT_ALL_STATUS);
              ResultSet resultSet = statement.executeQuery()){
 
-                while (resultSet.next()) {
-                    Integer id = resultSet.getInt(1);
-                    String value = resultSet.getString(2);
-                    statusMap.put(id,value);
-                }
+            while (resultSet.next()) {
+                Integer id = resultSet.getInt(1);
+                String value = resultSet.getString(2);
+                statusMap.put(id,value);
+            }
 
         }catch (ConnectionPoolException | SQLException e){
             throw new DaoException(e);
@@ -125,6 +125,9 @@ public class PaymentDaoImpl implements PaymentDao {
             try{
                 int moneyOnCard ;
                 int usersTrainerKey;
+                boolean isUpdateMoneyCard;
+                boolean isCreatedBankBill;
+                boolean isCreatedUsersPaidTraining;
 
                 try( PreparedStatement statement = connection.prepareStatement(Query.SQL_SELECT_MONEY_FROM_ACCOUNT)){
                     moneyOnCard = calcMoneyOnCard(statement, card);
@@ -135,38 +138,46 @@ public class PaymentDaoImpl implements PaymentDao {
 
                         preparedStatement.setDouble(1,price);
                         preparedStatement.setInt(2,card);
-                        preparedStatement.executeUpdate();
+                        int updatedRow = preparedStatement.executeUpdate();
+                        isUpdateMoneyCard = updatedRow > 0;
 
                     }
                     try (PreparedStatement preparedStatement = connection.prepareStatement(Query.SQL_CREATE_BANK_TRANSACTION_INFORMATION)){
 
                         preparedStatement.setDouble(1,price);
                         preparedStatement.setInt(2,card);
-                        preparedStatement.executeUpdate();
+                        int createdBankBillRow = preparedStatement.executeUpdate();
+                        isCreatedBankBill = createdBankBillRow > 0;
                     }
                     try (PreparedStatement preparedStatement = connection.prepareStatement(Query.SQL_FIND_USERS_TRAINER)) {
-                        usersTrainerKey = createStudentsPaidTrainings(preparedStatement, userId, trainerId);
+                        usersTrainerKey = findUserTrainerKey(preparedStatement, userId, trainerId);
                     }
                     if(usersTrainerKey > 0){
                         try (PreparedStatement preparedStatement = connection.prepareStatement(Query.SQL_UPDATE_PAID_TRAINING)){
+
                             preparedStatement.setInt(1,trainingAmount);
                             preparedStatement.setInt(2,usersTrainerKey);
+                            int updatedPaidTrainings = preparedStatement.executeUpdate();
+                            isCreatedUsersPaidTraining = updatedPaidTrainings > 0;
                         }
                     }else{
                         try (PreparedStatement preparedStatement = connection.prepareStatement(Query.SQL_CREATE_USERS_TRAINER_WITH_PAID_TRAININGS)){
+
                             preparedStatement.setInt(1,trainingAmount);
                             preparedStatement.setInt(2,userId);
                             preparedStatement.setInt(3,trainerId);
+                            int createdPaidTrainings = preparedStatement.executeUpdate();
+                            isCreatedUsersPaidTraining = createdPaidTrainings > 0;
                         }
                     }
-
-                } else{
-                    logger.info("no money");
-                    return false;
+                    if(isCreatedBankBill && isCreatedUsersPaidTraining && isUpdateMoneyCard){
+                        connection.commit();
+                        logger.info("payed training");
+                        return true;
+                    }
                 }
-                connection.commit();
-                logger.info("payed training");
-                return true;
+                logger.info("problems with paying");
+                return false;
 
             }catch (SQLException e){
                 connection.rollback();
@@ -193,7 +204,7 @@ public class PaymentDaoImpl implements PaymentDao {
         return moneyOnCard;
     }
 
-    private int createStudentsPaidTrainings(PreparedStatement statement, int userId, int trainerId) throws SQLException {
+    private int findUserTrainerKey(PreparedStatement statement, int userId, int trainerId) throws SQLException {
 
         int userTrainerKey = 0;
 

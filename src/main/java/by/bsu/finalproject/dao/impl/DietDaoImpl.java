@@ -24,7 +24,7 @@ public class DietDaoImpl implements DietDao<Integer, Diet> {
     private static final Logger logger = LogManager.getLogger(DietDaoImpl.class);
 
     @Override
-    public Map<Integer, Diet> findAll() throws DaoException {
+    public Map<Integer, Diet> findAllDiets() throws DaoException {
 
         Map<Integer, Diet> diets = new HashMap<>();
 

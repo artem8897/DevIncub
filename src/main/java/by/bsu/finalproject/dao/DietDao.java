@@ -18,7 +18,7 @@ public interface DietDao<K, T extends Entity> {
      * @throws DaoException
      */
 
-    Map<K, T> findAll() throws DaoException;
+    Map<K, T> findAllDiets() throws DaoException;
 
     /**
      * Create a diet at the specified userId

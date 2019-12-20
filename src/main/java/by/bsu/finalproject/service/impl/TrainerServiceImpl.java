@@ -32,7 +32,7 @@ public class TrainerServiceImpl implements TrainerService {
         Map<Integer, Trainer> trainerMap ;
 
         try {
-            trainerMap = trainerDao.findAll();
+            trainerMap = trainerDao.findAllTrainers();
         } catch (DaoException e) {
             throw new LogicException(e);
         }
@@ -63,7 +63,7 @@ public class TrainerServiceImpl implements TrainerService {
                 currentPage = Integer.parseInt(currentPageString);
                 recordsPerPage = Integer.parseInt(recordPageString);
                 try {
-                    trainerList = trainerDao.findAllInLimit(currentPage,recordsPerPage);
+                    trainerList = trainerDao.findLimitTrainersList(currentPage,recordsPerPage);
                 } catch (DaoException e) {
                     throw new LogicException(e);
                 }

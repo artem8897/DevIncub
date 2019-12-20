@@ -20,7 +20,7 @@ public interface UserDao<K,S, T extends Entity>  {
      * @throws DaoException
      */
 
-    Map<K, T> findAll(K currentPage, K recordPerPage) throws DaoException;
+    Map<K, T> findAllUsers(K currentPage, K recordPerPage) throws DaoException;
 
     /**
      * Create user at the specified user entity
@@ -29,7 +29,7 @@ public interface UserDao<K,S, T extends Entity>  {
      * @throws DaoException
      */
 
-    boolean create(T user) throws DaoException;
+    boolean createUser(T user) throws DaoException;
 
     /**
      * Define was created user at the specified email and login

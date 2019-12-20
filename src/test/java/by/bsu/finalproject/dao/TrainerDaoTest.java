@@ -85,7 +85,7 @@ public class TrainerDaoTest {
         trainer.setTrainerName(name);
         trainer.setWorkExperience(experience);
 
-        trainerList = trainerDao.findAllInLimit(0,10);
+        trainerList = trainerDao.findLimitTrainersList(0,10);
 
         boolean isExist = trainerList.contains(trainer);
 

@@ -52,7 +52,7 @@ public class CreateUserReviewCommand implements ActionCommand {
             } else {
                 try {
                     TrainerDaoImpl trainerDao = new TrainerDaoImpl();
-                    request.setAttribute(ParamName.TRAINER_ATTRIBUTE, trainerDao.findAll());
+                    request.setAttribute(ParamName.TRAINER_ATTRIBUTE, trainerDao.findAllTrainers());
                     request.setAttribute(ParamName.MAP, map);
                     request.setAttribute(ParamName.INFO, MessageManager.getProperty(MessageName.MESSAGE_WRONG_FIELDS));
                 } catch (DaoException e) {

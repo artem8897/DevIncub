@@ -27,7 +27,7 @@ public class TrainerDaoImpl implements TrainerDao<Integer, Trainer> {
     private static final Logger logger = LogManager.getLogger(TrainerDaoImpl.class);
 
     @Override
-    public Map<Integer,Trainer> findAll() throws DaoException {
+    public Map<Integer,Trainer> findAllTrainers() throws DaoException {
 
         Map<Integer, Trainer> trainers = new HashMap<>();
 
@@ -64,7 +64,7 @@ public class TrainerDaoImpl implements TrainerDao<Integer, Trainer> {
             throw new DaoException(e);
         }
     }
-    public List<Trainer> findAllInLimit(int currentPage, int recordPage) throws DaoException {
+    public List<Trainer> findLimitTrainersList(int currentPage, int recordPage) throws DaoException {
 
         List<Trainer> trainers = new ArrayList<>();
 

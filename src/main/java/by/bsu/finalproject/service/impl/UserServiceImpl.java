@@ -42,7 +42,7 @@ public class UserServiceImpl implements UserService {
                 currentPage = Integer.parseInt(currentPageString);
                 recordsPerPage = Integer.parseInt(recordPageString);
                 try {
-                    userMap = userDao.findAll(currentPage, recordsPerPage);
+                    userMap = userDao.findAllUsers(currentPage, recordsPerPage);
                 } catch (DaoException e) {
                     throw new LogicException(e);
                 }
@@ -90,7 +90,7 @@ public class UserServiceImpl implements UserService {
                 String encryptedPassword = cryptographer.encrypt(pass);
                 user.setPassword(encryptedPassword);
 
-                return userDao.create(user);
+                return userDao.createUser(user);
 
             }else{
                 return false;
