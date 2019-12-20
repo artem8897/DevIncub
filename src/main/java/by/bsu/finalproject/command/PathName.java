@@ -11,7 +11,6 @@ public class PathName {
 
     public static final String PATH_REGISTRATION_PAGE="path.page.registration";
     public static final String PATH_LOGIN_PAGE = "path.page.login";
-    public static final String PATH_PAGE_INFORMATION_FOR_UPDATE = "path.page.userinformationforupdate";
     public static final String PATH_PAGE_INFORMATION = "path.page.userinformation";
     public static final String PATH_USER_PAGE = "path.page.user";
     public static final String PATH_ADMIN_PAGE = "path.page.admin";

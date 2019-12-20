@@ -43,11 +43,11 @@ public class ParamName {
     public static final String ALL_TRAINER_ATTRIBUTE = "alltrainer";
     public static final String REVIEW = "review";
     public static final String TRAINING = "training";
-    public static final  String DIET_TYPE = "diet_type";
-    public static final  String PROTEINS = "proteins";
-    public static final  String FATS = "fats";
-    public static final  String CARBOHYDRATES = "carbohydrates";
-    public static final  String STATUS = "status";
+    public static final String DIET_TYPE = "diet_type";
+    public static final String PROTEINS = "proteins";
+    public static final String FATS = "fats";
+    public static final String CARBOHYDRATES = "carbohydrates";
+    public static final String STATUS = "status";
     public static final String STUDENTS = "students";
     public static final String ADD = "ADD";
     public static final String TRAINER_ATTRIBUTE = "trainers";
