@@ -8,7 +8,7 @@ import by.bsu.finalproject.entity.User;
 import by.bsu.finalproject.entity.UserType;
 import by.bsu.finalproject.manager.ConfigurationManager;
 import by.bsu.finalproject.manager.MessageManager;
-import by.bsu.finalproject.service.impl.InformationServiceImpl;
+import by.bsu.finalproject.service.impl.StudentServiceImpl;
 import by.bsu.finalproject.exception.CommandException;
 import by.bsu.finalproject.exception.LogicException;
 
@@ -39,7 +39,7 @@ public class UpdatingStudentInformationPageCommand implements ActionCommand {
                 userId = Integer.parseInt(request.getParameter(ParamName.USER_ID));
             }
             try {
-                InformationServiceImpl informationService = new InformationServiceImpl();
+                StudentServiceImpl informationService = new StudentServiceImpl();
 
                 Map<String, String> attributeMap = informationService.findPersonalInformation(userId);
 

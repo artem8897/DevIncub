@@ -132,8 +132,6 @@ public class DietDaoImpl implements DietDao<Integer, Diet> {
               logger.error("some diet exception", e);
               connection.rollback();
               return false;
-          }finally {
-              connection.setAutoCommit(true);
           }
       } catch (SQLException | ConnectionPoolException e) {
           throw new DaoException(e);

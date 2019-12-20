@@ -8,7 +8,7 @@ public enum DaoFactory {
 
     private DietDaoImpl dietDao = new DietDaoImpl();
     private PaymentDaoImpl paymentDao = new PaymentDaoImpl();
-    private PersonalInformationDaoImpl personalInformationDao = new PersonalInformationDaoImpl();
+    private StudentDaoImpl personalInformationDao = new StudentDaoImpl();
     private ReviewDaoImpl reviewDao = new ReviewDaoImpl();
     private UserDaoImpl userDao = new UserDaoImpl();
     private TrainingDaoImpl trainingDao = new TrainingDaoImpl();
@@ -19,7 +19,7 @@ public enum DaoFactory {
         return dietDao;
     }
     public PaymentDaoImpl getPaymentDao(){return paymentDao;}
-    public PersonalInformationDaoImpl getPersonalInformationDao(){
+    public StudentDaoImpl getPersonalInformationDao(){
         return personalInformationDao;
     }
     public UserDaoImpl getUserDao(){

@@ -4,16 +4,14 @@ import by.bsu.finalproject.command.ActionCommand;
 import by.bsu.finalproject.command.MessageName;
 import by.bsu.finalproject.command.ParamName;
 import by.bsu.finalproject.command.PathName;
-import by.bsu.finalproject.entity.User;
 import by.bsu.finalproject.exception.CommandException;
 import by.bsu.finalproject.exception.LogicException;
 import by.bsu.finalproject.manager.ConfigurationManager;
 import by.bsu.finalproject.manager.MessageManager;
-import by.bsu.finalproject.service.impl.InformationServiceImpl;
+import by.bsu.finalproject.service.impl.StudentServiceImpl;
 import by.bsu.finalproject.service.impl.PaymentServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 /**
  * Update students pay status command
@@ -30,7 +28,7 @@ public class UpdateStudentStatus implements ActionCommand {
         int userId = Integer.parseInt(request.getParameter(ParamName.USER_ID));
         int status = Integer.parseInt(request.getParameter(ParamName.STATUS));
         String redirect = request.getParameter(ParamName.REDIRECT);
-        InformationServiceImpl logic = new InformationServiceImpl();
+        StudentServiceImpl logic = new StudentServiceImpl();
 
         boolean wasUpdated;
 

@@ -6,7 +6,7 @@ import by.bsu.finalproject.command.PathName;
 import by.bsu.finalproject.command.ParamName;
 import by.bsu.finalproject.entity.User;
 import by.bsu.finalproject.entity.UserType;
-import by.bsu.finalproject.service.impl.InformationServiceImpl;
+import by.bsu.finalproject.service.impl.StudentServiceImpl;
 import by.bsu.finalproject.manager.ConfigurationManager;
 import by.bsu.finalproject.manager.MessageManager;
 import by.bsu.finalproject.exception.CommandException;
@@ -48,7 +48,7 @@ public class UpdateUserInformationCommand implements ActionCommand {
             String sex = request.getParameter(ParamName.PARAM_NAME_SEX);
 
             Map<String, String> map = new HashMap<>();
-            InformationServiceImpl logic = new InformationServiceImpl();
+            StudentServiceImpl logic = new StudentServiceImpl();
             boolean wasUpdated;
 
             try {

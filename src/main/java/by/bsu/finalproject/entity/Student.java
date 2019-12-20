@@ -1,6 +1,6 @@
 package by.bsu.finalproject.entity;
 
-public class PersonInformation implements Entity {
+public class Student implements Entity {
 
     private int id;
     private String name;
@@ -11,7 +11,7 @@ public class PersonInformation implements Entity {
     private int paidTraining;
     private String paidStatus;
 
-    public PersonInformation() {
+    public Student() {
     }
 
     public int getId() {
@@ -93,7 +93,7 @@ public class PersonInformation implements Entity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        PersonInformation that = (PersonInformation) o;
+        Student that = (Student) o;
 
         if (id != that.id) return false;
         if (weight != that.weight) return false;

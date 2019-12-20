@@ -1,9 +1,7 @@
 package by.bsu.finalproject.dao;
 
 import by.bsu.finalproject.connectionpool.ConnectionPool;
-import by.bsu.finalproject.dao.impl.PersonalInformationDaoImpl;
 import by.bsu.finalproject.entity.Review;
-import by.bsu.finalproject.entity.UserType;
 import by.bsu.finalproject.exception.ConnectionPoolException;
 import by.bsu.finalproject.exception.DaoException;
 import org.junit.Test;

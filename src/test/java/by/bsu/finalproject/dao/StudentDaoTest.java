@@ -1,11 +1,10 @@
 package by.bsu.finalproject.dao;
 
 import by.bsu.finalproject.connectionpool.ConnectionPool;
-import by.bsu.finalproject.dao.impl.PersonalInformationDaoImpl;
-import by.bsu.finalproject.entity.PersonInformation;
+import by.bsu.finalproject.dao.impl.StudentDaoImpl;
+import by.bsu.finalproject.entity.Student;
 import by.bsu.finalproject.exception.ConnectionPoolException;
 import by.bsu.finalproject.exception.DaoException;
-import by.bsu.finalproject.service.ServiceName;
 import org.junit.Test;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
@@ -14,12 +13,12 @@ import org.testng.annotations.BeforeTest;
 import java.sql.Connection;
 
 
-public class PersonalInformationDaoTest {
+public class StudentDaoTest {
 
 
     private final String DATABASE_URL = ("jdbc:mysql://localhost:3306/new_schema?useUnicode=true&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true");
     Connection connection;
-    PersonalInformationDaoImpl personalInformationDao = DaoFactory.INSTANCE.getPersonalInformationDao();
+    StudentDaoImpl personalInformationDao = DaoFactory.INSTANCE.getPersonalInformationDao();
     int userId = 68;
     String name = "Artem";
     String secondName = "Kuzmik";
@@ -41,7 +40,7 @@ public class PersonalInformationDaoTest {
     @Test
     public void testFindNumberOfRows() throws DaoException {
 
-        int studentsRows = personalInformationDao.findNumberOfRows();
+        int studentsRows = personalInformationDao.findNumberStudents();
         Assert.assertTrue(studentsRows > 0);
 
     }
@@ -57,7 +56,7 @@ public class PersonalInformationDaoTest {
     @Test
     public void findNumberOfRowsStudentsWithPaidTraining(int trainerId) throws DaoException {
 
-        int studentRowsWithPaidTraining = personalInformationDao.findNumberOfRowsStudentsHavingPaid(trainerId);
+        int studentRowsWithPaidTraining = personalInformationDao.findNumberOfStudentsWhoPaid(trainerId);
         Assert.assertTrue(studentRowsWithPaidTraining > 0);
 
     }
@@ -65,7 +64,7 @@ public class PersonalInformationDaoTest {
     @Test
     public void testFindNumberOfRowsStudentsWithNoDiet(int trainerId) throws DaoException {
 
-        int studentRowsWithNoDiet = personalInformationDao.findNumberOfRowsStudentsWithNoDiet(trainerId);
+        int studentRowsWithNoDiet = personalInformationDao.findNumberStudentsWithNoDiet(trainerId);
         Assert.assertTrue(studentRowsWithNoDiet > 0);
 
     }
@@ -73,7 +72,7 @@ public class PersonalInformationDaoTest {
     @Test
     public void testAddInformation() throws DaoException {
 
-        PersonInformation person = new PersonInformation();
+        Student person = new Student();
         person.setId(userId);
         person.setSex(sex);
         person.setName(name);
@@ -81,9 +80,9 @@ public class PersonalInformationDaoTest {
         person.setWeight(weight);
         person.setSecondName(secondName);
 
-        personalInformationDao.create(person);
+        personalInformationDao.createStudent(person);
 
-        PersonInformation createdPerson = personalInformationDao.findPersonalInformation(userId);
+        Student createdPerson = personalInformationDao.findStudentInformation(userId);
 
         Assert.assertEquals(person, createdPerson);
 
@@ -100,7 +99,7 @@ public class PersonalInformationDaoTest {
     @Test
     public void testUpdateUserInformation() throws DaoException {
 
-        PersonInformation person = new PersonInformation();
+        Student person = new Student();
         person.setId(userId);
         person.setSex(sex);
         person.setName("Arseniy");
@@ -108,9 +107,9 @@ public class PersonalInformationDaoTest {
         person.setWeight(weight);
         person.setSecondName(secondName);
 
-        personalInformationDao.update(person);
+        personalInformationDao.updateStudent(person);
 
-        PersonInformation updatedPerson = personalInformationDao.findPersonalInformation(userId);
+        Student updatedPerson = personalInformationDao.findStudentInformation(userId);
 
         Assert.assertEquals(person, updatedPerson);
 

@@ -4,12 +4,12 @@ import by.bsu.finalproject.command.ActionCommand;
 import by.bsu.finalproject.command.MessageName;
 import by.bsu.finalproject.command.PathName;
 import by.bsu.finalproject.command.ParamName;
-import by.bsu.finalproject.entity.PersonInformation;
+import by.bsu.finalproject.entity.Student;
 import by.bsu.finalproject.entity.User;
 import by.bsu.finalproject.entity.UserType;
 import by.bsu.finalproject.manager.ConfigurationManager;
 import by.bsu.finalproject.manager.MessageManager;
-import by.bsu.finalproject.service.impl.InformationServiceImpl;
+import by.bsu.finalproject.service.impl.StudentServiceImpl;
 import by.bsu.finalproject.exception.CommandException;
 import by.bsu.finalproject.exception.LogicException;
 
@@ -38,7 +38,7 @@ public class PageForCreateChangeAppointmentCommand implements ActionCommand {
             String currentPageString = (request.getParameter(ParamName.CURRENT_PAGE));
             String recordPageString = (request.getParameter(ParamName.RECORDS_PER_PAGE));
             String type = request.getParameter(ParamName.TYPE);
-            InformationServiceImpl informationService = new InformationServiceImpl();
+            StudentServiceImpl informationService = new StudentServiceImpl();
 
             try {
                 int trainerId = user.getId();
@@ -52,7 +52,7 @@ public class PageForCreateChangeAppointmentCommand implements ActionCommand {
                 } else {
                     noOfRecords = informationService.findNumberOfRows();
                 }
-                Map<Integer, PersonInformation> personInformationMap = informationService.findStudentsByTrainer(trainerId, type, currentPageString, recordPageString);
+                Map<Integer, Student> personInformationMap = informationService.findStudentsByTrainer(trainerId, type, currentPageString, recordPageString);
 
                 if (!personInformationMap.isEmpty()) {
                     int currentPage = Integer.parseInt(currentPageString);

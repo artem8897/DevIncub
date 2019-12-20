@@ -5,7 +5,7 @@ import by.bsu.finalproject.command.MessageName;
 import by.bsu.finalproject.command.PathName;
 import by.bsu.finalproject.command.ParamName;
 import by.bsu.finalproject.entity.User;
-import by.bsu.finalproject.service.impl.InformationServiceImpl;
+import by.bsu.finalproject.service.impl.StudentServiceImpl;
 import by.bsu.finalproject.manager.ConfigurationManager;
 import by.bsu.finalproject.manager.MessageManager;
 import by.bsu.finalproject.exception.CommandException;
@@ -42,7 +42,7 @@ public class CreateStudentInformationCommand implements ActionCommand {
             Map<String, String> map = new HashMap<>();
 
             int userId = user.getId();
-            InformationServiceImpl logic = new InformationServiceImpl();
+            StudentServiceImpl logic = new StudentServiceImpl();
             boolean wasCreated;
             try {
                 wasCreated = logic.addInformation(userId, name, secondName, sex, weight, height, map);

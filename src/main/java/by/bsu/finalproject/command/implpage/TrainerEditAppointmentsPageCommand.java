@@ -4,13 +4,13 @@ import by.bsu.finalproject.command.ActionCommand;
 import by.bsu.finalproject.command.MessageName;
 import by.bsu.finalproject.command.ParamName;
 import by.bsu.finalproject.command.PathName;
-import by.bsu.finalproject.entity.PersonInformation;
+import by.bsu.finalproject.entity.Student;
 import by.bsu.finalproject.entity.User;
 import by.bsu.finalproject.exception.LogicException;
 import by.bsu.finalproject.manager.ConfigurationManager;
 import by.bsu.finalproject.exception.CommandException;
 import by.bsu.finalproject.manager.MessageManager;
-import by.bsu.finalproject.service.impl.InformationServiceImpl;
+import by.bsu.finalproject.service.impl.StudentServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -33,10 +33,10 @@ public class TrainerEditAppointmentsPageCommand implements ActionCommand {
         if (user != null) {
 
             int noOfRecords;
-            InformationServiceImpl informationService = new InformationServiceImpl();
+            StudentServiceImpl informationService = new StudentServiceImpl();
             String currentPageString = (request.getParameter(ParamName.CURRENT_PAGE));
             String recordPageString = (request.getParameter(ParamName.RECORDS_PER_PAGE));
-            Map<Integer, PersonInformation> userMap;
+            Map<Integer, Student> userMap;
 
             try {
                 userMap = informationService.findLimitTrainerMap(currentPageString, recordPageString, user.getId());

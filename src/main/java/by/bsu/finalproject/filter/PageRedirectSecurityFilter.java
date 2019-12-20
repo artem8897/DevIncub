@@ -18,7 +18,7 @@ import java.io.IOException;
  */
 
 
-@WebFilter( urlPatterns = { "/jsp/*" }, initParams = {
+@WebFilter( urlPatterns = { "/jsp/authorized/*" }, initParams = {
         @WebInitParam(name = "INDEX_PATH", value = "/index.jsp", description = "security filter") })
 public class PageRedirectSecurityFilter implements Filter {
     private String indexPath;

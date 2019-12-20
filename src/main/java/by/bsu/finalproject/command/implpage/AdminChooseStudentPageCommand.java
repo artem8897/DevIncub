@@ -4,12 +4,12 @@ import by.bsu.finalproject.command.ActionCommand;
 import by.bsu.finalproject.command.MessageName;
 import by.bsu.finalproject.command.ParamName;
 import by.bsu.finalproject.command.PathName;
-import by.bsu.finalproject.entity.PersonInformation;
+import by.bsu.finalproject.entity.Student;
 import by.bsu.finalproject.exception.CommandException;
 import by.bsu.finalproject.exception.LogicException;
 import by.bsu.finalproject.manager.ConfigurationManager;
 import by.bsu.finalproject.manager.MessageManager;
-import by.bsu.finalproject.service.impl.InformationServiceImpl;
+import by.bsu.finalproject.service.impl.StudentServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
@@ -25,8 +25,8 @@ public class AdminChooseStudentPageCommand implements ActionCommand {
     public String execute(HttpServletRequest request) throws CommandException {
 
         String page;
-        InformationServiceImpl informationService = new InformationServiceImpl();
-        Map<Integer, PersonInformation> userMap ;
+        StudentServiceImpl informationService = new StudentServiceImpl();
+        Map<Integer, Student> userMap ;
         int noOfRecords;
         String currentPageString = request.getParameter(ParamName.CURRENT_PAGE);
         String recordPageString = request.getParameter(ParamName.RECORDS_PER_PAGE);

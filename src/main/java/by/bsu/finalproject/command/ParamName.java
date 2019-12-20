@@ -14,8 +14,8 @@ public class ParamName {
     public static final String PARAM_TRAINING_ID = "training_id";
     public static final String USER_ID = "user_id";
     public static final String USER_SESSION = "User";
-    public static final  String MOV_ATTRIBUTE = "mov";
-    public static final  String UPDATE = "UPDATE";
+    public static final String MOV_ATTRIBUTE = "mov";
+    public static final String UPDATE = "UPDATE";
     public static final String PARAM_NAME_DIET_TYPE = "diet_type";
     public static final String PARAM_NAME_PROTEINS = "proteins";
     public static final String PARAM_NAME_FATS = "fats";

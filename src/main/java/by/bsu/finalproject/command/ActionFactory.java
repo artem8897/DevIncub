@@ -1,6 +1,7 @@
 package by.bsu.finalproject.command;
 
 import by.bsu.finalproject.command.implpage.LoginPageCommand;
+import by.bsu.finalproject.command.implpage.WrongPageCommand;
 import by.bsu.finalproject.manager.MessageManager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +23,7 @@ public class ActionFactory {
 
     public static ActionCommand defineCommand(HttpServletRequest request) {
 
-        ActionCommand current = new WrongCommand();
+        ActionCommand current = new WrongPageCommand();
         String action = request.getParameter(ParamName.PARAM_NAME_COMMAND);
         if (action == null || action.isEmpty()) {
             return new LoginPageCommand();

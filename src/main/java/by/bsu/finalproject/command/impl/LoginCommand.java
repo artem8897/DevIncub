@@ -3,7 +3,7 @@ import by.bsu.finalproject.command.ActionCommand;
 import by.bsu.finalproject.command.PathName;
 import by.bsu.finalproject.command.ParamName;
 import by.bsu.finalproject.manager.MessageManager;
-import by.bsu.finalproject.service.impl.InformationServiceImpl;
+import by.bsu.finalproject.service.impl.StudentServiceImpl;
 import by.bsu.finalproject.manager.ConfigurationManager;
 import by.bsu.finalproject.service.impl.TrainerServiceImpl;
 import by.bsu.finalproject.service.impl.UserServiceImpl;
@@ -30,7 +30,7 @@ public class LoginCommand implements ActionCommand {
         String email = request.getParameter(ParamName.PARAM_NAME_EMAIL);
         String pass = request.getParameter(ParamName.PARAM_NAME_PASSWORD);
         UserServiceImpl userService = new UserServiceImpl();
-        InformationServiceImpl informationService = new InformationServiceImpl();
+        StudentServiceImpl informationService = new StudentServiceImpl();
         TrainerServiceImpl trainerService = new TrainerServiceImpl();
 
         try {

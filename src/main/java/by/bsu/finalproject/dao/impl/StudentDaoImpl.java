@@ -1,10 +1,10 @@
 package by.bsu.finalproject.dao.impl;
 
 import by.bsu.finalproject.connectionpool.ConnectionPool;
-import by.bsu.finalproject.dao.PersonalInformationDao;
+import by.bsu.finalproject.dao.StudentDao;
 import by.bsu.finalproject.dao.Query;
 import by.bsu.finalproject.dao.TablesColumnName;
-import by.bsu.finalproject.entity.PersonInformation;
+import by.bsu.finalproject.entity.Student;
 import by.bsu.finalproject.exception.ConnectionPoolException;
 import by.bsu.finalproject.exception.DaoException;
 import org.apache.logging.log4j.LogManager;
@@ -20,14 +20,14 @@ import java.util.Map;
  */
 
 
-public class PersonalInformationDaoImpl implements PersonalInformationDao<Integer, PersonInformation> {
+public class StudentDaoImpl implements StudentDao<Integer, Student> {
 
-    private static final Logger logger = LogManager.getLogger(PersonalInformationDaoImpl.class);
+    private static final Logger logger = LogManager.getLogger(StudentDaoImpl.class);
 
     @Override
-    public Map<Integer, PersonInformation> findAllStudents() throws DaoException {
+    public Map<Integer, Student> findAllStudents() throws DaoException {
 
-        Map<Integer, PersonInformation> personInformationMap;
+        Map<Integer, Student> personInformationMap;
 
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement statement = connection.prepareStatement(Query.SQL_SELECT_ALL_PERSONAL_INFORMATION)){
@@ -57,7 +57,7 @@ public class PersonalInformationDaoImpl implements PersonalInformationDao<Intege
         }
     }
 
-    public Integer findNumberOfRows() throws DaoException {
+    public Integer findNumberStudents() throws DaoException {
 
         int number = 0;
 
@@ -76,9 +76,9 @@ public class PersonalInformationDaoImpl implements PersonalInformationDao<Intege
         return number;
     }
 
-    public Map<Integer, PersonInformation> findAllByTrainerInLimit(int currentPage, int recordPage, int trainerId) throws DaoException {
+    public Map<Integer, Student> findStudentsByTrainer(int currentPage, int recordPage, int trainerId) throws DaoException {
 
-        Map<Integer, PersonInformation> personInformationMap;
+        Map<Integer, Student> personInformationMap;
 
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement statement = connection.prepareStatement(Query.SQL_SELECT_LIMIT_INFORMATION_BY_TRAINER)){
@@ -95,9 +95,9 @@ public class PersonalInformationDaoImpl implements PersonalInformationDao<Intege
         }
         return personInformationMap;
     }
-    public Map<Integer, PersonInformation> findAllInLimit(int currentPage, int recordPage) throws DaoException {
+    public Map<Integer, Student> findAllStudents(int currentPage, int recordPage) throws DaoException {
 
-        Map<Integer, PersonInformation> personInformationMap;
+        Map<Integer, Student> personInformationMap;
 
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement statement = connection.prepareStatement(Query.SQL_SELECT_LIMIT_PERSONAL_INFORMATION)){
@@ -114,9 +114,9 @@ public class PersonalInformationDaoImpl implements PersonalInformationDao<Intege
         return personInformationMap;
     }
 
-    public Map<Integer, PersonInformation> findAllStudentsByTrainerId(Integer id) throws DaoException {
+    public Map<Integer, Student> findAllStudentsByTrainerId(Integer id) throws DaoException {
 
-        Map<Integer,PersonInformation> mapPerson ;
+        Map<Integer, Student> mapPerson ;
 
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement statement = connection.prepareStatement(Query.SQL_SELECT_USER_BY_TRAINER)){
@@ -132,9 +132,9 @@ public class PersonalInformationDaoImpl implements PersonalInformationDao<Intege
         return mapPerson;
     }
 
-    public Map<Integer, PersonInformation> findAllStudentsHavingPaidTrainingsByTrainerId(int currentPage, int recordPage, Integer id) throws DaoException {
+    public Map<Integer, Student> findStudentsWithPaidTrainings(int currentPage, int recordPage, Integer id) throws DaoException {
 
-        Map<Integer,PersonInformation> mapPerson ;
+        Map<Integer, Student> mapPerson ;
 
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement statement = connection.prepareStatement(Query.SQL_SELECT_STUDENT_WITH_PAID_TRAININGS)){
@@ -151,7 +151,7 @@ public class PersonalInformationDaoImpl implements PersonalInformationDao<Intege
         }
         return mapPerson;
     }
-    public Integer findNumberOfRowsStudentsHavingPaid(int trainerId) throws DaoException {
+    public Integer findNumberOfStudentsWhoPaid(int trainerId) throws DaoException {
 
         int number = 0;
 
@@ -173,9 +173,9 @@ public class PersonalInformationDaoImpl implements PersonalInformationDao<Intege
         return number;
     }
 
-    public Map<Integer, PersonInformation> findAllStudentsHavingNoDietByTrainerId(int currentPage, int recordPage, Integer id) throws DaoException {
+    public Map<Integer, Student> findStudentsWithNoDiet(int currentPage, int recordPage, Integer id) throws DaoException {
 
-        Map<Integer,PersonInformation> mapPerson ;
+        Map<Integer, Student> mapPerson ;
 
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement statement = connection.prepareStatement(Query.SQL_SELECT_STUDENTS_WITH_NO_DIET)){
@@ -192,7 +192,7 @@ public class PersonalInformationDaoImpl implements PersonalInformationDao<Intege
         }
         return mapPerson;
     }
-    public Integer findNumberOfRowsStudentsWithNoDiet(int trainerId) throws DaoException {
+    public Integer findNumberStudentsWithNoDiet(int trainerId) throws DaoException {
 
         int number = 0;
 
@@ -215,9 +215,9 @@ public class PersonalInformationDaoImpl implements PersonalInformationDao<Intege
         return number;
     }
 
-    public PersonInformation findPersonalInformation(Integer userId) throws DaoException {
+    public Student findStudentInformation(Integer userId) throws DaoException {
 
-        PersonInformation personInformation = new PersonInformation();
+        Student student = new Student();
 
         try (Connection cn = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement st = cn.prepareStatement(Query.SQL_SELECT_ALL_USER_PERSONAL_INFORMATION)){
@@ -227,22 +227,22 @@ public class PersonalInformationDaoImpl implements PersonalInformationDao<Intege
             try(ResultSet resultSet = st.executeQuery()){
 
                 if(resultSet.next()){
-                    personInformation.setSecondName(resultSet.getString(TablesColumnName.SECOND_NAME));
-                    personInformation.setName(resultSet.getString(TablesColumnName.NAME));
-                    personInformation.setSex(resultSet.getString(TablesColumnName.SEX));
-                    personInformation.setWeight(resultSet.getInt(TablesColumnName.WEIGHT));
-                    personInformation.setHeight(resultSet.getInt(TablesColumnName.HEIGHT));
+                    student.setSecondName(resultSet.getString(TablesColumnName.SECOND_NAME));
+                    student.setName(resultSet.getString(TablesColumnName.NAME));
+                    student.setSex(resultSet.getString(TablesColumnName.SEX));
+                    student.setWeight(resultSet.getInt(TablesColumnName.WEIGHT));
+                    student.setHeight(resultSet.getInt(TablesColumnName.HEIGHT));
                 }
             }
         } catch (SQLException | ConnectionPoolException e) {
             logger.catching(e);
             throw new DaoException(e);
         }
-        return personInformation;
+        return student;
     }
 
     @Override
-    public boolean create(PersonInformation entity) throws DaoException {
+    public boolean createStudent(Student entity) throws DaoException {
 
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement statement = connection.prepareStatement(Query.SQL_INSERT_USER_INFORMATION)){
@@ -256,7 +256,7 @@ public class PersonalInformationDaoImpl implements PersonalInformationDao<Intege
     }
 
     @Override
-    public boolean update(PersonInformation entity) throws DaoException {
+    public boolean updateStudent(Student entity) throws DaoException {
 
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement statement = connection.prepareStatement(Query.SQL_UPDATE_PERSONAL_INFORMATION)) {
@@ -271,7 +271,6 @@ public class PersonalInformationDaoImpl implements PersonalInformationDao<Intege
 
     public boolean updatePayStatus(Integer userId, Integer payStatus) throws DaoException {
 
-        //todo
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement statement = connection.prepareStatement(Query.SQL_UPDATE_STATUS_PAY)) {
 
@@ -286,28 +285,28 @@ public class PersonalInformationDaoImpl implements PersonalInformationDao<Intege
         }
     }
 
-    private Map<Integer, PersonInformation> createPersonMap(PreparedStatement statement) throws SQLException {
+    private Map<Integer, Student> createPersonMap(PreparedStatement statement) throws SQLException {
 
-        Map<Integer, PersonInformation> personInformationMap = new HashMap<>();
+        Map<Integer, Student> personInformationMap = new HashMap<>();
 
         try(ResultSet resultSet = statement.executeQuery()){
 
             while (resultSet.next()) {
 
-                PersonInformation personInformation = new PersonInformation();
-                personInformation.setId(resultSet.getInt(TablesColumnName.INFORMATION_ID));
-                personInformation.setSecondName(resultSet.getString(TablesColumnName.SECOND_NAME));
-                personInformation.setName(resultSet.getString(TablesColumnName.NAME));
-                personInformation.setSex(resultSet.getString(TablesColumnName.SEX));
-                personInformation.setWeight(resultSet.getInt(TablesColumnName.WEIGHT));
-                personInformation.setHeight(resultSet.getInt(TablesColumnName.HEIGHT));
-                personInformationMap.put(personInformation.getId(),personInformation);
+                Student student = new Student();
+                student.setId(resultSet.getInt(TablesColumnName.INFORMATION_ID));
+                student.setSecondName(resultSet.getString(TablesColumnName.SECOND_NAME));
+                student.setName(resultSet.getString(TablesColumnName.NAME));
+                student.setSex(resultSet.getString(TablesColumnName.SEX));
+                student.setWeight(resultSet.getInt(TablesColumnName.WEIGHT));
+                student.setHeight(resultSet.getInt(TablesColumnName.HEIGHT));
+                personInformationMap.put(student.getId(), student);
             }
         }
         return personInformationMap;
     }
 
-    private boolean insertPersonInformationInDatabase(PersonInformation entity, PreparedStatement statement) throws SQLException {
+    private boolean insertPersonInformationInDatabase(Student entity, PreparedStatement statement) throws SQLException {
 
         int insertedRow ;
 

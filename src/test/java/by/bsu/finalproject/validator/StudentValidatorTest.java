@@ -3,7 +3,7 @@ package by.bsu.finalproject.validator;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class PersonInformationValidatorTest {
+public class StudentValidatorTest {
 
     private String name = "Артем";
     private String secondName = "Kuzmik";

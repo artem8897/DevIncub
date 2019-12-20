@@ -1,6 +1,6 @@
 package by.bsu.finalproject.service;
 
-import by.bsu.finalproject.entity.PersonInformation;
+import by.bsu.finalproject.entity.Student;
 import by.bsu.finalproject.exception.LogicException;
 
 import java.util.Map;
@@ -11,7 +11,7 @@ import java.util.Map;
  * @author A. Kuzmik
  */
 
-public interface InformationService {
+public interface StudentService {
 
     /**
      * Find all students
@@ -19,7 +19,7 @@ public interface InformationService {
      * @throws LogicException
      */
 
-    Map<Integer, PersonInformation> findAllPersonalInformationMap() throws LogicException;
+    Map<Integer, Student> findAllPersonalInformationMap() throws LogicException;
 
     /**
      * Create student at the specified personal information entity
@@ -87,7 +87,7 @@ public interface InformationService {
      * @throws LogicException
      */
 
-    Map<Integer, PersonInformation> findLimitTrainerMap(String currentPageString, String recordPageString, int trainerId) throws LogicException;
+    Map<Integer, Student> findLimitTrainerMap(String currentPageString, String recordPageString, int trainerId) throws LogicException;
 
 
     /**
@@ -98,7 +98,7 @@ public interface InformationService {
      * @throws LogicException
      */
 
-    Map<Integer, PersonInformation> findLimitUserMap(String currentPageString, String recordPageString ) throws LogicException;
+    Map<Integer, Student> findLimitUserMap(String currentPageString, String recordPageString ) throws LogicException;
 
     /**
      * Find limited amount of all students with paid trainings or diet in case of set condition at the specified trainerId
@@ -110,7 +110,7 @@ public interface InformationService {
      * @throws LogicException
      */
 
-    Map<Integer, PersonInformation> findStudentsByTrainer(int id, String condition, String currentPageString, String recordPageString) throws LogicException;
+    Map<Integer, Student> findStudentsByTrainer(int id, String condition, String currentPageString, String recordPageString) throws LogicException;
 
     /**
      * Define number of students with Paid trainings  at the specified trainerId

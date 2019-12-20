@@ -87,7 +87,7 @@ public class PaymentDaoImpl implements PaymentDao {
             while (resultSet.next()) {
                 Integer id = resultSet.getInt(1);
                 String value = resultSet.getString(2);
-                discountMap.put(id,value);
+                discountMap.put(id, value);
             }
 
         }catch (ConnectionPoolException | SQLException e){
@@ -133,7 +133,6 @@ public class PaymentDaoImpl implements PaymentDao {
                     return false;
                 }
                 connection.commit();
-                //todo
                 logger.info("payed training");
                 return true;
 
@@ -141,8 +140,6 @@ public class PaymentDaoImpl implements PaymentDao {
                 connection.rollback();
                 logger.error(e);
                 return false;
-            }finally {
-                connection.setAutoCommit(true);
             }
         }catch (ConnectionPoolException | SQLException e){
             logger.catching(e);
