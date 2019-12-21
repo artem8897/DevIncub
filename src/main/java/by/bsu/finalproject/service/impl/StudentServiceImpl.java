@@ -5,7 +5,7 @@ import by.bsu.finalproject.dao.impl.StudentDaoImpl;
 import by.bsu.finalproject.entity.Student;
 import by.bsu.finalproject.service.StudentService;
 import by.bsu.finalproject.exception.DaoException;
-import by.bsu.finalproject.exception.LogicException;
+import by.bsu.finalproject.exception.ServiceException;
 import by.bsu.finalproject.service.ServiceName;
 import by.bsu.finalproject.validator.StudentInformationValidator;
 import org.apache.logging.log4j.LogManager;
@@ -27,19 +27,19 @@ public class StudentServiceImpl implements StudentService {
     private StudentDaoImpl personalInformationDao = DaoFactory.INSTANCE.getPersonalInformationDao();
     private static final String REGULAR_PAGE_NUMBER = "\\d{1,2}";
 
-    public Map<Integer, Student> findAllPersonalInformationMap() throws LogicException {
+    public Map<Integer, Student> findAllPersonalInformationMap() throws ServiceException {
 
         Map<Integer, Student> personInformationMap ;
 
         try {
             personInformationMap = personalInformationDao.findAllStudents();
         } catch (DaoException e) {
-            throw new LogicException(e);
+            throw new ServiceException(e);
         }
         return personInformationMap;
     }
 
-    public Map<Integer, Student> findLimitTrainerMap(String currentPageString, String recordPageString, int trainerId) throws LogicException {
+    public Map<Integer, Student> findLimitTrainerMap(String currentPageString, String recordPageString, int trainerId) throws ServiceException {
 
         Map<Integer, Student> personInformationMap = new HashMap<>();
 
@@ -57,7 +57,7 @@ public class StudentServiceImpl implements StudentService {
                 try {
                     personInformationMap = personalInformationDao.findStudentsByTrainer(currentPage, recordsPerPage, trainerId);
                 } catch (DaoException e) {
-                    throw new LogicException(e);
+                    throw new ServiceException(e);
                 }
             }
         }
@@ -65,40 +65,40 @@ public class StudentServiceImpl implements StudentService {
     }
 
 
-    public Integer findNumberOfRows () throws LogicException {
+    public Integer findNumberOfRows () throws ServiceException {
 
         try {
             return personalInformationDao.findNumberStudents();
         } catch (DaoException e) {
-            throw new LogicException(e);
+            throw new ServiceException(e);
         }
     }
-    public boolean updatePaymentStatus(int userId, int paymentStatus) throws LogicException {
+    public boolean updatePaymentStatus(int userId, int paymentStatus) throws ServiceException {
 
         try {
             return personalInformationDao.updatePayStatus(userId, paymentStatus);
         } catch (DaoException e) {
-            throw new LogicException(e);
+            throw new ServiceException(e);
         }
     }
-    public Integer findNumberOfRowsStudentsWithPaidTraining (int trainerId) throws LogicException {
+    public Integer findNumberOfRowsStudentsWithPaidTraining (int trainerId) throws ServiceException {
 
         try {
             return personalInformationDao.findNumberOfStudentsWhoPaid(trainerId);
         } catch (DaoException e) {
-            throw new LogicException(e);
+            throw new ServiceException(e);
         }
     }
-    public Integer findNumberOfRowsStudentsWithNoDiet (int trainerId) throws LogicException {
+    public Integer findNumberOfRowsStudentsWithNoDiet (int trainerId) throws ServiceException {
 
         try {
             return personalInformationDao.findNumberStudentsWithNoDiet(trainerId);
         } catch (DaoException e) {
-            throw new LogicException(e);
+            throw new ServiceException(e);
         }
     }
 
-    public boolean addInformation(int userId, String name,String secondName,String sex, String weight, String height, Map<String, String> map) throws LogicException {
+    public boolean addInformation(int userId, String name,String secondName,String sex, String weight, String height, Map<String, String> map) throws ServiceException {
 
         boolean isValidPersonalInformation = ValidatePersonalInformation(name, secondName, sex, weight, height, map);
 
@@ -118,13 +118,13 @@ public class StudentServiceImpl implements StudentService {
                     return personalInformationDao.createStudent(person);
                 }
             } catch (DaoException e) {
-                throw new LogicException(e);
+                throw new ServiceException(e);
             }
         }
         return false;
     }
 
-    public Map<String, String> findPersonalInformation(int userId) throws LogicException {
+    public Map<String, String> findPersonalInformation(int userId) throws ServiceException {
 
         Student student;
         Map<String, String> attributeMap = new HashMap<>();
@@ -136,12 +136,12 @@ public class StudentServiceImpl implements StudentService {
             attributeMap.put(ServiceName.HEIGHT, String.valueOf(student.getHeight()));
 
         } catch (DaoException e) {
-            throw new LogicException(e);
+            throw new ServiceException(e);
         }
         return attributeMap;
     }
 
-    public Map<Integer, Student> findStudentsByTrainer(int trainerId, String condition, String currentPageString, String recordPageString) throws LogicException {
+    public Map<Integer, Student> findStudentsByTrainer(int trainerId, String condition, String currentPageString, String recordPageString) throws ServiceException {
 
         Map<Integer, Student> personalInformationMap = new HashMap<>();
 
@@ -166,7 +166,7 @@ public class StudentServiceImpl implements StudentService {
                             default: personalInformationMap = personalInformationDao.findStudentsByTrainer(currentPage, recordsPerPage, trainerId);
                         }
                     } catch (DaoException e) {
-                        throw new LogicException(e);
+                        throw new ServiceException(e);
                     }
                 }
             }
@@ -174,7 +174,7 @@ public class StudentServiceImpl implements StudentService {
         return personalInformationMap;
     }
 
-    public Map<Integer, Student> findLimitUserMap(String currentPageString, String recordPageString ) throws LogicException {
+    public Map<Integer, Student> findLimitUserMap(String currentPageString, String recordPageString ) throws ServiceException {
 
         Map<Integer, Student> personInformationMap = new HashMap<>() ;
 
@@ -192,23 +192,23 @@ public class StudentServiceImpl implements StudentService {
                 try {
                     personInformationMap = personalInformationDao.findAllStudents(currentPage,recordsPerPage);
                 } catch (DaoException e) {
-                    throw new LogicException(e);
+                    throw new ServiceException(e);
                 }
             }
         }
         return personInformationMap;
     }
 
-    public boolean isExist(int id) throws LogicException {
+    public boolean isExist(int id) throws ServiceException {
 
         try {
             return personalInformationDao.isCreated(id);
         } catch (DaoException e) {
-            throw new LogicException(e);
+            throw new ServiceException(e);
         }
     }
 
-    public boolean updateUserInformation(int userId, String name,String secondName,String sex, String weight, String height,  Map<String, String> map) throws LogicException {
+    public boolean updateUserInformation(int userId, String name,String secondName,String sex, String weight, String height,  Map<String, String> map) throws ServiceException {
 
         boolean isValidPersonalInformation = ValidatePersonalInformation(name, secondName, sex, weight, height, map);
 
@@ -225,7 +225,7 @@ public class StudentServiceImpl implements StudentService {
             try {
                 return personalInformationDao.updateStudent(person);
             } catch (DaoException e) {
-                throw new LogicException(e);
+                throw new ServiceException(e);
             }
         }else{
             return false;

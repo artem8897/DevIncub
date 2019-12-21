@@ -4,15 +4,13 @@ import by.bsu.finalproject.command.ActionCommand;
 import by.bsu.finalproject.command.MessageName;
 import by.bsu.finalproject.command.ParamName;
 import by.bsu.finalproject.command.PathName;
-import by.bsu.finalproject.entity.User;
 import by.bsu.finalproject.exception.CommandException;
-import by.bsu.finalproject.exception.LogicException;
+import by.bsu.finalproject.exception.ServiceException;
 import by.bsu.finalproject.manager.ConfigurationManager;
 import by.bsu.finalproject.manager.MessageManager;
 import by.bsu.finalproject.service.impl.TrainingServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 /**
  * Delete students training command
@@ -31,14 +29,14 @@ public class DeleteTrainingCommand implements ActionCommand {
         int trainingId = Integer.parseInt(request.getParameter(ParamName.PARAM_TRAINING_ID));
         String redirect = request.getParameter(ParamName.REDIRECT);
 
-        boolean wasCreated;
+        boolean wasDeleted;
 
         try {
-            wasCreated = trainingService.deleteTraining(trainingId);
-        } catch (LogicException e) {
+            wasDeleted = trainingService.deleteTraining(trainingId);
+        } catch (ServiceException e) {
             throw new CommandException(e);
         }
-        if (wasCreated) {
+        if (wasDeleted) {
             request.setAttribute(ParamName.REDIRECT, redirect);
         } else {
             request.setAttribute(ParamName.INFO, MessageManager.getProperty(MessageName.MESSAGE_WRONG_FIELDS));

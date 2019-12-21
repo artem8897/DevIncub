@@ -19,7 +19,7 @@ public class CreatingDiscountPageCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
 
-        LocalDateTime localDateTimeMin = LocalDateTime.now().plusDays(18);
+        LocalDateTime localDateTimeMin = LocalDateTime.now().plusDays(10);
         LocalDateTime localDateTimeMax = LocalDateTime.now().plusMonths(2);
 
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(DATE_PATTERN);

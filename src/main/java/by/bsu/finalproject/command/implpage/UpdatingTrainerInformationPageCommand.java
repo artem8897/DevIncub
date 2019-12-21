@@ -8,7 +8,7 @@ import by.bsu.finalproject.entity.UserType;
 import by.bsu.finalproject.manager.ConfigurationManager;
 import by.bsu.finalproject.service.impl.TrainerServiceImpl;
 import by.bsu.finalproject.exception.CommandException;
-import by.bsu.finalproject.exception.LogicException;
+import by.bsu.finalproject.exception.ServiceException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -42,7 +42,7 @@ public class UpdatingTrainerInformationPageCommand implements ActionCommand {
             }
             try {
                 trainer = trainerService.findTrainerInformation(userId);
-            } catch (LogicException e) {
+            } catch (ServiceException e) {
                 throw new CommandException(e);
             }
             request.setAttribute(ParamName.MOV_ATTRIBUTE, ParamName.UPDATE);

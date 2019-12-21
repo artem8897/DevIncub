@@ -17,7 +17,7 @@
     <br/><fmt:message key="label.name"/><br/>
     <input type="text" name="name"  value="${trainers['name']}" required pattern = "(([А-Яа-я]{5,20})|([a-zA-z]{5,20}))"/>
     <br/><fmt:message key="label.training_type"/><br/>
-    <input type="text" name="training_type" value="${trainers['training_type']}" required pattern = "(([а-яА-я]{5,14})|([a-zA-Z]{2,20}))"/>
+    <input type="text" name="training_type" value="${trainers['training_type']}" required pattern = "(([а-яА-я ]{5,14})|([a-zA-Z ]{2,20}))"/>
     <input type="hidden" name="user_id" value="${user_id}">
     <br/>
     ${info}

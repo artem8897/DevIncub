@@ -9,6 +9,11 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
+/**
+ * Project context listener
+ * @author A. Kuzmik
+ */
+
 public class ProjectContextListener implements ServletContextListener {
 
     private static final Logger logger = LogManager.getLogger(ProjectContextListener.class);
@@ -23,12 +28,12 @@ public class ProjectContextListener implements ServletContextListener {
 
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
+
         try {
             ConnectionPool.INSTANCE.destroyPool();
         } catch (ConnectionPoolException e) {
             logger.error(e);
         }
-        logger.info("Connection pool destroyed");
     }
 
 }

@@ -8,7 +8,7 @@ import by.bsu.finalproject.service.impl.UserServiceImpl;
 import by.bsu.finalproject.manager.ConfigurationManager;
 import by.bsu.finalproject.manager.MessageManager;
 import by.bsu.finalproject.exception.CommandException;
-import by.bsu.finalproject.exception.LogicException;
+import by.bsu.finalproject.exception.ServiceException;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -31,7 +31,6 @@ public class RegistrationCommand implements ActionCommand {
         String confirmedPassword = request.getParameter(ParamName.PARAM_NAME_CONFIRMED_PASSWORD2);
         String email = request.getParameter(ParamName.PARAM_NAME_EMAIL);
         String redirect = request.getParameter(ParamName.REDIRECT);
-
         String username = request.getParameter(ParamName.PARAM_NAME_USERNAME);
         String sex = request.getParameter(ParamName.PARAM_NAME_SEX);
 
@@ -40,7 +39,7 @@ public class RegistrationCommand implements ActionCommand {
         boolean wasCreated ;
         try {
             wasCreated = userService.register(email,password,confirmedPassword,username,sex,map);
-        } catch (LogicException e) {
+        } catch (ServiceException e) {
             throw new CommandException(e);
         }
         page = ConfigurationManager.getProperty(PathName.PATH_REGISTRATION_PAGE);

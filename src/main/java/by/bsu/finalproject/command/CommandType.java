@@ -19,6 +19,21 @@ public enum CommandType {
             this.command = new DeleteTrainingCommand();
         }
     },
+    SHOW_DISCOUNTS{
+        {
+            this.command = new ShowAllDiscountsCommand();
+        }
+    },
+    DELETE_DISCOUNT{
+        {
+            this.command = new DeleteDiscountCommand();
+        }
+    },
+    ADD_TRAINER_INFORMATION{
+        {
+            this.command = new CreateTrainerInformationCommand();
+        }
+    },
     LOGOUT {
         {
             this.command = new LogoutCommand();
@@ -92,7 +107,7 @@ public enum CommandType {
     },
     UPDATE_PAY_STATUS{
         {
-            this.command = new UpdateStudentStatus();
+            this.command = new UpdateStudentStatusCommand();
         }
     },
     CREATEUSERREVIEW{
@@ -217,12 +232,12 @@ public enum CommandType {
     },
     SHOW_TRAINERS_REVIEWS{
         {
-            this.command = new FindTrainersReview();
+            this.command = new FindTrainersReviewCommand();
         }
     },
     GO_TO_CHOOSE_TRAINER{
         {
-            this.command = new TrainingOrder();
+            this.command = new TrainingOrderCommand();
         }
     },
     GO_TO_PAY {

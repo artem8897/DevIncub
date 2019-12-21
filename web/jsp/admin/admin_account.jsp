@@ -8,8 +8,10 @@
 <html><head><title><fmt:message key="label.title" /></title></head>
 <body>
 <div style="text-align: center;">
+
     <c:import url="/jsp/header.jsp"/>
         <c:import url="/jsp/user_navigation.jsp"/>
+
         <hr/>
         <div class="w3-hover-text-brown"><ctg:table-revenue/></div>
         <hr/>

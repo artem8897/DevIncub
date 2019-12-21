@@ -6,7 +6,7 @@ import by.bsu.finalproject.command.ParamName;
 import by.bsu.finalproject.command.PathName;
 import by.bsu.finalproject.entity.Student;
 import by.bsu.finalproject.exception.CommandException;
-import by.bsu.finalproject.exception.LogicException;
+import by.bsu.finalproject.exception.ServiceException;
 import by.bsu.finalproject.manager.ConfigurationManager;
 import by.bsu.finalproject.manager.MessageManager;
 import by.bsu.finalproject.service.impl.StudentServiceImpl;
@@ -35,7 +35,7 @@ public class AdminChooseStudentPageCommand implements ActionCommand {
         try {
             userMap = informationService.findLimitUserMap(currentPageString,recordPageString);
             noOfRecords = informationService.findNumberOfRows();
-        } catch (LogicException e) {
+        } catch (ServiceException e) {
             throw new CommandException(e);
         }
         if(!userMap.isEmpty()) {

@@ -11,7 +11,7 @@ import by.bsu.finalproject.service.impl.UserServiceImpl;
 import by.bsu.finalproject.entity.UserType;
 import by.bsu.finalproject.entity.User;
 import by.bsu.finalproject.exception.CommandException;
-import by.bsu.finalproject.exception.LogicException;
+import by.bsu.finalproject.exception.ServiceException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -73,7 +73,7 @@ public class LoginCommand implements ActionCommand {
                 request.setAttribute(ParamName.WRONG_MAIL_OR_PASSWORD,
                         MessageManager.getProperty(MessageName.MESSAGE_LOGIN_ERROR));
             }
-        } catch (LogicException e) {
+        } catch (ServiceException e) {
             throw new CommandException(e);
         }
         return page;

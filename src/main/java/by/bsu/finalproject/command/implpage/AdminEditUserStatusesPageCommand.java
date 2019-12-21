@@ -6,7 +6,7 @@ import by.bsu.finalproject.command.ParamName;
 import by.bsu.finalproject.command.PathName;
 import by.bsu.finalproject.entity.User;
 import by.bsu.finalproject.exception.CommandException;
-import by.bsu.finalproject.exception.LogicException;
+import by.bsu.finalproject.exception.ServiceException;
 import by.bsu.finalproject.manager.ConfigurationManager;
 import by.bsu.finalproject.manager.MessageManager;
 import by.bsu.finalproject.service.impl.UserServiceImpl;
@@ -35,7 +35,7 @@ public class AdminEditUserStatusesPageCommand implements ActionCommand {
         try {
             userMap = userService.findAllUserMap(currentPageString,recordPageString);
             noOfRecords = userService.findNumberOfUsers();
-        } catch (LogicException e) {
+        } catch (ServiceException e) {
             throw new CommandException(e);
         }
         if(!userMap.isEmpty()) {

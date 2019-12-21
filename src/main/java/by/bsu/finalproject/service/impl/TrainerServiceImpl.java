@@ -6,7 +6,7 @@ import by.bsu.finalproject.entity.Trainer;
 import by.bsu.finalproject.service.ServiceName;
 import by.bsu.finalproject.service.TrainerService;
 import by.bsu.finalproject.exception.DaoException;
-import by.bsu.finalproject.exception.LogicException;
+import by.bsu.finalproject.exception.ServiceException;
 import by.bsu.finalproject.validator.TrainerInformationValidator;
 
 import java.util.ArrayList;
@@ -27,28 +27,28 @@ public class TrainerServiceImpl implements TrainerService {
 
     private static final String REGULAR_PAGE_NUMBER = "\\d{1,2}";
 
-    public Map<Integer, Trainer> findAllTrainerMap() throws LogicException {
+    public Map<Integer, Trainer> findAllTrainerMap() throws ServiceException {
 
         Map<Integer, Trainer> trainerMap ;
 
         try {
             trainerMap = trainerDao.findAllTrainers();
         } catch (DaoException e) {
-            throw new LogicException(e);
+            throw new ServiceException(e);
         }
         return trainerMap;
     }
-    public boolean isExist(int id) throws LogicException {
+    public boolean isExist(int id) throws ServiceException {
 
         try {
             return trainerDao.isCreated(id);
         } catch (DaoException e) {
-            throw new LogicException(e);
+            throw new ServiceException(e);
         }
     }
 
 
-    public List<Trainer> findLimitTrainerMap(String currentPageString,String recordPageString ) throws LogicException {
+    public List<Trainer> findLimitTrainerMap(String currentPageString,String recordPageString ) throws ServiceException {
 
         List<Trainer> trainerList = new ArrayList<>();
 
@@ -65,23 +65,23 @@ public class TrainerServiceImpl implements TrainerService {
                 try {
                     trainerList = trainerDao.findTrainersList(currentPage,recordsPerPage);
                 } catch (DaoException e) {
-                    throw new LogicException(e);
+                    throw new ServiceException(e);
                 }
             }
         }
         return trainerList;
     }
 
-    public Integer findNumberOfRows () throws LogicException {
+    public Integer findNumberOfRows () throws ServiceException {
 
         try {
              return trainerDao.findTrainersNumber();
         } catch (DaoException e) {
-            throw new LogicException(e);
+            throw new ServiceException(e);
         }
     }
 
-    public boolean createTrainer(int userId, String name,String experience, String trainingType, Map<String, String> map) throws LogicException {
+    public boolean createTrainer(int userId, String name,String experience, String trainingType, Map<String, String> map) throws ServiceException {
 
         boolean isTrainerInformationValid = validateTrainerInformation(name, experience, trainingType, map);
 
@@ -96,14 +96,14 @@ public class TrainerServiceImpl implements TrainerService {
             try {
                 return trainerDao.createTrainer(trainer);
             } catch (DaoException e) {
-                throw new LogicException(e);
+                throw new ServiceException(e);
             }
         }else{
             return false;
         // toDO
         }
     }
-    public  boolean updateTrainerInformation(int trainerId,String name, String workExperience, String trainingType, Map<String, String> map) throws LogicException {
+    public  boolean updateTrainerInformation(int trainerId,String name, String workExperience, String trainingType, Map<String, String> map) throws ServiceException {
 
         boolean isTrainerInformationValid = validateTrainerInformation(name, workExperience, trainingType, map);
 
@@ -118,13 +118,13 @@ public class TrainerServiceImpl implements TrainerService {
             try {
                 return trainerDao.updateTrainer(trainer);
             } catch (DaoException e) {
-                throw new LogicException(e);
+                throw new ServiceException(e);
             }
         }else{
             return false;
         }
     }
-    public Map<String, String> findTrainerInformation(int userId) throws LogicException {
+    public Map<String, String> findTrainerInformation(int userId) throws ServiceException {
 
         Trainer trainer;
         Map<String, String> map = new HashMap<>();
@@ -137,7 +137,7 @@ public class TrainerServiceImpl implements TrainerService {
             map.put(ServiceName.TRAINING_TYPE,trainer.getTrainingType());
 
         } catch (DaoException e) {
-            throw new LogicException(e);
+            throw new ServiceException(e);
         }
         return map;
     }

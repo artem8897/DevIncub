@@ -1,6 +1,6 @@
 package by.bsu.finalproject.service;
 
-import by.bsu.finalproject.exception.LogicException;
+import by.bsu.finalproject.exception.ServiceException;
 
 import java.util.Map;
 
@@ -17,20 +17,20 @@ public interface PaymentService {
      * @param trainingAmount
      * @param userId
      * @return price
-     * @throws LogicException
+     * @throws ServiceException
      */
 
-    double calcPriceForTraining(int userId, String trainingAmount) throws LogicException;
+    double calcPriceForTraining(int userId, String trainingAmount) throws ServiceException;
 
     /**
      * Insert discount date
      * @param value
      * @param date
      * @return return boolean was discount date inserted
-     * @throws LogicException
+     * @throws ServiceException
      */
 
-    boolean addDiscount(String date, String value) throws LogicException ;
+    boolean addDiscount(String date, String value) throws ServiceException;
 
     /**
      * pay a price for training at the specified userId and trainerId
@@ -40,18 +40,18 @@ public interface PaymentService {
      * @param userId
      * @param cardNumber
      * @return return boolean was payed training
-     * @throws LogicException
+     * @throws ServiceException
      */
 
-    boolean payTraining(double sum, String cardNumber, int userId, String trainingAmount, int trainerId) throws LogicException;
+    boolean payTraining(double sum, String cardNumber, int userId, String trainingAmount, int trainerId) throws ServiceException;
 
     /**
      * Find all statuses
      * @return return Map statuses
-     * @throws LogicException
+     * @throws ServiceException
      */
 
-    Map<Integer, String> selectStatuses() throws LogicException;
+    Map<Integer, String> selectStatuses() throws ServiceException;
 
 }
 

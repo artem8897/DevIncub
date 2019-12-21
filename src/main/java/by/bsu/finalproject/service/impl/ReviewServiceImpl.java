@@ -4,10 +4,9 @@ import by.bsu.finalproject.dao.DaoFactory;
 import by.bsu.finalproject.dao.impl.ReviewDaoImpl;
 import by.bsu.finalproject.entity.Review;
 import by.bsu.finalproject.entity.UserType;
-import by.bsu.finalproject.security.XssSecurity;
 import by.bsu.finalproject.service.ReviewService;
 import by.bsu.finalproject.exception.DaoException;
-import by.bsu.finalproject.exception.LogicException;
+import by.bsu.finalproject.exception.ServiceException;
 import by.bsu.finalproject.service.ServiceName;
 import by.bsu.finalproject.validator.ReviewValidator;
 
@@ -23,27 +22,26 @@ public class ReviewServiceImpl implements ReviewService {
 
     private ReviewDaoImpl reviewDao = DaoFactory.INSTANCE.getReviewDao();
 
-    public boolean createReview(int userId, String userReview, String rate, int trainerId, Map<String, String> map) throws LogicException {
+    public boolean createReview(int userId, String userReview, String rate, int trainerId, Map<String, String> map) throws ServiceException {
 
         boolean isValidReview = validateReview(userReview, rate, map);
 
         if(isValidReview){
 
             Review review = new Review();
-            userReview = XssSecurity.protectFromXssAttack(userReview);
             review.setRate(Integer.parseInt(rate));
             review.setReview(userReview);
             try {
                 return reviewDao.create(userId, trainerId, review);
             } catch (DaoException e) {
-                throw new LogicException(e);
+                throw new ServiceException(e);
             }
         }else{
             return false;
         }
     }
 
-    public Map<Integer, Review> findReview(int userId, UserType userType) throws LogicException {
+    public Map<Integer, Review> findReview(int userId, UserType userType) throws ServiceException {
 
         Map<Integer, Review> reviewMap = new HashMap<>();
         try {
@@ -53,7 +51,7 @@ public class ReviewServiceImpl implements ReviewService {
                 reviewMap = reviewDao.findAllByTrainer(userId);
             }
         } catch (DaoException e) {
-            throw new LogicException(e);
+            throw new ServiceException(e);
         }
         return reviewMap;
     }

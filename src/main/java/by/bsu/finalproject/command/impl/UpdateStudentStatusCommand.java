@@ -5,7 +5,7 @@ import by.bsu.finalproject.command.MessageName;
 import by.bsu.finalproject.command.ParamName;
 import by.bsu.finalproject.command.PathName;
 import by.bsu.finalproject.exception.CommandException;
-import by.bsu.finalproject.exception.LogicException;
+import by.bsu.finalproject.exception.ServiceException;
 import by.bsu.finalproject.manager.ConfigurationManager;
 import by.bsu.finalproject.manager.MessageManager;
 import by.bsu.finalproject.service.impl.StudentServiceImpl;
@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
  * @author A. Kuzmik
  */
 
-public class UpdateStudentStatus implements ActionCommand {
+public class UpdateStudentStatusCommand implements ActionCommand {
 
     private StudentServiceImpl logic = new StudentServiceImpl();
 
@@ -43,7 +43,7 @@ public class UpdateStudentStatus implements ActionCommand {
                 request.setAttribute(ParamName.USER_ID, userId);
                 request.setAttribute(ParamName.INFO, MessageManager.getProperty(MessageName.MESSAGE_WRONG_FIELDS));
             }
-        } catch (LogicException e) {
+        } catch (ServiceException e) {
             throw new CommandException(e);
         }
         return page;

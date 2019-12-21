@@ -11,38 +11,32 @@ import by.bsu.finalproject.manager.MessageManager;
 import by.bsu.finalproject.service.impl.PaymentServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 /**
- * Add discount command
+ * Show all discounts
  * @author A. Kuzmik
  */
 
-public class CreateDiscountCommand implements ActionCommand {
+public class ShowAllDiscountsCommand implements ActionCommand {
 
-    private PaymentServiceImpl logic = new PaymentServiceImpl();
+    private PaymentServiceImpl paymentService = new PaymentServiceImpl();
 
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
 
-        String page = ConfigurationManager.getProperty(PathName.PATH_ADMIN_PAGE);
-
-        String date = request.getParameter(ParamName.PARAM_NAME_DATE);
-        String discount = request.getParameter(ParamName.DISCOUNT);
-        String redirect = request.getParameter(ParamName.REDIRECT);
-
-        boolean wasCreated;
-
+        Map<String, Integer> discountsMap;
         try {
-            wasCreated = logic.addDiscount(date, discount);
+            discountsMap = paymentService.findDiscounts();
         } catch (ServiceException e) {
             throw new CommandException(e);
         }
-        if (wasCreated) {
-            request.setAttribute(ParamName.REDIRECT, redirect);
+        if (!discountsMap.isEmpty()) {
+            request.setAttribute(ParamName.DISCOUNT, discountsMap);
+            return ConfigurationManager.getProperty(PathName.DISCOUNTS_PAGE);
         } else {
-            request.setAttribute(ParamName.INFO, MessageManager.getProperty(MessageName.MESSAGE_WRONG_FIELDS));
+            request.setAttribute(ParamName.WRONG_ACTION, MessageManager.getProperty(MessageName.WRONG_ACTION));
+            return ConfigurationManager.getProperty(PathName.PATH_ADMIN_PAGE);
         }
-        return page;
     }
 }
-

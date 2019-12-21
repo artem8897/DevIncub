@@ -9,7 +9,7 @@ import by.bsu.finalproject.manager.ConfigurationManager;
 import by.bsu.finalproject.manager.MessageManager;
 import by.bsu.finalproject.service.impl.TrainingServiceImpl;
 import by.bsu.finalproject.exception.CommandException;
-import by.bsu.finalproject.exception.LogicException;
+import by.bsu.finalproject.exception.ServiceException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -47,7 +47,7 @@ public class UpdatingTrainingPageCommand implements ActionCommand {
                     request.setAttribute(ParamName.PARAM_NAME_USER_TYPE, user.getUserType().toString());
                     page = ConfigurationManager.getProperty(PathName.PATH_TRAINING_PAGE);
                 }
-            } catch (LogicException e) {
+            } catch (ServiceException e) {
                 throw new CommandException(e);
             }
         }else{

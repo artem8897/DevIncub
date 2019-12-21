@@ -57,7 +57,7 @@ public class TrainingDaoImpl implements TrainingDao {
         return trainingMap;
     }
 
-    public boolean deleteTraining(Integer trainingId) throws DaoException {
+    public boolean deleteTraining(int trainingId) throws DaoException {
 
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement statement = connection.prepareStatement(Query.SQL_DELETE_TRAINING)){
@@ -92,7 +92,7 @@ public class TrainingDaoImpl implements TrainingDao {
         return trainings;
     }
 
-    public Integer findNumberOfTrainings(int userId) throws DaoException {
+    public int findNumberOfTrainings(int userId) throws DaoException {
 
         int number = 0 ;
 
@@ -141,8 +141,8 @@ public class TrainingDaoImpl implements TrainingDao {
         return training;
     }
 
-
-    public boolean createTraining(Integer userId, Training entity) throws DaoException {
+    @Override
+    public boolean createTraining(int userId, Training entity) throws DaoException {
 
         try (Connection connection = ConnectionPool.INSTANCE.getConnection()) {
 

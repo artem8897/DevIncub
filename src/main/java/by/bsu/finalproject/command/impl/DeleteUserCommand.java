@@ -7,7 +7,7 @@ import by.bsu.finalproject.entity.User;
 import by.bsu.finalproject.manager.ConfigurationManager;
 import by.bsu.finalproject.service.impl.UserServiceImpl;
 import by.bsu.finalproject.exception.CommandException;
-import by.bsu.finalproject.exception.LogicException;
+import by.bsu.finalproject.exception.ServiceException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -26,15 +26,13 @@ public class DeleteUserCommand implements ActionCommand {
         //todo
         HttpSession session = request.getSession(true);
         User user = (User) session.getAttribute(ParamName.USER_ATTRIBUTE);
-        if(user == null){
-            return ConfigurationManager.getProperty(PathName.PATH_LOGIN_PAGE);
-        }
+
         int userId = Integer.parseInt(request.getParameter(ParamName.PARAM_NAME_USER_ID));
         String page ;
         boolean wasDeleted ;
         try {
             wasDeleted = userService.deleteUser(userId);
-        } catch (LogicException e) {
+        } catch (ServiceException e) {
             throw new CommandException(e);
         }
         if(wasDeleted){

@@ -7,7 +7,7 @@ import by.bsu.finalproject.command.PathName;
 import by.bsu.finalproject.entity.Trainer;
 import by.bsu.finalproject.entity.User;
 import by.bsu.finalproject.exception.CommandException;
-import by.bsu.finalproject.exception.LogicException;
+import by.bsu.finalproject.exception.ServiceException;
 import by.bsu.finalproject.manager.ConfigurationManager;
 import by.bsu.finalproject.manager.MessageManager;
 import by.bsu.finalproject.service.impl.PaymentServiceImpl;
@@ -35,10 +35,10 @@ public class CalculatePriceForTrainingCommand implements ActionCommand {
         HttpSession session = request.getSession(true);
         User user = (User) session.getAttribute(ParamName.USER_ATTRIBUTE);
 
-        if(user != null) {
+        if (user != null) {
 
             String amountOfTrainings = request.getParameter(ParamName.TRAINING_AMOUNT);
-             Map<Integer, Trainer> trainerMap;
+            Map<Integer, Trainer> trainerMap;
 
             try {
                 trainerMap = trainerService.findAllTrainerMap();
@@ -57,10 +57,10 @@ public class CalculatePriceForTrainingCommand implements ActionCommand {
                 } else {
                     request.setAttribute(ParamName.INFO, MessageManager.getProperty(MessageName.NO_TRAINERS_EXIST));
                 }
-            } catch (LogicException e) {
+            } catch (ServiceException e) {
                 throw new CommandException(e);
             }
-        }else{
+        } else {
             page = ConfigurationManager.getProperty(PathName.PATH_LOGIN_PAGE);
         }
         return page;

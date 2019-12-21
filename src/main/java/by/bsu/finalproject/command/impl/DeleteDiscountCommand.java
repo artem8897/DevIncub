@@ -13,31 +13,29 @@ import by.bsu.finalproject.service.impl.PaymentServiceImpl;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * Add discount command
+ * Delete students training command
  * @author A. Kuzmik
  */
 
-public class CreateDiscountCommand implements ActionCommand {
+public class DeleteDiscountCommand implements ActionCommand {
 
-    private PaymentServiceImpl logic = new PaymentServiceImpl();
+    private PaymentServiceImpl paymentService = new PaymentServiceImpl();
 
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
 
         String page = ConfigurationManager.getProperty(PathName.PATH_ADMIN_PAGE);
-
-        String date = request.getParameter(ParamName.PARAM_NAME_DATE);
-        String discount = request.getParameter(ParamName.DISCOUNT);
+        String discountDate = request.getParameter(ParamName.DISCOUNT);
         String redirect = request.getParameter(ParamName.REDIRECT);
 
-        boolean wasCreated;
+        boolean wasDeleted;
 
         try {
-            wasCreated = logic.addDiscount(date, discount);
+            wasDeleted = paymentService.deleteDiscount(discountDate);
         } catch (ServiceException e) {
             throw new CommandException(e);
         }
-        if (wasCreated) {
+        if (wasDeleted) {
             request.setAttribute(ParamName.REDIRECT, redirect);
         } else {
             request.setAttribute(ParamName.INFO, MessageManager.getProperty(MessageName.MESSAGE_WRONG_FIELDS));
@@ -45,4 +43,3 @@ public class CreateDiscountCommand implements ActionCommand {
         return page;
     }
 }
-

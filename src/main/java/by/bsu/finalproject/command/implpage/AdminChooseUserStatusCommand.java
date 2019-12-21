@@ -4,7 +4,7 @@ import by.bsu.finalproject.command.ActionCommand;
 import by.bsu.finalproject.command.ParamName;
 import by.bsu.finalproject.command.PathName;
 import by.bsu.finalproject.exception.CommandException;
-import by.bsu.finalproject.exception.LogicException;
+import by.bsu.finalproject.exception.ServiceException;
 import by.bsu.finalproject.manager.ConfigurationManager;
 import by.bsu.finalproject.service.impl.PaymentServiceImpl;
 
@@ -26,7 +26,7 @@ public class AdminChooseUserStatusCommand implements ActionCommand {
         try {
             request.setAttribute(ParamName.USER_ID, userId);
             request.setAttribute(ParamName.STATUS,paymentService.selectStatuses());
-        } catch (LogicException e) {
+        } catch (ServiceException e) {
             throw new CommandException(e);
         }
         return ConfigurationManager.getProperty(PathName.ADMIN_CHOOSE_STUDENT_STATUS_PAGE);

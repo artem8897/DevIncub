@@ -8,7 +8,7 @@ import by.bsu.finalproject.security.Cryptographer;
 import by.bsu.finalproject.service.ServiceName;
 import by.bsu.finalproject.service.UserService;
 import by.bsu.finalproject.exception.DaoException;
-import by.bsu.finalproject.exception.LogicException;
+import by.bsu.finalproject.exception.ServiceException;
 import by.bsu.finalproject.validator.UserValidator;
 
 import java.util.HashMap;
@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService {
 
     private static final String REGULAR_PAGE_NUMBER = "\\d{1,2}";
 
-    public Map<Integer, User> findAllUserMap(String currentPageString, String recordPageString) throws LogicException {
+    public Map<Integer, User> findAllUserMap(String currentPageString, String recordPageString) throws ServiceException {
 
         Map<Integer, User> userMap = new HashMap<>();
 
@@ -44,7 +44,7 @@ public class UserServiceImpl implements UserService {
                 try {
                     userMap = userDao.findAllUsers(currentPage, recordsPerPage);
                 } catch (DaoException e) {
-                    throw new LogicException(e);
+                    throw new ServiceException(e);
                 }
             }
         }
@@ -52,13 +52,13 @@ public class UserServiceImpl implements UserService {
         return userMap;
     }
 
-    public User findUserInBase(String enterLogin, String enterPass) throws LogicException {
+    public User findUserInBase(String enterLogin, String enterPass) throws ServiceException {
 
         User user;
         try {
             user = userDao.findEntityByEmail(enterLogin);
         } catch (DaoException e) {
-            throw new LogicException(e);
+            throw new ServiceException(e);
         }
         Cryptographer cryptographer = new Cryptographer();
         String encryptedPass = cryptographer.encrypt(enterPass);
@@ -69,7 +69,7 @@ public class UserServiceImpl implements UserService {
         }
 
     }
-    public boolean register(String login,String pass,String confirmedPassword,String username,String sex, Map<String, String> map) throws LogicException {
+    public boolean register(String login,String pass,String confirmedPassword,String username,String sex, Map<String, String> map) throws ServiceException {
 
         try {
             boolean isMailOrUsernameInBase = userDao.isExistMailOrUsername(login,username);
@@ -96,19 +96,19 @@ public class UserServiceImpl implements UserService {
                 return false;
             }
         } catch (DaoException e) {
-            throw new LogicException(e);
+            throw new ServiceException(e);
         }
     }
-    public boolean deleteUser(int userId) throws LogicException {
+    public boolean deleteUser(int userId) throws ServiceException {
 
         try {
             return userDao.deleteUser(userId);
         } catch (DaoException e) {
-            throw new LogicException(e);
+            throw new ServiceException(e);
         }
     }
 
-    public boolean changeUserStatus(int userId,int adminId, String status, String userType) throws LogicException {
+    public boolean changeUserStatus(int userId,int adminId, String status, String userType) throws ServiceException {
 
         UserType type = UserType.valueOf(userType);
 
@@ -118,10 +118,10 @@ public class UserServiceImpl implements UserService {
         try {
             return userDao.changeUserStatus(userId, status, type);
         } catch (DaoException e) {
-            throw new LogicException(e);
+            throw new ServiceException(e);
         }
     }
-    public boolean changePassword(int userId, String confirmedPassword, String password) throws LogicException {
+    public boolean changePassword(int userId, String confirmedPassword, String password) throws ServiceException {
 
         if(password!=null && password.equals(confirmedPassword)){
 
@@ -131,12 +131,12 @@ public class UserServiceImpl implements UserService {
             try {
                 return userDao.updatePassword(userId ,encryptedPassword);
             } catch (DaoException e) {
-                throw new LogicException(e);
+                throw new ServiceException(e);
             }
         }
         return false;
     }
-    public boolean changeUsername(int userId, String username) throws LogicException {
+    public boolean changeUsername(int userId, String username) throws ServiceException {
 
         if(username!=null){
             try {
@@ -145,19 +145,19 @@ public class UserServiceImpl implements UserService {
                     return userDao.updateUsername(userId, username);
                 }
             } catch (DaoException e) {
-                throw new LogicException(e);
+                throw new ServiceException(e);
             }
         }
         return false;
 
     }
 
-    public Integer findNumberOfUsers() throws LogicException {
+    public Integer findNumberOfUsers() throws ServiceException {
 
         try {
             return userDao.findNumberOfRows();
         } catch (DaoException e) {
-            throw new LogicException(e);
+            throw new ServiceException(e);
         }
     }
 

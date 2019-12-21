@@ -1,7 +1,7 @@
 package by.bsu.finalproject.service;
 
 import by.bsu.finalproject.entity.Trainer;
-import by.bsu.finalproject.exception.LogicException;
+import by.bsu.finalproject.exception.ServiceException;
 
 import java.util.List;
 import java.util.Map;
@@ -22,10 +22,10 @@ public interface TrainerService {
      * @param trainingType
      * @param map
      * @return boolean was created information
-     * @throws LogicException
+     * @throws ServiceException
      */
 
-    boolean createTrainer(int userId, String name,String experience, String trainingType, Map<String, String> map) throws LogicException;
+    boolean createTrainer(int userId, String name,String experience, String trainingType, Map<String, String> map) throws ServiceException;
 
     /**
      * Update trainer at the specified trainer entity
@@ -35,54 +35,54 @@ public interface TrainerService {
      * @param trainingType
      * @param map
      * @return boolean was updated
-     * @throws LogicException
+     * @throws ServiceException
      */
 
-    boolean updateTrainerInformation(int trainerId,String name, String workExperience, String trainingType, Map<String, String> map) throws LogicException;
+    boolean updateTrainerInformation(int trainerId,String name, String workExperience, String trainingType, Map<String, String> map) throws ServiceException;
 
     /**
      * Find trainer at the specified trainerID
      * @param userId
      * @return map of trainers
-     * @throws LogicException
+     * @throws ServiceException
      */
 
-    Map<String, String> findTrainerInformation(int userId) throws LogicException;
+    Map<String, String> findTrainerInformation(int userId) throws ServiceException;
 
     /**
      * Find all trainers
      * @return trainers map
-     * @throws LogicException
+     * @throws ServiceException
      */
 
-    Map<Integer, Trainer> findAllTrainerMap() throws LogicException;
+    Map<Integer, Trainer> findAllTrainerMap() throws ServiceException;
 
 
     /**
      * Define was created trainer information at the specified trainerId
      * @param id
      * @return boolean is exist information
-     * @throws LogicException
+     * @throws ServiceException
      */
 
-    boolean isExist(int id) throws LogicException;
+    boolean isExist(int id) throws ServiceException;
 
     /**
      * Find limited amount of all trainers
      * @param currentPageString
      * @param recordPageString
      * @return list of trainers
-     * @throws LogicException
+     * @throws ServiceException
      */
 
-    List<Trainer> findLimitTrainerMap(String currentPageString,String recordPageString ) throws LogicException;
+    List<Trainer> findLimitTrainerMap(String currentPageString,String recordPageString ) throws ServiceException;
 
     /**
      * Find number of trainers
      * @return number of trainers
-     * @throws LogicException
+     * @throws ServiceException
      */
 
-    Integer findNumberOfRows() throws LogicException;
+    Integer findNumberOfRows() throws ServiceException;
 
 }

@@ -36,4 +36,5 @@ public class PathName {
     public static final String PATH_PAGE_PASSWORD = "path.page.password";
     public static final String PATH_PAGE_DISCOUNT = "path.page.discount_page";
     public static final String ADMIN_CHOOSE_STUDENT_STATUS_PAGE = "path.page.admin_change_student_status";
+    public static final String DISCOUNTS_PAGE = "path.page.show_discounts";
 }

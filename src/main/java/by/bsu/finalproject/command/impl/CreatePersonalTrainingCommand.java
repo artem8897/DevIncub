@@ -4,15 +4,13 @@ import by.bsu.finalproject.command.ActionCommand;
 import by.bsu.finalproject.command.MessageName;
 import by.bsu.finalproject.command.PathName;
 import by.bsu.finalproject.command.ParamName;
-import by.bsu.finalproject.entity.User;
 import by.bsu.finalproject.service.impl.TrainingServiceImpl;
 import by.bsu.finalproject.manager.ConfigurationManager;
 import by.bsu.finalproject.manager.MessageManager;
 import by.bsu.finalproject.exception.CommandException;
-import by.bsu.finalproject.exception.LogicException;
+import by.bsu.finalproject.exception.ServiceException;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -41,7 +39,7 @@ public class CreatePersonalTrainingCommand implements ActionCommand {
         boolean wasCreated;
         try {
             wasCreated = trainingService.createPersonalTrainingForUser(userId, periodicity, trainingType, personality, map);
-        } catch (LogicException e) {
+        } catch (ServiceException e) {
             throw new CommandException(e);
         }
         if (wasCreated) {

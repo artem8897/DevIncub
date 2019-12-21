@@ -3,13 +3,11 @@ package by.bsu.finalproject.service.impl;
 import by.bsu.finalproject.dao.DaoFactory;
 import by.bsu.finalproject.dao.impl.PaymentDaoImpl;
 import by.bsu.finalproject.exception.DaoException;
-import by.bsu.finalproject.exception.LogicException;
+import by.bsu.finalproject.exception.ServiceException;
 import by.bsu.finalproject.service.PaymentService;
 import by.bsu.finalproject.validator.PaymentValidator;
 
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Service for payment
@@ -20,7 +18,7 @@ public class PaymentServiceImpl implements PaymentService {
 
     private PaymentDaoImpl paymentDao = DaoFactory.INSTANCE.getPaymentDao();
 
-    public boolean addDiscount(String date, String discount) throws LogicException {
+    public boolean addDiscount(String date, String discount) throws ServiceException {
 
         boolean isValidDate = PaymentValidator.INSTANCE.isValidDate(date);
         boolean isValidValue = PaymentValidator.INSTANCE.isValidDiscount(discount);
@@ -35,13 +33,14 @@ public class PaymentServiceImpl implements PaymentService {
                     return paymentDao.insertDiscountDate(date, discountValue);
                 }
             } catch (DaoException e) {
-                throw new LogicException(e);
+                throw new ServiceException(e);
             }
         }
         return false;
     }
 
-    public double calcPriceForTraining(int userId, String trainingAmount) throws LogicException {
+
+    public double calcPriceForTraining(int userId, String trainingAmount) throws ServiceException {
 
         double price = 0;
         boolean isValidAmount = PaymentValidator.INSTANCE.isValidDiscount(trainingAmount);
@@ -53,12 +52,29 @@ public class PaymentServiceImpl implements PaymentService {
             try {
                 price = paymentDao.calcPrice(userId,trainingAmountNumber);
             } catch (DaoException e) {
-                throw new LogicException(e);
+                throw new ServiceException(e);
             }
         }
         return price;
     }
-    public boolean payTraining(double sum, String cardNumber, int userId, String trainingAmount, int trainerId) throws LogicException {
+    public boolean deleteDiscount(String date) throws ServiceException {
+
+        boolean isValidDate = PaymentValidator.INSTANCE.isValidDate(date);
+
+        if(isValidDate) {
+
+            try {
+                boolean isExist = paymentDao.isDiscountDateExist(date);
+                if (isExist) {
+                    return paymentDao.deleteDiscount(date);
+                }
+            } catch (DaoException e) {
+                throw new ServiceException(e);
+            }
+        }
+        return false;
+    }
+    public boolean payTraining(double sum, String cardNumber, int userId, String trainingAmount, int trainerId) throws ServiceException {
 
         boolean isValidCard = PaymentValidator.INSTANCE.isValidCard(cardNumber);
         boolean isValidTrainingAmount = PaymentValidator.INSTANCE.isValidDiscount(trainingAmount);
@@ -69,18 +85,27 @@ public class PaymentServiceImpl implements PaymentService {
             try {
                 return paymentDao.payTraining(validCardNumber, userId, sum, validTrainingAmount, trainerId);
             } catch (DaoException e) {
-                throw new LogicException(e);
+                throw new ServiceException(e);
             }
         }
         return false;
     }
 
-    public Map<Integer, String> selectStatuses() throws LogicException {
+    public Map<String, Integer> findDiscounts() throws ServiceException {
+
+        try {
+            return paymentDao.findDiscountDates();
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    public Map<Integer, String> selectStatuses() throws ServiceException {
 
         try {
             return paymentDao.findAllPayStatuses();
         } catch (DaoException e) {
-            throw new LogicException(e);
+            throw new ServiceException(e);
         }
     }
 }

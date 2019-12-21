@@ -2,7 +2,7 @@ package by.bsu.finalproject.service;
 
 import by.bsu.finalproject.entity.Review;
 import by.bsu.finalproject.entity.UserType;
-import by.bsu.finalproject.exception.LogicException;
+import by.bsu.finalproject.exception.ServiceException;
 
 import java.util.Map;
 
@@ -22,19 +22,19 @@ public interface ReviewService {
      * @param rate
      * @param map
      * @return boolean was review created
-     * @throws LogicException
+     * @throws ServiceException
      */
 
-    boolean createReview(int userId, String userReview, String rate, int trainerId,  Map<String, String> map) throws LogicException;
+    boolean createReview(int userId, String userReview, String rate, int trainerId,  Map<String, String> map) throws ServiceException;
 
     /**
      * Find reviews on trainer at the specified trainerId
      * @param userId
      * @param userType
      * @return map of reviews
-     * @throws LogicException
+     * @throws ServiceException
      */
 
-    Map<Integer, Review> findReview(int userId, UserType userType) throws LogicException;
+    Map<Integer, Review> findReview(int userId, UserType userType) throws ServiceException;
 
 }

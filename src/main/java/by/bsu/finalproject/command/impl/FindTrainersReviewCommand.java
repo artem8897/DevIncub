@@ -9,7 +9,7 @@ import by.bsu.finalproject.entity.UserType;
 import by.bsu.finalproject.manager.ConfigurationManager;
 import by.bsu.finalproject.service.impl.ReviewServiceImpl;
 import by.bsu.finalproject.exception.CommandException;
-import by.bsu.finalproject.exception.LogicException;
+import by.bsu.finalproject.exception.ServiceException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -20,7 +20,7 @@ import java.util.Map;
  * @author A. Kuzmik
  */
 
-public class FindTrainersReview implements ActionCommand {
+public class FindTrainersReviewCommand implements ActionCommand {
 
     private ReviewServiceImpl reviewService = new ReviewServiceImpl();
 
@@ -41,7 +41,7 @@ public class FindTrainersReview implements ActionCommand {
 
         try {
             reviewMap = reviewService.findReview(trainerId, UserType.TRAINER);
-        } catch (LogicException e) {
+        } catch (ServiceException e) {
             throw new CommandException(e);
         }
 

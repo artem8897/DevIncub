@@ -19,11 +19,14 @@
         <table class="table table-striped table-bordered table-sm">
 
             <tr>
-                <td>    <button class="w3-btn w3-hover-light-blue w3-round-large" onclick="location.href='controller?command=admin_choose_person&currentPage=0&recordsPerPage=5'"><fmt:message key="label.edit_information"/> </button>  </td>
-                <td>    <button class="w3-btn w3-hover-light-blue w3-round-large" onclick="location.href='controller?command=DISCOUNT'"><fmt:message key="label.discount"/></button> </td>
-                <td>    <button class="w3-btn w3-hover-light-blue w3-round-large" onclick="location.href='controller?command=ADMIN_EDIT_USER&currentPage=0&recordsPerPage=5'"><fmt:message key="label.change_user_status"/> </button> </td>
-                <td>    <button class="w3-btn w3-hover-red w3-round-large" onclick="location.href='controller?command=edition_trainer'"><fmt:message key="label.edit_trainer"/> </button> </td>
-                <td>    <button class="w3-btn w3-hover-green w3-round-large" onclick="location.href='controller?command=GO_TO_PASSWORD'"><fmt:message key="label.change_password"/> </button> </td>
+                <td> <button class="w3-btn w3-hover-light-blue w3-round-large" onclick="location.href='controller?command=admin_choose_person&currentPage=0&recordsPerPage=5'"><fmt:message key="label.edit_information"/> </button>  </td>
+                <td> <button class="w3-btn w3-hover-light-blue w3-round-large" onclick="location.href='controller?command=show_discounts'"><fmt:message key="label.show_discounts"/> </button>  </td>
+                <td> <button class="w3-btn w3-hover-light-blue w3-round-large" onclick="location.href='controller?command=DISCOUNT'"><fmt:message key="label.discount"/></button> </td>
+            </tr>
+            <tr>
+                <td> <button class="w3-btn w3-hover-light-blue w3-round-large" onclick="location.href='controller?command=ADMIN_EDIT_USER&currentPage=0&recordsPerPage=5'"><fmt:message key="label.change_user_status"/> </button> </td>
+                <td> <button class="w3-btn w3-hover-red w3-round-large" onclick="location.href='controller?command=edition_trainer'"><fmt:message key="label.edit_trainer"/> </button> </td>
+                <td> <button class="w3-btn w3-hover-green w3-round-large" onclick="location.href='controller?command=GO_TO_PASSWORD'"><fmt:message key="label.change_password"/> </button> </td>
             </tr>
         </table>
                     </c:when>

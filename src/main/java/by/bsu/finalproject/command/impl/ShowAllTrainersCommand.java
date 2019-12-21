@@ -9,12 +9,10 @@ import by.bsu.finalproject.manager.ConfigurationManager;
 import by.bsu.finalproject.manager.MessageManager;
 import by.bsu.finalproject.service.impl.TrainerServiceImpl;
 import by.bsu.finalproject.exception.CommandException;
-import by.bsu.finalproject.exception.LogicException;
+import by.bsu.finalproject.exception.ServiceException;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Show all trainers and their information command
@@ -35,7 +33,7 @@ public class ShowAllTrainersCommand implements ActionCommand {
         try {
             trainerList = trainerService.findLimitTrainerMap(currentPageString,recordPageString);
             noOfRecords = trainerService.findNumberOfRows();
-        } catch (LogicException e) {
+        } catch (ServiceException e) {
             throw new CommandException(e);
         }
         if(!trainerList.isEmpty()) {

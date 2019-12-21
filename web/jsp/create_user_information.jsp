@@ -4,29 +4,24 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <fmt:setBundle basename="local" />
 <html><head><title><fmt:message key="label.registration"/></title></head>
-<div class="w3-container w3-center">
+    <body>
+    <div class="w3-container w3-center">
 
     <c:import url="/jsp/header.jsp"/>
     <c:import url="/jsp/user_navigation.jsp"/>
 
-    <div style="text-align: center;">
-
-    <body>
     <form name="AddUserInformation" method="POST" action="controller"/>
-    <input type="hidden" name="redirect" value="controller?command=student_acc">
-    <c:set var="students" value="${students}"/>
-    </br><fmt:message key="label.name"/> <br/>
-    <input type="text" name="name" value="${students['name']}" required pattern = "(([А-Яа-я]{3,14})|([A-Za-z]{2,20}))"/>
-    <br/><fmt:message key="label.second_name"/><br/>
-    <input type="text" name="second_name" value="${students['second_name']}" required pattern = "(([а-яА-я]{5,14})|([a-zA-Z]{2,20}))"/>
-    <br/><fmt:message key="label.weight"/><br/>
-    <input type="text" name="weight" value="${students['weight']}" required pattern="[0-9]{2,3}"/>
-    <br/><fmt:message key="label.height"/><br/>
-    <input type="text" name="height" value="${students['height']}" required pattern="[0-9]{3}"/>
-    <br/>
-
-    <tr bgcolor="#c8d8f8">
-    <td  valign=top colspan=2>
+        <input type="hidden" name="redirect" value="controller?command=student_acc">
+        <c:set var="students" value="${students}"/>
+        </br><fmt:message key="label.name"/> <br/>
+        <input type="text" name="name" value="${students['name']}" required pattern = "(([А-Яа-я]{3,14})|([A-Za-z]{2,20}))"/>
+        <br/><fmt:message key="label.second_name"/><br/>
+        <input type="text" name="second_name" value="${students['second_name']}" required pattern = "(([а-яА-я]{5,14})|([a-zA-Z]{2,20}))"/>
+        <br/><fmt:message key="label.weight"/><br/>
+        <input type="text" name="weight" value="${students['weight']}" required pattern="[0-9]{2,3}"/>
+        <br/><fmt:message key="label.height"/><br/>
+        <input type="text" name="height" value="${students['height']}" required pattern="[0-9]{3}"/>
+        <br/>
 
         <fmt:message key="label.choosesex"/>
 
@@ -52,12 +47,9 @@ ${wrongregistration}
     </c:choose>
     <br/>
     <br/>
-    <c:set var = "user_type" value = "${user_type}"/>
-    <c:if test="${user_type.equals('ADMIN')}">
-    </c:if>
     </form><hr/>
     <c:import url="/jsp/footer.jsp"/>
+    </div>
 </body>
-        </div>
-</div>
+
 </html>

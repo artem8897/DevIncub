@@ -4,8 +4,6 @@ import by.bsu.finalproject.connectionpool.ConnectionPool;
 import by.bsu.finalproject.dao.impl.PaymentDaoImpl;
 import by.bsu.finalproject.exception.ConnectionPoolException;
 import by.bsu.finalproject.exception.DaoException;
-import by.bsu.finalproject.exception.LogicException;
-import by.bsu.finalproject.manager.DatabaseResourceManager;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
@@ -15,11 +13,10 @@ import java.util.Map;
 
 public class PaymentDaoTest {
 
-    private final String DATABASE_URL = ("jdbc:mysql://localhost:3306/new_schema?useUnicode=true&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true");
-    PaymentDaoImpl paymentDao = DaoFactory.INSTANCE.getPaymentDao();
-    Connection connection;
-    PreparedStatement statement;
-    ResultSet resultSet;
+    private PaymentDaoImpl paymentDao = DaoFactory.INSTANCE.getPaymentDao();
+    private Connection connection;
+    private PreparedStatement statement;
+    private ResultSet resultSet;
 
     @BeforeTest
     void beforeTest() throws ConnectionPoolException {

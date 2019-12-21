@@ -4,7 +4,7 @@ import by.bsu.finalproject.command.ActionCommand;
 import by.bsu.finalproject.command.PathName;
 import by.bsu.finalproject.command.ParamName;
 import by.bsu.finalproject.entity.Trainer;
-import by.bsu.finalproject.exception.LogicException;
+import by.bsu.finalproject.exception.ServiceException;
 import by.bsu.finalproject.manager.ConfigurationManager;
 import by.bsu.finalproject.exception.CommandException;
 import by.bsu.finalproject.service.impl.TrainerServiceImpl;
@@ -27,7 +27,7 @@ public class ReviewPageCommand implements ActionCommand {
         try {
             Map<Integer, Trainer> trainerMap = trainerService.findAllTrainerMap();
             request.setAttribute(ParamName.TRAINER_ATTRIBUTE, trainerMap);
-        } catch (LogicException e) {
+        } catch (ServiceException e) {
             throw new CommandException(e);
         }
          return ConfigurationManager.getProperty(PathName.PATH_PAGE_USER_REVIEW);

@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
  * @author A. Kuzmik
  */
 
-public class TrainingOrder implements ActionCommand {
+public class TrainingOrderCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request) throws CommandException {

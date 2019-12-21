@@ -1,7 +1,7 @@
 package by.bsu.finalproject.service;
 
 import by.bsu.finalproject.entity.User;
-import by.bsu.finalproject.exception.LogicException;
+import by.bsu.finalproject.exception.ServiceException;
 
 import java.util.Map;
 
@@ -18,10 +18,10 @@ public interface UserService {
      * @param enterLogin
      * @param enterPass
      * @return user
-     * @throws LogicException
+     * @throws ServiceException
      */
 
-    User findUserInBase(String enterLogin, String enterPass) throws LogicException;
+    User findUserInBase(String enterLogin, String enterPass) throws ServiceException;
 
     /**
      * Create user at the specified user entity
@@ -32,19 +32,19 @@ public interface UserService {
      * @param sex
      * @param map
      * @return boolean was created user
-     * @throws LogicException
+     * @throws ServiceException
      */
 
-    boolean register(String login,String pass,String confirmedPassword,String username,String sex, Map<String, String> map) throws LogicException;
+    boolean register(String login,String pass,String confirmedPassword,String username,String sex, Map<String, String> map) throws ServiceException;
 
     /**
      * Delete a user at the specified userId
      * @param userId
      * @return  boolean was deleted
-     * @throws LogicException
+     * @throws ServiceException
      */
 
-    boolean deleteUser(int userId) throws LogicException;
+    boolean deleteUser(int userId) throws ServiceException;
 
     /**
      * Update status and userType at the specified userId
@@ -52,10 +52,10 @@ public interface UserService {
      * @param status
      * @param userType
      * @return boolean was updated user
-     * @throws LogicException
+     * @throws ServiceException
      */
 
-    boolean changeUserStatus(int userId,int adminId, String status, String userType) throws LogicException;
+    boolean changeUserStatus(int userId,int adminId, String status, String userType) throws ServiceException;
 
     /**
      * Update password at the specified userId
@@ -63,38 +63,38 @@ public interface UserService {
      * @param confirmedPassword
      * @param password
      * @return boolean was updated training
-     * @throws LogicException
+     * @throws ServiceException
      */
 
-    boolean changePassword(int userId, String confirmedPassword, String password) throws LogicException;
+    boolean changePassword(int userId, String confirmedPassword, String password) throws ServiceException;
 
     /**
      * Update username at the specified userId
      * @param userId
      * @param username
      * @return boolean was updated training
-     * @throws LogicException
+     * @throws ServiceException
      */
 
-    boolean changeUsername(int userId, String username) throws LogicException;
+    boolean changeUsername(int userId, String username) throws ServiceException;
 
     /**
      * Find all users
      * @param currentPageString
      * @param recordPageString
      * @return users map
-     * @throws LogicException
+     * @throws ServiceException
      */
 
-     Map<Integer, User> findAllUserMap(String currentPageString, String recordPageString) throws LogicException;
+     Map<Integer, User> findAllUserMap(String currentPageString, String recordPageString) throws ServiceException;
 
     /**
      * Find number of users
      * @return number of users
-     * @throws LogicException
+     * @throws ServiceException
      */
 
-    Integer findNumberOfUsers() throws LogicException;
+    Integer findNumberOfUsers() throws ServiceException;
 
 
 }

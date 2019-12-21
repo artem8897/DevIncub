@@ -11,7 +11,7 @@ import by.bsu.finalproject.manager.ConfigurationManager;
 import by.bsu.finalproject.manager.MessageManager;
 import by.bsu.finalproject.service.impl.StudentServiceImpl;
 import by.bsu.finalproject.exception.CommandException;
-import by.bsu.finalproject.exception.LogicException;
+import by.bsu.finalproject.exception.ServiceException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -75,7 +75,7 @@ public class EditAppointmentPageCommand implements ActionCommand {
                         page = ConfigurationManager.getProperty(PathName.PATH_PAGE_TRAINER);
                     }
                 }
-            } catch (LogicException e) {
+            } catch (ServiceException e) {
                 throw new CommandException(e);
             }
         }else{

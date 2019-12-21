@@ -49,7 +49,7 @@ public class TrainerDaoImpl implements TrainerDao {
         }
         return trainers;
     }
-    public boolean isCreated(Integer id) throws DaoException {
+    public boolean isCreated(int id) throws DaoException {
 
         try (Connection cn = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement statement = cn.prepareStatement(Query.SQL_SELECT_TRAINER_BY_ID)){
@@ -91,7 +91,7 @@ public class TrainerDaoImpl implements TrainerDao {
         }
         return trainers;
     }
-    public Integer findTrainersNumber() throws DaoException {
+    public int findTrainersNumber() throws DaoException {
 
       int number = 0;
 

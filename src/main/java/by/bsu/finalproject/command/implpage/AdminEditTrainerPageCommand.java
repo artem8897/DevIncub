@@ -9,7 +9,7 @@ import by.bsu.finalproject.manager.ConfigurationManager;
 import by.bsu.finalproject.manager.MessageManager;
 import by.bsu.finalproject.service.impl.TrainerServiceImpl;
 import by.bsu.finalproject.exception.CommandException;
-import by.bsu.finalproject.exception.LogicException;
+import by.bsu.finalproject.exception.ServiceException;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
@@ -38,7 +38,7 @@ public class AdminEditTrainerPageCommand implements ActionCommand {
                 request.setAttribute(ParamName.INFO, MessageManager.getProperty(MessageName.NO_TRAINERS_EXIST));
             }
             return page;
-        } catch ( LogicException e) {
+        } catch ( ServiceException e) {
             throw new CommandException(e);
         }
     }

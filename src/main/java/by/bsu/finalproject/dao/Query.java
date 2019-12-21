@@ -53,7 +53,6 @@ public class Query {
     public static final String SQL_CREATE_USERS_TRAINER_WITH_PAID_TRAININGS = " INSERT user_trainer (paid_training,user_Id,trainer_Id) VALUES (?,?,?);";
     public static final String SQL_CREATE_BANK_TRANSACTION_INFORMATION = "INSERT center_bank(sum, date_transaction, center_bank.card_id) VALUES (?,CURDATE(),?)";
 
-
     public static final String SQL_SELECT_ALL_TRAININGS = "SELECT training.training_id,date,personality,training_type FROM training JOIN user_training ON user_training.training_id = training.training_id WHERE date > CURRENT_DATE AND user_training.user_id = ?";
     public static final String SQL_INSERT_TRAINING = "INSERT mydb.training(date,training_type,personality) VALUES (?,?,?)";
     public static final String SQL_SELECT_LIMIT_TRAININGS = "SELECT training.training_id,date,personality,training_type FROM training JOIN user_training ON user_training.training_id = training.training_id WHERE date > CURRENT_DATE AND user_training.user_id = ? AND training.status = 'active' LIMIT ?,?";
@@ -67,7 +66,6 @@ public class Query {
     public static final String SQL_SELECT_USER_IN_FORMATION_BY_ID = "SELECT * FROM mydb.personal_information WHERE  information_id = ? ;";
     public static final String SQL_SELECT_TRAINER_BY_ID = "SELECT * FROM mydb.trainer_information WHERE  trainer_id = ? ";
 
-
     public static final String SQL_UPDATE_USER_PASSWORD =  "UPDATE user SET password = ? WHERE id = ?";
     public static final String SQL_UPDATE_USERNAME =  "UPDATE user SET username = ? WHERE id = ?";
     public static final String SQL_UPDATE_TRAINING =    "UPDATE training SET date = ?, personality = ?,training_type = ? WHERE training_id = ?";
@@ -79,7 +77,9 @@ public class Query {
     public static final String SQL_CALCULATE_PRICE_FOR_TRAININGS = "SELECT (price * discounts.discount_value * if(discount_amount IS NOT NULL, 100 - discount_date.discount_amount, 100))/10000  FROM discounts JOIN personal_information ON discounts.discount_id = personal_information.status_id, centerces_price LEFT JOIN discount_date ON CURRENT_DATE = discount_date.date WHERE personal_information.information_id = ? AND training_amount = ?";
     public static final String SQL_SELECT_MONEY_FROM_ACCOUNT = "SELECT money_amount FROM money_card WHERE account_number = ?";
     public static final String SQL_SELECT_DISCOUNT_DATE = "SELECT date FROM discount_date WHERE date = ?";
+    public static final String SQL_SELECT_ALL_DISCOUNT_DATES = "SELECT date, discount_amount FROM discount_date WHERE date >= CURRENT_DATE AND status = 'active'";
     public static final String SQL_SELECT_DISCOUNT_DATE_AND_PRICE = "SELECT date, discount_amount FROM discount_date WHERE date = ?";
+    public static final String SQL_DELETE_DISCOUNT = "UPDATE discount_date SET discount_date.status = 'deleted' WHERE date = ?";
 
 }
 

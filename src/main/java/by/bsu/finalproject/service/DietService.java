@@ -1,6 +1,6 @@
 package by.bsu.finalproject.service;
 
-import by.bsu.finalproject.exception.LogicException;
+import by.bsu.finalproject.exception.ServiceException;
 
 import java.util.Map;
 
@@ -21,19 +21,19 @@ public interface DietService {
      * @param proteins
      * @param map
      * @return boolean if valid and was updated
-     * @throws LogicException
+     * @throws ServiceException
      */
 
-    boolean addInformation(int userId, String dietType,String carbohydrates,String fats,String proteins, Map<String, String> map) throws LogicException;
+    boolean addInformation(int userId, String dietType,String carbohydrates,String fats,String proteins, Map<String, String> map) throws ServiceException;
 
     /**
      * Find if valid a diet at the specified userId
      * @param userId
      * @return diet entity
-     * @throws LogicException
+     * @throws ServiceException
      */
 
-    Map<String, String>  findUsersDiet(int userId) throws LogicException;
+    Map<String, String>  findUsersDiet(int userId) throws ServiceException;
 
     /**
      * Update a diet at the specified userId
@@ -44,8 +44,8 @@ public interface DietService {
      * @param proteins
      * @param map
      * @return boolean if valid and was updated
-     * @throws LogicException
+     * @throws ServiceException
      */
 
-    boolean updateDiet(int userId, String dietType,String carbohydrates,String fats,String proteins,  Map<String, String> map)  throws LogicException;
+    boolean updateDiet(int userId, String dietType,String carbohydrates,String fats,String proteins,  Map<String, String> map)  throws ServiceException;
 }

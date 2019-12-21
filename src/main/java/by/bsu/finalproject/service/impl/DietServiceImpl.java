@@ -5,7 +5,7 @@ import by.bsu.finalproject.dao.impl.DietDaoImpl;
 import by.bsu.finalproject.entity.Diet;
 import by.bsu.finalproject.service.DietService;
 import by.bsu.finalproject.exception.DaoException;
-import by.bsu.finalproject.exception.LogicException;
+import by.bsu.finalproject.exception.ServiceException;
 import by.bsu.finalproject.service.ServiceName;
 import by.bsu.finalproject.validator.DietValidator;
 import org.apache.logging.log4j.LogManager;
@@ -25,7 +25,7 @@ public class DietServiceImpl implements DietService {
 
     private DietDaoImpl dietDao = DaoFactory.INSTANCE.getDietDao();
 
-    public boolean addInformation(int userId, String dietType,String carbohydrates,String fats,String proteins,  Map<String, String> map) throws LogicException {
+    public boolean addInformation(int userId, String dietType,String carbohydrates,String fats,String proteins,  Map<String, String> map) throws ServiceException {
 
         boolean isCorrectDiet = validateDiet(dietType, carbohydrates, fats, proteins, map);
 
@@ -40,14 +40,14 @@ public class DietServiceImpl implements DietService {
             try {
                 return dietDao.createDiet(diet, userId);
             } catch (DaoException e) {
-                throw new LogicException(e);
+                throw new ServiceException(e);
             }
         } else {
             logger.info("not valid diet");
             return false;
         }
     }
-    public Map<String, String> findUsersDiet(int userId) throws LogicException {
+    public Map<String, String> findUsersDiet(int userId) throws ServiceException {
 
         Diet diet;
         Map<String, String> attributeMap = new HashMap<>();
@@ -60,20 +60,20 @@ public class DietServiceImpl implements DietService {
             attributeMap.put(ServiceName.PROTEINS, String.valueOf(diet.getProteins()));
 
         } catch (DaoException e) {
-            throw new LogicException(e);
+            throw new ServiceException(e);
         }
         return attributeMap;
     }
-    public boolean isDietExist(int userId) throws LogicException {
+    public boolean isDietExist(int userId) throws ServiceException {
 
         try {
             return dietDao.isUsersDietExist(userId);
         } catch (DaoException e) {
-            throw new LogicException(e);
+            throw new ServiceException(e);
         }
     }
 
-    public  boolean updateDiet(int userId, String dietType,String carbohydrates,String fats,String proteins,  Map<String, String> map) throws LogicException {
+    public  boolean updateDiet(int userId, String dietType,String carbohydrates,String fats,String proteins,  Map<String, String> map) throws ServiceException {
 
         boolean isCorrectDiet = validateDiet(dietType, carbohydrates, fats, proteins, map);
 
@@ -87,7 +87,7 @@ public class DietServiceImpl implements DietService {
             try {
                 return dietDao.updateDiet(userId,diet);
             } catch (DaoException e) {
-                throw new LogicException(e);
+                throw new ServiceException(e);
             }
         }else{
             logger.info("not valid diet");
