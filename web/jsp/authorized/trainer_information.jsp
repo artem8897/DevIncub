@@ -10,23 +10,24 @@
     <c:import url="/jsp/header.jsp"/>
     <c:import url="/jsp/user_navigation.jsp"/>
 
-    <form name="AddTrainerInformation" method="POST" action="controller"/>
+    <form name="TrainerInformation" method="POST" action="controller"/>
     <c:set var="trainers" value="${trainers}"/>
     </br><fmt:message key="label.work_experience"/> <br/>
     <input type="text" name="work_experience"  value="${trainers['work_experience']}" required pattern = "([0-9]{1,2})"/>
     <br/><fmt:message key="label.name"/><br/>
-    <input type="text" name="name"  value="${trainers['name']}" required pattern = "(([А-Яа-я]{5,20})|([a-zA-z]{5,20}))"/>
+    <input type="text" name="name" value="${trainers['name']}" required pattern = "(([А-Яа-я]{5,20})|([a-zA-z]{5,20}))"/>
     <br/><fmt:message key="label.training_type"/><br/>
     <input type="text" name="training_type" value="${trainers['training_type']}" required pattern = "(([а-яА-я ]{5,14})|([a-zA-Z ]{2,20}))"/>
     <input type="hidden" name="user_id" value="${user_id}">
     <br/>
-    ${info}
+    <span style="color: red">${info}</span>
     <br/>
     <c:set var = "move" value = "${mov}"/>
     <br/>
 
     <c:choose>
         <c:when test="${move == 'ADD'}">
+            <input type="hidden" name="redirect" value="controller?command=GO_TO_TRAINER">
             <button class="w3-btn w3-hover-light-blue w3-round-large"  name="command" value=add_trainer_information ><fmt:message key="label.create_trainer_information"/></button>
         </c:when>
         <c:when test="${move == 'UPDATE'}">

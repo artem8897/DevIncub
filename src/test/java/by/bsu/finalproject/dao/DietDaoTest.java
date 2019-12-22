@@ -15,7 +15,6 @@ import java.sql.Connection;
 
 public class DietDaoTest {
 
-    private final String DATABASE_URL = ("jdbc:mysql://localhost:3306/new_schema?useUnicode=true&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true");
     Connection connection;
     DietDaoImpl dietDao = DaoFactory.INSTANCE.getDietDao();
     int userId = 68;

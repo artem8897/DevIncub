@@ -30,6 +30,7 @@ public class PaymentDaoTest {
 
     @Test
     public void testAddDiscount() throws DaoException, SQLException {
+
         String date = "2019-12-26";
         int value = 20;
         int actualValue = 0;

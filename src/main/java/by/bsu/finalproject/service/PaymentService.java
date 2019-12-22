@@ -51,7 +51,7 @@ public interface PaymentService {
      * @throws ServiceException
      */
 
-    Map<Integer, String> selectStatuses() throws ServiceException;
+    Map<Integer, String> finsPayStatuses() throws ServiceException;
 
 }
 

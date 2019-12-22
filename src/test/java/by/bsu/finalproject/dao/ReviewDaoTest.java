@@ -15,8 +15,6 @@ import java.util.Map;
 
 public class ReviewDaoTest {
 
-
-    private final String DATABASE_URL = ("jdbc:mysql://localhost:3306/new_schema?useUnicode=true&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true");
     Connection connection;
     ReviewDao reviewDao = DaoFactory.INSTANCE.getReviewDao();
 
@@ -55,7 +53,7 @@ public class ReviewDaoTest {
             put(17, secondUserReview);
         }};
 
-        Map<Integer, Review> reviewMap = reviewDao.findAllByTrainer(userId);
+        Map<Integer, Review> reviewMap = reviewDao.findReviewsByTrainerId(userId);
 
         Assert.assertEquals(expectedReviewMap, reviewMap);
 

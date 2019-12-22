@@ -15,8 +15,10 @@
 <input type="date" name="date"  value="${training['date']}" required/>
 </br><fmt:message key="label.training_type"/> <br/>
 <input type="text" name="training type"  value="${training['training_type']}" required/>
-</br>personality <br/>
+</br><fmt:message key="label.personality"/><br/>
 <input type="text" name="personality"  value="${training['personality']}" required/>
+
+    <span style="color: red">${info}</span>
 
 <br/>
 <c:set var = "move" value = "${mov}"/>

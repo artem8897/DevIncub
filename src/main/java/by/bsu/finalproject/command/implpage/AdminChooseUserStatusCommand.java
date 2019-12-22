@@ -25,7 +25,7 @@ public class AdminChooseUserStatusCommand implements ActionCommand {
         int userId = Integer.parseInt(request.getParameter(ParamName.USER_ID));
         try {
             request.setAttribute(ParamName.USER_ID, userId);
-            request.setAttribute(ParamName.STATUS,paymentService.selectStatuses());
+            request.setAttribute(ParamName.STATUS,paymentService.finsPayStatuses());
         } catch (ServiceException e) {
             throw new CommandException(e);
         }

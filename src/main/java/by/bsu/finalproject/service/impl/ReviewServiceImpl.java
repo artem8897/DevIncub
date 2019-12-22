@@ -46,9 +46,9 @@ public class ReviewServiceImpl implements ReviewService {
         Map<Integer, Review> reviewMap = new HashMap<>();
         try {
             if(userType.equals(UserType.USER)){
-                reviewMap = reviewDao.findAllByUser(userId);
+                reviewMap = reviewDao.findReviewsByUserId(userId);
             }else if(userType.equals(UserType.TRAINER)){
-                reviewMap = reviewDao.findAllByTrainer(userId);
+                reviewMap = reviewDao.findReviewsByTrainerId(userId);
             }
         } catch (DaoException e) {
             throw new ServiceException(e);

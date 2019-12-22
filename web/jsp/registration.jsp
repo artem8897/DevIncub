@@ -22,7 +22,7 @@
 
     </br><fmt:message key="label.email"/> <br/>
     <input type="email" name="email"  value="${students['email']}" required pattern="[A-Za-z0-9]{4,20}@[a-z]{3,7}.[a-z]{2,3}"/>
-    </br><label class="invalid-value-label"><c:if test="${ students['email'] eq 'wrong field'}"><fmt:message key="message.wrong_fields"/></c:if></label><br/>
+    </br><label class="invalid-value-label"><c:if test="${ students['email'] eq 'wrong field'}"><fmt:message key="label.wrong_mail"/></c:if></label><br/>
     <br/><fmt:message key="label.password"/><br/>
     <input type="password" name="password" value="${students['password']}"  required pattern="[0-9a-zA-Z]{5,10}"/>
     <br/><fmt:message key="label.confirmpassword"/><br/>
@@ -31,8 +31,8 @@
     <input type="text" name="username" value="${students['username']}" required pattern="[A-Za-z]{1,2}[A-Za-z0-9]{6,8}" />
     <br/><label class="invalid-value-label"><c:if test="${ students['username'] eq 'wrong field'}"><span style="color: darkred"><fmt:message key="label.wrong_username"/></span></c:if></label></br>
     <br/>
-${wrong_fields}
-${wrongregistration}
+    <span style="color: darkred">${wrong_fields}</span>
+    <span style="color: darkred">${wrongregistration}</span>
 <br/>
 <button class="w3-btn w3-hover-light-blue w3-round-large" name="command" value=registration ><fmt:message key="label.registration"/></button>
 </form><hr/>

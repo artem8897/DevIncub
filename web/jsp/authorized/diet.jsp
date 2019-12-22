@@ -32,7 +32,8 @@
 <input type="text" name="carbohydrates"  value="${diet['carbohydrates']}" required pattern="[0-9]{0,3}"/>
 <input type="hidden" name="user_id" value="${user_id}">
 <br/>
-<c:set var = "move" value = "${mov}"/>
+    <span style="color: red">${info}</span>
+    <c:set var = "move" value = "${mov}"/>
 <br/>
 <c:choose>
     <c:when test="${move == 'ADD'}">

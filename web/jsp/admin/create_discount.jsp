@@ -19,7 +19,7 @@
 <input type="hidden" name="redirect" value="controller?command=GO_TO_ADMIN">
     <br/>
 </form><hr/>
-${info}
+<span style="color: red">${info}</span>
 <br/>
 <c:import url="/jsp/footer.jsp"/>
 </div>

@@ -79,7 +79,7 @@ public class ReviewDaoImpl implements ReviewDao {
         }
     }
 
-    public Map<Integer, Review> findAllByTrainer(Integer id) throws DaoException {
+    public Map<Integer, Review> findReviewsByTrainerId(Integer id) throws DaoException {
 
         Map<Integer, Review> reviewMap;
         String sqlQuery = Query.SQL_SELECT_TRAINERS_REVIEW;
@@ -91,8 +91,7 @@ public class ReviewDaoImpl implements ReviewDao {
         }
         return reviewMap;
     }
-
-    public Map<Integer, Review> findAllByUser(Integer id) throws DaoException {
+    public Map<Integer, Review> findReviewsByUserId(Integer id) throws DaoException {
 
         Map<Integer, Review> reviewMap;
         String sqlQuery = Query.SQL_SELECT_USERS_REVIEW;

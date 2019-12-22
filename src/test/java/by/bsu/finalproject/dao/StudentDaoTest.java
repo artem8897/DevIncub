@@ -15,8 +15,6 @@ import java.sql.Connection;
 
 public class StudentDaoTest {
 
-
-    private final String DATABASE_URL = ("jdbc:mysql://localhost:3306/new_schema?useUnicode=true&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true");
     Connection connection;
     StudentDaoImpl personalInformationDao = DaoFactory.INSTANCE.getPersonalInformationDao();
     int userId = 68;

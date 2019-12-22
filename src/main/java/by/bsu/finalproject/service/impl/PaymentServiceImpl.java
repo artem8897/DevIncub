@@ -100,7 +100,7 @@ public class PaymentServiceImpl implements PaymentService {
         }
     }
 
-    public Map<Integer, String> selectStatuses() throws ServiceException {
+    public Map<Integer, String> finsPayStatuses() throws ServiceException {
 
         try {
             return paymentDao.findAllPayStatuses();

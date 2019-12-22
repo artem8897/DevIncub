@@ -5,10 +5,11 @@
 <fmt:setLocale value="${local}" scope="session" />
 <fmt:setBundle basename="local" />
 <!DOCTYPE>
-<html><head><title><fmt:message key="label.title" /></title></head>
+<html><head><title><fmt:message key="label.trainer_page" /></title></head>
 <body>
 <c:import url="/jsp/header.jsp"/>
 <c:import url="/jsp/user_navigation.jsp"/>
+<fmt:message key="label.trainer_acc"/>
 <div class="w3-hover-text-brown"><ctg:table-revenue/></div>
 <hr/>
 ${info}

@@ -15,7 +15,6 @@ import java.util.List;
 
 public class TrainerDaoTest {
 
-    private final String DATABASE_URL = ("jdbc:mysql://localhost:3306/new_schema?useUnicode=true&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true");
     private Connection connection;
     private TrainerDaoImpl trainerDao = DaoFactory.INSTANCE.getTrainerDao();
     private int userId = 12;

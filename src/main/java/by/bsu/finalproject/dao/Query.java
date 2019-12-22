@@ -80,7 +80,6 @@ public class Query {
     public static final String SQL_SELECT_MONEY_FROM_ACCOUNT = "SELECT money_amount FROM money_card WHERE account_number = ?";
     public static final String SQL_SELECT_DISCOUNT_DATE = "SELECT date FROM discount_date WHERE date = ?";
     public static final String SQL_SELECT_ALL_DISCOUNT_DATES = "SELECT date, discount_amount FROM discount_date WHERE date >= CURRENT_DATE AND status = 'active'";
-    public static final String SQL_SELECT_DISCOUNT_DATE_AND_PRICE = "SELECT date, discount_amount FROM discount_date WHERE date = ?";
     public static final String SQL_DELETE_DISCOUNT = "UPDATE discount_date SET discount_date.status = 'deleted' WHERE date = ?";
 
 }

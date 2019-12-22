@@ -32,7 +32,7 @@ public interface ReviewDao {
      * @throws DaoException
      */
 
-     Map<Integer, Review> findAllByTrainer(Integer id) throws DaoException;
+     Map<Integer, Review> findReviewsByTrainerId(Integer id) throws DaoException;
 
     /**
      * Find reviews by student at the specified userId
@@ -41,5 +41,5 @@ public interface ReviewDao {
      * @throws DaoException
      */
 
-     Map<Integer, Review> findAllByUser(Integer id) throws DaoException;
+     Map<Integer, Review> findReviewsByUserId(Integer id) throws DaoException;
 }

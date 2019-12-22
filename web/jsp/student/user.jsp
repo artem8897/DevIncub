@@ -6,15 +6,15 @@
 <fmt:setBundle basename="local" />
 <!DOCTYPE>
 <html><head><title>
-</div><fmt:message key="label.title" /></title></head>
-
+</div><fmt:message key="label.student_page" /></title></head>
 <body class="w3-border-blue-gray">
 <c:import url="/jsp/header.jsp"/>
 <c:import url="/jsp/user_navigation.jsp"/>
+<fmt:message key="label.student_acc"/>
 <div class="w3-hover-text-brown" style="text-align: center"><ctg:table-revenue/></div>
 <hr/>
 <hr/>
-${info}
+<span style="color: #00bcd4"></span> ${info}
 </body>
 <c:import url="../footer.jsp"/>
 </div>

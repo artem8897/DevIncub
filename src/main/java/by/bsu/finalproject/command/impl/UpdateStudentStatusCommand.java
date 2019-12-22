@@ -39,7 +39,7 @@ public class UpdateStudentStatusCommand implements ActionCommand {
                 request.setAttribute(ParamName.REDIRECT, redirect);
             } else {
                 PaymentServiceImpl paymentService = new PaymentServiceImpl();
-                request.setAttribute(ParamName.STATUS, paymentService.selectStatuses());
+                request.setAttribute(ParamName.STATUS, paymentService.finsPayStatuses());
                 request.setAttribute(ParamName.USER_ID, userId);
                 request.setAttribute(ParamName.INFO, MessageManager.getProperty(MessageName.MESSAGE_WRONG_FIELDS));
             }

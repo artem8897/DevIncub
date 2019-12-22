@@ -55,7 +55,9 @@ public enum ConnectionPool {
      */
 
     public Connection getConnection() throws ConnectionPoolException {
+
         Connection connection ;
+
         try {
             connection = connectionQueue.take();
             givenAwayConQueue.offer(connection);
@@ -74,17 +76,21 @@ public enum ConnectionPool {
      */
 
     public void releaseConnection(Connection connection) throws ConnectionPoolException {
+
         if(connection.getClass() == ProxyConnection.class){
             try {
                 connection.setAutoCommit(true);
             } catch (SQLException e) {
                 throw new ConnectionPoolException(e);
             }
+
         givenAwayConQueue.remove(connection);
         connectionQueue.offer(connection);
+
         }else{
             logger.error("wrong connection tries to get into ConnectionPool");
-            throw new ConnectionPoolException("Unknown connection");
+            throw new
+                    ConnectionPoolException("Unknown connection");
         }
     }
 
@@ -96,10 +102,8 @@ public enum ConnectionPool {
         for (int i = 0; i < DEFAULT_POOL_SIZE ; i++) {
             try {
                 ((ProxyConnection)connectionQueue.take()).reallyClose();
-            } catch (SQLException e) {
+            } catch (SQLException | InterruptedException e) {
                 throw new ConnectionPoolException("SQLException in destroyPool",e);
-            } catch (InterruptedException e) {
-                throw new ConnectionPoolException(e);
             }
         }
         deregisterDriver();

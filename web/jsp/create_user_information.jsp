@@ -3,7 +3,7 @@
 <fmt:setLocale value="${local}" scope="session" />
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <fmt:setBundle basename="local" />
-<html><head><title><fmt:message key="label.registration"/></title></head>
+<html><head><title><fmt:message key="label.edit_student"/></title></head>
     <body>
     <div class="w3-container w3-center">
 
@@ -49,6 +49,14 @@ ${wrongregistration}
     </c:choose>
     <br/>
     <br/>
+        <c:choose>
+            <c:when test="${user_type.equals('ADMIN')}">
+                <input type="hidden" name="redirect" value="controller?command=GO_TO_ADMIN">
+            </c:when>
+            <c:when test="${user_type.equals('USER')}">
+                <input type="hidden" name="redirect" value="controller?command=student_acc">
+            </c:when>
+        </c:choose></form><hr/>
     </form><hr/>
     <c:import url="/jsp/footer.jsp"/>
     </div>

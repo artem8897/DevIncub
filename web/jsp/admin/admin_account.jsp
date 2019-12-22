@@ -5,14 +5,12 @@
 <fmt:setBundle basename="local" />
 <%@ taglib prefix="ctg" uri="/WEB-INF/tld/custom.tld" %>
 <!DOCTYPE>
-<html><head><title><fmt:message key="label.title" /></title></head>
+<html><head><title><fmt:message key="label.admin_page" /></title></head>
 <body>
 <div style="text-align: center;" >
-
     <c:import url="/jsp/header.jsp"/>
-        <c:import url="/jsp/user_navigation.jsp"/>
-
-        <hr/>
+    <c:import url="/jsp/user_navigation.jsp"/>
+        <fmt:message key="label.admin_acc"/>
         <div class="w3-hover-text-brown"><ctg:table-revenue/></div>
         <hr/>
         ${info}

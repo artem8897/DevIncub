@@ -39,7 +39,7 @@ public class EmailAcceptor {
                 return new PasswordAuthentication(SENDER_EMAIL_ADDRESS, SENDER_EMAIL_PASSWORD);
             }
         });
-        String number = String.valueOf((int)(30 + Math.random()*30));
+        String number = String.valueOf((int)(99 + Math.random()*309));
 
         MimeMessage message = new MimeMessage(session);
         message.setFrom(new InternetAddress(SENDER_EMAIL_ADDRESS));

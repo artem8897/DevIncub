@@ -42,7 +42,6 @@
 
                     <option value="${user.value.status}" selected/>${user.value.status}
                     <option value="active" /><c:out value="active"/>
-                    <option value="blocked" /><c:out value="blocked"/>
                     <option value="deleted" /><c:out value="deleted"/>
 
                 </select></td>

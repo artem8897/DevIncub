@@ -38,7 +38,7 @@ public class CreateTrainerInformationCommand implements ActionCommand {
             String name = request.getParameter(ParamName.PARAM_NAME_NAME);
             String redirect = request.getParameter(ParamName.REDIRECT);
             String workExperience = request.getParameter(ParamName.PARAM_WORK_EXPERIENCE);
-            int userId = Integer.parseInt(request.getParameter(ParamName.USER_ID));
+            int userId = user.getId();
 
             Map<String, String> map = new HashMap<>();
 

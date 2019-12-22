@@ -30,7 +30,7 @@ public class UserDaoImpl implements UserDao {
         Map<Integer, User> users = new HashMap<>();
 
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();
-                 PreparedStatement st = connection.prepareStatement(Query.SQL_SELECT_ALL_USERS)){
+             PreparedStatement st = connection.prepareStatement(Query.SQL_SELECT_ALL_USERS)){
 
                 st.setInt(1,currentPage);
                 st.setInt(2,recordPerPage);

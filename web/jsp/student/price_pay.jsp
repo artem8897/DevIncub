@@ -36,7 +36,7 @@
 
             <br>
             <fmt:message key="label.card_number"/>
-            <input type="password" name="card" value="" required pattern="[0-9]{10}"/>
+            <input type="password" name="card" value="" required pattern="[0-9]{9}"/>
             <br/>
         <button class="w3-btn w3-hover-light-blue w3-round-large"  name="command" value="PAY" ><fmt:message key="label.pay"/></button>
         </form><hr/>
