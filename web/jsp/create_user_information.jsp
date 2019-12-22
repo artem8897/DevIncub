@@ -39,7 +39,9 @@ ${wrongregistration}
     <br/>
     <c:choose>
         <c:when test="${move == 'ADD'}">
-            <button class="w3-btn w3-hover-light-blue w3-round-large"  name="command" value=addinformationcommand ><fmt:message key="label.create_user_dat"/></button>
+            <br/><fmt:message key="label.code"/><br/>
+            <input type="text" name="code" value="" required pattern="[0-9]{2,7}"/>
+            <br/><button class="w3-btn w3-hover-light-blue w3-round-large"  name="command" value=addinformationcommand ><fmt:message key="label.create_user_dat"/></button><br/>
         </c:when>
         <c:when test="${move == 'UPDATE'}">
             <button button class="w3-btn w3-hover-light-blue w3-round-large"  name="command" value=user_information_update><fmt:message key="label.edit_student"/></button>

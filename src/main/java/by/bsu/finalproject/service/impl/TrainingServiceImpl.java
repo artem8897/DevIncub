@@ -34,7 +34,7 @@ public class TrainingServiceImpl implements TrainingService {
 
         Training training = new Training();
         training.setTrainingType(trainingType);
-        training.setPeriodicity(date);
+        training.setDate(date);
         training.setPersonality(personality);
 
         boolean isValidTraining = validateTraining(training, map);
@@ -44,6 +44,7 @@ public class TrainingServiceImpl implements TrainingService {
             try {
                 return trainingDao.createTraining(userId, training);
             } catch (DaoException e) {
+                logger.catching(e);
                 throw new ServiceException(e);
             }
         }else{
@@ -55,6 +56,7 @@ public class TrainingServiceImpl implements TrainingService {
         try {
             return trainingDao.deleteTraining(trainingId);
         } catch (DaoException e) {
+            logger.catching(e);
             throw new ServiceException(e);
         }
     }
@@ -76,6 +78,7 @@ public class TrainingServiceImpl implements TrainingService {
                 try {
                     trainingMap = trainingDao.findUsersTrainings(currentPage,recordsPerPage, userId);
                 } catch (DaoException e) {
+                    logger.catching(e);
                     throw new ServiceException(e);
                 }
             }
@@ -86,6 +89,7 @@ public class TrainingServiceImpl implements TrainingService {
         try {
              return trainingDao.findNumberOfTrainings(userId);
         } catch (DaoException e) {
+            logger.catching(e);
             throw new ServiceException(e);
         }
     }
@@ -96,6 +100,7 @@ public class TrainingServiceImpl implements TrainingService {
         try {
             trainingMap = trainingDao.findUsersTrainingMap(userId);
         } catch (DaoException e) {
+            logger.catching(e);
             throw new ServiceException(e);
         }
         return trainingMap;
@@ -105,17 +110,17 @@ public class TrainingServiceImpl implements TrainingService {
         Training training = new Training();
 
         training.setPersonality(personality);
-        training.setPeriodicity(periodicity);
+        training.setDate(periodicity);
         training.setId(trainingId);
         training.setTrainingType(trainingType);
 
         boolean isValidTraining = validateTraining(training, map);
 
         if(isValidTraining){
-
             try {
                 return trainingDao.update(training);
             } catch (DaoException e) {
+                logger.catching(e);
                 throw new ServiceException(e);
             }
         }else{
@@ -135,6 +140,7 @@ public class TrainingServiceImpl implements TrainingService {
             trainingPramsMap.put(ServiceName.TRAINING_ID, String.valueOf(trainingId));
 
         } catch (DaoException e) {
+            logger.catching(e);
             throw new ServiceException(e);
         }
         return trainingPramsMap;

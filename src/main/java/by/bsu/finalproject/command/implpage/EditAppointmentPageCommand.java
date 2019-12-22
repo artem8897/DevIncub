@@ -46,10 +46,10 @@ public class EditAppointmentPageCommand implements ActionCommand {
 
                 if (ParamName.TRAINING.equals(type)) {
                     noOfRecords = informationService.findNumberOfRowsStudentsWithPaidTraining(trainerId);
-                    request.setAttribute(ParamName.INFO, MessageManager.getProperty(MessageName.NO_TRAINING_EXIST));
+                    request.setAttribute(ParamName.INFO, MessageManager.getProperty(MessageName.ALL_TRAININGS_SET));
                 } else if (ParamName.DIET.equals(type)) {
                     noOfRecords = informationService.findNumberOfRowsStudentsWithNoDiet(trainerId);
-                    request.setAttribute(ParamName.INFO, MessageManager.getProperty(MessageName.NO_DIET_EXIST));
+                    request.setAttribute(ParamName.INFO, MessageManager.getProperty(MessageName.ALL_DIET_SET));
                 } else {
                     noOfRecords = informationService.findNumberOfRows();
                 }

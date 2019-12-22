@@ -31,6 +31,8 @@ public class Query {
     public static final String SQL_UPDATE_TRAINING_PAID = "UPDATE user_trainer SET paid_training = paid_training - 1 WHERE user_trainer.user_id = ? ";
     public static final String SQL_INSERT_REVIEW = "INSERT mydb.review(review,rate) VALUES (?,?)";
     public static final String SQL_INSERT_USERS_REVIEW = "INSERT mydb.user_review(user_id,trainer_id,review_id) VALUES (?,?,?)";
+    public static final String SQL_INSERT_REGISTRATION_CODE = "INSERT mydb.registration_code(email,code) VALUES (?,?)";
+    public static final String SQL_SELECT_REGISTRATION_CODE = "SELECT code FROM registration_code WHERE email = ?";
     public static final String SQL_SELECT_ALL_TRAINERS = "SELECT work_experience,name,training_type,trainer_id FROM trainer_information";
     public static final String SQL_SELECT_LIMIT_TRAINERS = "SELECT work_experience,name,training_type,trainer_id FROM trainer_information JOIN user on trainer_information.trainer_id = user.id WHERE user.status NOT LIKE 'deleted' AND user.usertype LIKE 'trainer' LIMIT ?,?";
     public static final String SQL_INSERT_TRAINER = "INSERT mydb.trainer_information(training_type,name,work_experience,trainer_id) VALUES (?,?,?,?)";

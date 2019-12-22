@@ -130,7 +130,7 @@ public class TrainingDaoImpl implements TrainingDao {
 
                     training.setId(resultSet.getInt(TablesColumnName.TRAINING_ID));
                     training.setTrainingType(resultSet.getString(TablesColumnName.TRAINING_TYPE));
-                    training.setPeriodicity(resultSet.getString(TablesColumnName.DATE));
+                    training.setDate(resultSet.getString(TablesColumnName.DATE));
                     training.setPersonality(resultSet.getString(TablesColumnName.PERSONALITY));
                 }
             }
@@ -246,7 +246,7 @@ public class TrainingDaoImpl implements TrainingDao {
                  Training training = new Training();
                  training.setId(resultSet.getInt(TablesColumnName.TRAINING_ID));
                  training.setTrainingType(resultSet.getString(TablesColumnName.TRAINING_TYPE));
-                 training.setPeriodicity(resultSet.getString(TablesColumnName.DATE));
+                 training.setDate(resultSet.getString(TablesColumnName.DATE));
                  trainingMap.put(training.getId(),training);
              }
          }

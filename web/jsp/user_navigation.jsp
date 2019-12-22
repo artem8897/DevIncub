@@ -34,7 +34,7 @@
             <table class="table table-striped table-bordered table-sm">
 
                 <tr>
-                    <td>  <button class="w3-btn w3-text-aqua w3-hover-light-blue w3-round-large" onclick="location.href='controller?command=update_user_information_page'"><fmt:message key="label.edit_information"/> </button> </td>
+                    <td>  <button class="w3-btn w3-hover-amber w3-round-large" onclick="location.href='controller?command=update_user_information_page'"><fmt:message key="label.edit_my_information"/> </button> </td>
                     <td>  <button class="w3-btn w3-hover-amber w3-round-large" onclick="location.href='controller?command=button_diet_page'" ><fmt:message key="label.update_diet"/> </button> </td>
                     <td>  <button class="w3-btn w3-hover-border-blue-gray w3-round-large" onclick="location.href='controller?command=go_to_choose_trainer'" ><fmt:message key="label.buy_trainings"/> </button> </td>
                     <td>  <button class="w3-btn w3-hover-text-black w3-round-large" onclick="location.href='controller?command=all_users_training_page&currentPage=0&recordsPerPage=5'" ><fmt:message key="label.update_training"/> </button> </td>

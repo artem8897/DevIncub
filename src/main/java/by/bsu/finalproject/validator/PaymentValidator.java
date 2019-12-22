@@ -17,7 +17,6 @@ public enum PaymentValidator {
     private static final String REGULAR_DATE = "[0-9]{4}-[0-9]{2}-[0-9]{2}";
     private static final String REGULAR_CARD = "\\d{9}";
 
-
     /**
      * Validate date
      * @param date
@@ -28,7 +27,6 @@ public enum PaymentValidator {
         Pattern pat = Pattern.compile(REGULAR_DATE);
         Matcher matcher = pat.matcher(date);
         return matcher.matches();
-
     }
     /**
      * Validate card
@@ -48,6 +46,7 @@ public enum PaymentValidator {
      */
 
     public boolean isValidDiscount(String discount){
+
         Pattern pat = Pattern.compile(REGULAR_NUMBER);
         Matcher matcher = pat.matcher(discount);
         return matcher.matches();
@@ -60,6 +59,7 @@ public enum PaymentValidator {
      */
 
     private boolean isPageValid(String pageNumber){
+
         Pattern pat = Pattern.compile(REGULAR_PAGE);
         Matcher matcher = pat.matcher(pageNumber);
         return matcher.matches();

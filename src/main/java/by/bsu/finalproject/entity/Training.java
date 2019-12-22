@@ -3,7 +3,7 @@ package by.bsu.finalproject.entity;
 public class Training {
 
     private String trainingType;
-    private String periodicity;
+    private String date;
     private String personality;
     private int id;
     private String status;
@@ -20,11 +20,11 @@ public class Training {
     }
 
     public String getDate() {
-        return periodicity;
+        return date;
     }
 
-    public void setPeriodicity(String periodicity) {
-        this.periodicity = periodicity;
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public int getId() {
@@ -55,7 +55,7 @@ public class Training {
     @Override
     public String toString() {
         return "trainingType='" + trainingType + '\'' +
-                ", periodicity='" + periodicity + '\'' +
+                ", periodicity='" + date + '\'' +
                 ", id=" + id;
     }
 
@@ -69,7 +69,7 @@ public class Training {
         if (id != training.id) return false;
         if (trainingType != null ? !trainingType.equals(training.trainingType) : training.trainingType != null)
             return false;
-        if (periodicity != null ? !periodicity.equals(training.periodicity) : training.periodicity != null)
+        if (date != null ? !date.equals(training.date) : training.date != null)
             return false;
         if (personality != null ? !personality.equals(training.personality) : training.personality != null)
             return false;
@@ -79,7 +79,7 @@ public class Training {
     @Override
     public int hashCode() {
         int result = trainingType != null ? trainingType.hashCode() : 0;
-        result = 31 * result + (periodicity != null ? periodicity.hashCode() : 0);
+        result = 31 * result + (date != null ? date.hashCode() : 0);
         result = 31 * result + (personality != null ? personality.hashCode() : 0);
         result = 31 * result + id;
         result = 31 * result + (status != null ? status.hashCode() : 0);

@@ -22,5 +22,7 @@ public class MessageName {
     public static final String PROBLEMS_WITH_PAID = "message.some_problem_with_paid";
     public static final String WRONG_ACTION = "message.wrongaction";
     public static final String NULL_PAGE = "message.nullpage";
+    public static final String ALL_DIET_SET = "message.all_diets_set";
+    public static final String ALL_TRAININGS_SET = "message.all_trainings_set";
 
 }

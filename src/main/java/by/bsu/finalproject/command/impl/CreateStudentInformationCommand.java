@@ -36,6 +36,8 @@ public class CreateStudentInformationCommand implements ActionCommand {
         if(user != null) {
 
             String name = request.getParameter(ParamName.PARAM_NAME_NAME);
+            String email = user.getEmail();
+            String code = request.getParameter(ParamName.CODE);
             String redirect = request.getParameter(ParamName.REDIRECT);
             String secondName = request.getParameter(ParamName.PARAM_NAME_SECOND_NAME);
             String weight = request.getParameter(ParamName.PARAM_NAME_WEIGHT);
@@ -46,7 +48,7 @@ public class CreateStudentInformationCommand implements ActionCommand {
             int userId = user.getId();
             boolean wasCreated;
             try {
-                wasCreated = logic.addInformation(userId, name, secondName, sex, weight, height, map);
+                wasCreated = logic.addInformation(userId, name, secondName, sex, weight, height, map, code, email);
             } catch (ServiceException e) {
                 throw new CommandException(e);
             }

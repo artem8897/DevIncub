@@ -29,13 +29,12 @@ public interface UserService {
      * @param pass
      * @param confirmedPassword
      * @param username
-     * @param sex
      * @param map
      * @return boolean was created user
      * @throws ServiceException
      */
 
-    boolean register(String login,String pass,String confirmedPassword,String username,String sex, Map<String, String> map) throws ServiceException;
+    boolean register(String login,String pass,String confirmedPassword,String username, Map<String, String> map) throws ServiceException;
 
     /**
      * Delete a user at the specified userId

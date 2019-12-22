@@ -102,6 +102,20 @@ public class UserDaoImpl implements UserDao {
             throw new DaoException(e);
         }
     }
+    public void createUsersCode(String email, String code) throws DaoException {
+
+        try (Connection connection = ConnectionPool.INSTANCE.getConnection();
+             PreparedStatement  statement = connection.prepareStatement(Query.SQL_INSERT_REGISTRATION_CODE)) {
+
+            statement.setString(1, email);
+            statement.setString(2, code);
+            statement.executeUpdate();
+
+        }catch (ConnectionPoolException | SQLException e){
+            logger.catching(e);
+            throw new DaoException(e);
+        }
+    }
     public boolean changeUserStatus(int userId , String status, UserType userType) throws DaoException {
 
         try (Connection connection = ConnectionPool.INSTANCE.getConnection();

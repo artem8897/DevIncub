@@ -38,7 +38,7 @@ public class TrainingDaoTest {
 
         Training training = new Training();
         training.setTrainingType(trainingType);
-        training.setPeriodicity(date);
+        training.setDate(date);
         training.setPersonality(personality);
 
         trainingDao.createTraining(userId, training);
@@ -54,7 +54,7 @@ public class TrainingDaoTest {
         Training training = new Training();
 
         training.setPersonality(personality);
-        training.setPeriodicity(date);
+        training.setDate(date);
         training.setId(trainingId);
         training.setTrainingType(trainingType);
 

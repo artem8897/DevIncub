@@ -12,7 +12,7 @@ public enum DietValidator {
 
     INSTANCE;
 
-    private static final String REGULAR_DIET_TYPE = "[A-Z a-z]{6,20}";
+    private static final String REGULAR_DIET_TYPE = "[A-Z][A-Z a-z]{6,20}";
     private static final String REGULAR_NUMBER = "\\d{1,9}";
 
     /**

@@ -34,6 +34,7 @@ public class StudentServiceImpl implements StudentService {
         try {
             personInformationMap = personalInformationDao.findAllStudents();
         } catch (DaoException e) {
+            logger.catching(e);
             throw new ServiceException(e);
         }
         return personInformationMap;
@@ -57,6 +58,7 @@ public class StudentServiceImpl implements StudentService {
                 try {
                     personInformationMap = personalInformationDao.findStudentsByTrainer(currentPage, recordsPerPage, trainerId);
                 } catch (DaoException e) {
+                    logger.catching(e);
                     throw new ServiceException(e);
                 }
             }
@@ -64,12 +66,12 @@ public class StudentServiceImpl implements StudentService {
         return personInformationMap;
     }
 
-
     public Integer findNumberOfRows () throws ServiceException {
 
         try {
             return personalInformationDao.findNumberStudents();
         } catch (DaoException e) {
+            logger.catching(e);
             throw new ServiceException(e);
         }
     }
@@ -78,6 +80,7 @@ public class StudentServiceImpl implements StudentService {
         try {
             return personalInformationDao.updatePayStatus(userId, paymentStatus);
         } catch (DaoException e) {
+            logger.catching(e);
             throw new ServiceException(e);
         }
     }
@@ -86,6 +89,7 @@ public class StudentServiceImpl implements StudentService {
         try {
             return personalInformationDao.findNumberOfStudentsWhoPaid(trainerId);
         } catch (DaoException e) {
+            logger.catching(e);
             throw new ServiceException(e);
         }
     }
@@ -94,15 +98,16 @@ public class StudentServiceImpl implements StudentService {
         try {
             return personalInformationDao.findNumberStudentsWithNoDiet(trainerId);
         } catch (DaoException e) {
+            logger.catching(e);
             throw new ServiceException(e);
         }
     }
 
-    public boolean addInformation(int userId, String name,String secondName,String sex, String weight, String height, Map<String, String> map) throws ServiceException {
+    public boolean addInformation(int userId, String name,String secondName,String sex, String weight, String height, Map<String, String> map, String code, String email) throws ServiceException {
 
         boolean isValidPersonalInformation = ValidatePersonalInformation(name, secondName, sex, weight, height, map);
 
-        if (isValidPersonalInformation) {
+        if (isValidPersonalInformation && code != null) {
 
             Student person = new Student();
             person.setId(userId);
@@ -111,10 +116,11 @@ public class StudentServiceImpl implements StudentService {
             person.setHeight(Integer.parseInt(height));
             person.setWeight(Integer.parseInt(weight));
             person.setSecondName(secondName);
-
+            String usersCode = findRegistrationCode(email);
             try {
+                boolean isRightCode = code.equals(usersCode);
                 boolean isAlreadyExist = personalInformationDao.isCreated(userId);
-                if (!isAlreadyExist) {
+                if (!isAlreadyExist && isRightCode) {
                     return personalInformationDao.createStudent(person);
                 }
             } catch (DaoException e) {
@@ -122,6 +128,14 @@ public class StudentServiceImpl implements StudentService {
             }
         }
         return false;
+    }
+    private String findRegistrationCode(String email) throws ServiceException {
+
+        try {
+            return personalInformationDao.findRegistrationCode(email);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
     }
 
     public Map<String, String> findPersonalInformation(int userId) throws ServiceException {

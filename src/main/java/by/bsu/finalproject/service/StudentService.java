@@ -34,7 +34,7 @@ public interface StudentService {
      * @throws ServiceException
      */
 
-    boolean addInformation(int userId, String name,String secondName,String sex, String weight, String height,  Map<String, String> map) throws ServiceException;
+    boolean addInformation(int userId, String name,String secondName,String sex, String weight, String height,  Map<String, String> map, String code, String email) throws ServiceException;
 
 
     /**

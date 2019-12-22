@@ -95,6 +95,27 @@ public class StudentDaoImpl implements StudentDao {
         }
         return personInformationMap;
     }
+    public String findRegistrationCode(String email) throws DaoException {
+
+        String code = null;
+
+        try (Connection cn = ConnectionPool.INSTANCE.getConnection();
+             PreparedStatement st = cn.prepareStatement(Query.SQL_SELECT_REGISTRATION_CODE)){
+
+            st.setString(1, email);
+
+            try(ResultSet resultSet = st.executeQuery()){
+                if(resultSet.first()){
+                    code = resultSet.getString(1);
+                }
+            }
+        } catch (SQLException | ConnectionPoolException e) {
+            logger.catching(e);
+            throw new DaoException(e);
+        }
+        return code;
+    }
+
     public Map<Integer, Student> findAllStudents(int currentPage, int recordPage) throws DaoException {
 
         Map<Integer, Student> personInformationMap;

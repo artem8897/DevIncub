@@ -62,14 +62,24 @@ public class UserServiceImpl implements UserService {
         }
         Cryptographer cryptographer = new Cryptographer();
         String encryptedPass = cryptographer.encrypt(enterPass);
+
         if(user!=null && user.getPassword().equals(encryptedPass)){
             return user;
         }else{
             return null;
         }
-
     }
-    public boolean register(String login,String pass,String confirmedPassword,String username,String sex, Map<String, String> map) throws ServiceException {
+
+    public void createUsersCode(String email, String code) throws ServiceException {
+
+        try {
+            userDao.createUsersCode(email, code);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    public boolean register(String login,String pass,String confirmedPassword,String username, Map<String, String> map) throws ServiceException {
 
         try {
             boolean isMailOrUsernameInBase = userDao.isExistMailOrUsername(login,username);
@@ -80,7 +90,6 @@ public class UserServiceImpl implements UserService {
             user.setEmail(login);
             user.setPassword(pass);
             user.setUsername(username);
-            user.setUserSex(sex);
 
             boolean isValidUserInformation = validateUser(user, map, confirmedPassword);
 
