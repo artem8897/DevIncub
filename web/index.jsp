@@ -4,7 +4,5 @@
 <html>
 <head><title>Index</title></head>
 <body>
-<fmt:setLocale value="ru_RU" scope="session" />
-Lifecycle: ${lifecycle}
-<jsp:forward page="/jsp/login.jsp"/>
+<jsp:forward page="/jsp/main.jsp"/>
 </body></html>
