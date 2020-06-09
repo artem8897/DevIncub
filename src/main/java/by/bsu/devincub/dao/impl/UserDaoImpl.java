@@ -37,7 +37,7 @@ public class UserDaoImpl implements UserDao {
                     users.add(user);
                 }
             }
-        } catch (ConnectionPoolException | SQLException e) {
+        } catch (SQLException e) {
             throw new DaoException(e);
         }
         return users;
@@ -59,7 +59,7 @@ public class UserDaoImpl implements UserDao {
                     user = null;
                 }
             }
-        } catch (SQLException | ConnectionPoolException e) {
+        } catch (SQLException e) {
             logger.catching(e);
             throw new DaoException(e);
         }
@@ -80,7 +80,7 @@ public class UserDaoImpl implements UserDao {
                     user = null;
                 }
             }
-        } catch (SQLException | ConnectionPoolException e) {
+        } catch (SQLException e) {
             logger.catching(e);
             throw new DaoException(e);
         }

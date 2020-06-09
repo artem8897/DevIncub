@@ -8,10 +8,6 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.Executor;
 
-/**
- * Creates protect {@link ConnectionPool} from getting wild connections.
- */
-
 public class ProxyConnection implements Connection {
 
     private Connection connection;

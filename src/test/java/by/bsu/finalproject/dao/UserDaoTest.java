@@ -18,7 +18,7 @@ public class UserDaoTest {
     UserDao dietDao = new UserDaoImpl();
 
     @BeforeTest
-    void beforeTest() throws ConnectionPoolException {
+    void beforeTest() {
         connection = ConnectionPool.INSTANCE.getConnection();
     }
 

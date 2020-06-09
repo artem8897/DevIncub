@@ -19,7 +19,7 @@ public class AccountDaoTest {
     AccountDao accountDao = new AccountDaoImpl();
 
     @BeforeTest
-    void beforeTest() throws ConnectionPoolException {
+    void beforeTest() {
         connection = ConnectionPool.INSTANCE.getConnection();
     }
 

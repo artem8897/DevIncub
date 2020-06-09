@@ -35,7 +35,7 @@ public class AccountDaoImpl implements AccountDao {
             if (resultSet.next()) {
                 number = resultSet.getInt(COUNT);
             }
-        } catch (ConnectionPoolException | SQLException e) {
+        } catch (SQLException e) {
             logger.catching(e);
             throw new DaoException(e);
         }
@@ -57,7 +57,7 @@ public class AccountDaoImpl implements AccountDao {
                     accounts.add(account);
                 }
             }
-        } catch (ConnectionPoolException | SQLException e) {
+        } catch (SQLException e) {
             throw new DaoException(e);
         }
         return accounts;

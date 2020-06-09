@@ -9,15 +9,12 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayDeque;
 import java.util.Queue;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingDeque;
 
 public enum ConnectionPool {
 
     INSTANCE;
     private final Logger logger = LogManager.getLogger(ConnectionPool.class);
-    private BlockingQueue<Connection> connectionQueue;
-    private Queue<Connection> givenAwayConQueue;
+    private Queue<Connection> connectionQueue;
     private static final int DEFAULT_POOL_SIZE = 32;
     private final String DATABASE_DRIVER = DatabaseResourceManager.getProperty("database.driver");
     private final String DATABASE_URL = DatabaseResourceManager.getProperty("database.url");
@@ -27,8 +24,7 @@ public enum ConnectionPool {
     ConnectionPool() {
         try {
             Class.forName(DATABASE_DRIVER);
-            connectionQueue = new LinkedBlockingDeque<>(DEFAULT_POOL_SIZE);
-            givenAwayConQueue = new ArrayDeque<>();
+            connectionQueue = new ArrayDeque<>(DEFAULT_POOL_SIZE);
             for (int i = 0; i < DEFAULT_POOL_SIZE; i++) {
                 Connection connection = new ProxyConnection(DriverManager.getConnection(DATABASE_URL, DATABASE_USER, DATABASE_PASSWORD));
                 connectionQueue.add(connection);
@@ -39,16 +35,9 @@ public enum ConnectionPool {
         }
     }
 
-    public Connection getConnection() throws ConnectionPoolException {
-        Connection connection;
-        try {
-            connection = connectionQueue.take();
-            givenAwayConQueue.offer(connection);
-            logger.trace("Connection is successful");
-        } catch (InterruptedException e) {
-            logger.error(e);
-            throw new ConnectionPoolException("Exception in taking connection", e);
-        }
+    public Connection getConnection() {
+        Connection connection = connectionQueue.remove();
+        logger.trace("Connection is successful");
         return connection;
     }
 
@@ -59,12 +48,10 @@ public enum ConnectionPool {
             } catch (SQLException e) {
                 throw new ConnectionPoolException(e);
             }
-            givenAwayConQueue.remove(connection);
             connectionQueue.offer(connection);
         } else {
             logger.error("wrong connection tries to get into ConnectionPool");
-            throw new
-                    ConnectionPoolException("Unknown connection");
+            throw new ConnectionPoolException("Unknown connection");
         }
     }
 
@@ -72,8 +59,8 @@ public enum ConnectionPool {
     public void destroyPool() throws ConnectionPoolException {
         for (int i = 0; i < DEFAULT_POOL_SIZE; i++) {
             try {
-                ((ProxyConnection) connectionQueue.take()).reallyClose();
-            } catch (SQLException | InterruptedException e) {
+                ((ProxyConnection) connectionQueue.remove()).reallyClose();
+            } catch (SQLException e) {
                 throw new ConnectionPoolException("SQLException in destroyPool", e);
             }
         }
